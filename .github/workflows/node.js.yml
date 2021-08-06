@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  backend-build:
 
     runs-on: ubuntu-latest
 
@@ -30,8 +30,7 @@ jobs:
     - run: yarn build
     - run: yarn test
 
-jobs:
-  build:
+  frontend-build:
 
     runs-on: ubuntu-latest
 
