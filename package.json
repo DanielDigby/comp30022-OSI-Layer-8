@@ -1,0 +1,8 @@
+{
+  "name": "root",
+  "version": "1.0.0",
+  "repository": "https://github.com/DanielDigby/comp30022-it-project.git",
+  "author": "DanielDigby <50546545+DanielDigby@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true
+}
