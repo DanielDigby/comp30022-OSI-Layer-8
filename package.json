@@ -4,5 +4,11 @@
   "repository": "https://github.com/DanielDigby/comp30022-it-project.git",
   "author": "DanielDigby <50546545+DanielDigby@users.noreply.github.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "heroku-postbuild": "cd client && yarn install && yarn build && cd ../server && yarn install && tsc & node ."
+  }
 }
