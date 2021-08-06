@@ -1,5 +1,5 @@
 {
-	"name": "backend",
+	"name": "server",
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"repository": "https://github.com/DanielDigby/comp30022-it-project",
