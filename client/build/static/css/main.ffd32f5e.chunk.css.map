@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/views/BaseView/BaseView.module.css"],"names":[],"mappings":"AAAA,2BACC,UAAW,CACX,WAAY,CACZ,qBACD","file":"main.ffd32f5e.chunk.css","sourcesContent":[".container {\r\n\twidth: 50vw;\r\n\theight: 50vh;\r\n\tbackground-color: blue;\r\n}\r\n"]}
