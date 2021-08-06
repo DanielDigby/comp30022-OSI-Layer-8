@@ -9,6 +9,6 @@
     "node": "14.x"
   },
   "scripts": {
-    "heroku-postbuild": "cd client && yarn install && yarn build && cd ../server && yarn install && yarn start"
+    "heroku-postbuild": "cd client && rm .eslintrc && yarn install && yarn build && cd ../server && yarn install && yarn start"
   }
 }

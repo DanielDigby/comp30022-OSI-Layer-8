@@ -5,13 +5,13 @@ import { Route, Switch } from "react-router-dom";
 import BaseView from "./views/BaseView";
 
 const App = (): JSX.Element => {
-	return (
-		<div>
-			<Switch>
-				<Route path="/" component={BaseView} />
-			</Switch>
-		</div>
-	);
+    return (
+        <div>
+            <Switch>
+                <Route path="/" component={BaseView} />
+            </Switch>
+        </div>
+    );
 };
 
 export default App;
