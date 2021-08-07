@@ -61,7 +61,7 @@ and in the (root) package.json we see:
   }
 ```
 what this means is that the (root) yarn controlls the whole "monorepo" and is the controller for all dependencies, we never directly install dependencies here.
-So do not run "yarn add somepackage"
+So do not run "yarn add somepackage" as it will install it in the root rather than the client/server
 # Test Pipeline
 
 The way the test pipeline works, is by running:
