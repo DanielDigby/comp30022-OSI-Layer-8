@@ -73,9 +73,11 @@ for both the client and the server, and you can check the commands being run in 
 The pipeline is set to run before pushes to main and develop, as well as before merges to main and develop so you'll be able to easily tell if a merge will break something
 and github will automatically abort the merge
 
+All we've got to do is write tests as/before we write code and it will keep our ship sailing
+
 # Deployment
 
-The way deployment works is by pushing the repo to heroku whenever we make a merge or a push to main, what heroku then does is:
+The way deployment works is by pushing the repo to heroku whenever we make a merge or a push to main and after the test pipeline has passed, what heroku then does is:
 ```
 yarn workspaces foreach run build
 yarn workspace server run start
