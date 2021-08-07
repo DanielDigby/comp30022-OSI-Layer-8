@@ -1,6 +1,6 @@
 # comp30022-it-project
 
-# Start Commands
+# Start Commands (all commands are run at project root)
 
 you can start either the backend or the frontend individually by running:
 ```
@@ -32,7 +32,7 @@ to install something as a devDependency run:
 yarn workspace server add -D someDevpackage
 ```
 
-# yarn usage (all commands are run at project root)
+# yarn explantion
 
 I couldn't get our test pipeline to run properly with the react app as a subfolder of our node server, as react is very pedantic about which version of jest it uses and didnt like
 sharing with node.
