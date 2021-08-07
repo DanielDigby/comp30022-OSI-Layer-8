@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "heroku-prebuild": "yarn plugin import workspaces-tools",
+    "heroku-prebuild": "yarn plugin import workspace-tools",
     "build": "yarn workspaces foreach run build",
     "start": "yarn workspaces server start"
   },
