@@ -69,6 +69,6 @@ jobs:
     - run: yarn plugin import workspace-tools
     - run: yarn
     - run: yarn workspaces foreach run build
-    - run: yarn workspace server start & ^C
+    - run: yarn workspace server start & SIGKILL
 
   
