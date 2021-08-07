@@ -29,7 +29,7 @@ and in the (root) package.json we see:
   }
 ```
 what this means is that the (root) yarn controlls the whole "monorepo" and is the controller for all dependencies, we never directly install dependencies here.
-So do not run "yarn add somepackage)
+So do not run "yarn add somepackage"
 
 we need to install our packages to a specific workspace, so they get managed and installed correctly during production. to do so run:
 yarn workspace client add somepackage
