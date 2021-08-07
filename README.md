@@ -10,7 +10,7 @@ To solve this, I split the two into two client/server directories. This created 
 Thus the solution I landed on was yarn workspaces.
 
 The structure looks like this
-
+```
 (root)
 - package.json
 - yarn lock
@@ -18,16 +18,16 @@ The structure looks like this
 --- package.json
 -- server
 --- package.json
-
+```
 and in the (root) package.json we see:
-
+```
   "workspaces": {
     "packages": [
       "client",
       "server"
     ]
   }
-
+```
 what this means is that the (root) yarn controlls the whole "monorepo" and is the controller for all dependencies, we never directly install dependencies here.
 So do not run "yarn add somepackage)
 
