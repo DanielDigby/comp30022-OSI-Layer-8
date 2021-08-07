@@ -32,8 +32,13 @@ what this means is that the (root) yarn controlls the whole "monorepo" and is th
 So do not run "yarn add somepackage"
 
 we need to install our packages to a specific workspace, so they get managed and installed correctly during production. to do so run:
+
+```
 yarn workspace client add somepackage
+```
+```
 yarn workspace server add somepackage
+```
 
 additionally, there is no distinguishment between dependencies and devDependencies (packages you only need in development like prettier) for the react app because it
 all gets built into minified files when deployed. There is however a distinguishment between dependencies and devDependencies for the node server so please be careful
