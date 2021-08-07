@@ -20,12 +20,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: GitHub Checks
-      uses: LouisBrunner/checks-action@v1.1.2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: Test Frontend
-        conclusion: ${{ job.status }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
@@ -46,12 +40,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: GitHub Checks
-      uses: LouisBrunner/checks-action@v1.1.2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: Test Frontend
-        conclusion: ${{ job.status }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
