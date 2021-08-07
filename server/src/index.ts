@@ -3,7 +3,7 @@ import path = require("path");
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.get("/", (_, res) => {
+app.get("/api/", (_, res) => {
     res.status(200).send("rebuild");
 });
 
