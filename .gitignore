@@ -129,7 +129,7 @@ yarn-error.log*
 
 **/build/
 
-# yarn
+# yarn v2
 .yarn/*
 !.yarn/cache
 !.yarn/patches
