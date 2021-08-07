@@ -6,7 +6,7 @@ const port = process.env.PORT || 8080;
 require("dotenv").config();
 
 app.get("/api/", (_, res) => {
-    res.status(200).send("hello world");
+    res.status(200).send("dev");
 });
 
 if (process.env.NODE_ENV === "production") {
