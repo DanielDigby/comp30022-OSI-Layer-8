@@ -9,8 +9,8 @@ app.get("/api/", (_, res) => {
     res.status(200).send("rebuild");
 });
 
-// Serve static frontend files (only when deployed)
 if (process.env.NODE_ENV === "production") {
+    // Serve static frontend files (only when deployed)
     app.use(express.static(path.join(__dirname, "../../client/build")));
 
     app.get("/*", function (req, res) {
