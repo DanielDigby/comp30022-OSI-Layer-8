@@ -6472,9 +6472,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.793":
-  version: 1.3.798
-  resolution: "electron-to-chromium@npm:1.3.798"
-  checksum: 60804d86ae238b7965244ceb098288d628c64e3e969f10bdac6c3f8ac796656f27ff0ff55383beccef4de8589c6e6e1aa1253ac0fd1f4843033bd62d0291688d
+  version: 1.3.799
+  resolution: "electron-to-chromium@npm:1.3.799"
+  checksum: 92efd7606ad0380238aafe455ce7030b85d68f5e4a2336711370e83b49c79dbd081f8b62aa308552562ea500f548a83be2146a2b779449f31817d2a23fd9e68d
   languageName: node
   linkType: hard
 
@@ -8870,9 +8870,9 @@ fsevents@^1.2.7:
   linkType: hard
 
 "is-bigint@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "is-bigint@npm:1.0.2"
-  checksum: 5268edbde844583d8d5ce86f8e47669bf9dd9b3d4de0238b25bb2ddfc620b47e0e226171a906f19ac4c10debba160353fb98c134d0309898495e1b691efcfb80
+  version: 1.0.3
+  resolution: "is-bigint@npm:1.0.3"
+  checksum: d52ab4fa6491a315b0c1d09f91cc538c242dd134d2ace3751341f3f38c036d37b5d6b6153b927b57bb78ed9f839415144a966c9141132ed870c65368cba0bf9c
   languageName: node
   linkType: hard
 
