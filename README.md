@@ -87,4 +87,5 @@ yarn workspace server run start
 # Github Setup
 
 I've set it up so we all need to create a pull request to push to a protected branch (main/dev), so rather than pushing to these branches directly we should cut a branch off
-as a hotfix from main, or a feature from dev. Make changes on the new branch then create a pr, and assign someone to review our changes before merging back in
+as a hotfix from main, or a feature from dev. Make changes on the new branch then create a pr, and assign someone to review our changes before merging back in. We also will be
+unable to merge until the tests pass
