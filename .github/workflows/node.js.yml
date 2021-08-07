@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Node.js CI
-  uses: LouisBrunner/checks-action@v1.1.2
+
 
 on:
   pull_request:
@@ -20,7 +20,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: LouisBrunner/checks-action@v1.1.1
+    - name: GitHub Checks
+      uses: LouisBrunner/checks-action@v1.1.2
       if: always()
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
