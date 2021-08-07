@@ -8,15 +8,18 @@
     "private": true,
     "scripts": {
         "build": "tsc",
-        "start": "tsc & node .",
+        "start": "node .",
         "dev": "tsc & nodemon --trace-warnings .",
         "test": "jest"
     },
     "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "path": "^0.12.7"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.12",
         "@types/express": "^4.17.13",
         "@types/jest": "^26.0.24",
         "@types/node": "^16.4.13",
