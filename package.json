@@ -6,9 +6,15 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "14.17.4"
+    "node": "14.x"
+  },
+  "workspaces": {
+    "packages": [
+      "client",
+      "server"
+    ]
   },
   "scripts": {
-    "heroku-postbuild": "cd client && yarn install --frozen-lockfile && yarn build && cd ../server && yarn install --frozen-lockfile && yarn start"
+    "heroku-postbuild": "cd client && yarn build && cd ../server && yarn start"
   }
 }
