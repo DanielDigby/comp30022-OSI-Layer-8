@@ -14,10 +14,10 @@ The structure looks like this
 (root)
 - package.json
 - yarn lock
--- client
---- package.json
--- server
---- package.json
+- client
+-- package.json
+- server
+-- package.json
 ```
 and in the (root) package.json we see:
 ```
@@ -40,35 +40,35 @@ all gets built into minified files when deployed. There is however a distinguish
 which you install as we go through the sem
 
 to install something as a devDependency run:
-
+```
 yarn workspace server add -D someDevpackage
-
+```
 # Test Pipeline
 
 The way the test pipeline works, is by running:
-
+```
 yarn workspace server/client build
 yarn workspace server/client test
-
+```
 for both the client and the server, and you can check the commands being run in the ./github/node.js.yml file
 
 # Deployment
 
 The way deployment works is by pushing the repo to heroku whenever we make a merge or a push to main, what heroku then does is:
-
+```
 yarn workspaces foreach run build
 yarn workspace server run start
-
+```
 ^ then the server serves the static files that were build from react so we dont need to start the react app
 
 # Other commands
 
 you can start either the backend or the frontend individually by running:
-
+```
 yarn workspace client/server dev
-
+```
 or you can start them both at once by running:
-
+```
 yarn dev
-
+```
 you can look at all the available commands by checking the scripts section of each package.json
