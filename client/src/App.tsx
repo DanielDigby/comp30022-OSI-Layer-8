@@ -11,6 +11,7 @@ const App = (): JSX.Element => {
                 {/* add more routes here, path is the url you want on the frontend component is the view to be rendered */}
                 <Route path="/" component={BaseView} />
             </Switch>
+            <h1>helloworld</h1>
         </div>
     );
 };
