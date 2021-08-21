@@ -1,11 +1,11 @@
 import React from "react"
-import kiwi from "../images/kiwi-3.svg"
+import kiwi from "../images/kiwi.svg"
 import styles from "./Styles.module.css"
 
 function LogIn(){
     return(
-        <div className="base-container">
-            <div className="header">Login Page</div>
+        <div className={styles.basecontainer}>
+            <div className={styles.header}>Login Page</div>
 
             <div className="content">
 
@@ -13,12 +13,12 @@ function LogIn(){
                     <img className={styles.image} src={kiwi}/>
                 </div>
 
-                <div className="form">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" placeholder="username"></input>
+                <div className={styles.form}>
+                    <label htmlFor="email">Email</label>
+                    <input type="email" placeholder="email"></input>
                 </div>
 
-                <div className="form">
+                <div className={styles.form}>
                     <label htmlFor="password">Password</label>
                     <input type="password" placeholder="password"></input>
                 </div>

@@ -1,5 +1,5 @@
 import React from "react"
-import kiwi from "../images/kiwi-3.svg"
+import kiwi2 from "../images/kiwi2.svg"
 import styles from "./Styles.module.css"
 
 function Register(){
@@ -7,15 +7,20 @@ function Register(){
         <div className="base-container">
             <div className="header">Login Page</div>
 
-            <div className="content">
+            <div className={styles.basecontainer}>
 
                 <div className="image">
-                    <img className={styles.image} src={kiwi}/>
+                    <img className={styles.image} src={kiwi2}/>
                 </div>
 
                 <div className="form">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" placeholder="username"></input>
+                    <label htmlFor="name">Full Name</label>
+                    <input type="text" placeholder="Enter full name"></input>
+                </div>
+
+                <div className="form">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" placeholder="username"></input>
                 </div>
 
                 <div className="form">
@@ -26,7 +31,7 @@ function Register(){
             </div>
 
             <div className="footer">
-                <button className="btn" type="button">Login</button>
+                <button className="btn" type="button">Register</button>
 
             </div>
 
