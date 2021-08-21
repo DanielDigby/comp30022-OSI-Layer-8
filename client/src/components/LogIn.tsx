@@ -2,15 +2,17 @@ import React from "react"
 import kiwi from "../images/kiwi.svg"
 import styles from "./Styles.module.css"
 
-function LogIn(){
-    return(
+
+
+function LogIn(): JSX.Element {
+    return (
         <div className={styles.basecontainer}>
             <div className={styles.header}>Login Page</div>
 
             <div className="content">
 
                 <div className="image">
-                    <img className={styles.image} src={kiwi}/>
+                    <img className={styles.image} src={kiwi} />
                 </div>
 
                 <div className={styles.form}>
@@ -35,7 +37,7 @@ function LogIn(){
         </div>
     )
 
-    
+
 }
 
 

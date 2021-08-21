@@ -2,7 +2,7 @@ import React from "react"
 import kiwi2 from "../images/kiwi2.svg"
 import styles from "./Styles.module.css"
 
-function Register(){
+function Register(): JSX.Element{
     return(
         <div className="base-container">
             <div className="header">Login Page</div>
