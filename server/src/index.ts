@@ -6,6 +6,7 @@ const port = process.env.PORT || 8080;
 require("dotenv").config();
 
 app.get("/api/", (_, res) => {
+    console.log("hello");
     res.status(200).send("dev");
 });
 
