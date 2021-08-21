@@ -14,13 +14,13 @@ function LogIn(){
                 </div>
 
                 <div className={styles.form}>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" placeholder="email"></input>
+                    <label className={styles.label} htmlFor="email">Email</label>
+                    <input className={styles.input} type="email" placeholder="email"></input>
                 </div>
 
                 <div className={styles.form}>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="password"></input>
+                    <label className={styles.label} htmlFor="password">Password</label>
+                    <input className={styles.input} type="password" placeholder="password"></input>
                 </div>
 
             </div>
