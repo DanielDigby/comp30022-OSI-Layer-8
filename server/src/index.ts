@@ -5,12 +5,19 @@ const app = express();
 const port = process.env.PORT || 8080;
 require("dotenv").config();
 
+// health route
 app.get("/api/", (_, res) => {
-    console.log("hello");
-    console.log("merge demo");
-    res.status(200).send("dev");
+    res.status(200).send("alive");
 });
 
+// database models
+require("./config/mongoose");
+
+// note URLS
+const noteRouter = require("./modules/note/noteRouter");
+app.use("/api/notes/", noteRouter);
+
+// Frontend connection
 if (process.env.NODE_ENV === "production") {
     // Serve static frontend files (only when deployed)
 
