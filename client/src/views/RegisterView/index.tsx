@@ -46,13 +46,15 @@ const RegisterView = (): JSX.Element => {
 
             </div>
 
-            <div className="footer">
-                <button className="btn" type="button">Register</button>
+
+            <div className={styles.footer}>
+                <Button positive>Register</Button>
             </div>
+
 
             <div className="footer">
                 <Link to="/">
-                    <button className="btn" type="button">Go Back</button>
+                    <Button size='medium'>Go Back</Button>
                 </Link>
             </div>
 

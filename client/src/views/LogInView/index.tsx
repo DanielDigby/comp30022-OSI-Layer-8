@@ -4,7 +4,7 @@ import logo from "../../images/cara.svg";
 import { Link } from "react-router-dom";
 
 // Semantic UI button
-import { Button, Menu } from "semantic-ui-react";
+import { Button, Menu, Segment } from "semantic-ui-react";
 
 const LogInView = (): JSX.Element => {
     // api call
@@ -34,15 +34,16 @@ const LogInView = (): JSX.Element => {
                 </div>
             </div>
 
-            <div className="footer">
-                <button className="btn" type="button">Login</button>
+            <div className={styles.footer}>
+                <Button positive>Log in</Button>
             </div>
 
-            <div className="footer">
+            <div className={styles.footer}>
                 <Link to="/">
-                    <button className="btn" type="button">Go Back</button>
+                    <Button size='medium'>Go Back</Button>
                 </Link>
             </div>
+
 
         </div>
     );
