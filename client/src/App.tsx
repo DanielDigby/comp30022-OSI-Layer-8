@@ -7,6 +7,8 @@ import styles from "./App.module.css";
 import BaseView from "./views/BaseView";
 import NotesView from "./views/NotesView";
 import HomeView from "./views/HomeView";
+import LogInView from "./views/LogInView";
+import RegisterView from "./views/RegisterView";
 
 const App = (): JSX.Element => {
     return (
@@ -15,10 +17,13 @@ const App = (): JSX.Element => {
             className="container-center-horizontal">
             <Switch>
                 {/* add more routes here, path is the url you want on the frontend component is the view to be rendered */}
-                <Route path="/" component={HomeView} />
-                
+                <Route exact path="/" component={HomeView} />
+                <Route path="/login" component={LogInView} />
+                <Route path="/register" component={RegisterView} />
+
+
+
                 <Route path="/notes" component={NotesView} />
-                <Route path="/" component={BaseView} />
             </Switch>
         </div>
     );
