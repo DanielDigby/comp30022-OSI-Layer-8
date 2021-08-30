@@ -4,12 +4,12 @@ import logo from "../../images/cara.svg";
 import { Link } from "react-router-dom";
 
 // Semantic UI button
-import { Button, Menu, Segment } from "semantic-ui-react";
+import { Checkbox, Button, Menu, Segment } from "semantic-ui-react";
 
 const LogInView = (): JSX.Element => {
     // api call
     return (
-        <div className={styles.container}>
+        <div className={styles.basecontainer}>
             <div className={styles.header}>Login Page</div>
 
             <div className={styles.container}>
@@ -19,8 +19,8 @@ const LogInView = (): JSX.Element => {
                     </Link>
                 </div>
 
-                <div className={styles.container}>
-                    <h1 className={styles.heading}>Cara</h1>
+                <div className={styles.heading}>
+                    <h1>Cara</h1>
                 </div>
 
                 <div className={styles.form}>
@@ -34,6 +34,11 @@ const LogInView = (): JSX.Element => {
                 </div>
             </div>
 
+            {/* Centered right now*/}
+            <div className={styles.rememberMe}>
+                <Checkbox label="Remember me"/>
+            </div>
+            
             <div className={styles.footer}>
                 <Button positive>Log in</Button>
             </div>
@@ -43,7 +48,6 @@ const LogInView = (): JSX.Element => {
                     <Button size='medium'>Go Back</Button>
                 </Link>
             </div>
-
 
         </div>
     );

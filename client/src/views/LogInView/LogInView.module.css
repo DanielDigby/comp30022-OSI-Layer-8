@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 0px;
 }
 
 .image {
@@ -33,7 +34,7 @@
 }
 
 .form {
-    margin: 15px;
+    margin-bottom: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,6 +42,7 @@
 
 .label {
     font-size: 20px;
+    margin-bottom: 0px;
 }
 
 .input {
@@ -53,12 +55,13 @@
     background-color: #f3f3f3;
     border: 0;
     border-radius: 4px;
-    margin-bottom: 31px;
+    margin-bottom: 10px;
     transition: all 250ms ease-in-out;
 }
 
 .heading {
     margin-top: 0px;
+    margin-bottom: 50px;
 }
 
 .heading2 {
@@ -70,4 +73,8 @@
 
 .footer {
     margin-bottom: 50px;
+}
+
+.rememberMe {
+    margin-bottom: 15px;
 }

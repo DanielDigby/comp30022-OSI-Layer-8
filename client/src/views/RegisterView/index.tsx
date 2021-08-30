@@ -10,13 +10,13 @@ import { Button, Menu } from "semantic-ui-react";
 const RegisterView = (): JSX.Element => {
     // api call
     return (
-        <div className={styles.container}>
+        <div className={styles.basecontainer}>
             <div className={styles.header}>Registration Page</div>
 
             <div className={styles.container}>
                 <div className="image">
                     <Link to="/">
-                    <img className={styles.image} src={logo} />
+                        <img className={styles.image} src={logo} />
                     </Link>
                 </div>
 
