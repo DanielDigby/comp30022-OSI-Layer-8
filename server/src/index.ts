@@ -6,6 +6,8 @@ const port = process.env.PORT || 8080;
 require("dotenv").config();
 
 app.get("/api/", (_, res) => {
+    console.log("hello");
+    console.log("merge demo");
     res.status(200).send("dev");
 });
 
