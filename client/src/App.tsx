@@ -9,9 +9,7 @@ import NotesView from "./views/NotesView";
 
 const App = (): JSX.Element => {
     return (
-        <div 
-            id="ipad-container"
-            className="container-center-horizontal">
+        <div id="ipad-container" className="container-center-horizontal">
             <Switch>
                 {/* add more routes here, path is the url you want on the frontend component is the view to be rendered */}
                 <Route path="/notes" component={NotesView} />
