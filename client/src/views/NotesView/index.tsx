@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./NotesView.module.css";
 
 // Semantic UI button
-import { Button, Menu } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 
 const NotesView = (): JSX.Element => {
     // api call
