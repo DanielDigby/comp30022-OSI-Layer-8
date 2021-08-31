@@ -7,11 +7,11 @@ const noteSchema = new mongoose.Schema({
     eventTime: { type: Date },
     pinned: { type: Boolean },
     tags: { type: [String], required: true },
-    // relatedNotes: {
-    //     type: [mongoose.Schema.Types.ObjectId],
-    //     ref: "Note",
-    //     required: true,
-    // },
+    relatedNotes: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Note",
+        required: true,
+    },
 });
 
 const Note = mongoose.model("Note", noteSchema);
