@@ -15,7 +15,7 @@ require("./config/mongoose");
 
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
-app.use("/api/notes/", noteRouter);
+app.use("/api/notes", noteRouter);
 
 // Frontend connection
 if (process.env.NODE_ENV === "production") {

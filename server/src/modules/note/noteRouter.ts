@@ -1,10 +1,10 @@
-import express = require("express");
+import express from "express";
 
 const noteController = require("./noteController");
 const noteRouter = express.Router();
 
 // create a new note in database
-noteRouter.post("/", noteController.postNote);
+noteRouter.post("/", express.json(), noteController.postNote);
 
 // get all notes in database
 noteRouter.get("/", noteController.getNotes);
