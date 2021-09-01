@@ -18,10 +18,8 @@ const postNote = async (req: express.Request, res: express.Response) => {
         });
     
         newNote.save();
-            //.then(() => res.status(200).send(newNote))
         return res.status(200).send(newNote);
     } catch (err) {
-        console.log(err)
         return res.send(err);
     }
 };
@@ -33,7 +31,21 @@ const getNotes = async (req: express.Request, res: express.Response) => {
     res.status(200).send(notes);
 };
 
+// controller for updating a specific note
+const updateNote = async (req: express.Request, res: express.Response) => {
+    try {
+        const id = req.params.Id;
+        const newData  = req.body;
+        const note = await Note.findByIdAndUpdate(id, newData).setOptions({ new: true, overwrite: true });
+
+        return res.status(200).send(note);
+    } catch (err) {
+        return res.send(err);
+    }
+}
+
 module.exports = {
     getNotes,
-    postNote
+    postNote,
+    updateNote
 };

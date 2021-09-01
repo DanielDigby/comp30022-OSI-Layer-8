@@ -9,4 +9,7 @@ noteRouter.post("/", express.json(), noteController.postNote);
 // get all notes in database
 noteRouter.get("/", noteController.getNotes);
 
+// update a note
+noteRouter.put("/:Id", express.json(), noteController.updateNote);
+
 module.exports = noteRouter;
