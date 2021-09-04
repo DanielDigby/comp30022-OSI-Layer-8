@@ -12,4 +12,7 @@ noteRouter.get("/", noteController.getNotes);
 // update a note
 noteRouter.put("/:Id", express.json(), noteController.updateNote);
 
+// delete a note
+noteRouter.delete("/:Id", express.json(), noteController.deleteNote);
+
 module.exports = noteRouter;

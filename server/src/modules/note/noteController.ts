@@ -10,6 +10,7 @@ const postNote = async (req: express.Request, res: express.Response) => {
         const newNote = new Note({
             title: req.body?.title,
             text: req.body?.text,
+            image: req.body?.image,
             reminderTime: req.body?.reminderTime,
             eventTime: req.body?.eventTime,
             pinned: req.body?.pinned,
@@ -44,8 +45,21 @@ const updateNote = async (req: express.Request, res: express.Response) => {
     }
 }
 
+// controller for deleting a specific note
+const deleteNote = async (req: express.Request, res: express.Response) => {
+    try {
+        const id = req.params.Id;
+        const deletedNote = await Note.findByIdAndDelete(id);
+
+        return res.status(200).send(deletedNote);
+    } catch (err) {
+        return res.send(err);
+    }
+}
+
 module.exports = {
     getNotes,
     postNote,
-    updateNote
+    updateNote,
+    deleteNote
 };
