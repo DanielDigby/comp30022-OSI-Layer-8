@@ -4,6 +4,30 @@ import mongoose from "mongoose";
 // import model
 const Note = mongoose.model("Note");
 
+// controller for getting all notes
+const getNotes = async (req: express.Request, res: express.Response) => {
+    try {
+        const notes = await Note.find({}, {});
+
+        return res.status(200).send(notes);
+    } catch (err) {
+        return res.send(err);
+    }
+    
+};
+
+// controller for getting a specific note
+const getNote = async (req: express.Request, res: express.Response) => {
+    try {
+        const id = req.params.Id;
+        const note = Note.findById(id);
+
+        return res.status(200).send(note);
+    } catch (err) {
+        return res.send(err);
+    }
+}
+
 // controller for the action of posting a note
 const postNote = async (req: express.Request, res: express.Response) => {
     try {
@@ -23,13 +47,6 @@ const postNote = async (req: express.Request, res: express.Response) => {
     } catch (err) {
         return res.send(err);
     }
-};
-
-// controller for the action of getting all notes
-const getNotes = async (req: express.Request, res: express.Response) => {
-    const notes = await Note.find({}, {});
-
-    res.status(200).send(notes);
 };
 
 // controller for updating a specific note
@@ -59,6 +76,7 @@ const deleteNote = async (req: express.Request, res: express.Response) => {
 
 module.exports = {
     getNotes,
+    getNote,
     postNote,
     updateNote,
     deleteNote
