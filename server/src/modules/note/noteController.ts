@@ -1,5 +1,5 @@
-import express = require("express");
-import mongoose = require("mongoose");
+import express from "express";
+import mongoose from "mongoose";
 
 // import model
 const Note = mongoose.model("Note");

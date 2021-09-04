@@ -1,4 +1,4 @@
-import express = require("express");
+import express from "express";
 
 const noteController = require("./noteController");
 const noteRouter = express.Router();

@@ -1,6 +1,6 @@
-import express = require("express");
-import cors = require("cors");
-import path = require("path");
+import express from "express";
+import cors from "cors";
+import path from "path";
 const app = express();
 const port = process.env.PORT || 8080;
 require("dotenv").config();
@@ -16,6 +16,10 @@ require("./config/mongoose");
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
 app.use("/api/notes/", noteRouter);
+
+// user URLs
+const userRouter = require("./modules/user/userRouter");
+app.use("/api/users/", userRouter);
 
 // Frontend connection
 if (process.env.NODE_ENV === "production") {
