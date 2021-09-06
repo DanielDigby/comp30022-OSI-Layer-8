@@ -13,6 +13,9 @@ app.get("/api/", (_, res) => {
 // database models
 require("./config/mongoose");
 
+// middleware
+app.use(express.json());
+
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
 app.use("/api/notes", noteRouter);

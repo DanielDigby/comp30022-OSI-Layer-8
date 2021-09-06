@@ -50,7 +50,7 @@ const postNote = async (req: express.Request, res: express.Response) => {
 };
 
 // controller for updating a specific note
-const updateNote = async (req: express.Request, res: express.Response) => {
+const putNote = async (req: express.Request, res: express.Response) => {
     try {
         const id = req.params.Id;
         const newData  = req.body;
@@ -78,6 +78,6 @@ module.exports = {
     getNotes,
     getNote,
     postNote,
-    updateNote,
+    putNote,
     deleteNote
 };

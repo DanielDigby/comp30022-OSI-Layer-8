@@ -10,12 +10,12 @@ noteRouter.get("/", noteController.getNotes);
 noteRouter.get("/:Id", noteController.getNote); 
 
 // create a new note in database
-noteRouter.post("/", express.json(), noteController.postNote);
+noteRouter.post("/", noteController.postNote);
 
 // update a note
-noteRouter.put("/:Id", express.json(), noteController.updateNote);
+noteRouter.put("/:Id", noteController.putNote);
 
 // delete a note
-noteRouter.delete("/:Id", express.json(), noteController.deleteNote);
+noteRouter.delete("/:Id", noteController.deleteNote);
 
 module.exports = noteRouter;
