@@ -1,5 +1,20 @@
 /* --------------------------  BASE --------------------------  */
 
+/* Custom colour titles access with var(--...) */
+:root {
+    --colour-blue: #d3ddfd;
+    --colour-blue-light: #d4e6fa;
+    --colour-red: #ebd2df;
+    --colour-green: #d0e2e8;
+    --colour-red-bright: #ff4343;
+    --colour-grey: #cacde5;
+    --colour-white: #efeff2;
+    --colour-yellow: #f5e8d7;
+    --colour-background: #e4e5ed;
+    --colour-grey-highlight: #cfd1de;
+    --colour-gradientBG: linear-gradient(#f0e4f0, #ebe4ed, #e4e5ed);
+}
+
 /* This container basically holds the whole page 
 and then centres what we put in it */
 .pageContainer {
@@ -7,6 +22,8 @@ and then centres what we put in it */
     max-height: 100vh;
     width: 100vw;
     max-width: 100vw;
+
+    background-image: var(--gradientBackground);
 }
 
 .containerHorizontal,
