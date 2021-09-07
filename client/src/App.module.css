@@ -1,6 +1,6 @@
 /* --------------------------  BASE --------------------------  */
 
-/* Custom colour titles access with var(--...) */
+/* Custom properties for colour, fonts and sizes */
 :root {
     --colour-blue: #d3ddfd;
     --colour-blue-light: #d4e6fa;
@@ -8,11 +8,67 @@
     --colour-green: #d0e2e8;
     --colour-red-bright: #ff4343;
     --colour-grey: #cacde5;
+    --colour-grey-highlight: #cfd1de;
     --colour-white: #efeff2;
     --colour-yellow: #f5e8d7;
     --colour-background: #e4e5ed;
-    --colour-grey-highlight: #cfd1de;
     --colour-gradientBG: linear-gradient(#f0e4f0, #ebe4ed, #e4e5ed);
+
+    --font-family: "Lato", sans-serif;
+}
+
+/* Dashboard page classes */
+
+.sideMenu {
+    font-family: var(--font-family);
+}
+
+.sideMenu:hover {
+    color: var(--colour-grey-highlight);
+}
+
+.note {
+    font-family: var(--font-family);
+}
+
+/* Welcome page classes */
+.welcomeMessage {
+    font-family: "Charter", sans-serif;
+    font-size: 50px;
+}
+
+.date {
+    font-family: "Charter", sans-serif;
+    font-size: 40px;
+}
+
+.reminder {
+    font-family: var(--font-family);
+}
+
+.pinned {
+    font-family: var(--font-family);
+}
+
+/* Login page classes */
+.loginButton {
+    background-color: #ff8a4a;
+    color: #ffffff;
+    font-family: var(--font-family);
+}
+
+.signupButton {
+    background-color: #1b1c1d;
+    color: #ffffff;
+    font-family: var(--font-family);
+}
+
+.forgotButton {
+    color: #2185d0;
+}
+
+.heading {
+    font-family: var(--font-family);
 }
 
 /* This container basically holds the whole page 
