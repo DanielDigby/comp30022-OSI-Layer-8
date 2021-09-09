@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./SettingsView.module.css";
 
 // Semantic UI button
-import { Button, Menu } from "semantic-ui-react";
 
 const SettingsView = (): JSX.Element => {
     // api call

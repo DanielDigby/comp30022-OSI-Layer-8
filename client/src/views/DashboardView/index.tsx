@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./DashboardView.module.css";
 import { Link } from "react-router-dom";
 
 // Semantic UI button
-import { Button, Menu } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 const DashboardView = (): JSX.Element => {
     // api call

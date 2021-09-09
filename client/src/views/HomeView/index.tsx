@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./HomeView.module.css";
 import logo from "../../images/cara.svg";
 import { Link } from "react-router-dom";
 
 // Semantic UI button
-import { Button, Menu } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 const HomeView = (): JSX.Element => {
     // api call

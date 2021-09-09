@@ -1,10 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import styles from "./App.module.css";
-
 // import our views
-import BaseView from "./views/BaseView";
 import NotesView from "./views/NotesView";
 import HomeView from "./views/HomeView";
 import LogInView from "./views/LogInView";

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./LogInView.module.css";
 import logo from "../../images/cara.svg";
 import { Link } from "react-router-dom";
 
 // Semantic UI button
-import { Checkbox, Button, Menu, Segment } from "semantic-ui-react";
+import { Checkbox, Button } from "semantic-ui-react";
 
 const LogInView = (): JSX.Element => {
     // api call
