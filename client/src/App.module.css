@@ -12,29 +12,47 @@
     --colour-white: #efeff2;
     --colour-yellow: #f5e8d7;
     --colour-background: #e4e5ed;
+    --colour-background-dark: #586583;
     --colour-gradientBG: linear-gradient(#f0e4f0, #ebe4ed, #e4e5ed);
 
     --font-family: "Lato", sans-serif;
+    --text-big: 30px;
+    --text-medium: 20px;
+    --text-small: 10px;
+}
+
+.light {
+    color: var(--colour-background);
+}
+
+.dark {
+    color: var(--colour-background-dark);
 }
 
 /* Dashboard page classes */
 
 .sideMenu {
+    width: 33vw;
+    height: 100vh;
     font-family: var(--font-family);
+    color: var(--colour-background);
+    font-size: var(--text-medium);
 }
 
 .sideMenu:hover {
     color: var(--colour-grey-highlight);
+    font-size: var(--text-medium);
 }
 
 .note {
     font-family: var(--font-family);
+    font-size: var(--text-small);
 }
 
 /* Welcome page classes */
 .welcomeMessage {
     font-family: "Charter", sans-serif;
-    font-size: 50px;
+    font-size: var(--text-large);
 }
 
 .date {

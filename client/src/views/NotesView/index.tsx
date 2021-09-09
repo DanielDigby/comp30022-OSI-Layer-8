@@ -8,7 +8,7 @@ const NotesView = (): JSX.Element => {
     // api call
     return (
         <div>
-            <div className={appStyles.Container}>
+            <div className={appStyles.sideMenu}>
                 <Menu secondary vertical>
                     <Menu.Item name="Pinned" />
                     <Menu.Item name="Events" />
