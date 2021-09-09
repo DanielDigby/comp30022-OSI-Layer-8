@@ -15,7 +15,7 @@ const LogInView = (): JSX.Element => {
             <div className={styles.container}>
                 <div className="image">
                     <Link to="/">
-                    <img className={styles.image} src={logo} />
+                        <img className={styles.image} src={logo} />
                     </Link>
                 </div>
 
@@ -24,19 +24,31 @@ const LogInView = (): JSX.Element => {
                 </div>
 
                 <div className={styles.form}>
-                    <label className={styles.label} htmlFor="email">Email</label>
-                    <input className={styles.input} type="email" placeholder="enter email"></input>
+                    <label className={styles.label} htmlFor="email">
+                        Email
+                    </label>
+                    <input
+                        className={styles.input}
+                        type="email"
+                        placeholder="enter email"
+                    ></input>
                 </div>
 
                 <div className={styles.form}>
-                    <label className={styles.label} htmlFor="password">Password</label>
-                    <input className={styles.input} type="password" placeholder="password"></input>
+                    <label className={styles.label} htmlFor="password">
+                        Password
+                    </label>
+                    <input
+                        className={styles.input}
+                        type="password"
+                        placeholder="password"
+                    ></input>
                 </div>
             </div>
 
             {/* Centered right now*/}
             <div className={styles.rememberMe}>
-                <Checkbox label="Remember me"/>
+                <Checkbox label="Remember me" />
             </div>
 
             <div className={styles.footer}>
@@ -45,7 +57,7 @@ const LogInView = (): JSX.Element => {
 
             <div className={styles.footer}>
                 <Link to="/">
-                    <Button size='medium'>Go Back</Button>
+                    <Button size="medium">Go Back</Button>
                 </Link>
             </div>
         </div>
