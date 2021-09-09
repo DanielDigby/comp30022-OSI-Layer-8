@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./HomeView.module.css";
 import logo from "../../images/cara.svg";
+
 import { useHistory } from "react-router-dom";
 
 // Semantic UI button
