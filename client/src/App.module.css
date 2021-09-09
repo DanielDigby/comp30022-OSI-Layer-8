@@ -1,0 +1,34 @@
+/* --------------------------  BASE --------------------------  */
+
+/* This container basically holds the whole page 
+and then centres what we put in it */
+#page-container {
+    height: 100vh;
+    max-height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+}
+
+#ipad-container {
+    width: 1024px;
+    height: 768px;
+}
+
+.container-center-horizontal,
+.container-center-vertical {
+    pointer-events: auto;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 1;
+    display: flex;
+}
+
+.container-center-horizontal {
+    flex-direction: row;
+    justify-content: center;
+}
+.container-center-vertical {
+    flex-direction: column;
+    align-content: center;
+    height: 100%;
+}
