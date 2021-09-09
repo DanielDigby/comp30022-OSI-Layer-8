@@ -16,11 +16,13 @@
     --colour-gradientBG: linear-gradient(#f0e4f0, #ebe4ed, #e4e5ed);
 
     --font-family: "Lato", sans-serif;
+    --font-weight-bold: 800;
     --text-big: 30px;
     --text-medium: 20px;
-    --text-small: 10px;
+    --text-small: 15px;
 }
 
+/* Light/Dark mode */
 .light {
     color: var(--colour-background);
 }
@@ -30,7 +32,6 @@
 }
 
 /* Dashboard page classes */
-
 .sideMenu {
     width: 33vw;
     height: 100vh;
