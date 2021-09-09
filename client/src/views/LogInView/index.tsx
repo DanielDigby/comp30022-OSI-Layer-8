@@ -38,7 +38,7 @@ const LogInView = (): JSX.Element => {
             <div className={styles.rememberMe}>
                 <Checkbox label="Remember me"/>
             </div>
-            
+
             <div className={styles.footer}>
                 <Button positive>Log in</Button>
             </div>
@@ -48,7 +48,6 @@ const LogInView = (): JSX.Element => {
                     <Button size='medium'>Go Back</Button>
                 </Link>
             </div>
-
         </div>
     );
 };
