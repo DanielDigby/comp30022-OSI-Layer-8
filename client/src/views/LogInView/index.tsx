@@ -38,9 +38,11 @@ const LogInView = (): JSX.Element => {
             <div className={styles.rememberMe}>
                 <Checkbox label="Remember me"/>
             </div>
-            
+
             <div className={styles.footer}>
-                <Button positive>Log in</Button>
+                <Link to="/dashboard">
+                    <Button positive>Log in</Button>
+                </Link>
             </div>
 
             <div className={styles.footer}>
