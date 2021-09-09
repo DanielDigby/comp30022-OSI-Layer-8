@@ -18,7 +18,7 @@ app.use(express.json());
 
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
-app.use("/api/notes/", noteRouter);
+app.use("/api/notes", noteRouter);
 
 // user URLs
 const userRouter = require("./modules/user/userRouter");
