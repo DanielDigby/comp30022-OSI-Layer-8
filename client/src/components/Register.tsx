@@ -1,16 +1,15 @@
-import React from "react"
-import kiwi2 from "../images/kiwi2.svg"
-import styles from "./Styles.module.css"
+import React from "react";
+import kiwi2 from "../images/kiwi2.svg";
+import styles from "./Styles.module.css";
 
-function Register(): JSX.Element{
-    return(
+function Register(): JSX.Element {
+    return (
         <div className="base-container">
             <div className="header">Login Page</div>
 
             <div className={styles.basecontainer}>
-
                 <div className="image">
-                    <img className={styles.image} src={kiwi2}/>
+                    <img className={styles.image} src={kiwi2} />
                 </div>
 
                 <div className="form">
@@ -27,21 +26,15 @@ function Register(): JSX.Element{
                     <label htmlFor="password">Password</label>
                     <input type="password" placeholder="password"></input>
                 </div>
-
             </div>
 
             <div className="footer">
-                <button className="btn" type="button">Register</button>
-
+                <button className="btn" type="button">
+                    Register
+                </button>
             </div>
-
-
-
         </div>
-    )
-
-    
+    );
 }
 
-
-export default Register
+export default Register;

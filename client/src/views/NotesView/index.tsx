@@ -10,15 +10,9 @@ const NotesView = (): JSX.Element => {
         <div>
             <div className={styles.container}>
                 <Menu secondary vertical>
-                    <Menu.Item
-                        name="Pinned"
-                    />
-                    <Menu.Item
-                        name="Events"
-                    />
-                    <Menu.Item
-                        name="Contacts"
-                    />
+                    <Menu.Item name="Pinned" />
+                    <Menu.Item name="Events" />
+                    <Menu.Item name="Contacts" />
                 </Menu>
             </div>
         </div>
