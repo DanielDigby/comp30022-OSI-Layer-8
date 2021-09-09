@@ -1,12 +1,17 @@
 import React from "react";
 import styles from "./LogInView.module.css";
 import logo from "../../images/cara.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Semantic UI button
 import { Checkbox, Button } from "semantic-ui-react";
 
 const LogInView = (): JSX.Element => {
+    const homeHistory = useHistory();
+    const dashboardHistory = useHistory();
+    const navigateHome = () => homeHistory.push("/");
+    const navigateDashboard = () => dashboardHistory.push("/dashboard");
+
     // api call
     return (
         <div className={styles.basecontainer}>
@@ -14,9 +19,11 @@ const LogInView = (): JSX.Element => {
 
             <div className={styles.container}>
                 <div className="image">
-                    <Link to="/">
-                        <img className={styles.image} src={logo} />
-                    </Link>
+                    <img
+                        className={styles.image}
+                        src={logo}
+                        onClick={() => navigateHome()}
+                    />
                 </div>
 
                 <div className={styles.heading}>
@@ -52,15 +59,15 @@ const LogInView = (): JSX.Element => {
             </div>
 
             <div className={styles.footer}>
-                <Link to="/dashboard">
-                    <Button positive>Log in</Button>
-                </Link>
+                <Button positive onClick={() => navigateDashboard()}>
+                    Log in
+                </Button>
             </div>
 
             <div className={styles.footer}>
-                <Link to="/">
-                    <Button size="medium">Go Back</Button>
-                </Link>
+                <Button size="medium" onClick={() => navigateHome()}>
+                    Go Back
+                </Button>
             </div>
         </div>
     );

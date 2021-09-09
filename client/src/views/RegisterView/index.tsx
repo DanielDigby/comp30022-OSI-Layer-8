@@ -1,12 +1,15 @@
 import React from "react";
 import styles from "./RegisterView.module.css";
 import logo from "../../images/cara.svg";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
 
 const RegisterView = (): JSX.Element => {
+    const homeHistory = useHistory();
+    const navigateHome = () => homeHistory.push("/");
+
     // api call
     return (
         <div className={styles.basecontainer}>
@@ -14,9 +17,11 @@ const RegisterView = (): JSX.Element => {
 
             <div className={styles.container}>
                 <div className="image">
-                    <Link to="/">
-                        <img className={styles.image} src={logo} />
-                    </Link>
+                    <img
+                        className={styles.image}
+                        src={logo}
+                        onClick={() => navigateHome()}
+                    />
                 </div>
 
                 <div className={styles.container}>
@@ -72,10 +77,10 @@ const RegisterView = (): JSX.Element => {
                 <Button positive>Register</Button>
             </div>
 
-            <div className="footer">
-                <Link to="/">
-                    <Button size="medium">Go Back</Button>
-                </Link>
+            <div className={styles.footer}>
+                <Button size="medium" onClick={() => navigateHome()}>
+                    Go Back
+                </Button>
             </div>
         </div>
     );

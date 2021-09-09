@@ -2,9 +2,14 @@ import React from "react";
 import styles from "./NotesView.module.css";
 
 // Semantic UI button
-import { Menu } from "semantic-ui-react";
+import { Button, Menu } from "semantic-ui-react";
+
+import { useHistory } from "react-router-dom";
 
 const NotesView = (): JSX.Element => {
+    const dashboardHistory = useHistory();
+    const navigateDashboard = () => dashboardHistory.push("/dashboard");
+
     // api call
     return (
         <div>
@@ -14,6 +19,12 @@ const NotesView = (): JSX.Element => {
                     <Menu.Item name="Events" />
                     <Menu.Item name="Contacts" />
                 </Menu>
+
+                <div className={styles.footer}>
+                    <Button size="medium" onClick={() => navigateDashboard()}>
+                        Go Back
+                    </Button>
+                </div>
             </div>
         </div>
     );
