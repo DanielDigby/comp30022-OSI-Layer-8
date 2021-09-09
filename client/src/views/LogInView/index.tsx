@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./LogInView.module.css";
 import logo from "../../images/cara.svg";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // Semantic UI button
 import { Checkbox, Button } from "semantic-ui-react";
