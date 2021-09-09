@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 // Semantic UI button
 import { Button, Menu } from "semantic-ui-react";
 
-
 const RegisterView = (): JSX.Element => {
     // api call
     return (
@@ -25,39 +24,59 @@ const RegisterView = (): JSX.Element => {
                 </div>
 
                 <div className={styles.form}>
-                    <label className={styles.label} htmlFor="email">Full name</label>
-                    <input className={styles.input} type="name" placeholder="enter full name"></input>
+                    <label className={styles.label} htmlFor="email">
+                        Full name
+                    </label>
+                    <input
+                        className={styles.input}
+                        type="name"
+                        placeholder="enter full name"
+                    ></input>
                 </div>
 
                 <div className={styles.form}>
-                    <label className={styles.label} htmlFor="email">Enter Email</label>
-                    <input className={styles.input} type="email" placeholder="enter email"></input>
+                    <label className={styles.label} htmlFor="email">
+                        Enter Email
+                    </label>
+                    <input
+                        className={styles.input}
+                        type="email"
+                        placeholder="enter email"
+                    ></input>
                 </div>
 
                 <div className={styles.form}>
-                    <label className={styles.label} htmlFor="password">Enter Password</label>
-                    <input className={styles.input} type="password" placeholder="password"></input>
+                    <label className={styles.label} htmlFor="password">
+                        Enter Password
+                    </label>
+                    <input
+                        className={styles.input}
+                        type="password"
+                        placeholder="password"
+                    ></input>
                 </div>
 
                 <div className={styles.form}>
-                    <label className={styles.label} htmlFor="password">Enter Password again</label>
-                    <input className={styles.input} type="password" placeholder="password"></input>
+                    <label className={styles.label} htmlFor="password">
+                        Enter Password again
+                    </label>
+                    <input
+                        className={styles.input}
+                        type="password"
+                        placeholder="password"
+                    ></input>
                 </div>
-
             </div>
-
 
             <div className={styles.footer}>
                 <Button positive>Register</Button>
             </div>
 
-
             <div className="footer">
                 <Link to="/">
-                    <Button size='medium'>Go Back</Button>
+                    <Button size="medium">Go Back</Button>
                 </Link>
             </div>
-
         </div>
     );
 };
