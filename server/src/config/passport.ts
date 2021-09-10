@@ -1,4 +1,4 @@
-import passport, { PassportStatic } from "passport";
+import passport from "passport";
 import mongoose from "mongoose";
 import passportLocal from "passport-local";
 import passportJwt from "passport-jwt";
@@ -19,12 +19,11 @@ passport.use(
                 if (err) {
                     return done(err);
                 }
-                if (!user) {
+                if (!user || !validatePassword(password, user.password)) {
+                    // TODO (Daniel) rate limit failed login attempts
                     return done(null, false);
                 }
-                if (!validatePassword(password, user.password)) {
-                    return done(null, false);
-                }
+                // TODO (Daniel) reset rate limiter on successful login
                 return done(null, user);
             }
         );
@@ -49,8 +48,10 @@ passport.use(
                     return done(err, false);
                 }
                 if (user) {
+                    // TODO (Daniel) reset rate limiter on successful login
                     return done(null, user);
                 } else {
+                    // TODO (Daniel) rate limit failed login attempts
                     return done(null, false);
                 }
             }

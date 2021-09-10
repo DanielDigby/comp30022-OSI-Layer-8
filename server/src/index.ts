@@ -2,21 +2,23 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
+
+require("dotenv").config();
+require("./config/mongoose");
+require("./config/passport");
+
 const app = express();
 const port = process.env.PORT || 8080;
-require("dotenv").config();
 
 // health route
 app.get("/api/", (_, res) => {
     res.status(200).send("alive");
 });
 
-// database models
-require("./config/mongoose");
-
 // middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use();
 
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
