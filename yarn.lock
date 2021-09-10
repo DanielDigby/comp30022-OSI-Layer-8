@@ -2711,6 +2711,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cookie-parser@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@types/cookie-parser@npm:1.4.2"
+  dependencies:
+    "@types/express": "*"
+  checksum: d5b3c0e193cc95289444306ad396b27b92c9ff1ffd0769268b374d09315c8df1ae94de5fe2a81a79c0629560646763136e15c8a4069d3dc5ba5cb6bc185eaccd
+  languageName: node
+  linkType: hard
+
 "@types/cors@npm:^2.8.12":
   version: 2.8.12
   resolution: "@types/cors@npm:2.8.12"
@@ -5665,6 +5674,16 @@ __metadata:
   dependencies:
     safe-buffer: ~5.1.1
   checksum: 985d974a2d33e1a2543ada51c93e1ba2f73eaed608dc39f229afc78f71dcc4c8b7d7c684aa647e3c6a3a204027444d69e53e169ce94e8d1fa8d7dee80c9c8fed
+  languageName: node
+  linkType: hard
+
+"cookie-parser@npm:^1.4.5":
+  version: 1.4.5
+  resolution: "cookie-parser@npm:1.4.5"
+  dependencies:
+    cookie: 0.4.0
+    cookie-signature: 1.0.6
+  checksum: 09b41e191af8e472229b53468b858a53f64a355b438ecb56a38be2a729b862b8233041e5af102115caebae534d399813ec7270b68a949bba3b987b38555c30b6
   languageName: node
   linkType: hard
 
@@ -10966,7 +10985,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jsonwebtoken@npm:^8.2.0":
+"jsonwebtoken@npm:^8.2.0, jsonwebtoken@npm:^8.5.1":
   version: 8.5.1
   resolution: "jsonwebtoken@npm:8.5.1"
   dependencies:
@@ -15306,10 +15325,13 @@ resolve@^2.0.0-next.3:
   resolution: "root@workspace:."
   dependencies:
     "@types/bcrypt": ^5.0.0
+    "@types/cookie-parser": ^1.4.2
     "@types/passport": ^1.0.7
     "@types/passport-jwt": ^3.0.6
     "@types/passport-local": ^1.0.34
     bcrypt: ^5.0.1
+    cookie-parser: ^1.4.5
+    jsonwebtoken: ^8.5.1
     passport-jwt: ^4.0.0
     passport-local: ^1.0.0
   languageName: unknown

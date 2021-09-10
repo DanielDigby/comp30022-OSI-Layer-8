@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT || 8080;
 require("dotenv").config();
@@ -15,6 +16,7 @@ require("./config/mongoose");
 
 // middleware
 app.use(express.json());
+app.use(cookieParser());
 
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
