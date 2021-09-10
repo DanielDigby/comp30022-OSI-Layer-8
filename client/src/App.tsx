@@ -13,7 +13,7 @@ import SettingsView from "./views/SettingsView";
 
 const App = (): JSX.Element => {
     return (
-         <div className={styles.pageContainer}>
+        <div className={styles.pageContainer}>
             <Switch>
                 {/* add more routes here, path is the url you want on the frontend component is the view to be rendered */}
                 <Route exact path="/" component={HomeView} />
