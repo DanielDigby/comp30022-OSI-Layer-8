@@ -10,6 +10,8 @@ import Tag from "../Tag";
 import HeadingText from "../HeadingText";
 
 
+/* Deleted NotesText folder and it's working now */
+
 type HeaderType = {
     headerText: string;
 };
@@ -20,9 +22,9 @@ const Note = (): JSX.Element => {
         <div className={styles.Segment}>
             <Segment.Group raised>
                 <Segment>
-                    <HeadingText headingText = "Heading here" />
+                    <HeadingText headingText="Heading here"/>
                     <p></p>
-                    <p>Text</p>
+                    <p> Note Text</p>
                     <a>
                         <Tag tagName="Event" />
                     </a>
