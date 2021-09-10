@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+import styles from "./App.module.css";
+
 // import our views
 import NotesView from "./views/NotesView";
 import HomeView from "./views/HomeView";
@@ -11,7 +13,7 @@ import SettingsView from "./views/SettingsView";
 
 const App = (): JSX.Element => {
     return (
-        <div id="ipad-container" className="container-center-horizontal">
+        <div className={styles.pageContainer}>
             <Switch>
                 {/* add more routes here, path is the url you want on the frontend component is the view to be rendered */}
                 <Route exact path="/" component={HomeView} />

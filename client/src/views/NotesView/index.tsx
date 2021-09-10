@@ -18,5 +18,4 @@ const NotesView = (): JSX.Element => {
         </div>
     );
 };
-
 export default NotesView;
