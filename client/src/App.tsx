@@ -11,10 +11,6 @@ import RegisterView from "./views/RegisterView";
 import DashboardView from "./views/DashboardView";
 import SettingsView from "./views/SettingsView";
 
-// Component (temporary)
-import Note from "./components/Note";
-
-
 const App = (): JSX.Element => {
     return (
         <div className={styles.pageContainer}>
