@@ -1,8 +1,9 @@
-import mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const noteSchema = new mongoose.Schema({
     title: { type: String },
     text: { type: String },
+    image: { type: String },
     reminderTime: { type: Date },
     eventTime: { type: Date },
     pinned: { type: Boolean },
