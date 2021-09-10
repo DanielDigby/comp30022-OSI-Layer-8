@@ -1,12 +1,17 @@
 import React from "react";
 import styles from "./HomeView.module.css";
 import logo from "../../images/cara.svg";
-import { Link } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
 
 const HomeView = (): JSX.Element => {
+    const navHistory = useHistory();
+    const navigateLogin = () => navHistory.push("/login");
+    const navigateRegister = () => navHistory.push("/register");
+
     // api call
     return (
         <div className={styles.container}>
@@ -18,18 +23,19 @@ const HomeView = (): JSX.Element => {
             <h4 className={styles.heading2}>Untangle your personal life</h4>
 
             <div className={styles.button}>
-                <Link to="/login">
-                    <Button
-                        className={styles.button}
-                        basic
-                        colour="black"
-                        content="Sign-In"
-                    />
-                </Link>
-
-                <Link to="/register">
-                    <Button basic colour="black" content="Register" />
-                </Link>
+                <Button
+                    className={styles.button}
+                    basic
+                    colour="black"
+                    content="Sign-In"
+                    onClick={() => navigateLogin()}
+                />
+                <Button
+                    basic
+                    colour="black"
+                    content="Register"
+                    onClick={() => navigateRegister()}
+                />
             </div>
         </div>
     );
