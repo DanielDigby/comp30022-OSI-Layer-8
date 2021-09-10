@@ -1,12 +1,17 @@
 import express from "express";
 import mongoose from "mongoose";
+import { IResponseWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
 const User = require("./userModel");
 mongoose.model("User");
 
 // controller for creating a new user
-const createUser = async (req: express.Request, res: express.Response) => {
+export const createUserMiddleware = async (
+    req: express.Request,
+    res: IResponseWithUser,
+    next: express.NextFunction
+) => {
     try {
         const newUser = new User({
             firstName: req.body.firstName,
@@ -18,7 +23,8 @@ const createUser = async (req: express.Request, res: express.Response) => {
         });
 
         newUser.save();
-        return res.status(200).send(newUser);
+        res.user = newUser;
+        next();
     } catch (err) {
         return res.send(err);
     }
@@ -41,6 +47,5 @@ const updateUser = async (req: express.Request, res: express.Response) => {
 };
 
 module.exports = {
-    createUser,
     updateUser,
 };

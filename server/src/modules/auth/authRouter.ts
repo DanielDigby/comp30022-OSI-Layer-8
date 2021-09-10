@@ -1,13 +1,12 @@
 import express from "express";
 import passport from "passport";
+import { createUserMiddleware } from "../user/userController";
 
 const authController = require("./authController");
 const authRouter = express.Router();
 
 // post a user register action
-authRouter.post("/register", (req, res) => {
-    res.redirect("../user");
-});
+authRouter.post("/register", createUserMiddleware, authController.postRegister);
 
 // post a user login action
 authRouter.post(
