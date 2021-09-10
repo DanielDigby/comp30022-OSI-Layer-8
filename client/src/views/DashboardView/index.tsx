@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
 
+// trigger tests
+
 // Semantic UI button
 import { Button } from "semantic-ui-react";
 
