@@ -3,3 +3,9 @@
     height: 100vh;
     background-color: #d4e6fa;
 }
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
