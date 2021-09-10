@@ -7,10 +7,9 @@ import { useHistory } from "react-router-dom";
 import { Checkbox, Button } from "semantic-ui-react";
 
 const LogInView = (): JSX.Element => {
-    const homeHistory = useHistory();
-    const dashboardHistory = useHistory();
-    const navigateHome = () => homeHistory.push("/");
-    const navigateDashboard = () => dashboardHistory.push("/dashboard");
+    const navHistory = useHistory();
+    const navigateHome = () => navHistory.push("/");
+    const navigateDashboard = () => navHistory.push("/dashboard");
 
     // api call
     return (

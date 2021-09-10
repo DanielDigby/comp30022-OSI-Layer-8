@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 
 const SettingsView = (): JSX.Element => {
-    const dashboardHistory = useHistory();
-    const navigateDashboard = () => dashboardHistory.push("/dashboard");
+    const navHistory = useHistory();
+    const navigateDashboard = () => navHistory.push("/dashboard");
 
     // api call
     return (

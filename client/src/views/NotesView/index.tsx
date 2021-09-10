@@ -7,8 +7,8 @@ import { Button, Menu } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 const NotesView = (): JSX.Element => {
-    const dashboardHistory = useHistory();
-    const navigateDashboard = () => dashboardHistory.push("/dashboard");
+    const navHistory = useHistory();
+    const navigateDashboard = () => navHistory.push("/dashboard");
 
     // api call
     return (

@@ -8,10 +8,9 @@ import { useHistory } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 
 const HomeView = (): JSX.Element => {
-    const loginHistory = useHistory();
-    const navigateLogin = () => loginHistory.push("/login");
-    const registerHistory = useHistory();
-    const navigateRegister = () => registerHistory.push("/register");
+    const navHistory = useHistory();
+    const navigateLogin = () => navHistory.push("/login");
+    const navigateRegister = () => navHistory.push("/register");
 
     // api call
     return (
