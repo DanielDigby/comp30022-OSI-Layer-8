@@ -47,13 +47,12 @@ passport.use(
                 if (err) {
                     return done(err, false);
                 }
-                if (user) {
-                    // TODO (Daniel) reset rate limiter on successful login
-                    return done(null, user);
-                } else {
+                if (!user) {
                     // TODO (Daniel) rate limit failed login attempts
                     return done(null, false);
                 }
+                // TODO (Daniel) reset rate limiter on successful login
+                return done(null, user);
             }
         );
     })
