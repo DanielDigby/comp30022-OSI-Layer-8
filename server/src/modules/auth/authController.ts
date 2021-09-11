@@ -2,19 +2,13 @@ import express from "express";
 import { generateJwt } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
-const postRegister = async (req: IRequestWithUser, res: express.Response) => {
+const postLogin = async (req: IRequestWithUser, res: express.Response) => {
     const jwt = generateJwt(req.user);
 
     return res
         .status(200)
         .cookie("jwt", jwt, { httpOnly: true })
         .send(req.user);
-};
-
-const postLogin = async (req: IRequestWithUser, res: express.Response) => {
-    const jwt = generateJwt(req.user);
-
-    return res.status(200).cookie("jwt", jwt, { httpOnly: true });
 };
 
 const postLogout = async (req: IRequestWithUser, res: express.Response) => {
@@ -27,7 +21,6 @@ const postLogout = async (req: IRequestWithUser, res: express.Response) => {
 };
 
 module.exports = {
-    postRegister,
     postLogin,
     postLogout,
 };

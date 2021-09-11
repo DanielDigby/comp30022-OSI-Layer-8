@@ -1,34 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import { IResponseWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
 const User = require("./userModel");
 mongoose.model("User");
-
-// controller for creating a new user
-export const createUserMiddleware = async (
-    req: express.Request,
-    res: IResponseWithUser,
-    next: express.NextFunction
-) => {
-    try {
-        const newUser = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            password: User.generateHash(req.body.password),
-            profilePic: req.body?.profilePic,
-            colourScheme: req.body.colourScheme,
-            tags: req.body.tags,
-        });
-
-        newUser.save();
-        res.user = newUser;
-        next();
-    } catch (err) {
-        return res.send(err);
-    }
-};
 
 // controller for updating a user's profile details
 const updateUser = async (req: express.Request, res: express.Response) => {
