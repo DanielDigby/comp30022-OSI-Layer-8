@@ -1,30 +1,41 @@
 import supertest from "supertest";
 import express from "express";
 
+const db = require("../../config/mongoose/testing");
 const app = require("../../index");
-const db = require("../../config/mongooseTesting");
 
 beforeAll(async () => {
-    await db.connect;
+    await db.createTestingDB();
+    await db.connectTestingDB();
 });
 
 afterEach(async () => {
-    await db.clear;
+    await db.clearTestingDB();
 });
 
 afterAll(async () => {
-    await db.close;
+    await db.closeTestingDB();
 });
 
 describe("Authentication service", () => {
     describe("Register user", () => {
         it(
-            "When correct new user object is provided expect return to be:" +
-                "success code" +
-                "jwt cookie" +
-                "created user object in response body",
-            () => {
-                expect(1).toBe(1);
+            "When correct new user object is provided expect return to be:\n" +
+                "- success code\n" +
+                "- jwt cookie\n" +
+                "- created user object in response body\n",
+            (done) => {
+                supertest(app)
+                    .post("/api/auth/register")
+                    .send({
+                        email: "testuser@email.com",
+                        firstName: "test",
+                        lastName: "user",
+                        password1: "password",
+                        password2: "password",
+                        profilePic: "someImgUrl",
+                    })
+                    .expect(200, done);
             }
         );
 

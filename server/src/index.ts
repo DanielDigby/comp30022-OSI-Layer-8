@@ -4,6 +4,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 
 require("dotenv").config();
+
 require("./config/mongoose");
 require("./config/passport");
 
@@ -44,7 +45,8 @@ if (process.env.NODE_ENV === "production") {
     });
 
     app.listen(port, () => console.log(`Running on port ${port}`));
-} else {
+}
+if (process.env.NODE_ENV === "development") {
     // cors for communicating with react frontend (only in development)
 
     // in production we dont need this because we can serve over the same port, but because we will run two separate
