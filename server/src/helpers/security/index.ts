@@ -12,12 +12,13 @@ export function hashPassword(password: string) {
 }
 
 // Generate jwt object and encrypt to string
+// TODO (Daniel) replace secret with an environment variable
 export function generateJwt(user: IUser) {
     return jsonwebtoken.sign(
         {
             _id: user._id,
         },
-        process.env.ACCESS_TOKEN_SECRET
+        "secret"
     );
 }
 

@@ -2,7 +2,7 @@ import passport from "passport";
 import mongoose from "mongoose";
 import passportLocal from "passport-local";
 import passportJwt from "passport-jwt";
-import { extractJwt, validatePassword } from "../helpers/security";
+import { extractJwt, validatePassword } from "../helpers/security/";
 
 import { IUser } from "../modules/user/userModel";
 const User = mongoose.model("User");

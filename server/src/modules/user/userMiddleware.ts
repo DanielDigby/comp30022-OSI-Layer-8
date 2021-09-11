@@ -1,10 +1,9 @@
 import express from "express";
-import mongoose from "mongoose";
+import { hashPassword } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
 const User = require("./userModel");
-mongoose.model("User");
 
 // create a user and attach to request object
 export const createUser = async (
@@ -16,7 +15,7 @@ export const createUser = async (
         const newUser = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            password: User.generateHash(req.body.password),
+            password: hashPassword(req.body.password),
             profilePic: req.body?.profilePic,
             colourScheme: req.body.colourScheme,
             tags: req.body.tags,

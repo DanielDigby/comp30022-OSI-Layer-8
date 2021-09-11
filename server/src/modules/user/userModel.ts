@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
+import { model, Schema, Model, Document } from "mongoose";
 
 export interface IUser extends Document {
-    _id: string;
     firstName: string;
     lastName: string;
     password: string;
@@ -10,7 +9,7 @@ export interface IUser extends Document {
     tags: Array<string>;
 }
 
-const userSchema = new mongoose.Schema<IUser>({
+const userSchema = new Schema<IUser>({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     password: { type: String, required: true },
@@ -26,6 +25,6 @@ const userSchema = new mongoose.Schema<IUser>({
     },
 });
 
-const User = mongoose.model<IUser>("User", userSchema);
+const User: Model<IUser> = model<IUser>("User", userSchema);
 
 module.exports = User;
