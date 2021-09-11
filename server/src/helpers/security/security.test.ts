@@ -13,6 +13,13 @@ import {
 
 describe("Password hashing", () => {
     describe("Hash passwords", () => {
+        it("Hash a password and expect it to not equal the original"),
+            () => {
+                const password = "password";
+                const hash = hashPassword(password);
+                expect(password).not.toEqual(hash);
+            };
+
         it("Hash two identical passwords and expect them to hash to the different values", () => {
             const password1 = "password";
             const password2 = "password";
@@ -20,7 +27,6 @@ describe("Password hashing", () => {
             const hash1 = hashPassword(password1);
             const hash2 = hashPassword(password2);
 
-            expect(password1).not.toEqual(hash1);
             expect(hash1).not.toEqual(hash2);
         });
     });
