@@ -18,7 +18,6 @@ app.get("/api/", (_, res) => {
 // middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use();
 
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
@@ -27,6 +26,10 @@ app.use("/api/notes", noteRouter);
 // user URLs
 const userRouter = require("./modules/user/userRouter");
 app.use("/api/users/", userRouter);
+
+// auth URLs
+const authRouter = require("./modules/auth/authRouter");
+app.use("/api/auth/", authRouter);
 
 // Frontend connection
 if (process.env.NODE_ENV === "production") {

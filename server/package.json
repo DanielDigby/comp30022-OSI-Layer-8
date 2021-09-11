@@ -12,6 +12,10 @@
         "dev": "ts-node-dev --respawn -- src/index.ts",
         "test": "jest"
     },
+    "jest": {
+        "testEnvironment": "node",
+        "coverage": false
+    },
     "dependencies": {
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",

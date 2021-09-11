@@ -1,8 +1,20 @@
 import supertest from "supertest";
 import express from "express";
 
-const index = require("../../index");
-const app = index.app;
+const app = require("../../index");
+const db = require("../../config/mongooseTesting");
+
+beforeAll(async () => {
+    await db.connect;
+});
+
+afterEach(async () => {
+    await db.clear;
+});
+
+afterAll(async () => {
+    await db.close;
+});
 
 describe("Authentication service", () => {
     describe("Register user", () => {
@@ -11,44 +23,46 @@ describe("Authentication service", () => {
                 "success code" +
                 "jwt cookie" +
                 "created user object in response body",
-            () => {}
+            () => {
+                expect(1).toBe(1);
+            }
         );
 
-        it(
-            "When incorrect new user object is provided expect return to be:" +
-                "user error code",
-            () => {}
-        );
+        // it(
+        //     "When incorrect new user object is provided expect return to be:" +
+        //         "user error code",
+        //     () => {}
+        // );
     });
 
-    describe("Log in user", () => {
-        it(
-            "When correct username and password are provided expect return to be:" +
-                "success code" +
-                "jwt cookie" +
-                "user object in response body",
-            () => {}
-        );
+    // describe("Log in user", () => {
+    //     it(
+    //         "When correct username and password are provided expect return to be:" +
+    //             "success code" +
+    //             "jwt cookie" +
+    //             "user object in response body",
+    //         () => {}
+    //     );
 
-        it(
-            "When incorrect username or password are provided expect return to be:" +
-                "user error code",
-            () => {}
-        );
-    });
+    //     it(
+    //         "When incorrect username or password are provided expect return to be:" +
+    //             "user error code",
+    //         () => {}
+    //     );
+    // });
 
-    describe("Log out user", () => {
-        it(
-            "When valid jwt is provided expect return to be:" +
-                "success code" +
-                "empty jwt cookie",
-            () => {}
-        );
+    // describe("Log out user", () => {
+    //     it(
+    //         "When valid jwt is provided expect return to be:" +
+    //             "success code" +
+    //             "empty jwt cookie",
+    //         () => {}
+    //     );
 
-        it(
-            "When invalid jwt is provided expect return to be:" +
-                "user error code",
-            () => {}
-        );
-    });
+    //     it(
+    //         "When invalid jwt is provided expect return to be:" +
+    //             "user error code",
+    //         () => {}
+    //     );
+    // });
 });

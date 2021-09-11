@@ -1,5 +1,6 @@
 import mongoose = require("mongoose");
 
+// connect to atlas database
 mongoose.connect(
     "mongodb+srv://development:development@development.e630l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     {
@@ -18,3 +19,4 @@ db.once("open", async () => {
 });
 
 require("../modules/note/noteModel");
+require("../modules/user/userModel");
