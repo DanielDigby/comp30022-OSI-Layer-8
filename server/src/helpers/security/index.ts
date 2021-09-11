@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
-import { IUser } from "../modules/user/userModel";
-import { IRequestWithCookie } from "../interfaces/expressInterfaces";
+import { IUser } from "../../modules/user/userModel";
+import { IRequestWithCookie } from "../../interfaces/expressInterfaces";
 
 export function validatePassword(password1: string, password2: string) {
     return bcrypt.compareSync(password1, password2);

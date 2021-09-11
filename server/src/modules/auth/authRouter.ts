@@ -1,12 +1,12 @@
 import express from "express";
 import passport from "passport";
-import { createUserMiddleware } from "../user/userController";
+import { createUser } from "../user/userMiddleware";
 
 const authController = require("./authController");
 const authRouter = express.Router();
 
 // post a user register action
-authRouter.post("/register", createUserMiddleware, authController.postLogin);
+authRouter.post("/register", createUser, authController.postLogin);
 
 // post a user login action
 authRouter.post(
