@@ -7,7 +7,7 @@ const noteRouter = express.Router();
 noteRouter.get("/", noteController.getNotes);
 
 // get a specific note in database
-noteRouter.get("/:Id", noteController.getNote); 
+noteRouter.get("/:Id", noteController.getNote);
 
 // create a new note in database
 noteRouter.post("/", noteController.postNote);
