@@ -12,13 +12,15 @@ export const createUser = async (
     next: express.NextFunction
 ) => {
     try {
+        if (req.body.password1 !== req.body.password2)
+            throw "Password mismatch";
+
         const newUser = new User({
+            email: req.body.email,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             password: hashPassword(req.body.password),
             profilePic: req.body?.profilePic,
-            colourScheme: req.body.colourScheme,
-            tags: req.body.tags,
         });
 
         newUser.save();

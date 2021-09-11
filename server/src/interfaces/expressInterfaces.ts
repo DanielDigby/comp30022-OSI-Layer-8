@@ -8,6 +8,7 @@ export interface IRequestWithCookie extends Request {
 export interface IRequestWithUser extends Request {
     user: IUser;
 }
+
 export interface IResponseWithUser extends Response {
     user: IUser;
 }

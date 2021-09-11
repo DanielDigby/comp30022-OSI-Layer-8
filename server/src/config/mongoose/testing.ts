@@ -1,10 +1,14 @@
-import mongoose = require("mongoose");
-const { MongoMemoryServer } = require("mongodb-memory-server");
+import mongoose from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
 
-const mongoServer = new MongoMemoryServer();
+let mongoServer: MongoMemoryServer;
+
+const createTestingDB = async () => {
+    mongoServer = await MongoMemoryServer.create();
+};
 
 // connect to in memory database while testing
-const connect = async () => {
+const connectTestingDB = async () => {
     const uri = await mongoServer.getUri();
 
     await mongoose.connect(uri);
@@ -19,19 +23,17 @@ const connect = async () => {
     db.once("open", async () => {
         console.log("Mongo connection started on " + db.host + ":" + db.port);
     });
-    require("../modules/note/noteModel");
-    require("../modules/user/userModel");
 };
 
-// dump database then close connection
-const disconnect = async () => {
+// Wipe data from memory then stop
+const closeTestingDB = async () => {
     await mongoose.connection.dropDatabase;
     await mongoose.connection.close();
     await mongoServer.stop();
 };
 
-// delete all document from each collection
-const clear = async () => {
+// Clear each collection
+const clearTestingDB = async () => {
     const collections = mongoose.connection.collections;
     for (const key in collections) {
         const collection = collections[key];
@@ -40,7 +42,8 @@ const clear = async () => {
 };
 
 module.exports = {
-    connect,
-    disconnect,
-    clear,
+    createTestingDB,
+    connectTestingDB,
+    closeTestingDB,
+    clearTestingDB,
 };

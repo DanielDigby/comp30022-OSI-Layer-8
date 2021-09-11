@@ -19,11 +19,13 @@ const userSchema = new Schema<IUser>({
     colourScheme: {
         type: String,
         enum: ["PLACEHOLDER"],
+        required: true,
         default: "PLACEHOLDER",
     },
     tags: {
         type: [String],
         required: true,
+        default: [],
     },
 });
 
