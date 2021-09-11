@@ -2897,6 +2897,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mongodb@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "@types/mongodb@npm:4.0.7"
+  dependencies:
+    mongodb: "*"
+  checksum: 10ebdfed5beaeb9354adcaded3ff31a0597eec96d665155bf029fdf81384534cc054ffd4f3a431911e55055cea8dcea6233b2265d6d90f45fe233fd59a31bd56
+  languageName: node
+  linkType: hard
+
 "@types/mongoose@npm:^5.11.97":
   version: 5.11.97
   resolution: "@types/mongoose@npm:5.11.97"
@@ -12165,7 +12174,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mongodb@npm:4.1.1":
+"mongodb@npm:*, mongodb@npm:4.1.1":
   version: 4.1.1
   resolution: "mongodb@npm:4.1.1"
   dependencies:
@@ -15948,6 +15957,7 @@ resolve@^2.0.0-next.3:
     "@types/cors": ^2.8.12
     "@types/express": ^4.17.13
     "@types/jest": ^26.0.24
+    "@types/mongodb": ^4.0.7
     "@types/mongodb-memory-server": ^2.3.0
     "@types/mongoose": ^5.11.97
     "@types/node": ^16.4.13
