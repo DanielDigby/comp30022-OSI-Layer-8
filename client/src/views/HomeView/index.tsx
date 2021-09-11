@@ -19,7 +19,7 @@ const HomeView = (): JSX.Element => {
                 <img className={styles.image} src={logo} />
             </div>
 
-            <h1 className={styles.heading}>Cara</h1>
+            <h1 className={styles.heading}>cara</h1>
             <h4 className={styles.heading2}>Untangle your personal life</h4>
 
             <div className={styles.button}>
