@@ -24,11 +24,11 @@
 
 /* Light/Dark mode */
 .light {
-    color: var(--colour-background);
+    background-color: var(--colour-background);
 }
 
 .dark {
-    color: var(--colour-background-dark);
+    background-color: var(--colour-background-dark);
 }
 
 /* Dashboard page classes */
@@ -39,8 +39,7 @@
 }
 
 .sideMenu:hover {
-    color: var(--colour-grey-highlight);
-    font-size: var(--text-medium);
+    color: var(--colour-red-bright);
 }
 
 .note {

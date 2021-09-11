@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./NotesView.module.css";
+import styles from "./ProfileImage.module.css";
 
 // Semantic UI button
 import { Image } from "semantic-ui-react";
@@ -12,18 +12,15 @@ interface Fullname {
 const ProfileImage = (props: Fullname): JSX.Element => {
     // api call
     return (
-        <div className={styles.container}>
-            <div>
+        <div className={styles.horizontal}>
+            <div className={styles.image}>
                 <Image
                     src="https://cdn.theconversation.com/avatars/1193792/width238/file-20210106-15-zlm7jy.jpg"
-                    className={styles.image}
                     circular
                 />
             </div>
 
-            <div className={styles.name}>
-                <h4>{props.firstName + props.lastName}</h4>
-            </div>
+            <h4 className={styles.text}>{props.firstName + props.lastName}</h4>
         </div>
     );
 };
