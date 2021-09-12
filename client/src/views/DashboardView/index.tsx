@@ -4,9 +4,45 @@ import { useHistory } from "react-router-dom";
 
 // trigger tests
 
-// Semantic UI button
-import { Button } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
+const DashboardView = (): JSX.Element => {
+    /*
+    const navHistory = useHistory();
+    const navigateHome = () => navHistory.push("/");
+    const navigateSettings = () => navHistory.push("/settings");
+    const navigateNotes = () => navHistory.push("/notes");
+    */
+
+    // api call
+
+    return (
+        <div className={styles.basecontainer}>
+            <div className={styles.topcontainer}> profile pic </div>
+
+            <div className={styles.viewNotesContainer}>
+                <Icon name="sticky note outline" />
+                <div className={styles.viewAllNotesContainer}>
+                    View <p>all notes</p>
+                </div>
+            </div>
+            <div className={styles.greetingsContainer}>
+                <div className={styles.heading}>
+                    <h1>Good Morning,</h1>
+                    <h1>Sonja.</h1>
+                </div>
+
+                <div className={styles.date}>
+                    <label className={styles.label} htmlFor="email">
+                        16 September 2021
+                    </label>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+/*
 const DashboardView = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateHome = () => navHistory.push("/");
@@ -37,5 +73,7 @@ const DashboardView = (): JSX.Element => {
         </div>
     );
 };
+
+*/
 
 export default DashboardView;
