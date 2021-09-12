@@ -42,8 +42,7 @@ describe("Authentication service", () => {
                     .expect("Content-Type", /json/)
                     .expect(200)
                     .then((res) => {
-                        expect(res.header["set-cookie"]).not.toBeNull();
-                        expect(res.header["set-cookie"]).not.toBeUndefined();
+                        expect(res.header["set-cookie"][0]).toMatch(/jwt/);
                         expect(res.body.email).toEqual(user.email);
                         expect(res.body.firstName).toEqual(user.firstName);
                         expect(res.body.lastName).toEqual(user.lastName);
@@ -86,7 +85,6 @@ describe("Authentication service", () => {
             "When mismatched passwords are provided expect return to be:\n" +
                 "\t- client error code",
             (done) => {
-                // note. no firstName
                 const user = {
                     email: "testuser@email.com",
                     firstName: "test",
@@ -136,8 +134,7 @@ describe("Authentication service", () => {
                     })
                     .expect(200)
                     .then((res) => {
-                        expect(res.header["set-cookie"]).not.toBeNull();
-                        expect(res.header["set-cookie"]).not.toBeUndefined();
+                        expect(res.header["set-cookie"][0]).toMatch(/jwt/);
                         expect(res.body.email).toEqual("testuser@email.com");
                         expect(res.body.firstName).toEqual("test");
                         expect(res.body.lastName).toEqual("user");
@@ -200,7 +197,7 @@ describe("Authentication service", () => {
                     .set("Cookie", ["jwt=" + jwt])
                     .expect(200)
                     .then((res) => {
-                        expect(res.header["set-cookie"]).not.toBeNull();
+                        expect(res.header["set-cookie"][0]).toMatch(/jwt=null/);
                         done();
                     })
                     .catch((err) => done(err));
