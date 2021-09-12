@@ -16,6 +16,8 @@ const DashboardView = (): JSX.Element => {
 
     // api call
 
+    /* DRAFT - Still need to clean things up and get pfp */
+
     return (
         <div className={styles.basecontainer}>
             <div className={styles.topcontainer}> profile pic </div>
@@ -28,7 +30,7 @@ const DashboardView = (): JSX.Element => {
                     </div>
 
                     <div className={styles.date}>
-                        <label className={styles.label} htmlFor="email">
+                        <label className={styles.label}>
                             16 September 2021
                         </label>
                     </div>
