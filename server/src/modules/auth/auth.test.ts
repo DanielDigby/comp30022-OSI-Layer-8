@@ -1,5 +1,8 @@
 import supertest from "supertest";
+import * as request from "superagent";
 import express from "express";
+import { assert } from "console";
+import { notify } from "superagent";
 
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
@@ -24,19 +27,26 @@ describe("Authentication service", () => {
                 "- success code\n" +
                 "- jwt cookie\n" +
                 "- created user object in response body\n",
-            () => {
-                expect(1).toBe(1);
-                //         supertest(app)
-                //             .post("/api/auth/register")
-                //             .send({
-                //                 email: "testuser@email.com",
-                //                 firstName: "test",
-                //                 lastName: "user",
-                //                 password1: "password",
-                //                 password2: "password",
-                //                 profilePic: "someImgUrl",
-                //             })
-                //             .expect(200, done);
+            (done) => {
+                const agent = request.agent();
+                supertest(app)
+                    .post("/api/auth/register")
+                    .send({
+                        email: "testuser@email.com",
+                        firstName: "test",
+                        lastName: "user",
+                        password1: "password",
+                        password2: "password",
+                        profilePic: "someImgUrl",
+                    })
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.header["set-cookie"]).not.toBeNull();
+                        expect(res.header["set-cookie"]).not.toBeUndefined();
+                        done();
+                    })
+                    .catch((err) => done(err));
             }
         );
         // it(
@@ -67,7 +77,7 @@ describe("Authentication service", () => {
     //         "When valid jwt is provided expect return to be:" +
     //             "success code" +
     //             "empty jwt cookie",
-    //         () => {}
+    //         () => {} request.auth('my_token', { type: 'bearer' })
     //     );
 
     //     it(

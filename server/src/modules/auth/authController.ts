@@ -4,7 +4,6 @@ import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 const postLogin = async (req: IRequestWithUser, res: express.Response) => {
     const jwt = generateJwt(req.user);
-
     return res
         .status(200)
         .cookie("jwt", jwt, { httpOnly: true })
