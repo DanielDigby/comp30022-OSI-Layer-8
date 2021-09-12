@@ -1,7 +1,9 @@
 import supertest from "supertest";
 import * as request from "superagent";
 import express from "express";
-import { assert } from "console";
+import { IUser } from "../user/userModel";
+import mongoose from "mongoose";
+import { hashPassword } from "../../helpers/security";
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
 
@@ -73,7 +75,6 @@ describe("Authentication service", () => {
                     .send(user)
                     .expect(400)
                     .then((res) => {
-                        console.log(res.text);
                         expect(res.text).toEqual("Validation Error");
                         done();
                     })
@@ -107,21 +108,78 @@ describe("Authentication service", () => {
         );
     });
 
-    // describe("Log in user", () => {
-    //     it(
-    //         "When correct username and password are provided expect return to be:" +
-    //             "success code" +
-    //             "jwt cookie" +
-    //             "user object in response body",
-    //         () => {}
-    //     );
+    describe("Log in user", () => {
+        beforeEach(async () => {
+            // register the user to be logged in
+            const User = mongoose.model<IUser>("User");
+            const user = new User({
+                email: "testuser@email.com",
+                firstName: "test",
+                lastName: "user",
+                password: hashPassword("password"),
+                profilePic: "someImgUrl",
+            });
+            await user.save();
+        });
 
-    //     it(
-    //         "When incorrect username or password are provided expect return to be:" +
-    //             "user error code",
-    //         () => {}
-    //     );
-    // });
+        it(
+            "When correct email and password are provided expect return to be:\n" +
+                "\t- success code\n" +
+                "\t- jwt cookie\n" +
+                "\t- created user object in response body",
+            (done) => {
+                supertest(app)
+                    .post("/api/auth/login")
+                    .send({
+                        email: "testuser@email.com",
+                        password: "password",
+                    })
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.header["set-cookie"]).not.toBeNull();
+                        expect(res.header["set-cookie"]).not.toBeUndefined();
+                        expect(res.body.email).toEqual("testuser@email.com");
+                        expect(res.body.firstName).toEqual("test");
+                        expect(res.body.lastName).toEqual("user");
+                        expect(res.body.profilePic).toEqual("someImgUrl");
+                        expect(res.body.colourScheme).toEqual("PLACEHOLDER");
+                        expect(res.body.tags.length).toEqual(0);
+
+                        expect(res.body.password).toBe("redacted");
+                        done();
+                    })
+                    .catch((err) => done(err));
+            }
+        );
+
+        // it(
+        //     "When incorrect email or password are provided expect return to be:" +
+        //         "user error code",
+        //     (done) => {
+        //         supertest(app)
+        //             .post("/api/auth/login")
+        //             .send({
+        //                 email: "testuser@email.com",
+        //                 password: "password",
+        //             })
+        //             .expect(200)
+        //             .then((res) => {
+        //                 expect(res.header["set-cookie"]).not.toBeNull();
+        //                 expect(res.header["set-cookie"]).not.toBeUndefined();
+        //                 expect(res.body.email).toEqual("testuser@email.com");
+        //                 expect(res.body.firstName).toEqual("test");
+        //                 expect(res.body.lastName).toEqual("user");
+        //                 expect(res.body.profilePic).toEqual("someImgUrl");
+        //                 expect(res.body.colourScheme).toEqual("PLACEHOLDER");
+        //                 expect(res.body.tags.length).toEqual(0);
+
+        //                 expect(res.body.password).toBe("redacted");
+        //                 done();
+        //             })
+        //             .catch((err) => done(err));
+        //     }
+        // );
+    });
 
     // describe("Log out user", () => {
     //     it(
