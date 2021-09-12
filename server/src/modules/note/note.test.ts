@@ -87,35 +87,60 @@ describe("Note route tests", () => {
     describe("Get a specific note", () => {
         it(
             "When a note is correctly retrieved:" +
-                "success code" +
-                "Note object in response body",
+                "- success code" +
+                "- Note object in response body",
             async () => {
-                const note1 = new Note({
+                const note1 = {
                     title: "title1",
                     text: "text1",
                     image: "image1",
-                    reminderTime: new Date("2021-01-09"),
-                    eventTime: new Date("2021-01-09"),
+                    reminderTime: new Date("2021-01-09").toISOString(),
+                    eventTime: new Date("2021-01-09").toISOString(),
                     pinned: true,
-                    tags: [],
-                    relatedNotes: [],
-                });
-                await note1.save();
+                }
+                await (new Note(note1)).save();
 
                 const id = (await Note.findOne({ title: "title1" }))._id;
-
                 const res = await supertest(app).get(`/api/notes/${id}`);
                 expect(res.statusCode).toBe(200);
-                console.log(res.body)
-                // expect(res.body._id).toStrictEqual(id);
-                expect(res.body.title).toEqual("title1");
-                expect(res.body.text).toEqual("text1");
-                expect(res.body.image).toEqual("image1");
-                // expect(res.body.reminderTime).toEqual((new Date("2021-01-09")).toDateString());
-                // expect(res.body.eventTime).toEqual((new Date("2021-01-09")).toDateString());
-                expect(res.body.pinned).toEqual(true);
-                expect(res.body.tags).toEqual([]);
-                expect(res.body.relatedNotes).toEqual([]);
+                expect(res.body).toMatchObject(note1);
+            }
+        );
+
+        // it(
+        //     "When incorrect username or password are provided expect return to be:" +
+        //         "user error code",
+        //     () => {}
+        // );
+    });
+
+    describe("Post a new note", () => {
+        it(
+            "When a note is correctly posted:" +
+                "- success code" +
+                "- note object in response body" +
+                "- number of Note documents to increase by 1",
+            async () => {
+                const count = await Note.countDocuments();
+                const newNote = {
+                    title: "title5",
+                    text: "text5",
+                    image: "image5",
+                    reminderTime: new Date("2021-01-09").toISOString(),
+                    eventTime: new Date("2021-01-09").toISOString(),
+                    pinned: true,
+                    tags: ["tag5"],
+                }
+
+                const res = await supertest(app)
+                                        .post("/api/notes/")
+                                        .send(newNote);
+
+                const newCount = await Note.countDocuments();
+
+                expect(res.statusCode).toBe(200);
+                expect(res.body).toMatchObject(newNote);
+                expect(newCount).toEqual(count + 1);
             }
         );
 
