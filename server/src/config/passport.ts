@@ -24,6 +24,7 @@ passport.use(
                     return done(null, false);
                 }
                 // TODO (Daniel) reset rate limiter on successful login
+                user.password = "redacted";
                 return done(null, user);
             }
         );
@@ -52,6 +53,7 @@ passport.use(
                     return done(null, false);
                 }
                 // TODO (Daniel) reset rate limiter on successful login
+                user.password = "redacted";
                 return done(null, user);
             }
         );

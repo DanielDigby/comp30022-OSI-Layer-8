@@ -1,9 +1,11 @@
 import express from "express";
+import mongoose from "mongoose";
 import { hashPassword } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
-const User = require("./userModel");
+import { IUser } from "./userModel";
+const User = mongoose.model<IUser>("User");
 
 // create a user and attach to request object
 export const createUser = async (
