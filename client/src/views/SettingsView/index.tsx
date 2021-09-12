@@ -12,7 +12,7 @@ const SettingsView = (): JSX.Element => {
     // api call
     return (
         <div>
-            <div className={styles.container}>hello world settingsview</div>
+            <div className={styles.container}>hello world</div>
             <div className={styles.footer}>
                 <Button positive onClick={() => navigateDashboard()}>
                     Back
