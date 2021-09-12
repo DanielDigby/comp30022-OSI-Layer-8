@@ -49,11 +49,25 @@ describe("Authentication service", () => {
                     .catch((err) => done(err));
             }
         );
-        // it(
-        //     "When incorrect new user object is provided expect return to be:" +
-        //         "user error code",
-        //     () => {}
-        // );
+
+        it(
+            "When incorrect new user object is provided expect return to be:" +
+                "client error code",
+            (done) => {
+                // note. no firstName
+                const user = {
+                    email: "testuser@email.com",
+                    lastName: "user",
+                    password1: "password",
+                    password2: "password",
+                    profilePic: "someImgUrl",
+                };
+                supertest(app)
+                    .post("/api/auth/register")
+                    .send(user)
+                    .expect(400, done);
+            }
+        );
     });
 
     // describe("Log in user", () => {

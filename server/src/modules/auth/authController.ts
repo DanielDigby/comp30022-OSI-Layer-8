@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import { generateJwt } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
