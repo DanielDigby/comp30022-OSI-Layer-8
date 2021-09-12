@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-
 import mongoose from "mongoose";
 
 // TODO (Daniel) set up logging and monitoring
@@ -41,7 +40,7 @@ export class AppError extends Error {
 // Add expected error codes here
 async function crashIfUntrustedErrorOrSendResponse(err: Error, res: Response) {
     if (err instanceof AppError && err.isOperational) {
-        res.status(err.httpCode).send(err.name);
+        return res.status(err.httpCode).send(err.name);
     } else {
         res.send(500);
         // TODO (Daniel) gracefully crash and restart

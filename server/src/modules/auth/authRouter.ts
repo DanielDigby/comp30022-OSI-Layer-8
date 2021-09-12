@@ -11,14 +11,14 @@ authRouter.post("/register", createUser, authController.postLogin);
 // post a user login action
 authRouter.post(
     "/login",
-    passport.authenticate("local"),
+    passport.authenticate("local", { session: false }),
     authController.postLogin
 );
 
 // post a user logout action
 authRouter.post(
-    "/logut",
-    passport.authenticate("jwt"),
+    "/logout",
+    passport.authenticate("jwt", { session: false }),
     authController.postLogout
 );
 

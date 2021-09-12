@@ -5,7 +5,8 @@ import { AppError } from "../../helpers/errors";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
-const User = require("./userModel");
+import { IUser } from "./userModel";
+const User = mongoose.model<IUser>("User");
 
 // create a user and attach to request object
 export const createUser = async (
@@ -26,11 +27,12 @@ export const createUser = async (
             email: req.body.email,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            password: hashPassword(req.body.password),
+            password: hashPassword(req.body.password1),
             profilePic: req.body?.profilePic,
         });
 
-        newUser.save();
+        await newUser.save();
+        newUser.password = "redacted";
         req.user = newUser;
         next();
     } catch (err) {
