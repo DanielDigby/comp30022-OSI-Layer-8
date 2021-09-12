@@ -3,7 +3,7 @@ import * as request from "superagent";
 import express from "express";
 import { IUser } from "../user/userModel";
 import mongoose from "mongoose";
-import { hashPassword } from "../../helpers/security";
+import { hashPassword, generateJwt } from "../../helpers/security";
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
 
@@ -153,8 +153,8 @@ describe("Authentication service", () => {
         );
 
         it(
-            "When incorrect email or password are provided expect return to be:" +
-                "user error code",
+            "When incorrect email or password are provided expect return to be:\n" +
+                "\t- unauthorized code",
             (done) => {
                 supertest(app)
                     .post("/api/auth/login")
@@ -164,7 +164,7 @@ describe("Authentication service", () => {
                     })
                     .expect(401)
                     .then((res) => {
-                        expect(res.text).toEqual("Authentication Error");
+                        expect(res.text).toEqual("Unauthorized");
                         done();
                     })
                     .catch((err) => done(err));
@@ -172,18 +172,55 @@ describe("Authentication service", () => {
         );
     });
 
-    // describe("Log out user", () => {
-    //     it(
-    //         "When valid jwt is provided expect return to be:" +
-    //             "success code" +
-    //             "empty jwt cookie",
-    //         () => {} request.auth('my_token', { type: 'bearer' })
-    //     );
+    describe("Log out user", () => {
+        let jwt: string;
+        beforeEach(async () => {
+            // register the user to be logged in
+            const User = mongoose.model<IUser>("User");
+            const user = new User({
+                email: "testuser@email.com",
+                firstName: "test",
+                lastName: "user",
+                password: hashPassword("password"),
+                profilePic: "someImgUrl",
+            });
+            await user.save();
+            jwt = generateJwt(
+                await User.findOne({ email: "testuser@email.com" })
+            );
+        });
 
-    //     it(
-    //         "When invalid jwt is provided expect return to be:" +
-    //             "user error code",
-    //         () => {}
-    //     );
-    // });
+        it(
+            "When valid jwt is provided expect return to be:\n" +
+                "\t- success code\n" +
+                "\t- empty jwt cookie",
+            (done) => {
+                supertest(app)
+                    .post("/api/auth/logout")
+                    .set("Cookie", ["jwt=" + jwt])
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.header["set-cookie"]).not.toBeNull();
+                        done();
+                    })
+                    .catch((err) => done(err));
+            }
+        );
+
+        it(
+            "When invalid jwt is provided expect return to be:\n" +
+                "\t- user error code",
+            (done) => {
+                supertest(app)
+                    .post("/api/auth/logout")
+                    .set("Cookie", ["jwt=" + "notarealjwt"])
+                    .expect(401)
+                    .then((res) => {
+                        expect(res.text).toEqual("Unauthorized");
+                        done();
+                    })
+                    .catch((err) => done(err));
+            }
+        );
+    });
 });

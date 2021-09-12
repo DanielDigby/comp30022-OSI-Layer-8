@@ -15,10 +15,13 @@ const postLogin = async (req: IRequestWithUser, res: express.Response) => {
 const postLogout = async (req: IRequestWithUser, res: express.Response) => {
     // TODO (Daniel) blacklist jwt on logout
 
-    return res.status(200).cookie("jwt", "null", {
-        // expire after 5 seconds
-        expires: new Date(Date.now() + 5 * 1000),
-    });
+    return res
+        .status(200)
+        .cookie("jwt", "null", {
+            // expire after 5 seconds
+            expires: new Date(Date.now() + 5 * 1000),
+        })
+        .send();
 };
 
 module.exports = {

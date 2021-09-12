@@ -26,12 +26,7 @@ passport.use(
             const user = <IUser>await User.findOne({ email: email });
             if (!user || !validatePassword(password, user.password)) {
                 // TODO (Daniel) rate limit failed login attempts
-                throw new AppError(
-                    "Authentication Error",
-                    401,
-                    "Email or password is invalid",
-                    true
-                );
+                return done(null, false);
             }
             // TODO (Daniel) reset rate limiter on successful login
             user.password = "redacted";
