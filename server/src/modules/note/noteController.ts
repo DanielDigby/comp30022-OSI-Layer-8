@@ -19,7 +19,7 @@ const getNotes = async (req: express.Request, res: express.Response) => {
 const getNote = async (req: express.Request, res: express.Response) => {
     try {
         const id = req.params.Id;
-        const note = Note.findById(id);
+        const note = await Note.findById(id);
 
         return res.status(200).send(note);
     } catch (err) {
