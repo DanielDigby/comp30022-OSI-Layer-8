@@ -3,8 +3,7 @@
     grid-template-columns: 20% 20% 20% 20% 20%;
 
     margin-top: 5%;
-    background-color: #eee;
-    height: 50%;
+    height: 40%;
 }
 
 .block {
@@ -14,11 +13,10 @@
 }
 
 .colour {
-    height: 80%;
+    height: 100%;
     margin-top: 0;
 }
 
-.dark {
-    background-color: cornflowerblue;
-    margin-top: 0;
+.checkbox {
+    display: flex;
 }

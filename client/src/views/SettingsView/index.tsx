@@ -16,10 +16,15 @@ const SettingsView = (): JSX.Element => {
         <div className={styles.container}>
             <Segment raised className={styles.block}>
                 Personal Details
+                <div>hello</div>
+                <div>hello</div>
+                <div>hello</div>
             </Segment>
 
             <Segment raised className={styles.block}>
-                <h3>color schemes</h3>
+                <div className={styles.heading}>
+                    <h3>color schemes</h3>
+                </div>
                 <ColourBlocks />
             </Segment>
 
