@@ -1,3 +1,22 @@
 .footer {
     margin-bottom: 50px;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 1112px;
+    height: 834px;
+    background-color: #aaaa;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 45%;
+
+    left: 25%;
+    top: 5%;
+}

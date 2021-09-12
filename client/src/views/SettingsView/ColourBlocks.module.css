@@ -1,0 +1,10 @@
+.blocks {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+
+    margin-top: 10%;
+    background-color: #eee;
+}
+
+.block {
+}

@@ -3,7 +3,9 @@ import styles from "./SettingsView.module.css";
 
 import { useHistory } from "react-router-dom";
 // Semantic UI button
-import { Button } from "semantic-ui-react";
+import { Button, Segment } from "semantic-ui-react";
+
+import ColourBlocks from "./ColourBlocks";
 
 const SettingsView = (): JSX.Element => {
     const navHistory = useHistory();
@@ -11,8 +13,16 @@ const SettingsView = (): JSX.Element => {
 
     // api call
     return (
-        <div>
-            <div className={styles.container}>hello world</div>
+        <div className={styles.container}>
+            <Segment raised className={styles.block}>
+                Personal Details
+            </Segment>
+
+            <Segment raised className={styles.block}>
+                <h3>color schemes</h3>
+                <ColourBlocks />
+            </Segment>
+
             <div className={styles.footer}>
                 <Button positive onClick={() => navigateDashboard()}>
                     Back
