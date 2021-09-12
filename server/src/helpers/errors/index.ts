@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-
 import mongoose from "mongoose";
 
 // TODO (Daniel) set up logging and monitoring

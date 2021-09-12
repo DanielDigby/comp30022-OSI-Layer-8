@@ -2,7 +2,7 @@ import passport from "passport";
 import mongoose from "mongoose";
 import passportLocal from "passport-local";
 import passportJwt from "passport-jwt";
-import { NextFunction } from "express";
+import { AppError } from "../helpers/errors";
 import { extractJwt, validatePassword } from "../helpers/security/";
 
 import { IUser } from "../modules/user/userModel";
@@ -26,13 +26,18 @@ passport.use(
             const user = <IUser>await User.findOne({ email: email });
             if (!user || !validatePassword(password, user.password)) {
                 // TODO (Daniel) rate limit failed login attempts
-                done(null, false);
+                throw new AppError(
+                    "Authentication Error",
+                    401,
+                    "Email or password is invalid",
+                    true
+                );
             }
             // TODO (Daniel) reset rate limiter on successful login
             user.password = "redacted";
-            done(null, user);
+            return done(null, user);
         } catch (err) {
-            done(err);
+            return done(err);
         }
     })
 );
@@ -52,13 +57,13 @@ passport.use(
             const user = <IUser>await User.findOne({ id: jwt_payload._id });
             if (!user) {
                 // TODO (Daniel) rate limit failed login attempts
-                done(null, false);
+                return done(null, false);
             }
             // TODO (Daniel) reset rate limiter on successful login
             user.password = "redacted";
-            done(null, user);
+            return done(null, user);
         } catch (err) {
-            done(err);
+            return done(err);
         }
     })
 );

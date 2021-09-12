@@ -152,33 +152,24 @@ describe("Authentication service", () => {
             }
         );
 
-        // it(
-        //     "When incorrect email or password are provided expect return to be:" +
-        //         "user error code",
-        //     (done) => {
-        //         supertest(app)
-        //             .post("/api/auth/login")
-        //             .send({
-        //                 email: "testuser@email.com",
-        //                 password: "password",
-        //             })
-        //             .expect(200)
-        //             .then((res) => {
-        //                 expect(res.header["set-cookie"]).not.toBeNull();
-        //                 expect(res.header["set-cookie"]).not.toBeUndefined();
-        //                 expect(res.body.email).toEqual("testuser@email.com");
-        //                 expect(res.body.firstName).toEqual("test");
-        //                 expect(res.body.lastName).toEqual("user");
-        //                 expect(res.body.profilePic).toEqual("someImgUrl");
-        //                 expect(res.body.colourScheme).toEqual("PLACEHOLDER");
-        //                 expect(res.body.tags.length).toEqual(0);
-
-        //                 expect(res.body.password).toBe("redacted");
-        //                 done();
-        //             })
-        //             .catch((err) => done(err));
-        //     }
-        // );
+        it(
+            "When incorrect email or password are provided expect return to be:" +
+                "user error code",
+            (done) => {
+                supertest(app)
+                    .post("/api/auth/login")
+                    .send({
+                        email: "testuser@email.com",
+                        password: "wordpass",
+                    })
+                    .expect(401)
+                    .then((res) => {
+                        expect(res.text).toEqual("Authentication Error");
+                        done();
+                    })
+                    .catch((err) => done(err));
+            }
+        );
     });
 
     // describe("Log out user", () => {
