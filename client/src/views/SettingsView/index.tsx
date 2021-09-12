@@ -3,7 +3,7 @@ import styles from "./SettingsView.module.css";
 
 import { useHistory } from "react-router-dom";
 // Semantic UI button
-import { Button, Segment, Image } from "semantic-ui-react";
+import { Button, Segment } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
 import FirstNameForm from "./FirstNameForm";

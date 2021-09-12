@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./FirstNameForm.module.css";
 
-import { Icon, Form } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
 const FirstNameForm = (): JSX.Element => {
     const firstNameStateVariable = useState("first name");

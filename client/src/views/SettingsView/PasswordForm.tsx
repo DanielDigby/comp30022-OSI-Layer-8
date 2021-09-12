@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./PasswordForm.module.css";
 
 import { Form, Button } from "semantic-ui-react";
