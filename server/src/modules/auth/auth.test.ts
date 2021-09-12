@@ -29,21 +29,30 @@ describe("Authentication service", () => {
                 "- created user object in response body\n",
             (done) => {
                 const agent = request.agent();
+                const user = {
+                    email: "testuser@email.com",
+                    firstName: "test",
+                    lastName: "user",
+                    password1: "password",
+                    password2: "password",
+                    profilePic: "someImgUrl",
+                };
                 supertest(app)
                     .post("/api/auth/register")
-                    .send({
-                        email: "testuser@email.com",
-                        firstName: "test",
-                        lastName: "user",
-                        password1: "password",
-                        password2: "password",
-                        profilePic: "someImgUrl",
-                    })
+                    .send(user)
                     .expect("Content-Type", /json/)
                     .expect(200)
                     .then((res) => {
                         expect(res.header["set-cookie"]).not.toBeNull();
                         expect(res.header["set-cookie"]).not.toBeUndefined();
+                        expect(res.body.email).toEqual(user.email);
+                        expect(res.body.firstName).toEqual(user.firstName);
+                        expect(res.body.lastName).toEqual(user.lastName);
+                        expect(res.body.profilePic).toEqual(user.profilePic);
+                        expect(res.body.colourScheme).toEqual("PLACEHOLDER");
+                        expect(res.body.tags.length).toEqual(0);
+
+                        expect(res.body.password).toBe("redacted");
                         done();
                     })
                     .catch((err) => done(err));
@@ -51,7 +60,7 @@ describe("Authentication service", () => {
         );
 
         it(
-            "When incorrect new user object is provided expect return to be:" +
+            "When incorrect new user object is provided expect return to be:\n" +
                 "client error code",
             (done) => {
                 // note. no firstName
