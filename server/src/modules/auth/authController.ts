@@ -5,6 +5,8 @@ import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 const postLogin = async (req: IRequestWithUser, res: express.Response) => {
     const jwt = generateJwt(req.user);
+    req.user.password = "redacted";
+
     return res
         .status(200)
         .cookie("jwt", jwt, { httpOnly: true })

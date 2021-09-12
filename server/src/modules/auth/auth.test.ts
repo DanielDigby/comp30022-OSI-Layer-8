@@ -1,5 +1,4 @@
 import supertest from "supertest";
-import * as request from "superagent";
 import express from "express";
 import { assert } from "console";
 import { notify } from "superagent";
@@ -28,7 +27,6 @@ describe("Authentication service", () => {
                 "- jwt cookie\n" +
                 "- created user object in response body\n",
             (done) => {
-                const agent = request.agent();
                 const user = {
                     email: "testuser@email.com",
                     firstName: "test",

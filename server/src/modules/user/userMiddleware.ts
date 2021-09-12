@@ -5,7 +5,8 @@ import { AppError } from "../../helpers/errors";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
-const User = require("./userModel");
+import { IUser } from "./userModel";
+const User = mongoose.model<IUser>("User");
 
 // create a user and attach to request object
 export const createUser = async (
