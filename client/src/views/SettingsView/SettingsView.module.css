@@ -24,4 +24,12 @@
 .heading {
     margin-top: 20px;
     margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.personal {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: 40% 60%;
 }

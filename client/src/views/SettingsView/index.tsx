@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
+import FirstNameForm from "./FirstNameForm";
 
 const SettingsView = (): JSX.Element => {
     const navHistory = useHistory();
@@ -15,10 +16,16 @@ const SettingsView = (): JSX.Element => {
     return (
         <div className={styles.container}>
             <Segment raised className={styles.block}>
-                Personal Details
-                <div>hello</div>
-                <div>hello</div>
-                <div>hello</div>
+                <div className={styles.heading}>
+                    <h3>personal details</h3>
+                </div>
+                {/* All the different forms to enter, split 30% for forms 70% for profile pic */}
+                <div className={styles.personal}>
+                    <div>
+                        <FirstNameForm />
+                    </div>
+                    <div>hello</div>
+                </div>
             </Segment>
 
             <Segment raised className={styles.block}>
