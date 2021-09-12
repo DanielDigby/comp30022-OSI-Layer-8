@@ -31,7 +31,7 @@ describe("Authentication service", () => {
                         email: "testuser@email.com",
                         firstName: "test",
                         lastName: "user",
-                        password1: "password2",
+                        password1: "password",
                         password2: "password",
                         profilePic: "someImgUrl",
                     })
