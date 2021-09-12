@@ -20,22 +20,33 @@ const DashboardView = (): JSX.Element => {
         <div className={styles.basecontainer}>
             <div className={styles.topcontainer}> profile pic </div>
 
-            <div className={styles.viewNotesContainer}>
-                <Icon name="sticky note outline" />
-                <div className={styles.viewAllNotesContainer}>
-                    View <p>all notes</p>
+            <div className={styles.midContainer}>
+                <div className={styles.greetingsContainer}>
+                    <div className={styles.heading}>
+                        <h1>Good Morning,</h1>
+                        <h1>Sonja.</h1>
+                    </div>
+
+                    <div className={styles.date}>
+                        <label className={styles.label} htmlFor="email">
+                            16 September 2021
+                        </label>
+                    </div>
+                </div>
+                <div className={styles.viewNotesContainer}>
+                    <Icon name="sticky note outline" size="big" />
+                    <div className={styles.viewAllNotesContainer}>
+                        View <p>all notes</p>
+                    </div>
                 </div>
             </div>
-            <div className={styles.greetingsContainer}>
-                <div className={styles.heading}>
-                    <h1>Good Morning,</h1>
-                    <h1>Sonja.</h1>
-                </div>
 
-                <div className={styles.date}>
-                    <label className={styles.label} htmlFor="email">
-                        16 September 2021
-                    </label>
+            <div className={styles.bottomContainer}>
+                <div className={styles.calendarContainer}>
+                    <Icon name="calendar alternate" size="big" />
+                </div>
+                <div className={styles.tumbtackContainer}>
+                    <Icon name="thumbtack" size="big" />
                 </div>
             </div>
         </div>

@@ -1,7 +1,26 @@
 .topcontainer {
     display: flex;
     width: 100%;
-    height: 110px;
+    height: 10vh;
+}
+
+.midContainer {
+    display: flex;
+    width: 62%;
+    align-items: stretch;
+    flex-direction: row;
+    align-content: top;
+}
+
+.bottomContainer {
+    display: flex;
+    width: 75%;
+    flex-direction: row;
+}
+
+.calendarContainer {
+    display: flex;
+    width: 50%;
 }
 
 .viewAllNotesContainer {
@@ -22,7 +41,7 @@
     display: flex;
     flex-direction: column;
     align-items: left;
-    margin-bottom: 0px;
+    margin-bottom: 5vh;
 }
 
 .basecontainer {
