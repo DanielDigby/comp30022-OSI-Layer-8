@@ -1,5 +1,8 @@
 import supertest from "supertest";
+import * as request from "superagent";
 import express from "express";
+import { assert } from "console";
+import { notify } from "superagent";
 
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
@@ -25,6 +28,7 @@ describe("Authentication service", () => {
                 "- jwt cookie\n" +
                 "- created user object in response body\n",
             (done) => {
+                const agent = request.agent();
                 supertest(app)
                     .post("/api/auth/register")
                     .send({
@@ -35,7 +39,14 @@ describe("Authentication service", () => {
                         password2: "password",
                         profilePic: "someImgUrl",
                     })
-                    .expect(200, done);
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.header["set-cookie"]).not.toBeNull();
+                        expect(res.header["set-cookie"]).not.toBeUndefined();
+                        done();
+                    })
+                    .catch((err) => done(err));
             }
         );
 
@@ -67,7 +78,7 @@ describe("Authentication service", () => {
     //         "When valid jwt is provided expect return to be:" +
     //             "success code" +
     //             "empty jwt cookie",
-    //         () => {}
+    //         () => {} request.auth('my_token', { type: 'bearer' })
     //     );
 
     //     it(

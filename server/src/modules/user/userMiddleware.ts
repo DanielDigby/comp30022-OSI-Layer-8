@@ -19,7 +19,7 @@ export const createUser = async (
             email: req.body.email,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            password: hashPassword(req.body.password),
+            password: hashPassword(req.body.password1),
             profilePic: req.body?.profilePic,
         });
 
@@ -27,6 +27,7 @@ export const createUser = async (
         req.user = newUser;
         next();
     } catch (err) {
+        console.log(err);
         return res.send(err);
     }
 };
