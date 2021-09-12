@@ -33,3 +33,7 @@
     display: grid;
     grid-template-columns: 40% 60%;
 }
+
+.forms {
+    height: 70%;
+}
