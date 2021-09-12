@@ -16,7 +16,7 @@ const MenuItem = (): JSX.Element => {
                     <Menu.Item name="Pinned" />
                     <Menu.Item name="Events" />
                     <Menu.Item name="Contacts" />
-                    <Menu.Item name="Links" />
+                    <Menu.Item name="Settings" />
                 </Menu>
             </div>
         </div>

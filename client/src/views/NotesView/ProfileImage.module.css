@@ -7,6 +7,8 @@
 
 .image {
     display: flex;
+    padding-left: 5%;
+    padding-top: 5%;
     width: 60px;
     align-items: center;
     justify-content: center;

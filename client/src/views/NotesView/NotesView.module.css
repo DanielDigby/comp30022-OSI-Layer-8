@@ -6,6 +6,7 @@
 
 .menu {
     display: flex;
+    padding-top: 5%;
     flex-direction: column;
     width: 10%;
     height: 100vh;
