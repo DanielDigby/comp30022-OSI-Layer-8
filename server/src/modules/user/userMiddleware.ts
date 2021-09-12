@@ -15,16 +15,12 @@ export const createUser = async (
 ) => {
     try {
         if (req.body.password1 !== req.body.password2)
-<<<<<<< Updated upstream
             throw new AppError(
                 "Password Error",
                 400,
                 "user passwords are not able to be unified",
                 true
             );
-=======
-            throw new Error("Password mismatch");
->>>>>>> Stashed changes
 
         const newUser = new User({
             email: req.body.email,
@@ -38,7 +34,6 @@ export const createUser = async (
         req.user = newUser;
         next();
     } catch (err) {
-<<<<<<< Updated upstream
         if (err instanceof mongoose.Error.ValidationError) {
             err = new AppError(
                 "Validation Error",
@@ -47,8 +42,6 @@ export const createUser = async (
                 true
             );
         }
-=======
->>>>>>> Stashed changes
         next(err);
     }
 };
