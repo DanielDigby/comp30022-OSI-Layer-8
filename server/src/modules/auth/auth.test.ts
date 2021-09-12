@@ -1,7 +1,6 @@
 import supertest from "supertest";
 import express from "express";
 import { assert } from "console";
-import { notify } from "superagent";
 
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
