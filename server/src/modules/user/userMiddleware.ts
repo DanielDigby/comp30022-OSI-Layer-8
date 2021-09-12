@@ -26,6 +26,7 @@ export const createUser = async (
         });
 
         newUser.save();
+        newUser.password = "redacted";
         req.user = newUser;
         next();
     } catch (err) {
