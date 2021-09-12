@@ -31,7 +31,7 @@ export const createUser = async (
             profilePic: req.body?.profilePic,
         });
 
-        newUser.save();
+        await newUser.save();
         newUser.password = "redacted";
         req.user = newUser;
         next();

@@ -22,9 +22,9 @@ describe("Authentication service", () => {
     describe("Register user", () => {
         it(
             "When correct new user object is provided expect return to be:\n" +
-                "- success code\n" +
-                "- jwt cookie\n" +
-                "- created user object in response body\n",
+                "\t- success code\n" +
+                "\t- jwt cookie\n" +
+                "\t- created user object in response body",
             (done) => {
                 const user = {
                     email: "testuser@email.com",
@@ -58,7 +58,27 @@ describe("Authentication service", () => {
 
         it(
             "When incorrect new user object is provided expect return to be:\n" +
-                "client error code",
+                "\t- client error code",
+            (done) => {
+                // note. no firstName
+                const user = {
+                    email: "testuser@email.com",
+                    firstName: "test",
+                    lastName: "user",
+                    password1: "password",
+                    password2: "wordpass",
+                    profilePic: "someImgUrl",
+                };
+                supertest(app)
+                    .post("/api/auth/register")
+                    .send(user)
+                    .expect(400, done);
+            }
+        );
+
+        it(
+            "When mismatched passwords are provided expect return to be:\n" +
+                "\t- client error code",
             (done) => {
                 // note. no firstName
                 const user = {
