@@ -2,11 +2,6 @@ import supertest from "supertest";
 import * as request from "superagent";
 import express from "express";
 import { assert } from "console";
-<<<<<<< HEAD
-=======
-import { notify } from "superagent";
->>>>>>> 46619caf4b85b608be2f04e966c3daef84251ba3
-
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
 
@@ -68,16 +63,21 @@ describe("Authentication service", () => {
                 // note. no firstName
                 const user = {
                     email: "testuser@email.com",
-                    firstName: "test",
                     lastName: "user",
                     password1: "password",
-                    password2: "wordpass",
+                    password2: "password",
                     profilePic: "someImgUrl",
                 };
                 supertest(app)
                     .post("/api/auth/register")
                     .send(user)
-                    .expect(400, done);
+                    .expect(400)
+                    .then((res) => {
+                        console.log(res.text);
+                        expect(res.text).toEqual("Validation Error");
+                        done();
+                    })
+                    .catch((err) => done(err));
             }
         );
 
@@ -88,15 +88,21 @@ describe("Authentication service", () => {
                 // note. no firstName
                 const user = {
                     email: "testuser@email.com",
+                    firstName: "test",
                     lastName: "user",
                     password1: "password",
-                    password2: "password",
+                    password2: "wordpass",
                     profilePic: "someImgUrl",
                 };
                 supertest(app)
                     .post("/api/auth/register")
                     .send(user)
-                    .expect(400, done);
+                    .expect(400)
+                    .then((res) => {
+                        expect(res.text).toEqual("Password Error");
+                        done();
+                    })
+                    .catch((err) => done(err));
             }
         );
     });
