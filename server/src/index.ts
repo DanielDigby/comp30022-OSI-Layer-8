@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
+import { errorHandler } from "./helpers/errors";
 
 require("./config/mongoose");
 require("./config/passport");
@@ -29,6 +30,8 @@ app.use("/api/users/", userRouter);
 // auth URLs
 const authRouter = require("./modules/auth/authRouter");
 app.use("/api/auth/", authRouter);
+
+app.use(errorHandler);
 
 // Frontend connection
 if (process.env.NODE_ENV === "production") {

@@ -1,5 +1,7 @@
 import express from "express";
+import mongoose from "mongoose";
 import { hashPassword } from "../../helpers/security";
+import { AppError } from "../../helpers/errors";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
@@ -13,7 +15,12 @@ export const createUser = async (
 ) => {
     try {
         if (req.body.password1 !== req.body.password2)
-            throw "Password mismatch";
+            throw new AppError(
+                "Password Error",
+                400,
+                "user passwords are not able to be unified",
+                true
+            );
 
         const newUser = new User({
             email: req.body.email,
@@ -27,6 +34,14 @@ export const createUser = async (
         req.user = newUser;
         next();
     } catch (err) {
-        return res.send(err);
+        if (err instanceof mongoose.Error.ValidationError) {
+            err = new AppError(
+                "Validation Error",
+                400,
+                "incorrect user fields",
+                true
+            );
+        }
+        next(err);
     }
 };
