@@ -11,16 +11,19 @@ import styles from "./NotesView.module.css";
 import { useHistory } from "react-router-dom";
 
 const NotesView = (): JSX.Element => {
-    const navHistory = useHistory();
-    const navigateDashboard = () => navHistory.push("/dashboard");
+    const history = useHistory();
+    const navigateDashboard = () => history.push("/dashboard");
 
     // api call
 
     return (
-
         <div className={globalStyles.light}>
             <div className={styles.containerLeft}>
-                <ProfileImage firstName="Sonja" lastName="Pedell" />
+                <ProfileImage
+                    firstName="Sonja"
+                    lastName="Pedell"
+                    onClick={navigateDashboard}
+                />
                 <MenuItem />
             </div>
             <div className={styles.containerRight}>

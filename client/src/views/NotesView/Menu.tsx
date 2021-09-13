@@ -20,9 +20,10 @@ const MenuItem = (): JSX.Element => {
                     <Menu.Item name="Contacts" />
                     <Menu.Item name="Links" />
                 </Menu>
+                <Icon name="plus" />
             </div>
             <div>
-                <Icon name="certificate" size="large" />
+                <Icon name="cog" size="large" />
             </div>
         </div>
     );

@@ -12,9 +12,6 @@ const SearchBarItem = (): JSX.Element => {
                     </Grid.Column>
                 </Grid>
             </div>
-            <div>
-                <Icon name="question circle outline" size="large" />
-            </div>
         </div>
     );
 };

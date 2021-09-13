@@ -42,10 +42,6 @@
     font-size: var(--text-medium);
 }
 
-.sideMenu:hover {
-    color: var(--colour-red-bright);
-}
-
 .note {
     font-family: var(--font-family);
     font-size: var(--text-small);
