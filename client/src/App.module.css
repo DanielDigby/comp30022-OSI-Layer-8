@@ -25,6 +25,8 @@
 /* Light/Dark mode */
 .light {
     background-color: var(--colour-background);
+    display: flex;
+    justify-content: space-between;
 }
 
 .dark {

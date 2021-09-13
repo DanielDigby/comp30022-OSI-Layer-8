@@ -1,15 +1,20 @@
 import React from "react";
 import styles from "./SearchBar.module.css";
-import { Search, Grid } from "semantic-ui-react";
+import { Search, Grid, Icon } from "semantic-ui-react";
 
 const SearchBarItem = (): JSX.Element => {
     return (
         <div className={styles.container}>
-            <Grid>
-                <Grid.Column width={6}>
-                    <Search />
-                </Grid.Column>
-            </Grid>
+            <div>
+                <Grid>
+                    <Grid.Column width={6}>
+                        <Search />
+                    </Grid.Column>
+                </Grid>
+            </div>
+            <div>
+                <Icon name="question circle outline" size="large" />
+            </div>
         </div>
     );
 };

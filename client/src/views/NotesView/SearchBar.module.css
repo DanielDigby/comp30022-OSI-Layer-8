@@ -1,5 +1,6 @@
+/*  Holds the search bar */
 .container {
-    position: absolute;
-    top: 2vh;
-    right: 5vw;
+    display: flex;
+    width: 100%;
+    align-items: center;
 }
