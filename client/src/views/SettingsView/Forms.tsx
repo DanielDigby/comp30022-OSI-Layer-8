@@ -31,14 +31,14 @@ const FirstNameForm = (): JSX.Element => {
                     <h4 className={styles.formtitletext}>{lastName}</h4>
                     <Icon size="small" name="edit outline" />
                 </div>
-                <h4 className={styles.formfield}>{firstName}</h4>
+                <h4 className={styles.formfield}>{lastName}</h4>
             </div>
             <div className={styles.formheading}>
                 <div className={styles.formtitle}>
                     <h4 className={styles.formtitletext}>{email}</h4>
                     <Icon size="small" name="edit outline" />
                 </div>
-                <h4 className={styles.formfield}>{firstName}</h4>
+                <h4 className={styles.formfield}>{email}</h4>
             </div>
         </div>
     );
