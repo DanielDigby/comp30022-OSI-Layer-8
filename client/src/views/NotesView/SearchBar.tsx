@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./SearchBar.module.css";
-import { Search, Grid, Icon } from "semantic-ui-react";
+import { Search, Grid } from "semantic-ui-react";
 
 const SearchBarItem = (): JSX.Element => {
     return (
