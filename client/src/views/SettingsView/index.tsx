@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
-import FirstNameForm from "./FirstNameForm";
+import FirstNameForm from "./Forms";
 import PasswordForm from "./PasswordForm";
 import ProfilePic from "./ProfilePic";
 
