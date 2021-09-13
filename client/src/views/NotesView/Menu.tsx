@@ -18,8 +18,11 @@ const MenuItem = (): JSX.Element => {
                     <Menu.Item name="Pinned" />
                     <Menu.Item name="Events" />
                     <Menu.Item name="Contacts" />
-                    <Menu.Item name="Settings" />
+                    <Menu.Item name="Links" />
                 </Menu>
+            </div>
+            <div>
+                <Icon name="certificate" size="large" />
             </div>
         </div>
     );
