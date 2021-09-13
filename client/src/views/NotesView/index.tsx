@@ -1,30 +1,33 @@
 import React from "react";
-import styles from "./NotesView.module.css";
 
 // Semantic UI button
-import { Button, Menu } from "semantic-ui-react";
+
+import globalStyles from "../../App.module.css";
+import MenuItem from "./Menu";
+import SearchBarItem from "./SearchBar";
+import ProfileImage from "./ProfileImage";
+import styles from "./NotesView.module.css";
 
 import { useHistory } from "react-router-dom";
 
 const NotesView = (): JSX.Element => {
-    const navHistory = useHistory();
-    const navigateDashboard = () => navHistory.push("/dashboard");
+    const history = useHistory();
+    const navigateDashboard = () => history.push("/dashboard");
 
     // api call
-    return (
-        <div>
-            <div className={styles.container}>
-                <Menu secondary vertical>
-                    <Menu.Item name="Pinned" />
-                    <Menu.Item name="Events" />
-                    <Menu.Item name="Contacts" />
-                </Menu>
 
-                <div className={styles.footer}>
-                    <Button size="medium" onClick={() => navigateDashboard()}>
-                        Go Back
-                    </Button>
-                </div>
+    return (
+        <div className={globalStyles.light}>
+            <div className={styles.containerLeft}>
+                <ProfileImage
+                    firstName="Sonja"
+                    lastName="Pedell"
+                    onClick={navigateDashboard}
+                />
+                <MenuItem />
+            </div>
+            <div className={styles.containerRight}>
+                <SearchBarItem />
             </div>
         </div>
     );

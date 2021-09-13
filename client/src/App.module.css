@@ -24,24 +24,21 @@
 
 /* Light/Dark mode */
 .light {
-    color: var(--colour-background);
+    background-color: var(--colour-background);
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .dark {
-    color: var(--colour-background-dark);
+    background-color: var(--colour-background-dark);
 }
 
 /* Dashboard page classes */
 .sideMenu {
-    width: 33vw;
-    height: 100vh;
     font-family: var(--font-family);
-    color: var(--colour-background);
-    font-size: var(--text-medium);
-}
-
-.sideMenu:hover {
-    color: var(--colour-grey-highlight);
+    background-color: var(--colour-background);
     font-size: var(--text-medium);
 }
 
