@@ -1,20 +1,23 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import cookieParser from "cookie-parser";
+import { errorHandler } from "./helpers/errors";
+
+require("./config/mongoose");
+require("./config/passport");
+
 const app = express();
 const port = process.env.PORT || 8080;
-require("dotenv").config();
 
 // health route
 app.get("/api/", (_, res) => {
     res.status(200).send("alive");
 });
 
-// database models
-require("./config/mongoose");
-
 // middleware
 app.use(express.json());
+app.use(cookieParser());
 
 // note URLS
 const noteRouter = require("./modules/note/noteRouter");
@@ -23,6 +26,12 @@ app.use("/api/notes", noteRouter);
 // user URLs
 const userRouter = require("./modules/user/userRouter");
 app.use("/api/users/", userRouter);
+
+// auth URLs
+const authRouter = require("./modules/auth/authRouter");
+app.use("/api/auth/", authRouter);
+
+app.use(errorHandler);
 
 // Frontend connection
 if (process.env.NODE_ENV === "production") {
@@ -37,7 +46,8 @@ if (process.env.NODE_ENV === "production") {
     });
 
     app.listen(port, () => console.log(`Running on port ${port}`));
-} else {
+}
+if (process.env.NODE_ENV !== "test") {
     // cors for communicating with react frontend (only in development)
 
     // in production we dont need this because we can serve over the same port, but because we will run two separate
@@ -46,3 +56,5 @@ if (process.env.NODE_ENV === "production") {
 
     app.listen(port, () => console.log(`Running on http://localhost:${port}`));
 }
+
+module.exports = app;

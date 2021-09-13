@@ -13,7 +13,6 @@ const getNotes = async (req: express.Request, res: express.Response) => {
     } catch (err) {
         return res.send(err);
     }
-    
 };
 
 // controller for getting a specific note
@@ -26,7 +25,7 @@ const getNote = async (req: express.Request, res: express.Response) => {
     } catch (err) {
         return res.send(err);
     }
-}
+};
 
 // controller for the action of posting a note
 const postNote = async (req: express.Request, res: express.Response) => {
@@ -39,9 +38,9 @@ const postNote = async (req: express.Request, res: express.Response) => {
             eventTime: req.body?.eventTime,
             pinned: req.body?.pinned,
             tags: req.body?.tags,
-            relatedNotes: req.body?.relatedNotes
+            relatedNotes: req.body?.relatedNotes,
         });
-    
+
         newNote.save();
         return res.status(200).send(newNote);
     } catch (err) {
@@ -53,14 +52,17 @@ const postNote = async (req: express.Request, res: express.Response) => {
 const putNote = async (req: express.Request, res: express.Response) => {
     try {
         const id = req.params.Id;
-        const newData  = req.body;
-        const note = await Note.findByIdAndUpdate(id, newData).setOptions({ new: true, overwrite: true });
+        const newData = req.body;
+        const note = await Note.findByIdAndUpdate(id, newData).setOptions({
+            new: true,
+            overwrite: true,
+        });
 
         return res.status(200).send(note);
     } catch (err) {
         return res.send(err);
     }
-}
+};
 
 // controller for deleting a specific note
 const deleteNote = async (req: express.Request, res: express.Response) => {
@@ -72,12 +74,12 @@ const deleteNote = async (req: express.Request, res: express.Response) => {
     } catch (err) {
         return res.send(err);
     }
-}
+};
 
 module.exports = {
     getNotes,
     getNote,
     postNote,
     putNote,
-    deleteNote
+    deleteNote,
 };
