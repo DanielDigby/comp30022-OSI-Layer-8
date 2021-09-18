@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 // trigger tests
 
 import { Icon } from "semantic-ui-react";
+import ProfileImage from "../NotesView/ProfileImage";
 
 const DashboardView = (): JSX.Element => {
     /*
@@ -18,9 +19,19 @@ const DashboardView = (): JSX.Element => {
 
     /* DRAFT - Still need to clean things up and get pfp */
 
+    const history = useHistory();
+    const navigateDashboard = () => history.push("/dashboard");
+    const navigateNotes = () => history.push("/notes");
+
     return (
         <div className={styles.basecontainer}>
-            <div className={styles.topcontainer}> profile pic </div>
+            <div className={styles.topcontainer}>
+                <ProfileImage
+                    firstName="Sonja"
+                    lastName="Pedell"
+                    onClick={navigateDashboard}
+                />
+            </div>
 
             <div className={styles.midContainer}>
                 <div className={styles.greetingsContainer}>
@@ -36,7 +47,11 @@ const DashboardView = (): JSX.Element => {
                     </div>
                 </div>
                 <div className={styles.viewNotesContainer}>
-                    <Icon name="sticky note outline" size="big" />
+                    <Icon
+                        name="sticky note outline"
+                        size="big"
+                        onClick={navigateNotes}
+                    />
                     <div className={styles.viewAllNotesContainer}>
                         View <p>all notes</p>
                     </div>
