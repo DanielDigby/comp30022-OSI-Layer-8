@@ -1,8 +1,9 @@
 import { configureStore, StoreEnhancer } from "@reduxjs/toolkit";
-import userReducer from "./userSlice";
-import noteReducer from "./noteSlice";
 import { offline } from "@redux-offline/redux-offline";
 import config from "@redux-offline/redux-offline/lib/defaults";
+
+import userReducer from "./userSlice";
+import noteReducer from "./noteSlice";
 
 export const store = configureStore({
     reducer: {
