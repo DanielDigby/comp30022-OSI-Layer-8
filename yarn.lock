@@ -1618,6 +1618,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.9.6":
+  version: 7.15.4
+  resolution: "@babel/runtime@npm:7.15.4"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: c40825430400e47c19b97e4142d5315d2910305b9714d44a711472587ee2fd4521fdba5f02ddd9df3902f5e988d9854fa83f4da1e0c091f70f6983fa52480606
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.10.4, @babel/template@npm:^7.14.5, @babel/template@npm:^7.3.3":
   version: 7.14.5
   resolution: "@babel/template@npm:7.14.5"
@@ -2303,6 +2312,18 @@ __metadata:
   version: 2.9.3
   resolution: "@popperjs/core@npm:2.9.3"
   checksum: 4cb94c271eaa13416ab8169c6af778c5b6160614351a79c68e8219d6ee0a40b8f71080ca29e139591c7c0c8e08fc1627d0e18d40a64609713a42b58d683a009d
+  languageName: node
+  linkType: hard
+
+"@redux-offline/redux-offline@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "@redux-offline/redux-offline@npm:2.6.0"
+  dependencies:
+    "@babel/runtime": ^7.9.6
+    redux-persist: ^4.6.0
+  peerDependencies:
+    redux: ">=3"
+  checksum: ee75d683bc4a749af325bacbb501ee57532552c1c429aaa9857a9da852c5a5a81493f2f3efa673acfa7e37f6dc0b23b2436a9dd5f0266d95cf412c50f5bc3857
   languageName: node
   linkType: hard
 
@@ -5438,6 +5459,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "client@workspace:client"
   dependencies:
+    "@redux-offline/redux-offline": ^2.6.0
     "@reduxjs/toolkit": ^1.6.1
     "@testing-library/jest-dom": ^5.11.4
     "@testing-library/react": ^11.1.0
@@ -5460,7 +5482,6 @@ __metadata:
     react-redux: ^7.2.5
     react-router-dom: ^5.2.0
     react-scripts: 4.0.3
-    redux-offline: ^2.0.0
     semantic-ui-css: ^2.4.1
     semantic-ui-react: ^2.0.3
     typescript: ^4.0.3
@@ -15179,18 +15200,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"redux-offline@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "redux-offline@npm:2.0.0"
-  dependencies:
-    redux-persist: ^4.5.0
-  peerDependencies:
-    redux: ">=3"
-  checksum: 36ab3c6695343c702fa989ea30b6db3352ba61ce86c65b20ca0dc7607af65e81856646af794a2a39cece34afad49c8ef79a15cc5922f835b952c256e28366195
-  languageName: node
-  linkType: hard
-
-"redux-persist@npm:^4.5.0":
+"redux-persist@npm:^4.6.0":
   version: 4.10.2
   resolution: "redux-persist@npm:4.10.2"
   dependencies:
