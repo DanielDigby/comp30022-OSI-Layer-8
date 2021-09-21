@@ -12,12 +12,22 @@ export const noteSlice = createSlice({
     name: "note",
     initialState,
     reducers: {
+        // should attempt to load notes from backend
         loadNotes: (state, action: PayloadAction<Array<INote>>) => {
             state.notes = action.payload;
         },
+
+        // sets new notes array once loadNotes completes?
+        setNotes: (state, action: PayloadAction<Array<INote>>) => {
+            state.notes = action.payload;
+        },
+
+        // clear notes on logout
         clearNotes: (state) => {
             state.notes = [];
         },
+
+        // create a note and post to backend
         createNote: {
             reducer: (state, action: PayloadAction<INote>) => {
                 state.notes.push(action.payload);
@@ -39,6 +49,8 @@ export const noteSlice = createSlice({
                 };
             },
         },
+
+        // update a note and patch to backend
         updateNote: (state, action: PayloadAction<INote>) => {
             const note = state.notes.find(
                 (note) => note._id === action.payload._id
@@ -48,6 +60,8 @@ export const noteSlice = createSlice({
                 Object.assign(note, action.payload);
             }
         },
+
+        // delete a note and delete to backend
         deleteNote: (state, action: PayloadAction<INote>) => {
             state.notes.filter((note) => note._id !== action.payload._id);
         },

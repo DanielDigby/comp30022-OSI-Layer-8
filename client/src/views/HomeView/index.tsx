@@ -2,12 +2,12 @@ import React from "react";
 import styles from "./HomeView.module.css";
 import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createNote } from "../../config/redux/noteSlice";
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
-import { RootState } from "../../config/redux/store";
+// import { RootState } from "../../config/redux/store";
 import { INote } from "../../interfaces/note";
 
 const HomeView = (): JSX.Element => {
@@ -20,6 +20,7 @@ const HomeView = (): JSX.Element => {
 
     const postNote = async () => {
         const note: INote = {
+            _id: "61497208597ea28204547c0d",
             title: "NEW NOTE TEST",
         };
         dispatch(createNote(note));
