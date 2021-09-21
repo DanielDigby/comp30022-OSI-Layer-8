@@ -51,19 +51,50 @@ export const noteSlice = createSlice({
         },
 
         // update a note and patch to backend
-        updateNote: (state, action: PayloadAction<INote>) => {
-            const note = state.notes.find(
-                (note) => note._id === action.payload._id
-            );
-            if (note) {
-                // TODO (Daniel) check that this works
-                Object.assign(note, action.payload);
-            }
+        updateNote: {
+            reducer: (state, action: PayloadAction<INote>) => {
+                const note = state.notes.find(
+                    (note) => note._id === action.payload._id
+                );
+                if (note) {
+                    // TODO (Daniel) check that this works
+                    Object.assign(note, action.payload);
+                }
+            },
+            prepare: (note: INote) => {
+                return {
+                    payload: note,
+                    meta: {
+                        offline: {
+                            effect: {
+                                url: `/api/notes/${note._id}`,
+                                method: "PUT",
+                                data: note,
+                            },
+                        },
+                    },
+                };
+            },
         },
 
         // delete a note and delete to backend
-        deleteNote: (state, action: PayloadAction<INote>) => {
-            state.notes.filter((note) => note._id !== action.payload._id);
+        deleteNote: {
+            reducer: (state, action: PayloadAction<string>) => {
+                state.notes.filter((note) => note._id !== action.payload);
+            },
+            prepare: (id: string) => {
+                return {
+                    payload: id,
+                    meta: {
+                        offline: {
+                            effect: {
+                                url: `/api/notes/${id}`,
+                                method: "DELETE",
+                            },
+                        },
+                    },
+                };
+            },
         },
     },
 });
