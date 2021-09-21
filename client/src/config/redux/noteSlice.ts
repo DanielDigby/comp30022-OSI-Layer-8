@@ -22,7 +22,7 @@ export const noteSlice = createSlice({
             reducer: (state, action: PayloadAction<INote>) => {
                 state.notes.push(action.payload);
             },
-            prepare: (note) => {
+            prepare: (note: INote) => {
                 return {
                     payload: note,
                     meta: {
@@ -32,7 +32,7 @@ export const noteSlice = createSlice({
                                 method: "POST",
                                 data: note,
                             },
-                            // TODO (Daniel) commit
+                            // TODO (Daniel) commit: update note id
                             // TODO (Daniel) rollback
                         },
                     },
