@@ -18,8 +18,26 @@ export const noteSlice = createSlice({
         clearNotes: (state) => {
             state.notes = [];
         },
-        createNote: (state, action: PayloadAction<INote>) => {
-            state.notes.push(action.payload);
+        createNote: {
+            reducer: (state, action: PayloadAction<INote>) => {
+                state.notes.push(action.payload);
+            },
+            prepare: (note) => {
+                return {
+                    payload: note,
+                    meta: {
+                        offline: {
+                            effect: {
+                                url: "/api/notes",
+                                method: "POST",
+                                data: note,
+                            },
+                            // TODO (Daniel) commit
+                            // TODO (Daniel) rollback
+                        },
+                    },
+                };
+            },
         },
         updateNote: (state, action: PayloadAction<INote>) => {
             const note = state.notes.find(
