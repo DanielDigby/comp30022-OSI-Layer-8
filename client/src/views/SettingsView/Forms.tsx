@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./FirstNameForm.module.css";
+import styles from "./Forms.module.css";
 
 import { Icon } from "semantic-ui-react";
 
