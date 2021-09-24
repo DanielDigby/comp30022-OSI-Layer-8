@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import styles from "./App.module.css";
 
-// import our views
+// import views
 import NotesView from "./views/NotesView";
 import HomeView from "./views/HomeView";
 import LogInView from "./views/LogInView";
