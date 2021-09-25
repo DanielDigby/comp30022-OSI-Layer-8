@@ -23,9 +23,11 @@
   "packageManager": "yarn@3.0.0",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
-    "cookie-parser": "^1.4.5"
+    "cookie-parser": "^1.4.5",
+    "react-beautiful-dnd": "^13.1.0"
   },
   "devDependencies": {
-    "@types/cookie-parser": "^1.4.2"
+    "@types/cookie-parser": "^1.4.2",
+    "@types/react-beautiful-dnd": "^13.1.2"
   }
 }

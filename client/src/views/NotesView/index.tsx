@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Semantic UI button
 
@@ -15,6 +15,11 @@ import { useHistory } from "react-router-dom";
 }
 import dndStyles from "./dragAndDrop.module.css";
 import { DropdownItem } from "semantic-ui-react";
+
+{
+    /* Package to help with smooth drag n drop features */
+}
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 {
     /* SAMPLE NOTES DATA USED FOR DRAG AND DROP TESTING */
@@ -46,22 +51,44 @@ const NotesView = (): JSX.Element => {
             </div>
 
             {/* Main notes area? */}
-
-            <div className={dndStyles.notesSection}>
-                {testNotes.map((col) => (
-                    <div key={col.title} className={dndStyles.column}>
-                        {col.items.map((item) => (
-                            <div
-                                draggable
-                                key={item}
-                                className={dndStyles.item}
-                            >
-                                {item}
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </div>
+            <DragDropContext onDragEnd={(result) => console.log(result)}>
+                <Droppable droppableId="notes">
+                    {(provided) => (
+                        <div
+                            className={dndStyles.notesSection}
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                        >
+                            {testNotes.map((col, index) => (
+                                <div
+                                    key={col.title}
+                                    className={dndStyles.column}
+                                >
+                                    {col.items.map((item) => (
+                                        <Draggable
+                                            key={item}
+                                            draggableId={item}
+                                            index={index}
+                                        >
+                                            {(provided) => (
+                                                <div
+                                                    className={dndStyles.item}
+                                                    {...provided.draggableProps}
+                                                    ref={provided.innerRef}
+                                                    {...provided.dragHandleProps}
+                                                >
+                                                    {item}
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    ))}
+                                </div>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
 
             {/* Searchbar on top right corner */}
             <div className={styles.containerRight}>
