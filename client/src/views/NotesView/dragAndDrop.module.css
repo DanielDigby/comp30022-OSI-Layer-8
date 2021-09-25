@@ -1,13 +1,39 @@
 .notesSection {
     background-color: rgb(238, 153, 153);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+
+    margin-top: 7.5rem;
+    margin-bottom: 7.5rem;
+    margin-left: 0rem;
+    margin-right: -15rem;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.group {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
 
-    margin-top: 10rem;
-    margin-bottom: 10rem;
-    margin-left: 5rem;
-    margin-right: -12rem;
-    width: 70%;
+.item {
+    min-height: 150px;
     padding: 1rem;
+    color: cornsilk;
+    background-color: darkgrey;
+    border-radius: 5px;
+
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item:not(:last-of-type) {
+    margin-bottom: 1rem;
 }

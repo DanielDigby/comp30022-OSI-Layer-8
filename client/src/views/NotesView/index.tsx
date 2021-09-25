@@ -13,7 +13,8 @@ import { useHistory } from "react-router-dom";
 {
     /* CSS used for the notes section */
 }
-import dragAndDrop from "./dragAndDrop.module.css";
+import dndStyles from "./dragAndDrop.module.css";
+import { DropdownItem } from "semantic-ui-react";
 
 const NotesView = (): JSX.Element => {
     const history = useHistory();
@@ -23,6 +24,7 @@ const NotesView = (): JSX.Element => {
 
     return (
         <div className={globalStyles.light}>
+            {/* Sidebar with profile pic */}
             <div className={styles.containerLeft}>
                 <ProfileImage
                     firstName="Sonja"
@@ -33,8 +35,37 @@ const NotesView = (): JSX.Element => {
             </div>
 
             {/* Main notes area? */}
-            <div className={dragAndDrop.notesSection}>helloworld</div>
+            <div className={dndStyles.notesSection}>
+                <div className={dndStyles.group}>
+                    <div className={dndStyles.item}>
+                        <div>
+                            <p>note1</p>
+                        </div>
+                    </div>
+                    <div className={dndStyles.item}>
+                        <div>
+                            <p>note2</p>
+                        </div>
+                    </div>
+                </div>
 
+                <div className={dndStyles.group}>
+                    <div className={dndStyles.item}>
+                        <div>
+                            <p>note1</p>
+                        </div>
+                    </div>
+                    <div className={dndStyles.item}>
+                        <div>
+                            <p>note2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={dndStyles.group}></div>
+            </div>
+
+            {/* Searchbar on top right corner */}
             <div className={styles.containerRight}>
                 <SearchBarItem />
             </div>
