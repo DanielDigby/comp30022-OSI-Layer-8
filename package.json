@@ -20,5 +20,12 @@
     "start": "yarn workspace server start",
     "dev": "yarn workspace client dev & yarn workspace server dev"
   },
-  "packageManager": "yarn@3.0.0"
+  "packageManager": "yarn@3.0.0",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.6.1",
+    "cookie-parser": "^1.4.5"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.2"
+  }
 }
