@@ -15744,12 +15744,10 @@ resolve@^2.0.0-next.3:
 "root@workspace:.":
   version: 0.0.0-use.local
   resolution: "root@workspace:."
-
   dependencies:
     semantic-ui-css: ^2.4.1
     semantic-ui-react: ^2.0.3
     yarn: ^1.22.11
-
   languageName: unknown
   linkType: soft
 
