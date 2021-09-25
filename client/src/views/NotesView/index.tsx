@@ -10,6 +10,11 @@ import styles from "./NotesView.module.css";
 
 import { useHistory } from "react-router-dom";
 
+{
+    /* CSS used for the notes section */
+}
+import dragAndDrop from "./dragAndDrop.module.css";
+
 const NotesView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
@@ -26,6 +31,10 @@ const NotesView = (): JSX.Element => {
                 />
                 <MenuItem />
             </div>
+
+            {/* Main notes area? */}
+            <div className={dragAndDrop.notesSection}>helloworld</div>
+
             <div className={styles.containerRight}>
                 <SearchBarItem />
             </div>

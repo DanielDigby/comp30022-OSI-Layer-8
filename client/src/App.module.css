@@ -26,9 +26,10 @@
 .light {
     background-color: var(--colour-background);
     display: flex;
+    flex-direction: row;
     height: 100%;
     width: 100%;
-    justify-content: space-between;
+    padding: 0.5rem;
 }
 
 .dark {

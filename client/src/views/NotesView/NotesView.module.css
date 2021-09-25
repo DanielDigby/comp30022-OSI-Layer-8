@@ -1,11 +1,10 @@
 /* For the profile, tag icon  and side menu */
 .containerLeft {
-    padding-top: 10px;
-    padding-left: 10px;
     display: flex;
     width: 20%;
     flex-direction: column;
     align-items: flex-start;
+    background-color: cadetblue;
 }
 
 /* For the search bar and help (question mark) */
@@ -17,6 +16,7 @@
     height: 70px;
     flex-direction: column;
     align-items: flex-start;
+    background-color: burlywood;
 }
 
 /* Formats the side menu */
