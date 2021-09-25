@@ -16,6 +16,17 @@ import { useHistory } from "react-router-dom";
 import dndStyles from "./dragAndDrop.module.css";
 import { DropdownItem } from "semantic-ui-react";
 
+{
+    /* SAMPLE NOTES DATA USED FOR DRAG AND DROP TESTING */
+}
+
+const testNotes = [
+    { title: "col1", items: ["note1", "note2", "note3"] },
+    { title: "col2", items: ["note4", "note5"] },
+    { title: "col3", items: ["note7"] },
+    { title: "col4", items: [] },
+];
+
 const NotesView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
@@ -35,34 +46,21 @@ const NotesView = (): JSX.Element => {
             </div>
 
             {/* Main notes area? */}
+
             <div className={dndStyles.notesSection}>
-                <div className={dndStyles.group}>
-                    <div className={dndStyles.item}>
-                        <div>
-                            <p>note1</p>
-                        </div>
+                {testNotes.map((col) => (
+                    <div key={col.title} className={dndStyles.column}>
+                        {col.items.map((item) => (
+                            <div
+                                draggable
+                                key={item}
+                                className={dndStyles.item}
+                            >
+                                {item}
+                            </div>
+                        ))}
                     </div>
-                    <div className={dndStyles.item}>
-                        <div>
-                            <p>note2</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={dndStyles.group}>
-                    <div className={dndStyles.item}>
-                        <div>
-                            <p>note1</p>
-                        </div>
-                    </div>
-                    <div className={dndStyles.item}>
-                        <div>
-                            <p>note2</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={dndStyles.group}></div>
+                ))}
             </div>
 
             {/* Searchbar on top right corner */}
