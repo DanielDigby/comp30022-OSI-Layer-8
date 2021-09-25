@@ -1,0 +1,22 @@
+.blocks {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+
+    margin-top: 5%;
+    height: 40%;
+}
+
+.block {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.colour {
+    height: 100%;
+    margin-top: 0;
+}
+
+.checkbox {
+    display: flex;
+}

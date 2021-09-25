@@ -1,24 +1,10 @@
 import React from "react";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
-
-// trigger tests
-
 import { Icon } from "semantic-ui-react";
 import ProfileImage from "../NotesView/ProfileImage";
 
 const DashboardView = (): JSX.Element => {
-    /*
-    const navHistory = useHistory();
-    const navigateHome = () => navHistory.push("/");
-    const navigateSettings = () => navHistory.push("/settings");
-    const navigateNotes = () => navHistory.push("/notes");
-    */
-
-    // api call
-
-    /* DRAFT - Still need to clean things up and get pfp */
-
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
     const navigateNotes = () => history.push("/notes");
@@ -69,39 +55,5 @@ const DashboardView = (): JSX.Element => {
         </div>
     );
 };
-
-/*
-const DashboardView = (): JSX.Element => {
-    const navHistory = useHistory();
-    const navigateHome = () => navHistory.push("/");
-    const navigateSettings = () => navHistory.push("/settings");
-    const navigateNotes = () => navHistory.push("/notes");
-    // api call
-    return (
-        <div>
-            <div className={styles.container}>hello world dashboardview</div>
-
-            <div className={styles.footer}>
-                <Button size="medium" onClick={() => navigateHome()}>
-                    Go Back
-                </Button>
-            </div>
-
-            <div className={styles.footer}>
-                <Button size="medium" onClick={() => navigateSettings()}>
-                    temp settings button
-                </Button>
-            </div>
-
-            <div className={styles.footer}>
-                <Button size="medium" onClick={() => navigateNotes()}>
-                    go to notes
-                </Button>
-            </div>
-        </div>
-    );
-};
-
-*/
 
 export default DashboardView;
