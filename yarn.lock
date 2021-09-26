@@ -3070,6 +3070,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-beautiful-dnd@npm:^13.1.2":
+  version: 13.1.2
+  resolution: "@types/react-beautiful-dnd@npm:13.1.2"
+  dependencies:
+    "@types/react": "*"
+  checksum: 28372854fcd4b7546aabe55ee6569da59fad10f117929cff8a9c6f928448e4dd08ed1139facca33232833b9de100edf017aab9a0ee34065f8fc0e2a7a1262b2c
+  languageName: node
+  linkType: hard
+
 "@types/react-dom@npm:^16.9.8":
   version: 16.9.14
   resolution: "@types/react-dom@npm:16.9.14"
@@ -15788,8 +15797,10 @@ resolve@^2.0.0-next.3:
   dependencies:
     "@reduxjs/toolkit": ^1.6.1
     "@types/cookie-parser": ^1.4.2
+    "@types/react-beautiful-dnd": ^13.1.2
     cookie-parser: ^1.4.5
     react-beautiful-dnd: ^13.1.0
+    uuid: ^8.3.2
   languageName: unknown
   linkType: soft
 
@@ -18138,7 +18149,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.3.0, uuid@npm:^8.3.1":
+"uuid@npm:^8.3.0, uuid@npm:^8.3.1, uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
