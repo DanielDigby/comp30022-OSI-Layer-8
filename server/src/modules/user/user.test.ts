@@ -1,8 +1,5 @@
 import supertest from "supertest";
-import express from "express";
 import mongoose from "mongoose";
-import { createUser } from "../user/userMiddleware";
-import { create } from "domain";
 
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
@@ -30,32 +27,19 @@ describe("User route tests", () => {
                 "- created user object in response body\n" +
                 "- the number of User documents in db doesn't change",
             async () => {
-                supertest(app)
-                    .post("/api/auth/register")
-                    .send({
-                        email: "test@test.com",
-                        firstName: "Jane",
-                        lastName: "Doe",
-                        password: "test123",
-                        profilePic: "test url",
-                        colourScheme: "PLACEHOLDER",
-                        tags: ["test tag"]
-                    })
-                // await db.save({
-                //     email: "test@test.com",
-                //     firstName: "Jane",
-                //     lastName: "Doe",
-                //     password: "test123",
-                //     profilePic: "test url",
-                //     colourScheme: "PLACEHOLDER",
-                //     tags: ["test tag"]
-                // })
-                const count = await User.countDocuments()
+                const user = {
+                    email: "test@test.com",
+                    firstName: "Jane",
+                    lastName: "Doe",
+                    password: "test123",
+                    profilePic: "test url",
+                    colourScheme: "PLACEHOLDER",
+                    tags: ["test tag"]
+                }
+                await (new User(user)).save();
+                const id = (await User.findOne({ email: "test@test.com" }))._id;
                 
-                console.log(count);
-
-                const id = (await User.findOne())._id;
-                const newBody = {
+                const changedUser = {
                     email: "new@new.com",
                     firstName: "New",
                     lastName: "New",
@@ -65,54 +49,14 @@ describe("User route tests", () => {
                     tags: ["new test tag"]
                 }
 
-
                 const res = await supertest(app)
-                                        .put(`/api/user/${id}`)
-                                        .send(newBody);
+                                        .put(`/api/users/${id}`)
+                                        .send(changedUser);
                                     
-                const newCount = await User.countDocuments();    
-
                 expect(res.statusCode).toBe(200);  
-                expect(res.body).toEqual(newBody);           
-                expect(newCount).toBe(count + 1);
+                expect(res.body).toMatchObject(changedUser);           
             }
         );
-
-        // it(
-        //     "When incorrect new user object is provided expect return to be:" +
-        //         "user error code",
-        //     () => {}
-        // );
     });
 
-    // describe("Log in user", () => {
-    //     it(
-    //         "When correct username and password are provided expect return to be:" +
-    //             "success code" +
-    //             "jwt cookie" +
-    //             "user object in response body",
-    //         () => {}
-    //     );
-
-    //     it(
-    //         "When incorrect username or password are provided expect return to be:" +
-    //             "user error code",
-    //         () => {}
-    //     );
-    // });
-
-    // describe("Log out user", () => {
-    //     it(
-    //         "When valid jwt is provided expect return to be:" +
-    //             "success code" +
-    //             "empty jwt cookie",
-    //         () => {}
-    //     );
-
-    //     it(
-    //         "When invalid jwt is provided expect return to be:" +
-    //             "user error code",
-    //         () => {}
-    //     );
-    // });
 });
