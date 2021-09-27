@@ -3,7 +3,7 @@ import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/c
 import {
     store,
     RootStateWithOffline,
-    RESET_ALL,
+    RESET_BASE,
 } from "../../config/redux/store";
 import axios from "axios";
 import * as uuid from "uuid";
@@ -17,7 +17,7 @@ describe("Notes API Helpers", () => {
     describe("Post a note to backend", () => {
         beforeEach(() => {
             store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_ALL });
+            store.dispatch({ type: RESET_BASE });
         });
 
         it(
@@ -128,7 +128,7 @@ describe("Notes API Helpers", () => {
     describe("Patch a note to backend", () => {
         beforeEach(() => {
             store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_ALL });
+            store.dispatch({ type: RESET_BASE });
         });
 
         it(
@@ -183,7 +183,7 @@ describe("Notes API Helpers", () => {
     describe("Delete a note to backend", () => {
         beforeEach(() => {
             store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_ALL });
+            store.dispatch({ type: RESET_BASE });
         });
 
         it(

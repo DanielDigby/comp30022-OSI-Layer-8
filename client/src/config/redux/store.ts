@@ -22,9 +22,9 @@ const combinedReducer = combineReducers({
     notes: noteReducer,
 });
 
-export const RESET_ALL = "reset/all";
+export const RESET_BASE = "reset/all";
 const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
-    if (action.type === RESET_ALL) {
+    if (action.type === RESET_BASE) {
         state = {} as RootState;
     }
     return combinedReducer(state, action);
