@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyJwt } from "../../helpers/security/index"
+import { verifyJwt } from "../auth/authMiddleware"
 
 const userController = require("./userController");
 const userRouter = express.Router();

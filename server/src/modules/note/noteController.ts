@@ -42,7 +42,7 @@ const postNote = async (req: express.Request, res: express.Response) => {
             relatedNotes: req.body?.relatedNotes,
         });
 
-        newNote.save();
+        await newNote.save();
         return res.status(200).send(newNote);
     } catch (err) {
         return res.send(err);
