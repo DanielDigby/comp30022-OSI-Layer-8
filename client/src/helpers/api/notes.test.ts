@@ -1,4 +1,4 @@
-import { postNote } from "./notes";
+import { createNoteAPI } from "./notes";
 import { clearNotes } from "../../config/redux/noteSlice";
 import { RootState } from "../../config/redux/store";
 import axios from "axios";
@@ -64,13 +64,13 @@ describe("Notes API Helpers", () => {
                 );
 
                 // ACT
-                postNote(note);
+                createNoteAPI(note);
 
                 // ASSERT
                 // wait for 50ms to ensure that the fake api request resolves
                 await new Promise((r) => setTimeout(r, 50));
 
-                const notes = store.getState().notes.notes;
+                const notes = store.getState().notes.array;
                 expect(axios).toHaveBeenCalledTimes(1);
                 expect(notes[0]).toMatchObject(apiNote);
                 // expect num times axios called = 1

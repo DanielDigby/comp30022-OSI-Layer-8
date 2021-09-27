@@ -3,11 +3,11 @@ import { INote } from "../../interfaces/note";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
 export interface NoteState {
-    notes: Array<INote>;
+    array: Array<INote>;
 }
 
 const initialState: NoteState = {
-    notes: [],
+    array: [],
 };
 
 export const noteSlice = createSlice({
@@ -16,23 +16,23 @@ export const noteSlice = createSlice({
     reducers: {
         // should attempt to load notes from backend
         loadNotes: (state, action: PayloadAction<Array<INote>>) => {
-            state.notes = action.payload;
+            state.array = action.payload;
         },
 
         // sets new notes array once loadNotes completes?
         setNotes: (state, action: PayloadAction<Array<INote>>) => {
-            state.notes = action.payload;
+            state.array = action.payload;
         },
 
         // clear notes on logout
         clearNotes: (state) => {
-            state.notes = [];
+            state.array = [];
         },
 
         // create a note and post to backend
         createNote: {
             reducer: (state, action: PayloadAction<INote>) => {
-                state.notes.push(action.payload);
+                state.array.push(action.payload);
             },
             prepare: (note: INote) => {
                 // create and assign _clientId
@@ -63,7 +63,7 @@ export const noteSlice = createSlice({
         // update a note and patch to backend
         updateNote: {
             reducer: (state, action: PayloadAction<INote>) => {
-                const note = state.notes.find(
+                const note = state.array.find(
                     (note) => note._id === action.payload._id
                 );
                 if (note) {
@@ -92,7 +92,7 @@ export const noteSlice = createSlice({
             state,
             action: PayloadAction<AxiosResponse<INote>>
         ) => {
-            const note = state.notes.find(
+            const note = state.array.find(
                 (note) => note._clientId === action.payload.data._clientId
             );
             if (note) {
@@ -103,7 +103,7 @@ export const noteSlice = createSlice({
         // delete a note and delete to backend
         deleteNote: {
             reducer: (state, action: PayloadAction<string>) => {
-                state.notes.filter((note) => note._id !== action.payload);
+                state.array.filter((note) => note._id !== action.payload);
             },
             prepare: (id: string) => {
                 return {
