@@ -1,6 +1,10 @@
 import { createNoteAPI, updateNoteAPI, deleteNoteAPI } from "./notes";
-import { clearNotes } from "../../config/redux/noteSlice";
-import { store, RootStateWithOffline } from "../../config/redux/store";
+import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
+import {
+    store,
+    RootStateWithOffline,
+    RESET_ALL,
+} from "../../config/redux/store";
 import axios from "axios";
 import * as uuid from "uuid";
 
@@ -12,8 +16,8 @@ jest.mock("axios");
 describe("Notes API Helpers", () => {
     describe("Post a note to backend", () => {
         beforeEach(() => {
-            const dispatch = useDispatch();
-            dispatch(clearNotes());
+            store.dispatch({ type: RESET_OFFLINE });
+            store.dispatch({ type: RESET_ALL });
         });
 
         it(
@@ -121,63 +125,10 @@ describe("Notes API Helpers", () => {
         );
     });
 
-    // describe("Patch a note to backend", () => {
-    //     beforeEach(() => {
-    //         store.dispatch(clearNotes());
-    //     });
-
-    //     it(
-    //         "When a valid note is passed it should:\n" +
-    //             "\t update the note to the redux store\n" +
-    //             "\t send a patch request to the backend\n",
-    //         async () => {
-    //             store.dispatch({
-    //                 type: "Offline/STATUS_CHANGED",
-    //                 payload: {
-    //                     online: true,
-    //                 },
-    //             });
-    //             const note = {
-    //                 title: "NEW NOTE TEST",
-    //             };
-    //             const apiNote = {
-    //                 title: "NEW NOTE TEST",
-    //                 _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
-    //                 tags: [],
-    //                 relatedNotes: [],
-    //                 _id: "61514289e3c2e405ab49db7e",
-    //             };
-    //             const mRes = { status: 200, data: apiNote };
-    //             (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
-    //             jest.spyOn(uuid, "v4").mockImplementation(
-    //                 () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
-    //             );
-    //             createNoteAPI(note);
-    //             await new Promise((r) => setTimeout(r, 50));
-
-    //             const noteUpdated = {
-    //                 title: "UPDATED NAME",
-    //                 text: "NEW TEXT",
-    //                 _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
-    //                 tags: ["new user tag"],
-    //                 relatedNotes: [],
-    //                 _id: "61514289e3c2e405ab49db7e",
-    //             };
-    //             const mRes2 = { status: 200, data: noteUpdated };
-    //             (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes2);
-
-    //             updateNoteAPI(noteUpdated);
-
-    //             const notes = store.getState().notes.array;
-    //             expect(axios).toHaveBeenCalledTimes(2);
-    //             expect(notes[0]).toMatchObject(noteUpdated);
-    //         }
-    //     );
-    // });
-
-    describe("Delete a note to backend", () => {
+    describe("Patch a note to backend", () => {
         beforeEach(() => {
-            store.dispatch(clearNotes());
+            store.dispatch({ type: RESET_OFFLINE });
+            store.dispatch({ type: RESET_ALL });
         });
 
         it(
@@ -185,12 +136,67 @@ describe("Notes API Helpers", () => {
                 "\t update the note to the redux store\n" +
                 "\t send a patch request to the backend\n",
             async () => {
-                // store.dispatch({
-                //     type: "Offline/STATUS_CHANGED",
-                //     payload: {
-                //         online: true,
-                //     },
-                // });
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
+                const note = {
+                    title: "NEW NOTE TEST",
+                };
+                const apiNote = {
+                    title: "NEW NOTE TEST",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    tags: [],
+                    relatedNotes: [],
+                    _id: "61514289e3c2e405ab49db7e",
+                };
+                const mRes = { status: 200, data: apiNote };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
+                jest.spyOn(uuid, "v4").mockImplementation(
+                    () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
+                );
+                createNoteAPI(note);
+                await new Promise((r) => setTimeout(r, 50));
+
+                const noteUpdated = {
+                    title: "UPDATED NAME",
+                    text: "NEW TEXT",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    tags: ["new user tag"],
+                    relatedNotes: [],
+                    _id: "61514289e3c2e405ab49db7e",
+                };
+                const mRes2 = { status: 200, data: noteUpdated };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes2);
+
+                updateNoteAPI(noteUpdated);
+
+                const notes = store.getState().notes.array;
+                expect(axios).toHaveBeenCalledTimes(2);
+                expect(notes[0]).toMatchObject(noteUpdated);
+            }
+        );
+    });
+
+    describe("Delete a note to backend", () => {
+        beforeEach(() => {
+            store.dispatch({ type: RESET_OFFLINE });
+            store.dispatch({ type: RESET_ALL });
+        });
+
+        it(
+            "When a valid note is passed it should:\n" +
+                "\t update the note to the redux store\n" +
+                "\t send a patch request to the backend\n",
+            async () => {
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
                 const note = {
                     title: "NEW NOTE TEST",
                 };
