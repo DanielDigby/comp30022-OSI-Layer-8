@@ -1,13 +1,11 @@
 import supertest from "supertest";
 import mongoose from "mongoose";
-var bodyParser = require('body-parser');
-
+var bodyParser = require("body-parser");
 
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 const Note = mongoose.model("Note");
 
@@ -31,9 +29,9 @@ describe("Note route tests", () => {
                 "- success code\n" +
                 "- notes in response body\n",
             async () => {
-
                 // add 3 new notes to testing database
                 const note1 = new Note({
+                    _clientId: "somelongidgeneratedclientside",
                     title: "title1",
                     text: "text1",
                     image: "img",
@@ -46,6 +44,7 @@ describe("Note route tests", () => {
                 await note1.save();
 
                 const note2 = new Note({
+                    _clientId: "somelongidgeneratedclientside",
                     title: "title2",
                     text: "text2",
                     image: "img",
@@ -58,6 +57,7 @@ describe("Note route tests", () => {
                 await note2.save();
 
                 const note3 = new Note({
+                    _clientId: "somelongidgeneratedclientside",
                     title: "title3",
                     text: "text3",
                     image: "img",
@@ -83,14 +83,15 @@ describe("Note route tests", () => {
                 "- Note object in response body",
             async () => {
                 const note = {
+                    _clientId: "somelongidgeneratedclientside",
                     title: "title",
                     text: "text",
                     image: "img",
                     reminderTime: new Date("2021-01-09").toISOString(),
                     eventTime: new Date("2021-01-09").toISOString(),
                     pinned: true,
-                }
-                await (new Note(note)).save();
+                };
+                await new Note(note).save();
 
                 const id = (await Note.findOne({ title: "title" }))._id;
                 const res = await supertest(app).get(`/api/notes/${id}`);
@@ -109,6 +110,7 @@ describe("Note route tests", () => {
             async () => {
                 const count = await Note.countDocuments();
                 const note = {
+                    _clientId: "somelongidgeneratedclientside",
                     title: "title",
                     text: "text",
                     image: "img",
@@ -116,11 +118,9 @@ describe("Note route tests", () => {
                     eventTime: new Date("2021-01-09").toISOString(),
                     pinned: true,
                     tags: ["tag"],
-                }
+                };
 
-                const res = await supertest(app)
-                                        .post("/api/notes/")
-                                        .send(note);
+                const res = await supertest(app).post("/api/notes/").send(note);
 
                 const newCount = await Note.countDocuments();
 
@@ -138,34 +138,35 @@ describe("Note route tests", () => {
                 "- Note object in response body",
             async () => {
                 const note = {
+                    _clientId: "somelongidgeneratedclientside",
                     title: "title",
                     text: "text",
                     image: "img",
                     reminderTime: new Date("2021-01-09").toISOString(),
                     eventTime: new Date("2021-01-09").toISOString(),
                     pinned: true,
-                }
-                await (new Note(note)).save();
+                };
+                await new Note(note).save();
                 const id = (await Note.findOne({ title: "title" }))._id;
 
                 const changedNote = {
+                    _clientId: "somelongidgeneratedclientside",
                     title: "putChange",
                     text: "putChange",
                     image: "img",
                     reminderTime: new Date("2021-01-09").toISOString(),
                     eventTime: new Date("2021-01-09").toISOString(),
                     pinned: true,
-                }
+                };
 
                 const res = await supertest(app)
-                                        .put(`/api/notes/${id}`)
-                                        .send(changedNote);
+                    .put(`/api/notes/${id}`)
+                    .send(changedNote);
                 expect(res.statusCode).toBe(200);
                 expect(res.body).toMatchObject(changedNote);
             }
         );
     });
-
 
     describe("Delete a specific note", () => {
         it(
@@ -174,14 +175,15 @@ describe("Note route tests", () => {
                 "- Note object in response body",
             async () => {
                 const note = {
+                    _clientId: "somelongidgeneratedclientside",
                     title: "title",
                     text: "text",
                     image: "img",
                     reminderTime: new Date("2021-01-09").toISOString(),
                     eventTime: new Date("2021-01-09").toISOString(),
                     pinned: true,
-                }
-                await (new Note(note)).save();
+                };
+                await new Note(note).save();
                 const id = (await Note.findOne({ title: "title" }))._id;
 
                 const res = await supertest(app).delete(`/api/notes/${id}`);
