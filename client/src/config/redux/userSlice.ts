@@ -2,29 +2,47 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../interfaces/user";
 
 export interface UserState {
-    user: IUser | null;
+    account: IUser | null;
 }
 
 const initialState: UserState = {
-    user: null,
+    account: null,
 };
 
 export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        login: (state, action: PayloadAction<IUser>) => {
-            state.user = action.payload;
+        setUser: (state, action: PayloadAction<IUser>) => {
+            state.account = action.payload;
         },
-        logout: (state) => {
-            state.user = null;
+
+        clearUser: (state) => {
+            state.account = null;
         },
-        update: (state, action: PayloadAction<IUser>) => {
-            state.user = action.payload;
+
+        // update user locally and post changes to backend
+        updateUser: {
+            reducer: (state, action: PayloadAction<IUser>) => {
+                state.account = action.payload;
+            },
+            prepare: (user: IUser) => {
+                return {
+                    payload: user,
+                    meta: {
+                        offline: {
+                            effect: {
+                                url: "/api/user",
+                                method: "POST",
+                            },
+                        },
+                    },
+                };
+            },
         },
     },
 });
 
-export const { login, logout, update } = userSlice.actions;
+export const { setUser, clearUser, updateUser } = userSlice.actions;
 
 export default userSlice.reducer;

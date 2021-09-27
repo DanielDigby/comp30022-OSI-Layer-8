@@ -43,7 +43,7 @@ export interface RootStateWithOffline extends RootState {
         online: boolean;
         outbox: [ReturnType<typeof effect>];
         retryCount: number;
-        retryScheduled: false;
+        retryScheduled: boolean;
         netInfo: undefined;
     };
 }
