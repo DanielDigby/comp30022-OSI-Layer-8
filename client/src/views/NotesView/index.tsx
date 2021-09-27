@@ -15,14 +15,11 @@ import { useHistory } from "react-router-dom";
     /* CSS used for the notes section */
 }
 import dndStyles from "./dragAndDrop.module.css";
-import { DropdownItem } from "semantic-ui-react";
 
 {
     /* Package to help with smooth drag n drop features */
 }
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { types } from "@babel/core";
-import { copyFileSync } from "fs";
 
 import { uuid } from "uuidv4";
 
@@ -30,7 +27,8 @@ import { uuid } from "uuidv4";
     /* SAMPLE NOTES DATA USED FOR DRAG AND DROP TESTING */
 }
 
-const itemsFromBackend = [
+/* uuid generates a unique set of bytes, to use as a key for each object */
+const testNotes = [
     { id: uuid(), content: "note1" },
     { id: uuid(), content: "note2" },
     { id: uuid(), content: "note3" },
@@ -39,9 +37,11 @@ const itemsFromBackend = [
 ];
 
 const testColumns = {
+    /* UUID returns a segment of bytes, which isn't a valid identifier. JS requires us to use 
+    segment-literal notation. Basically for uuid() to be a key, need to wrap in []. */
     [uuid()]: {
         name: "col1",
-        items: itemsFromBackend,
+        items: testNotes,
     },
     [uuid()]: {
         name: "col2",
@@ -65,15 +65,28 @@ const onDragEnd = (
     columns: any,
     updateColumns: any
 ) => {
+    console.log([uuid()]);
+
+    /* If we drag the box into an invalid destination (off the screen), don't update state */
     if (!result.destination) return;
+
+    /* We need source and destination objects to update the state of our columns */
     const { source, destination } = result;
+
+    /* If we're dropping a note into a different column */
     if (source.droppableId !== destination.droppableId) {
         const sourceColumn = columns[source.droppableId];
         const destColumn = columns[destination.droppableId];
+
+        /* Copy the items over */
         const sourceItems = [...sourceColumn.items];
         const destItems = [...destColumn.items];
+
+        /* Update the state of the source and destination column with the item update */
         const [removed] = sourceItems.splice(source.index, 1);
         destItems.splice(destination.index, 0, removed);
+
+        /* call the useState update function */
         updateColumns({
             ...columns,
             [source.droppableId]: {
@@ -86,11 +99,15 @@ const onDragEnd = (
             },
         });
     } else {
+        /* Otherwise, we're just dragging the item in the same column */
         const column = columns[source.droppableId];
         const copiedItems = [...column.items];
+
+        /* Reorder the items */
         const [removed] = copiedItems.splice(source.index, 1);
         copiedItems.splice(destination.index, 0, removed);
 
+        /* Update the column */
         updateColumns({
             ...columns,
             [source.droppableId]: {
@@ -121,7 +138,7 @@ const NotesView = (): JSX.Element => {
                 <MenuItem />
             </div>
 
-            {/* Main notes area? */}
+            {/* Main notes area */}
             <div className={dndStyles.notesSection}>
                 <DragDropContext
                     onDragEnd={(result: any) =>
@@ -130,7 +147,9 @@ const NotesView = (): JSX.Element => {
                 >
                     {/* For every column */}
                     {Object.entries(columns).map(([id, column]) => {
+                        console.log("id: " + id);
                         console.log(column);
+
                         return (
                             <Droppable droppableId={id} key={id}>
                                 {(provided, snapshot) => {
@@ -150,6 +169,7 @@ const NotesView = (): JSX.Element => {
                                                     index
                                                 ) => {
                                                     return (
+                                                        /* Wrap each item in draggable */
                                                         <Draggable
                                                             key={item.id}
                                                             draggableId={
@@ -171,6 +191,7 @@ const NotesView = (): JSX.Element => {
                                                                         className={
                                                                             dndStyles.item
                                                                         }
+                                                                        /* If an item is being dragged, change its color */
                                                                         style={{
                                                                             backgroundColor:
                                                                                 snapshot.draggingOver
@@ -181,6 +202,7 @@ const NotesView = (): JSX.Element => {
                                                                                 .style,
                                                                         }}
                                                                     >
+                                                                        {/* THIS DIV IS WHERE THE NOTE OBJECT SHOULD BE RENDERED */}
                                                                         {
                                                                             item.content
                                                                         }
