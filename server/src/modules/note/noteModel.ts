@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const noteSchema = new mongoose.Schema({
+    _clientId: { type: String, required: true },
     title: { type: String },
     text: { type: String },
     image: { type: String },

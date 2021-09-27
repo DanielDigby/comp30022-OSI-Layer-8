@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { INote } from "../../interfaces/note";
+import { v4 as uuidv4 } from "uuid";
+import { AxiosResponse } from "axios";
 export interface NoteState {
     notes: Array<INote>;
 }
@@ -33,16 +35,24 @@ export const noteSlice = createSlice({
                 state.notes.push(action.payload);
             },
             prepare: (note: INote) => {
+                // create and assign _clientId
+                note._clientId = uuidv4();
+
                 return {
+                    // save the temp note
                     payload: note,
                     meta: {
                         offline: {
+                            // send original note to server
                             effect: {
                                 url: "/api/notes",
                                 method: "POST",
                                 data: note,
                             },
                             // TODO (Daniel) commit: update note id
+                            commit: {
+                                type: "note/updateNoteAfterResponse",
+                            },
                             // TODO (Daniel) rollback
                         },
                     },
@@ -77,6 +87,19 @@ export const noteSlice = createSlice({
             },
         },
 
+        // set a note id after api response completes
+        updateNoteAfterResponse: (
+            state,
+            action: PayloadAction<AxiosResponse<INote>>
+        ) => {
+            const note = state.notes.find(
+                (note) => note._clientId === action.payload.data._clientId
+            );
+            if (note) {
+                Object.assign(note, action.payload.data);
+            }
+        },
+
         // delete a note and delete to backend
         deleteNote: {
             reducer: (state, action: PayloadAction<string>) => {
@@ -99,6 +122,7 @@ export const noteSlice = createSlice({
     },
 });
 
-export const { createNote, updateNote, deleteNote } = noteSlice.actions;
+export const { loadNotes, clearNotes, createNote, updateNote, deleteNote } =
+    noteSlice.actions;
 
 export default noteSlice.reducer;

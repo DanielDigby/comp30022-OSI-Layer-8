@@ -1,9 +1,11 @@
 import { INote } from "../../interfaces/note";
-import { useDispatch } from "react-redux";
-import { createNote } from "../../config/redux/noteSlice";
-
-const dispatch = useDispatch();
+import { store } from "../../config/redux/store";
+import {
+    createNote,
+    deleteNote,
+    updateNote,
+} from "../../config/redux/noteSlice";
 
 export const postNote = (note: INote): void => {
-    dispatch(createNote(note));
+    store.dispatch(createNote(note));
 };

@@ -20,7 +20,6 @@ const HomeView = (): JSX.Element => {
 
     const postNote = async () => {
         const note: INote = {
-            _id: "61497208597ea28204547c0d",
             title: "NEW NOTE TEST",
         };
         dispatch(createNote(note));
@@ -28,7 +27,6 @@ const HomeView = (): JSX.Element => {
 
     const putNote = async () => {
         const note: INote = {
-            _id: "61497208597ea28204547c0d",
             title: "NEW NOTE TEST 2",
         };
         // eslint-disable-next-line no-debugger

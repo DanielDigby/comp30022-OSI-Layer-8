@@ -1,18 +1,78 @@
 import { postNote } from "./notes";
+import { useDispatch, useSelector } from "react-redux";
+import { clearNotes } from "../../config/redux/noteSlice";
+import { store } from "../../config/redux/store";
+import axios from "axios";
 
 describe("Notes API Helpers", () => {
     describe("Post a note to backend", () => {
+        beforeEach(() => {
+            store.dispatch(clearNotes());
+        });
+
         it(
             "When a valid note is passed to the api function it should:\n" +
                 "\t add the note to the redux store" +
                 "\t send a request to the backend",
             () => {
+                // arrange
                 const note = {
                     title: "hello world",
                 };
+                const apiNote = {
+                    //_id: "asjkdfaskjfhaklsbfkljabjkl",
+                    title: "test api",
+                };
+
+                // axios.get = jest
+                //     .fn()
+                //     .mockImplementationOnce(() =>
+                //         Promise.resolve({ data: apiNote })
+                //     );
+
+                // act
                 postNote(note);
-                expect(1).toBe(1);
+
+                // assert
+                const notes = store.getState().notes.notes;
+                expect(notes[0]).toMatchObject(apiNote);
             }
         );
     });
 });
+
+// test("updateToDo test", () => {
+//     let state = store.getState().toDo;
+//     const originalToDo = state.toDoList.find((p) => p.toDoId === 1);
+//     expect(originalToDo?.isComplete).toBeTruthy();
+//     expect(originalToDo?.description).toBe("eat tacos");
+
+//     store.dispatch(updateToDo({ toDoId: 1, isComplete: false }));
+//     state = store.getState().toDo;
+//     let changedToDo = state.toDoList.find((p) => p.toDoId === 1);
+//     expect(changedToDo?.isComplete).toBeFalsy();
+
+//     store.dispatch(updateToDo({ toDoId: 1, description: "be merry" }));
+//     state = store.getState().toDo;
+//     changedToDo = state.toDoList.find((p) => p.toDoId === 1);
+//     expect(changedToDo?.description).toBe("be merry");
+
+//     store.dispatch(
+//         updateToDo({ toDoId: 1, description: "eat tacos", isComplete: true })
+//     );
+//     state = store.getState().toDo;
+//     const backToOriginalToDo = state.toDoList.find((p) => p.toDoId === 1);
+
+//     // snapshots can be objects
+//     expect(backToOriginalToDo).toMatchInlineSnapshot(`
+//     Object {
+//       "description": "eat tacos",
+//       "isComplete": true,
+//       "profileId": 1,
+//       "toDoId": 1,
+//     }
+//   `);
+
+//     // deep object equality
+//     expect(backToOriginalToDo).toEqual(originalToDo);
+// });

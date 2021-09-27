@@ -1,5 +1,6 @@
 export interface INote {
     _id?: string;
+    _clientId?: string;
     title?: string;
     text?: string;
     image?: string;
