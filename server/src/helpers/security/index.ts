@@ -50,7 +50,7 @@ export function verifyJwt(req: express.Request, res: express.Response, next: exp
             }
         })
     } else {
-        // Redirect to login page if there no JWT
+        // Redirect to login page if there is no JWT
         res.redirect('/login');
     }
 }
