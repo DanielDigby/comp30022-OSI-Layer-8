@@ -52,7 +52,11 @@ describe("Notes API Helpers", () => {
 
                 // mock the axios return value
                 const mRes = { status: 200, data: apiNote };
+
+                // this one looks weird because the way we call axios in redux is axios(requestConfig: {})
+                // not axios.get(request:{}), so it needs to be mocked differently
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
+
                 // here I mock the uuid generated _clientId to make sure that our api note expected object matches
                 // the one that get's generated when saving to redux
                 jest.spyOn(uuid, "v4").mockImplementation(
