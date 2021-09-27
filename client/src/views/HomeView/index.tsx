@@ -27,9 +27,6 @@ const HomeView = (): JSX.Element => {
         const note: INote = {
             title: "NEW NOTE TEST 2",
         };
-        // eslint-disable-next-line no-debugger
-        debugger;
-        console.log("hello world");
         dispatch(updateNote(note));
     };
 
