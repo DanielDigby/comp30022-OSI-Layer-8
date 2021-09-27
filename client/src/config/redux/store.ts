@@ -1,5 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { configureStore, StoreEnhancer } from "@reduxjs/toolkit";
+import { AnyAction, Reducer } from "redux";
+import {
+    combineReducers,
+    configureStore,
+    StoreEnhancer,
+} from "@reduxjs/toolkit";
 import { offline } from "@redux-offline/redux-offline";
 import config from "@redux-offline/redux-offline/lib/defaults";
 
@@ -12,13 +17,34 @@ import { OfflineAction } from "@redux-offline/redux-offline/lib/types";
 const effect = (effect: AxiosRequestConfig, _action: OfflineAction) =>
     axios({ ...effect, withCredentials: true });
 
+const combinedReducer = combineReducers({
+    user: userReducer,
+    notes: noteReducer,
+});
+
+export const RESET_BASE = "reset/all";
+const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
+    if (action.type === RESET_BASE) {
+        state = {} as RootState;
+    }
+    return combinedReducer(state, action);
+};
+
 export const store = configureStore({
-    reducer: {
-        user: userReducer,
-        notes: noteReducer,
-    },
+    reducer: rootReducer,
     enhancers: [offline({ ...config, effect }) as StoreEnhancer],
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export interface RootStateWithOffline extends RootState {
+    offline: {
+        busy: boolean;
+        lastTransaction: number;
+        online: boolean;
+        outbox: [ReturnType<typeof effect>];
+        retryCount: number;
+        retryScheduled: false;
+        netInfo: undefined;
+    };
+}
 export type AppDispatch = typeof store.dispatch;

@@ -31,6 +31,7 @@ const getNote = async (req: express.Request, res: express.Response) => {
 const postNote = async (req: express.Request, res: express.Response) => {
     try {
         const newNote = new Note({
+            _clientId: req.body._clientId,
             title: req.body?.title,
             text: req.body?.text,
             image: req.body?.image,
