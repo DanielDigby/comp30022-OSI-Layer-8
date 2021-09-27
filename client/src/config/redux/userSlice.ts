@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { USERS } from "../../interfaces/endpoints";
 import { IUser } from "../../interfaces/user";
 
 export interface UserState {
@@ -32,7 +33,7 @@ export const userSlice = createSlice({
                     meta: {
                         offline: {
                             effect: {
-                                url: "/api/user",
+                                url: USERS,
                                 method: "POST",
                             },
                         },

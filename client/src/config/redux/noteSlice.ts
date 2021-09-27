@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { INote } from "../../interfaces/note";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
+import { NOTES } from "../../interfaces/endpoints";
 export interface NoteState {
     array: Array<INote>;
 }
@@ -14,19 +15,9 @@ export const noteSlice = createSlice({
     name: "note",
     initialState,
     reducers: {
-        // should attempt to load notes from backend
-        loadNotes: (state, action: PayloadAction<Array<INote>>) => {
-            state.array = action.payload;
-        },
-
-        // sets new notes array once loadNotes completes?
+        // sets new notes array
         setNotes: (state, action: PayloadAction<Array<INote>>) => {
             state.array = action.payload;
-        },
-
-        // clear notes on logout
-        clearNotes: (state) => {
-            state.array = [];
         },
 
         // create a note and post to backend
@@ -45,7 +36,7 @@ export const noteSlice = createSlice({
                         offline: {
                             // send original note to server
                             effect: {
-                                url: "/api/notes",
+                                url: NOTES,
                                 method: "POST",
                                 data: note,
                             },
@@ -67,7 +58,6 @@ export const noteSlice = createSlice({
                     (note) => note._id === action.payload._id
                 );
                 if (note) {
-                    // TODO (Daniel) check that this works
                     Object.assign(note, action.payload);
                 }
             },
@@ -77,7 +67,7 @@ export const noteSlice = createSlice({
                     meta: {
                         offline: {
                             effect: {
-                                url: `/api/notes/${note._id}`,
+                                url: NOTES + note._id,
                                 method: "PUT",
                                 data: note,
                             },
@@ -114,7 +104,7 @@ export const noteSlice = createSlice({
                     meta: {
                         offline: {
                             effect: {
-                                url: `/api/notes/${id}`,
+                                url: NOTES + id,
                                 method: "DELETE",
                             },
                         },
@@ -125,13 +115,7 @@ export const noteSlice = createSlice({
     },
 });
 
-export const {
-    loadNotes,
-    setNotes,
-    clearNotes,
-    createNote,
-    updateNote,
-    deleteNote,
-} = noteSlice.actions;
+export const { setNotes, createNote, updateNote, deleteNote } =
+    noteSlice.actions;
 
 export default noteSlice.reducer;
