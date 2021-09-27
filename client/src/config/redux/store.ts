@@ -21,4 +21,15 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export interface RootStateWithOffline extends RootState {
+    offline: {
+        busy: boolean;
+        lastTransaction: number;
+        online: boolean;
+        outbox: [ReturnType<typeof effect>];
+        retryCount: number;
+        retryScheduled: false;
+        netInfo: undefined;
+    };
+}
 export type AppDispatch = typeof store.dispatch;
