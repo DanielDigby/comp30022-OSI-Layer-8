@@ -1,8 +1,11 @@
 import { postNote } from "./notes";
-import { useDispatch, useSelector } from "react-redux";
 import { clearNotes } from "../../config/redux/noteSlice";
 import { RootState } from "../../config/redux/store";
 import axios from "axios";
+import * as uuid from "uuid";
+
+jest.mock("axios");
+jest.mock("uuid");
 
 jest.mock("axios");
 
@@ -17,68 +20,57 @@ describe("Notes API Helpers", () => {
             "When a valid note is passed to the api function it should:\n" +
                 "\t add the note to the redux store" +
                 "\t send a request to the backend",
-            () => {
-                // arrange
+            async () => {
+                // ARRANGE
+                // Since we are mocking our api for this test we need to tell redux that it is ONLINE
+                // if we do not do this it will not send an api request
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
+
+                // This is the note we are creating
                 const note = {
-                    title: "hello world",
+                    title: "NEW NOTE TEST",
                 };
+                // The note we expect back
+                // notice the clientId, as well as the normal id field -
+                // I am using a package called uuid to generate id's on the client side so we can find and
+                // update the notes in the redux store once the api requests come back.
+                //
+                // The clientId's get generated in the createNote reducer
+                // the backend id gets set in the updateNoteAfterResponse reducer
                 const apiNote = {
-                    _id: "asjkdfaskjfhaklsbfkljabjkl",
-                    title: "hello world",
+                    title: "NEW NOTE TEST",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    tags: [],
+                    relatedNotes: [],
+                    _id: "61514289e3c2e405ab49db7e",
                 };
 
-                axios.get = jest
-                    .fn()
-                    .mockImplementationOnce(() =>
-                        Promise.resolve({ data: apiNote })
-                    );
+                // mock the axios return value
+                const mRes = { status: 200, data: apiNote };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
+                // here I mock the uuid generated _clientId to make sure that our api note expected object matches
+                // the one that get's generated when saving to redux
+                jest.spyOn(uuid, "v4").mockImplementation(
+                    () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
+                );
 
-                // act
+                // ACT
                 postNote(note);
 
-                // assert
-                const notes = useSelector(
-                    (state: RootState) => state.notes.notes
-                );
+                // ASSERT
+                // wait for 50ms to ensure that the fake api request resolves
+                await new Promise((r) => setTimeout(r, 50));
+
+                const notes = store.getState().notes.notes;
+                expect(axios).toHaveBeenCalledTimes(1);
                 expect(notes[0]).toMatchObject(apiNote);
                 // expect num times axios called = 1
             }
         );
     });
 });
-
-// test("updateToDo test", () => {
-//     let state = store.getState().toDo;
-//     const originalToDo = state.toDoList.find((p) => p.toDoId === 1);
-//     expect(originalToDo?.isComplete).toBeTruthy();
-//     expect(originalToDo?.description).toBe("eat tacos");
-
-//     store.dispatch(updateToDo({ toDoId: 1, isComplete: false }));
-//     state = store.getState().toDo;
-//     let changedToDo = state.toDoList.find((p) => p.toDoId === 1);
-//     expect(changedToDo?.isComplete).toBeFalsy();
-
-//     store.dispatch(updateToDo({ toDoId: 1, description: "be merry" }));
-//     state = store.getState().toDo;
-//     changedToDo = state.toDoList.find((p) => p.toDoId === 1);
-//     expect(changedToDo?.description).toBe("be merry");
-
-//     store.dispatch(
-//         updateToDo({ toDoId: 1, description: "eat tacos", isComplete: true })
-//     );
-//     state = store.getState().toDo;
-//     const backToOriginalToDo = state.toDoList.find((p) => p.toDoId === 1);
-
-//     // snapshots can be objects
-//     expect(backToOriginalToDo).toMatchInlineSnapshot(`
-//     Object {
-//       "description": "eat tacos",
-//       "isComplete": true,
-//       "profileId": 1,
-//       "toDoId": 1,
-//     }
-//   `);
-
-//     // deep object equality
-//     expect(backToOriginalToDo).toEqual(originalToDo);
-// });
