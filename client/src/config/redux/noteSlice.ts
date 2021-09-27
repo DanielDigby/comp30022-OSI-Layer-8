@@ -49,7 +49,7 @@ export const noteSlice = createSlice({
                                 method: "POST",
                                 data: note,
                             },
-                            // TODO (Daniel) commit: update note id
+                            // update note once response recieved with mongodb id
                             commit: {
                                 type: "note/updateNoteAfterResponse",
                             },
@@ -100,10 +100,13 @@ export const noteSlice = createSlice({
             }
         },
 
-        // delete a note and delete to backend
+        // delete a note and send delete to backend
         deleteNote: {
             reducer: (state, action: PayloadAction<string>) => {
-                state.array.filter((note) => note._id !== action.payload);
+                const index = state.array.findIndex((note) => {
+                    return note._id === action.payload;
+                });
+                if (index !== -1) state.array.splice(index, 1);
             },
             prepare: (id: string) => {
                 return {
