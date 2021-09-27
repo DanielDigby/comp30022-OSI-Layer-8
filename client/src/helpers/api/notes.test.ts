@@ -218,7 +218,7 @@ describe("Notes API Helpers", () => {
                 const mRes2 = { status: 200 };
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes2);
 
-                deleteNoteAPI(apiNote._id);
+                deleteNoteAPI(apiNote);
 
                 const notes = store.getState().notes.array;
                 expect(axios).toHaveBeenCalledTimes(2);
