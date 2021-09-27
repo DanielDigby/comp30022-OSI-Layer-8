@@ -58,7 +58,7 @@ describe("Notes API Helpers", () => {
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
 
                 // here I mock the uuid generated _clientId to make sure that our api note expected object matches
-                // the one that get's generated when saving to redux
+                // the one that gets generated when saving to redux
                 jest.spyOn(uuid, "v4").mockImplementation(
                     () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
                 );
