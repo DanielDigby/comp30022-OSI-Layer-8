@@ -44,7 +44,6 @@ export interface RootStateWithOffline extends RootState {
         outbox: [ReturnType<typeof effect>];
         retryCount: number;
         retryScheduled: boolean;
-        netInfo: undefined;
     };
 }
 export type AppDispatch = typeof store.dispatch;
