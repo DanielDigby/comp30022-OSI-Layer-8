@@ -1,13 +1,16 @@
 import { postNote } from "./notes";
 import { useDispatch, useSelector } from "react-redux";
 import { clearNotes } from "../../config/redux/noteSlice";
-import { store } from "../../config/redux/store";
+import { RootState } from "../../config/redux/store";
 import axios from "axios";
+
+jest.mock("axios");
 
 describe("Notes API Helpers", () => {
     describe("Post a note to backend", () => {
         beforeEach(() => {
-            store.dispatch(clearNotes());
+            const dispatch = useDispatch();
+            dispatch(clearNotes());
         });
 
         it(
@@ -20,22 +23,25 @@ describe("Notes API Helpers", () => {
                     title: "hello world",
                 };
                 const apiNote = {
-                    //_id: "asjkdfaskjfhaklsbfkljabjkl",
-                    title: "test api",
+                    _id: "asjkdfaskjfhaklsbfkljabjkl",
+                    title: "hello world",
                 };
 
-                // axios.get = jest
-                //     .fn()
-                //     .mockImplementationOnce(() =>
-                //         Promise.resolve({ data: apiNote })
-                //     );
+                axios.get = jest
+                    .fn()
+                    .mockImplementationOnce(() =>
+                        Promise.resolve({ data: apiNote })
+                    );
 
                 // act
                 postNote(note);
 
                 // assert
-                const notes = store.getState().notes.notes;
+                const notes = useSelector(
+                    (state: RootState) => state.notes.notes
+                );
                 expect(notes[0]).toMatchObject(apiNote);
+                // expect num times axios called = 1
             }
         );
     });

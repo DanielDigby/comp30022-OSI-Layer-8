@@ -7,7 +7,6 @@ import { createNote, updateNote } from "../../config/redux/noteSlice";
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
-// import { RootState } from "../../config/redux/store";
 import { INote } from "../../interfaces/note";
 
 const HomeView = (): JSX.Element => {
@@ -15,7 +14,6 @@ const HomeView = (): JSX.Element => {
     const navigateLogin = () => navHistory.push("/login");
     const navigateRegister = () => navHistory.push("/register");
 
-    // const notes = useSelector((state: RootState) => state.notes.notes);
     const dispatch = useDispatch();
 
     const postNote = async () => {

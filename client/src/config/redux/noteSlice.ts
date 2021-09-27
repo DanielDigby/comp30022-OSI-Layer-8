@@ -122,7 +122,13 @@ export const noteSlice = createSlice({
     },
 });
 
-export const { loadNotes, clearNotes, createNote, updateNote, deleteNote } =
-    noteSlice.actions;
+export const {
+    loadNotes,
+    setNotes,
+    clearNotes,
+    createNote,
+    updateNote,
+    deleteNote,
+} = noteSlice.actions;
 
 export default noteSlice.reducer;
