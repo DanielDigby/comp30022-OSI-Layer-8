@@ -65,8 +65,6 @@ const onDragEnd = (
     columns: any,
     updateColumns: any
 ) => {
-    console.log([uuid()]);
-
     /* If we drag the box into an invalid destination (off the screen), don't update state */
     if (!result.destination) return;
 
@@ -147,9 +145,6 @@ const NotesView = (): JSX.Element => {
                 >
                     {/* For every column */}
                     {Object.entries(columns).map(([id, column]) => {
-                        console.log("id: " + id);
-                        console.log(column);
-
                         return (
                             <Droppable droppableId={id} key={id}>
                                 {(provided, snapshot) => {
