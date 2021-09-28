@@ -61,21 +61,14 @@ interface NewUser {
     password2: string;
     profilePic: string;
 }
-export const registerAPI = async (newUser: NewUser): Promise<boolean> => {
-    try {
-        const res = await axios.post(REGISTER, newUser, {
-            withCredentials: true,
-        });
-        const user = res.data;
-        if (user) {
-            store.dispatch(setUser(user));
-            return true;
-        }
-        return false;
-    } catch (err) {
-        console.log(err);
-        return false;
-    }
+export const registerAPI = async (newUser: NewUser): Promise<void> => {
+    const res = await axios.post(REGISTER, newUser, {
+        withCredentials: true,
+    });
+    const user = res.data;
+    if (user) {
+        store.dispatch(setUser(user));
+    } else throw new Error(res.statusText);
 };
 
 export const updateUserAPI = (user: IUser): void => {

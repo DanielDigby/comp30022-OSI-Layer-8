@@ -59,7 +59,7 @@ describe("Users API Helpers", () => {
                     mockRes2
                 );
 
-                await logInAPI({
+                const bool = await logInAPI({
                     email: "test@email.com",
                     password: "password1",
                 });
@@ -68,6 +68,7 @@ describe("Users API Helpers", () => {
                 await new Promise((r) => setTimeout(r, 50));
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
+                expect(bool).toBe(true);
                 expect(axios.post).toHaveBeenCalledTimes(1);
                 expect(axios.get).toHaveBeenCalledTimes(1);
                 expect(user).toMatchObject(apiUser);
@@ -132,10 +133,11 @@ describe("Users API Helpers", () => {
                     mockRes3
                 );
 
-                await logOutAPI();
+                const bool = await logOutAPI();
 
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
+                expect(bool).toBe(true);
                 expect(axios.get).toHaveBeenCalledTimes(2);
                 expect(user).toBe(null);
                 expect(notes).toEqual([]);
@@ -146,8 +148,8 @@ describe("Users API Helpers", () => {
     describe("Register user", () => {
         it(
             "When a valid newUser is posted expect:\n" +
-                "\t clear redux offline\n" +
-                "\t clear the redux store\n",
+                "\t true\n" +
+                "\t set created user in redux store\n",
             async () => {
                 const newUser = {
                     email: "test@email.com",
@@ -177,6 +179,38 @@ describe("Users API Helpers", () => {
                 const notes = store.getState().notes.array;
                 expect(axios.post).toHaveBeenCalledTimes(1);
                 expect(user).toMatchObject(apiUser);
+                expect(notes).toEqual([]);
+            }
+        );
+
+        it(
+            "When non matching passwords are posted expect:\n" +
+                "\t false\n" +
+                "\t promise reject with password error\n" +
+                "\t no user to have been set\n",
+            async () => {
+                const newUser = {
+                    email: "test@email.com",
+                    firstName: "firstName",
+                    lastName: "lastName",
+                    password1: "password",
+                    password2: "nonMatching",
+                    profilePic: "someImgUrl",
+                };
+                const mockRes = { status: 400, statusText: "Password Error" };
+                (axios.post as unknown as jest.Mock).mockResolvedValueOnce(
+                    mockRes
+                );
+
+                expect(async () => {
+                    await registerAPI(newUser);
+                }).rejects.toEqual(Error("Password Error"));
+
+                await new Promise((r) => setTimeout(r, 50));
+                const user = store.getState().user.account;
+                const notes = store.getState().notes.array;
+                expect(axios.post).toHaveBeenCalledTimes(1);
+                expect(user).toBe(null);
                 expect(notes).toEqual([]);
             }
         );
