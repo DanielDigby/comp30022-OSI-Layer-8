@@ -41,10 +41,9 @@ export interface RootStateWithOffline extends RootState {
         busy: boolean;
         lastTransaction: number;
         online: boolean;
-        outbox: [ReturnType<typeof effect>];
+        outbox: Array<ReturnType<typeof effect>>;
         retryCount: number;
-        retryScheduled: false;
-        netInfo: undefined;
+        retryScheduled: boolean;
     };
 }
 export type AppDispatch = typeof store.dispatch;

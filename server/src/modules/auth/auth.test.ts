@@ -193,7 +193,7 @@ describe("Authentication service", () => {
                 "\t- empty jwt cookie",
             (done) => {
                 supertest(app)
-                    .post("/api/auth/logout")
+                    .get("/api/auth/logout")
                     .set("Cookie", ["jwt=" + jwt])
                     .expect(200)
                     .then((res) => {
@@ -209,7 +209,7 @@ describe("Authentication service", () => {
                 "\t- user error code",
             (done) => {
                 supertest(app)
-                    .post("/api/auth/logout")
+                    .get("/api/auth/logout")
                     .set("Cookie", ["jwt=" + "notarealjwt"])
                     .expect(401)
                     .then((res) => {

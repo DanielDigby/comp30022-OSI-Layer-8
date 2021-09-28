@@ -11,15 +11,13 @@ import * as uuid from "uuid";
 jest.mock("axios");
 jest.mock("uuid");
 
-jest.mock("axios");
-
 describe("Notes API Helpers", () => {
-    describe("Post a note to backend", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
+    afterEach(() => {
+        store.dispatch({ type: RESET_OFFLINE });
+        store.dispatch({ type: RESET_BASE });
+    });
 
+    describe("Post a note to backend", () => {
         it(
             "When a valid note is passed it should:\n" +
                 "\t add the note to the redux store\n" +
@@ -55,11 +53,11 @@ describe("Notes API Helpers", () => {
                 };
 
                 // mock the axios return value
-                const mRes = { status: 200, data: apiNote };
+                const mockRes = { status: 200, data: apiNote };
 
                 // this one looks weird because the way we call axios in redux is axios(requestConfig: {})
                 // not axios.get(request:{}), so it needs to be mocked differently
-                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);
 
                 // here I mock the uuid generated _clientId to make sure that our api note expected object matches
                 // the one that gets generated when saving to redux
@@ -126,11 +124,6 @@ describe("Notes API Helpers", () => {
     });
 
     describe("Patch a note to backend", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
-
         it(
             "When a valid note is passed it should:\n" +
                 "\t update the note to the redux store\n" +
@@ -152,8 +145,8 @@ describe("Notes API Helpers", () => {
                     relatedNotes: [],
                     _id: "61514289e3c2e405ab49db7e",
                 };
-                const mRes = { status: 200, data: apiNote };
-                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
+                const mockRes = { status: 200, data: apiNote };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);
                 jest.spyOn(uuid, "v4").mockImplementation(
                     () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
                 );
@@ -168,8 +161,8 @@ describe("Notes API Helpers", () => {
                     relatedNotes: [],
                     _id: "61514289e3c2e405ab49db7e",
                 };
-                const mRes2 = { status: 200, data: noteUpdated };
-                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes2);
+                const mockRes2 = { status: 200, data: noteUpdated };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes2);
 
                 updateNoteAPI(noteUpdated);
 
@@ -181,11 +174,6 @@ describe("Notes API Helpers", () => {
     });
 
     describe("Delete a note to backend", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
-
         it(
             "When a valid note is passed it should:\n" +
                 "\t update the note to the redux store\n" +
@@ -207,16 +195,16 @@ describe("Notes API Helpers", () => {
                     relatedNotes: [],
                     _id: "61514289e3c2e405ab49db7e",
                 };
-                const mRes = { status: 200, data: apiNote };
-                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes);
+                const mockRes = { status: 200, data: apiNote };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);
                 jest.spyOn(uuid, "v4").mockImplementation(
                     () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
                 );
                 createNoteAPI(note);
                 await new Promise((r) => setTimeout(r, 50));
 
-                const mRes2 = { status: 200 };
-                (axios as unknown as jest.Mock).mockResolvedValueOnce(mRes2);
+                const mockRes2 = { status: 200 };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes2);
 
                 deleteNoteAPI(apiNote);
 

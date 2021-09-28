@@ -16,10 +16,10 @@ authRouter.post(
 );
 
 // post a user logout action
-authRouter.post(
+authRouter.get(
     "/logout",
     passport.authenticate("jwt", { session: false }),
-    authController.postLogout
+    authController.getLogout
 );
 
 module.exports = authRouter;
