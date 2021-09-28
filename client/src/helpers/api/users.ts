@@ -67,9 +67,8 @@ export const registerAPI = async (newUser: NewUser): Promise<boolean> => {
             withCredentials: true,
         });
         const user = res.data;
-
         if (user) {
-            store.dispatch(setUser);
+            store.dispatch(setUser(user));
             return true;
         }
         return false;

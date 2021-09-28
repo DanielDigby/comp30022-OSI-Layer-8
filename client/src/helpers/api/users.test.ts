@@ -1,4 +1,4 @@
-import { logInAPI, logOutAPI } from "./users";
+import { logInAPI, logOutAPI, registerAPI } from "./users";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
 import { store, RESET_BASE } from "../../config/redux/store";
 import axios from "axios";
@@ -7,12 +7,11 @@ jest.mock("axios");
 jest.mock("uuid");
 
 describe("Users API Helpers", () => {
+    afterEach(() => {
+        store.dispatch({ type: RESET_OFFLINE });
+        store.dispatch({ type: RESET_BASE });
+    });
     describe("Log in user", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
-
         it(
             "When valid user credentials are passed it should:\n" +
                 "\t set the user in redux store\n" +
@@ -60,8 +59,12 @@ describe("Users API Helpers", () => {
                     mockRes2
                 );
 
-                logInAPI({ email: "test@email.com", password: "password1" });
+                await logInAPI({
+                    email: "test@email.com",
+                    password: "password1",
+                });
 
+                // wait for outbox to clear
                 await new Promise((r) => setTimeout(r, 50));
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
@@ -74,11 +77,6 @@ describe("Users API Helpers", () => {
     });
 
     describe("Log out user", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
-
         it(
             "When a user is logged in, and the outbox is empty:\n" +
                 "\t clear redux offline\n" +
@@ -124,21 +122,61 @@ describe("Users API Helpers", () => {
                 (axios.get as unknown as jest.Mock).mockResolvedValueOnce(
                     mockRes2
                 );
-                logInAPI({ email: "test@email.com", password: "password1" });
-                await new Promise((r) => setTimeout(r, 50));
+                await logInAPI({
+                    email: "test@email.com",
+                    password: "password1",
+                });
 
                 const mockRes3 = { status: 200 };
                 (axios.get as unknown as jest.Mock).mockResolvedValueOnce(
-                    mockRes2
+                    mockRes3
                 );
 
-                logOutAPI();
+                await logOutAPI();
 
-                await new Promise((r) => setTimeout(r, 50));
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
                 expect(axios.get).toHaveBeenCalledTimes(2);
                 expect(user).toBe(null);
+                expect(notes).toEqual([]);
+            }
+        );
+    });
+
+    describe("Register user", () => {
+        it(
+            "When a valid newUser is posted expect:\n" +
+                "\t clear redux offline\n" +
+                "\t clear the redux store\n",
+            async () => {
+                const newUser = {
+                    email: "test@email.com",
+                    firstName: "firstName",
+                    lastName: "lastName",
+                    password1: "password",
+                    password2: "password",
+                    profilePic: "someImgUrl",
+                };
+                const apiUser = {
+                    email: "test@email.com",
+                    firstName: "firstName",
+                    lastName: "lastName",
+                    password: "redacted",
+                    profilePic: "someImgUrl",
+                    colourScheme: "PLACEHOLDER",
+                    tags: [],
+                };
+                const mockRes = { status: 200, data: apiUser };
+                (axios.post as unknown as jest.Mock).mockResolvedValueOnce(
+                    mockRes
+                );
+
+                await registerAPI(newUser);
+                await new Promise((r) => setTimeout(r, 50));
+                const user = store.getState().user.account;
+                const notes = store.getState().notes.array;
+                expect(axios.post).toHaveBeenCalledTimes(1);
+                expect(user).toMatchObject(apiUser);
                 expect(notes).toEqual([]);
             }
         );

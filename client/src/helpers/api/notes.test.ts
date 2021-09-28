@@ -14,12 +14,12 @@ jest.mock("uuid");
 jest.mock("axios");
 
 describe("Notes API Helpers", () => {
-    describe("Post a note to backend", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
+    afterEach(() => {
+        store.dispatch({ type: RESET_OFFLINE });
+        store.dispatch({ type: RESET_BASE });
+    });
 
+    describe("Post a note to backend", () => {
         it(
             "When a valid note is passed it should:\n" +
                 "\t add the note to the redux store\n" +
@@ -126,11 +126,6 @@ describe("Notes API Helpers", () => {
     });
 
     describe("Patch a note to backend", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
-
         it(
             "When a valid note is passed it should:\n" +
                 "\t update the note to the redux store\n" +
@@ -181,11 +176,6 @@ describe("Notes API Helpers", () => {
     });
 
     describe("Delete a note to backend", () => {
-        beforeEach(() => {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-        });
-
         it(
             "When a valid note is passed it should:\n" +
                 "\t update the note to the redux store\n" +
