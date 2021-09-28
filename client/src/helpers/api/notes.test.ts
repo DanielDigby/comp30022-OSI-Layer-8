@@ -11,8 +11,6 @@ import * as uuid from "uuid";
 jest.mock("axios");
 jest.mock("uuid");
 
-jest.mock("axios");
-
 describe("Notes API Helpers", () => {
     afterEach(() => {
         store.dispatch({ type: RESET_OFFLINE });

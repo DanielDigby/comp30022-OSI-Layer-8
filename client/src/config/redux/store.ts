@@ -41,7 +41,7 @@ export interface RootStateWithOffline extends RootState {
         busy: boolean;
         lastTransaction: number;
         online: boolean;
-        outbox: [ReturnType<typeof effect>];
+        outbox: Array<ReturnType<typeof effect>>;
         retryCount: number;
         retryScheduled: boolean;
     };

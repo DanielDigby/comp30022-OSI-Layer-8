@@ -1,7 +1,9 @@
 import { logInAPI, logOutAPI, registerAPI } from "./users";
+import { createNoteAPI } from "./notes";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
 import { store, RESET_BASE } from "../../config/redux/store";
 import axios from "axios";
+import * as uuid from "uuid";
 
 jest.mock("axios");
 jest.mock("uuid");
@@ -139,6 +141,76 @@ describe("Users API Helpers", () => {
                 expect(axios.get).toHaveBeenCalledTimes(2);
                 expect(user).toBe(null);
                 expect(notes).toEqual([]);
+            }
+        );
+
+        it(
+            "When a user is logged in, and the outbox is not empty:\n" +
+                "\t reject with error non empty outbox\n" +
+                "\t do not clear the redux store\n",
+            async () => {
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
+
+                const apiUser = {
+                    email: "test@email.com",
+                    firstName: "firstName",
+                    lastName: "lastName",
+                    password: "redacted",
+                    profilePic: "somepicurl",
+                    colourScheme: "PLACEHOLDER",
+                    tags: [],
+                };
+                const mockRes = { status: 200, data: apiUser };
+                (axios.post as unknown as jest.Mock).mockResolvedValueOnce(
+                    mockRes
+                );
+                const mockRes2 = { status: 200, data: [] };
+                (axios.get as unknown as jest.Mock).mockResolvedValueOnce(
+                    mockRes2
+                );
+                await logInAPI({
+                    email: "test@email.com",
+                    password: "password1",
+                });
+
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: false,
+                    },
+                });
+                const note = {
+                    title: "NEW NOTE TEST",
+                };
+                const storeNote = {
+                    title: "NEW NOTE TEST",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                };
+                jest.spyOn(uuid, "v4").mockImplementation(
+                    () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
+                );
+                createNoteAPI(note);
+                await new Promise((r) => setTimeout(r, 50));
+
+                const mockRes3 = { status: 200 };
+                (axios.get as unknown as jest.Mock).mockResolvedValueOnce(
+                    mockRes3
+                );
+
+                expect(async () => {
+                    await logOutAPI();
+                }).rejects.toEqual(Error("Non Empty Outbox"));
+
+                const user = store.getState().user.account;
+                const notes = store.getState().notes.array;
+                expect(axios.get).toHaveBeenCalledTimes(1);
+                expect(user).toMatchObject(apiUser);
+                expect(notes).toEqual([storeNote]);
             }
         );
     });

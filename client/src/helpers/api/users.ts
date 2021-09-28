@@ -2,7 +2,11 @@ import { IUser } from "../../interfaces/user";
 import { setUser, updateUser } from "../../config/redux/userSlice";
 import { setNotes } from "../../config/redux/noteSlice";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
-import { store, RESET_BASE } from "../../config/redux/store";
+import {
+    store,
+    RootStateWithOffline,
+    RESET_BASE,
+} from "../../config/redux/store";
 import { LOG_IN, LOG_OUT, NOTES, REGISTER } from "../../interfaces/endpoints";
 import axios from "axios";
 
@@ -33,21 +37,20 @@ export const logInAPI = async (credentials: Credentials): Promise<void> => {
 // post log out to server
 // clear redux store and redux offline
 export const logOutAPI = async (): Promise<void> => {
-    try {
-        const res = await axios.get(LOG_OUT, { withCredentials: true });
+    const outbox = (store.getState() as RootStateWithOffline).offline.outbox;
+    if (outbox.length !== 0) throw new Error("Non Empty Outbox");
 
-        if (res.status == 200) {
-            store.dispatch({ type: RESET_OFFLINE });
-            store.dispatch({ type: RESET_BASE });
-            return;
-        }
-    } catch (err) {
-        console.log(err);
-    }
+    const res = await axios.get(LOG_OUT, { withCredentials: true });
+
+    if (res.status == 200) {
+        store.dispatch({ type: RESET_OFFLINE });
+        store.dispatch({ type: RESET_BASE });
+    } else throw new Error(res.statusText);
 };
 
 // post new user to backend
 // and set returned user in redux
+// throws Password error on non matching passwords
 interface NewUser {
     email: string;
     firstName: string;
