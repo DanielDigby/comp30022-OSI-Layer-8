@@ -11,7 +11,7 @@ interface Credentials {
     email: string;
     password: string;
 }
-export const logInAPI = async (credentials: Credentials): Promise<boolean> => {
+export const logInAPI = async (credentials: Credentials): Promise<void> => {
     try {
         const authRes = await axios.post(LOG_IN, credentials, {
             withCredentials: true,
@@ -24,30 +24,25 @@ export const logInAPI = async (credentials: Credentials): Promise<boolean> => {
             // load notes
             const notesRes = await axios.get(NOTES, { withCredentials: true });
             if (notesRes) store.dispatch(setNotes(notesRes.data));
-            return true;
         }
-        return false;
     } catch (err) {
         console.log(err);
-        return false;
     }
 };
 
 // post log out to server
 // clear redux store and redux offline
-export const logOutAPI = async (): Promise<boolean> => {
+export const logOutAPI = async (): Promise<void> => {
     try {
         const res = await axios.get(LOG_OUT, { withCredentials: true });
 
         if (res.status == 200) {
             store.dispatch({ type: RESET_OFFLINE });
             store.dispatch({ type: RESET_BASE });
-            return true;
+            return;
         }
-        return false;
     } catch (err) {
         console.log(err);
-        return false;
     }
 };
 

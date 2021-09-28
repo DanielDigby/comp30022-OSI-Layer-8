@@ -59,7 +59,7 @@ describe("Users API Helpers", () => {
                     mockRes2
                 );
 
-                const bool = await logInAPI({
+                await logInAPI({
                     email: "test@email.com",
                     password: "password1",
                 });
@@ -68,7 +68,6 @@ describe("Users API Helpers", () => {
                 await new Promise((r) => setTimeout(r, 50));
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
-                expect(bool).toBe(true);
                 expect(axios.post).toHaveBeenCalledTimes(1);
                 expect(axios.get).toHaveBeenCalledTimes(1);
                 expect(user).toMatchObject(apiUser);
@@ -133,11 +132,10 @@ describe("Users API Helpers", () => {
                     mockRes3
                 );
 
-                const bool = await logOutAPI();
+                await logOutAPI();
 
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
-                expect(bool).toBe(true);
                 expect(axios.get).toHaveBeenCalledTimes(2);
                 expect(user).toBe(null);
                 expect(notes).toEqual([]);
