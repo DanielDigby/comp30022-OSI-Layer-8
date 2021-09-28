@@ -11,6 +11,7 @@ import { LOG_IN, LOG_OUT, NOTES, REGISTER } from "../../interfaces/endpoints";
 import axios from "axios";
 
 // post username password to backend then load notes and populate redux
+// reject with unauthorized error when credentials are incorrect
 interface Credentials {
     email: string;
     password: string;

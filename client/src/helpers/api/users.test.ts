@@ -78,9 +78,8 @@ describe("Users API Helpers", () => {
         );
 
         it(
-            "When valid user credentials are passed it should:\n" +
-                "\t set the user in redux store\n" +
-                "\t attempt to load notes in redux store\n",
+            "When invalid user credentials are passed it should:\n" +
+                "\t reject with Unauthorized error\n",
             async () => {
                 store.dispatch({
                     type: "Offline/STATUS_CHANGED",
