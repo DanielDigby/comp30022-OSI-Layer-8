@@ -37,7 +37,7 @@ export const logInAPI = async (credentials: Credentials): Promise<boolean> => {
 // clear redux store and redux offline
 export const logOutAPI = async (): Promise<boolean> => {
     try {
-        const res = await axios.post(LOG_OUT, { withCredentials: true });
+        const res = await axios.get(LOG_OUT, { withCredentials: true });
 
         if (res.status == 200) {
             store.dispatch({ type: RESET_OFFLINE });

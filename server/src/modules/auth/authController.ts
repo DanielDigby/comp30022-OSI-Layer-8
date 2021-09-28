@@ -12,7 +12,7 @@ const postLogin = async (req: IRequestWithUser, res: express.Response) => {
         .send(req.user);
 };
 
-const postLogout = async (req: IRequestWithUser, res: express.Response) => {
+const getLogout = async (req: IRequestWithUser, res: express.Response) => {
     // TODO (Daniel) blacklist jwt on logout
 
     return res
@@ -26,5 +26,5 @@ const postLogout = async (req: IRequestWithUser, res: express.Response) => {
 
 module.exports = {
     postLogin,
-    postLogout,
+    getLogout,
 };
