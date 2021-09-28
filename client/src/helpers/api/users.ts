@@ -36,6 +36,8 @@ export const logInAPI = async (credentials: Credentials): Promise<void> => {
 
 // post log out to server
 // clear redux store and redux offline
+// rejects with Non Empty Outbox if there are unsaved http requests
+// rejects with Unauthorized when no user jwt
 export const logOutAPI = async (): Promise<void> => {
     const outbox = (store.getState() as RootStateWithOffline).offline.outbox;
     if (outbox.length !== 0) throw new Error("Non Empty Outbox");
@@ -50,7 +52,7 @@ export const logOutAPI = async (): Promise<void> => {
 
 // post new user to backend
 // and set returned user in redux
-// throws Password error on non matching passwords
+// rejects with Password error on non matching passwords
 interface NewUser {
     email: string;
     firstName: string;

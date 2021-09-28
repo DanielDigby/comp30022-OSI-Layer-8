@@ -213,6 +213,28 @@ describe("Users API Helpers", () => {
                 expect(notes).toEqual([storeNote]);
             }
         );
+
+        it(
+            "When a user is not logged in:\n" +
+                "\t reject with error Unauthorized\n",
+            async () => {
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
+
+                const mockRes = { status: 401, statusText: "Unauthorized" };
+                (axios.get as unknown as jest.Mock).mockResolvedValueOnce(
+                    mockRes
+                );
+
+                expect(async () => {
+                    await logOutAPI();
+                }).rejects.toEqual(Error("Unauthorized"));
+            }
+        );
     });
 
     describe("Register user", () => {
