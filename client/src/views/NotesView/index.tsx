@@ -124,6 +124,8 @@ const NotesView = (): JSX.Element => {
     const [columns, updateColumns] = useState(testColumns);
     // api call
 
+    /* Do we need to reshuffle and render notes into their respective columns? */
+
     return (
         <div className={globalStyles.light}>
             {/* Sidebar with profile pic */}

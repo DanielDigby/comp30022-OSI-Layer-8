@@ -20,17 +20,5 @@
     "start": "yarn workspace server start",
     "dev": "yarn workspace client dev & yarn workspace server dev"
   },
-  "packageManager": "yarn@3.0.0",
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.6.1",
-    "cookie-parser": "^1.4.5",
-    "react-beautiful-dnd": "^13.1.0",
-    "uuid": "^8.3.2",
-    "uuidv4": "^6.2.12"
-  },
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.2",
-    "@types/react-beautiful-dnd": "^13.1.2",
-    "@types/uuid": "^8.3.1"
-  }
+  "packageManager": "yarn@3.0.0"
 }
