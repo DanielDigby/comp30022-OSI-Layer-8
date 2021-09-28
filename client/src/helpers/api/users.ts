@@ -16,22 +16,20 @@ interface Credentials {
     password: string;
 }
 export const logInAPI = async (credentials: Credentials): Promise<void> => {
-    try {
-        const authRes = await axios.post(LOG_IN, credentials, {
-            withCredentials: true,
-        });
-        const user = authRes.data;
+    const authRes = await axios.post(LOG_IN, credentials, {
+        withCredentials: true,
+    });
+    const user = authRes.data;
 
-        if (user) {
-            store.dispatch(setUser(user));
+    if (user) {
+        store.dispatch(setUser(user));
 
-            // load notes
-            const notesRes = await axios.get(NOTES, { withCredentials: true });
-            if (notesRes) store.dispatch(setNotes(notesRes.data));
-        }
-    } catch (err) {
-        console.log(err);
-    }
+        // load notes
+        const notesRes = await axios.get(NOTES, { withCredentials: true });
+        const notes = notesRes.data;
+        if (notes) store.dispatch(setNotes(notes));
+        else throw new Error(notesRes.statusText);
+    } else throw new Error(authRes.statusText);
 };
 
 // post log out to server

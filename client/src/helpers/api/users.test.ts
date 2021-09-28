@@ -76,6 +76,33 @@ describe("Users API Helpers", () => {
                 expect(notes).toEqual(userNotes);
             }
         );
+
+        it(
+            "When valid user credentials are passed it should:\n" +
+                "\t set the user in redux store\n" +
+                "\t attempt to load notes in redux store\n",
+            async () => {
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
+
+                // mock the axios return user and notes
+                const mockRes = { status: 401, statusText: "Unauthorized" };
+                (axios.post as unknown as jest.Mock).mockResolvedValueOnce(
+                    mockRes
+                );
+
+                expect(async () => {
+                    await logInAPI({
+                        email: "test@email.com",
+                        password: "password1",
+                    });
+                }).rejects.toEqual(Error("Unauthorized"));
+            }
+        );
     });
 
     describe("Log out user", () => {
