@@ -5515,6 +5515,7 @@ __metadata:
     eslint-plugin-security: ^1.4.0
     prettier: ^2.3.2
     react: ^17.0.2
+    react-beautiful-dnd: ^13.1.0
     react-dom: ^17.0.2
     react-redux: ^7.2.5
     react-router-dom: ^5.2.0
@@ -5523,6 +5524,7 @@ __metadata:
     semantic-ui-react: ^2.0.3
     typescript: ^4.0.3
     typescript-plugin-css-modules: ^3.4.0
+    uuidv4: ^6.2.12
     web-vitals: ^0.2.4
     workbox-background-sync: ^5.1.3
     workbox-broadcast-update: ^5.1.3
@@ -6131,6 +6133,15 @@ __metadata:
   bin:
     css-blank-pseudo: cli.js
   checksum: f995a6ca5dbb867af4b30c3dc872a8f0b27ad120442c34796eef7f9c4dcf014249522aaa0a2da3c101c4afa5d7d376436bb978ae1b2c02deddec283fad30c998
+  languageName: node
+  linkType: hard
+
+"css-box-model@npm:^1.2.0":
+  version: 1.2.1
+  resolution: "css-box-model@npm:1.2.1"
+  dependencies:
+    tiny-invariant: ^1.0.6
+  checksum: 4d113f26fed6b9150e2c314502d00dabe06f12ae43a01a7e9b6e57f3de49b4281dbb0dc46a1158a7349618f8f34d9250af57cb43d7337e9485e73e6b821e470e
   languageName: node
   linkType: hard
 
@@ -11921,6 +11932,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"memoize-one@npm:^5.1.1":
+  version: 5.2.1
+  resolution: "memoize-one@npm:5.2.1"
+  checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
+  languageName: node
+  linkType: hard
+
 "memory-fs@npm:^0.4.1":
   version: 0.4.1
   resolution: "memory-fs@npm:0.4.1"
@@ -14824,6 +14842,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"raf-schd@npm:^4.0.2":
+  version: 4.0.3
+  resolution: "raf-schd@npm:4.0.3"
+  checksum: 45514041c5ad31fa96aef3bb3c572a843b92da2f2cd1cb4a47c9ad58e48761d3a4126e18daa32b2bfa0bc2551a42d8f324a0e40e536cb656969929602b4e8b58
+  languageName: node
+  linkType: hard
+
 "raf@npm:^3.4.1":
   version: 3.4.1
   resolution: "raf@npm:3.4.1"
@@ -14896,6 +14921,24 @@ fsevents@^1.2.7:
     regenerator-runtime: ^0.13.7
     whatwg-fetch: ^3.4.1
   checksum: 99e52a6b2229c7ca730cfd44ac95640f955be71d144225bd6c24fa47922a742658a371d0a2f0876d732533f1055b7cd7e9d534c89c29f8ca889ecd1b8d15f065
+  languageName: node
+  linkType: hard
+
+"react-beautiful-dnd@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "react-beautiful-dnd@npm:13.1.0"
+  dependencies:
+    "@babel/runtime": ^7.9.2
+    css-box-model: ^1.2.0
+    memoize-one: ^5.1.1
+    raf-schd: ^4.0.2
+    react-redux: ^7.2.0
+    redux: ^4.0.4
+    use-memo-one: ^1.1.1
+  peerDependencies:
+    react: ^16.8.5 || ^17.0.0
+    react-dom: ^16.8.5 || ^17.0.0
+  checksum: 12b7e9fbe872783e0f899e03f2e80deee085aa1e2cec3d556c1d06bdbafbda7a3c9cf7a3a6b26544617eb2e50d0e3518001bd8300370704bf5a8c9c21f54ec90
   languageName: node
   linkType: hard
 
@@ -14985,7 +15028,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^7.2.5":
+"react-redux@npm:^7.2.0, react-redux@npm:^7.2.5":
   version: 7.2.5
   resolution: "react-redux@npm:7.2.5"
   dependencies:
@@ -15265,7 +15308,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.0.0, redux@npm:^4.1.0":
+"redux@npm:^4.0.0, redux@npm:^4.0.4, redux@npm:^4.1.0":
   version: 4.1.1
   resolution: "redux@npm:4.1.1"
   dependencies:
@@ -17307,7 +17350,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tiny-invariant@npm:^1.0.2":
+"tiny-invariant@npm:^1.0.2, tiny-invariant@npm:^1.0.6":
   version: 1.1.0
   resolution: "tiny-invariant@npm:1.1.0"
   checksum: 27d29bbb9e1d1d86e25766711c28ad91af6d67c87d561167077ac7fbce5212b97bbfe875e70bc369808e075748c825864c9b61f0e9f8652275ec86bcf4dcc924
@@ -18024,6 +18067,15 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"use-memo-one@npm:^1.1.1":
+  version: 1.1.2
+  resolution: "use-memo-one@npm:1.1.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+  checksum: 71f4598ce422b64a971dc93f45dc245158977f8882f56be82d4629c21577c22244959ac3aa99bd9559d64007b632d58aa43b256981afe56603c77ce3fdee165f
+  languageName: node
+  linkType: hard
+
 "use@npm:^3.1.0":
   version: 3.1.1
   resolution: "use@npm:3.1.1"
@@ -18119,7 +18171,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"uuidv4@npm:*":
+"uuidv4@npm:*, uuidv4@npm:^6.2.12":
   version: 6.2.12
   resolution: "uuidv4@npm:6.2.12"
   dependencies:
