@@ -18,9 +18,14 @@ import dndStyles from "./dragAndDrop.module.css";
 {
     /* Package to help with smooth drag n drop features */
 }
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {
+    DragDropContext,
+    Droppable,
+    Draggable,
+    DropResult,
+} from "react-beautiful-dnd";
 
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 
 {
     /* SAMPLE NOTES DATA USED FOR DRAG AND DROP TESTING */
@@ -59,61 +64,6 @@ const testColumns = {
 {
     /* Function to allow us to render the new state after we drag and drop notes */
 }
-const onDragEnd = (
-    result: { source: any; destination?: any },
-    columns: any,
-    updateColumns: any
-) => {
-    /* If we drag the box into an invalid destination (off the screen), don't update state */
-    if (!result.destination) return;
-
-    /* We need source and destination objects to update the state of our columns */
-    const { source, destination } = result;
-
-    /* If we're dropping a note into a different column */
-    if (source.droppableId !== destination.droppableId) {
-        const sourceColumn = columns[source.droppableId];
-        const destColumn = columns[destination.droppableId];
-
-        /* Copy the items over */
-        const sourceItems = [...sourceColumn.items];
-        const destItems = [...destColumn.items];
-
-        /* Update the state of the source and destination column with the item update */
-        const [removed] = sourceItems.splice(source.index, 1);
-        destItems.splice(destination.index, 0, removed);
-
-        /* call the useState update function */
-        updateColumns({
-            ...columns,
-            [source.droppableId]: {
-                ...sourceColumn,
-                items: sourceItems,
-            },
-            [destination.droppableId]: {
-                ...destColumn,
-                items: destItems,
-            },
-        });
-    } else {
-        /* Otherwise, we're just dragging the item in the same column */
-        const column = columns[source.droppableId];
-        const copiedItems = [...column.items];
-
-        /* Reorder the items */
-        const [removed] = copiedItems.splice(source.index, 1);
-        copiedItems.splice(destination.index, 0, removed);
-
-        /* Update the column */
-        updateColumns({
-            ...columns,
-            [source.droppableId]: {
-                ...column,
-                items: copiedItems,
-            },
-        });
-    }
-};
 
 const NotesView = (): JSX.Element => {
     const history = useHistory();
@@ -140,7 +90,7 @@ const NotesView = (): JSX.Element => {
             {/* Main notes area */}
             <div className={dndStyles.notesSection}>
                 <DragDropContext
-                    onDragEnd={(result: any) =>
+                    onDragEnd={(result: DropResult) =>
                         onDragEnd(result, columns, updateColumns)
                     }
                 >
@@ -148,7 +98,7 @@ const NotesView = (): JSX.Element => {
                     {Object.entries(columns).map(([id, column]) => {
                         return (
                             <Droppable droppableId={id} key={id}>
-                                {(provided, snapshot) => {
+                                {(provided) => {
                                     return (
                                         <div
                                             {...provided.droppableProps}
@@ -159,8 +109,8 @@ const NotesView = (): JSX.Element => {
                                             {column.items.map(
                                                 (
                                                     item: {
-                                                        id: any;
-                                                        content: any;
+                                                        id: string;
+                                                        content: string;
                                                     },
                                                     index
                                                 ) => {
@@ -227,3 +177,69 @@ const NotesView = (): JSX.Element => {
     );
 };
 export default NotesView;
+
+const onDragEnd = (
+    result: DropResult,
+    columns: typeof testColumns,
+    updateColumns: React.Dispatch<
+        React.SetStateAction<{
+            [x: string]: {
+                name: string;
+                items: {
+                    id: string;
+                    content: string;
+                }[];
+            };
+        }>
+    >
+) => {
+    /* If we drag the box into an invalid destination (off the screen), don't update state */
+    if (!result.destination) return;
+
+    /* We need source and destination objects to update the state of our columns */
+    const { source, destination } = result;
+
+    /* If we're dropping a note into a different column */
+    if (source.droppableId !== destination.droppableId) {
+        const sourceColumn = columns[source.droppableId];
+        const destColumn = columns[destination.droppableId];
+
+        /* Copy the items over */
+        const sourceItems = [...sourceColumn.items];
+        const destItems = [...destColumn.items];
+
+        /* Update the state of the source and destination column with the item update */
+        const [removed] = sourceItems.splice(source.index, 1);
+        destItems.splice(destination.index, 0, removed);
+
+        /* call the useState update function */
+        updateColumns({
+            ...columns,
+            [source.droppableId]: {
+                ...sourceColumn,
+                items: sourceItems,
+            },
+            [destination.droppableId]: {
+                ...destColumn,
+                items: destItems,
+            },
+        });
+    } else {
+        /* Otherwise, we're just dragging the item in the same column */
+        const column = columns[source.droppableId];
+        const copiedItems = [...column.items];
+
+        /* Reorder the items */
+        const [removed] = copiedItems.splice(source.index, 1);
+        copiedItems.splice(destination.index, 0, removed);
+
+        /* Update the column */
+        updateColumns({
+            ...columns,
+            [source.droppableId]: {
+                ...column,
+                items: copiedItems,
+            },
+        });
+    }
+};
