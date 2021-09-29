@@ -1,7 +1,8 @@
 import supertest from "supertest";
 import mongoose from "mongoose";
 var bodyParser = require("body-parser");
-
+import { hashPassword, generateJwt } from "../../helpers/security";
+import { IUser } from "../user/userModel";
 const db = require("../../config/mongoose/testing");
 const app = require("../../index");
 
@@ -29,9 +30,23 @@ describe("Note route tests", () => {
                 "- success code\n" +
                 "- notes in response body\n",
             async () => {
+                const User = mongoose.model<IUser>("User");
+                const user = new User({
+                    email: "testuser@email.com",
+                    firstName: "test",
+                    lastName: "user",
+                    password: hashPassword("password"),
+                    profilePic: "someImgUrl",
+                });
+                await user.save();
+                const jwt = generateJwt(
+                    await User.findOne({ email: "testuser@email.com" })
+                );
+
                 // add 3 new notes to testing database
                 const note1 = new Note({
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "title1",
                     text: "text1",
                     image: "img",
@@ -45,6 +60,7 @@ describe("Note route tests", () => {
 
                 const note2 = new Note({
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "title2",
                     text: "text2",
                     image: "img",
@@ -58,6 +74,7 @@ describe("Note route tests", () => {
 
                 const note3 = new Note({
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "title3",
                     text: "text3",
                     image: "img",
@@ -69,7 +86,9 @@ describe("Note route tests", () => {
                 });
                 await note3.save();
 
-                const res = await supertest(app).get("/api/notes/");
+                const res = await supertest(app)
+                    .get("/api/notes/")
+                    .set("Cookie", ["jwt=" + jwt]);
                 expect(res.statusCode).toBe(200);
                 expect(res.body.length).toBe(3);
             }
