@@ -1,13 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
+import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 // import model
 const Note = mongoose.model("Note");
 
 // controller for getting all notes
-const getNotes = async (req: express.Request, res: express.Response) => {
+const getNotes = async (req: IRequestWithUser, res: express.Response) => {
     try {
-        const notes = await Note.find({}, {});
+        const notes = await Note.find({ user: req.user._id });
 
         return res.status(200).send(notes);
     } catch (err) {
@@ -16,10 +17,10 @@ const getNotes = async (req: express.Request, res: express.Response) => {
 };
 
 // controller for getting a specific note
-const getNote = async (req: express.Request, res: express.Response) => {
+const getNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
-        const note = await Note.findById(id);
+        const note = await Note.find({ _id: id, user: req.user._id });
 
         return res.status(200).send(note);
     } catch (err) {
@@ -28,10 +29,11 @@ const getNote = async (req: express.Request, res: express.Response) => {
 };
 
 // controller for the action of posting a note
-const postNote = async (req: express.Request, res: express.Response) => {
+const postNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const newNote = new Note({
             _clientId: req.body._clientId,
+            user: req.user._id,
             title: req.body?.title,
             text: req.body?.text,
             image: req.body?.image,
@@ -50,11 +52,14 @@ const postNote = async (req: express.Request, res: express.Response) => {
 };
 
 // controller for updating a specific note
-const putNote = async (req: express.Request, res: express.Response) => {
+const putNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
         const newData = req.body;
-        const note = await Note.findByIdAndUpdate(id, newData).setOptions({
+        const note = await Note.findOneAndUpdate(
+            { _id: id, user: req.user._id },
+            newData
+        ).setOptions({
             new: true,
             overwrite: true,
         });
@@ -66,10 +71,13 @@ const putNote = async (req: express.Request, res: express.Response) => {
 };
 
 // controller for deleting a specific note
-const deleteNote = async (req: express.Request, res: express.Response) => {
+const deleteNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
-        const deletedNote = await Note.findByIdAndDelete(id);
+        const deletedNote = await Note.findOneAndDelete({
+            _id: id,
+            user: req.user._id,
+        });
 
         return res.status(200).send(deletedNote);
     } catch (err) {
