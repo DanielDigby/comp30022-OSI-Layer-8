@@ -7,6 +7,7 @@ import MenuItem from "./Menu";
 import SearchBarItem from "./SearchBar";
 import ProfileImage from "./ProfileImage";
 import styles from "./NotesView.module.css";
+import { searchNotes } from "../../helpers/util/search"
 
 import { useHistory } from "react-router-dom";
 
