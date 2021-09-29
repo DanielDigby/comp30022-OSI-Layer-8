@@ -1,6 +1,8 @@
 import express from "express";
+import { AppError } from "../../helpers/errors";
 import mongoose from "mongoose";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
+import { INote } from "./noteModel";
 
 // import model
 const Note = mongoose.model("Note");
@@ -20,7 +22,15 @@ const getNotes = async (req: IRequestWithUser, res: express.Response) => {
 const getNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
-        const note = await Note.find({ _id: id, user: req.user._id });
+        const note = await Note.findById(id);
+
+        if ((note as unknown as INote).user !== req.user._id)
+            throw new AppError(
+                "Forbidden",
+                403,
+                "Not able to modify note",
+                true
+            );
 
         return res.status(200).send(note);
     } catch (err) {
@@ -56,14 +66,19 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
         const newData = req.body;
-        const note = await Note.findOneAndUpdate(
-            { _id: id, user: req.user._id },
-            newData
-        ).setOptions({
-            new: true,
-            overwrite: true,
-        });
+        let note = await Note.findById(id);
 
+        if ((note as unknown as INote).user !== req.user._id)
+            throw new AppError(
+                "Forbidden",
+                403,
+                "Not able to modify note",
+                true
+            );
+
+        note = Object.assign(newData);
+
+        await note.save();
         return res.status(200).send(note);
     } catch (err) {
         return res.send(err);
@@ -74,12 +89,18 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
 const deleteNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
-        const deletedNote = await Note.findOneAndDelete({
-            _id: id,
-            user: req.user._id,
-        });
+        let note = await Note.findById(id);
 
-        return res.status(200).send(deletedNote);
+        if ((note as unknown as INote).user !== req.user._id)
+            throw new AppError(
+                "Forbidden",
+                403,
+                "Not able to modify note",
+                true
+            );
+
+        await note.remove();
+        return res.status(200).send();
     } catch (err) {
         return res.send(err);
     }
