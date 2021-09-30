@@ -1,27 +1,34 @@
 /* https://www.codegrepper.com/code-examples/javascript/filter+logic+react */
 
 import React from "react";
+import noteSlice from "../../config/redux/noteSlice";
 import { INote } from "../../interfaces/note";
 
-const userNotes = [
-    {
-        //title: "NEW NOTE TEST",
-        //_clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
-        tags: ["hello", "event"],
-        //relatedNotes: [],
-        id: "61514289e3c2e405ab49db7e",
-        content: "hello",
-    },
-    {
-        //title: "SECOND NOTE",
-        //_clientId: "75072f77-3b31-40f7-b3b7-5e46f4ea9abc",
-        tags: ["nothing"],
-        //relatedNotes: [],
-        id: "61514289e3c2e405ab4abcde",
-        content: "note 2",
-    },
-];
+/* Function to sort notes by Date */
+function sortByTime(inputNotes: INote[], noteType: string): any {
+    // sorts Reminder notes by Date
+    if (noteType === "ReminderTime") {
+        inputNotes.sort(function compare(a, b) {
+            if (a.reminderTime !== undefined && b.reminderTime !== undefined) {
+                return b.reminderTime?.valueOf() - a.reminderTime?.valueOf();
+            } else {
+                return 0;
+            }
+        });
+    }
+    // Sorts Event notes by Date
+    else {
+        inputNotes.sort(function compare(a, b) {
+            if (a.eventTime !== undefined && b.eventTime !== undefined) {
+                return b.eventTime?.valueOf() - a.eventTime?.valueOf();
+            } else {
+                return 0;
+            }
+        });
+    }
+}
 
+/* Filter Notes by Pinned, EventTime, ReminderTime, and tags */
 export const filterNotes = (inputNotes: INote[], filterOn: string): INote[] => {
     const temp = inputNotes.filter((inputNote) => inputNote.tags != undefined);
 
@@ -34,12 +41,12 @@ export const filterNotes = (inputNotes: INote[], filterOn: string): INote[] => {
         const filtered = inputNotes.filter(
             (inputNote) => inputNote.eventTime !== null
         );
-        return filtered;
+        return sortByTime(filtered, "EventTime");
     } else if (filterOn === "ReminderTime") {
         const filtered = inputNotes.filter(
             (inputNote) => inputNote.reminderTime !== null
         );
-        return filtered;
+        return sortByTime(filtered, "ReminderTime");
     } else {
         const filtered = temp.filter(
             (note) => note.tags !== undefined && note.tags.includes(filterOn)
