@@ -218,9 +218,9 @@ describe("Notes API Helpers", () => {
 
         // Testing create then edit request when status is offline
         it(
-            "When a valid note is passed it should:\n" +
-                "\t add the note to the redux store\n" +
-                "\t send a post request to the backend\n",
+            "Start offline, add note then update:\n" +
+                "\t note to be updated in store\n" +
+                "\t two requests are in outbox\n",
             async () => {
                 //tell redux that it is OFFLINE
                 store.dispatch({
@@ -234,10 +234,7 @@ describe("Notes API Helpers", () => {
                 const note = {
                     title: "NEW NOTE TEST",
                 };
-                const storeNote = {
-                    title: "NEW NOTE TEST",
-                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
-                };
+
                 // here I mock the uuid generated _clientId to make sure that our api note expected object matches
                 // the one that gets generated when saving to redux
                 jest.spyOn(uuid, "v4").mockImplementation(
@@ -248,20 +245,17 @@ describe("Notes API Helpers", () => {
                 createNoteAPI(note);
                 await new Promise((r) => setTimeout(r, 50));
 
-                // Check create note request is in queue
-                const redux = store.getState();
-                const notes = redux.notes.array;
-                expect(notes[0]).toMatchObject(storeNote);
-
                 const noteUpdated = {
                     title: "UPDATED NAME",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                 };
 
-                console.log((redux as RootStateWithOffline).offline.outbox);
                 updateNoteAPI(noteUpdated);
+                await new Promise((r) => setTimeout(r, 50));
 
+                const redux = store.getState();
                 const outbox = (redux as RootStateWithOffline).offline.outbox;
+                const notes = redux.notes.array;
                 // one action to create and one action of edit
                 expect(outbox.length).toEqual(2);
                 expect(notes[0]).toMatchObject(noteUpdated);
