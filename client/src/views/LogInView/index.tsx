@@ -6,10 +6,15 @@ import { useHistory } from "react-router-dom";
 // Semantic UI button
 import { Checkbox, Button } from "semantic-ui-react";
 
+import { logInAPI } from "../../helpers/api/users";
+
 const LogInView = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateHome = () => navHistory.push("/");
     const navigateDashboard = () => navHistory.push("/dashboard");
+
+    // Components to send over to our api call 
+    
 
     // api call
     return (
@@ -37,6 +42,7 @@ const LogInView = (): JSX.Element => {
                         className={styles.input}
                         type="email"
                         placeholder="enter email"
+                        value=this.state.email
                     ></input>
                 </div>
 
