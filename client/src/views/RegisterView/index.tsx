@@ -9,39 +9,39 @@ import { registerAPI, NewUser } from "../../helpers/api/users";
 
 const submitRegistration = (newUser: NewUser) => {
     return 0;
-}
+};
 
 const RegisterView = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateHome = () => navHistory.push("/");
 
     // Variables to hold our register form inputs
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password1, setPassword1] = useState("")
-    const [password2, setPassword2] = useState("")
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password1, setPassword1] = useState("");
+    const [password2, setPassword2] = useState("");
 
     // Handlers to update state when form is filled out 
     const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFirstName(e.target.value)
-    }
+        setFirstName(e.target.value);
+    };
 
     const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLastName(e.target.value)
-    }
+        setLastName(e.target.value);
+    };
 
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value)
-    }
+        setEmail(e.target.value);
+    };
 
     const handlePassword1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword1(e.target.value)
-    }
+        setPassword1(e.target.value);
+    };
 
     const handlePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword2(e.target.value)
-    }
+        setPassword2(e.target.value);
+    };
 
     // api call
     return (
