@@ -16,14 +16,19 @@ const RegisterView = (): JSX.Element => {
     const navigateHome = () => navHistory.push("/");
 
     // Variables to hold our register form inputs
-    const [fullName, setFullName] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password1, setPassword1] = useState("")
     const [password2, setPassword2] = useState("")
 
     // Handlers to update state when form is filled out 
-    const handleFullName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFullName(e.target.value)
+    const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFirstName(e.target.value)
+    }
+
+    const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLastName(e.target.value)
     }
 
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,14 +62,26 @@ const RegisterView = (): JSX.Element => {
                 </div>
 
                 <div className={styles.form}>
-                    <label className={styles.label} htmlFor="email">
-                        Full name
+                    <label className={styles.label} htmlFor="firstname">
+                        First name
                     </label>
                     <input
                         className={styles.input}
                         type="name"
-                        placeholder="enter full name"
-                        onChange={handleFullName}
+                        placeholder="First name"
+                        onChange={handleFirstName}
+                    ></input>
+                </div>
+
+                <div className={styles.form}>
+                    <label className={styles.label} htmlFor="lastname">
+                        Last name
+                    </label>
+                    <input
+                        className={styles.input}
+                        type="name"
+                        placeholder="Last name"
+                        onChange={handleLastName}
                     ></input>
                 </div>
 
