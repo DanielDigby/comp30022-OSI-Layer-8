@@ -52,7 +52,7 @@ export const logOutAPI = async (): Promise<void> => {
 // post new user to backend
 // and set returned user in redux
 // rejects with Password error on non matching passwords
-interface NewUser {
+export interface NewUser {
     email: string;
     firstName: string;
     lastName: string;

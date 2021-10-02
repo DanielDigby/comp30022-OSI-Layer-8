@@ -5,6 +5,11 @@ import { useHistory } from "react-router-dom";
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
+import { registerAPI, NewUser } from "../../helpers/api/users";
+
+const submitRegistration = (newUser: NewUser) => {
+    return 0;
+}
 
 const RegisterView = (): JSX.Element => {
     const navHistory = useHistory();
