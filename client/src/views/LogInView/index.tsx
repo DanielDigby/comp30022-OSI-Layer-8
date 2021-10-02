@@ -1,4 +1,4 @@
-import React from "react";
+import React, { DOMElement, useState } from "react";
 import styles from "./LogInView.module.css";
 import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { Checkbox, Button } from "semantic-ui-react";
 
 import { logInAPI } from "../../helpers/api/users";
+import { setCacheNameDetails } from "workbox-core";
 
 const LogInView = (): JSX.Element => {
     const navHistory = useHistory();
@@ -14,7 +15,19 @@ const LogInView = (): JSX.Element => {
     const navigateDashboard = () => navHistory.push("/dashboard");
 
     // Components to send over to our api call 
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    // Functions to update email and password entered
+    const handleEmail = (e: any) => {
+        setEmail(e.target.value)
+        console.log(email)
+    }
     
+    const handlePassword = (e: any) => {
+        setPassword(e.target.value)
+        console.log(password)
+    }
 
     // api call
     return (
@@ -42,7 +55,7 @@ const LogInView = (): JSX.Element => {
                         className={styles.input}
                         type="email"
                         placeholder="enter email"
-                        value=this.state.email
+                        onChange={handleEmail}
                     ></input>
                 </div>
 
@@ -54,6 +67,7 @@ const LogInView = (): JSX.Element => {
                         className={styles.input}
                         type="password"
                         placeholder="password"
+                        onChange={handlePassword}
                     ></input>
                 </div>
             </div>
