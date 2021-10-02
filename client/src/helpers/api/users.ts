@@ -12,7 +12,7 @@ import axios from "axios";
 
 // post username password to backend then load notes and populate redux
 // reject with unauthorized error when credentials are incorrect
-interface Credentials {
+export interface Credentials {
     email: string;
     password: string;
 }

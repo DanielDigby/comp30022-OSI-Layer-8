@@ -6,8 +6,13 @@ import { useHistory } from "react-router-dom";
 // Semantic UI button
 import { Checkbox, Button } from "semantic-ui-react";
 
-import { logInAPI } from "../../helpers/api/users";
+import { logInAPI, Credentials } from "../../helpers/api/users";
 import { setCacheNameDetails } from "workbox-core";
+
+const validateUserLogIn = (creds: Credentials) => {
+    return 0
+}
+
 
 const LogInView = (): JSX.Element => {
     const navHistory = useHistory();
@@ -19,12 +24,12 @@ const LogInView = (): JSX.Element => {
     const [password, setPassword] = useState("")
 
     // Functions to update email and password entered
-    const handleEmail = (e: any) => {
+    const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
         console.log(email)
     }
     
-    const handlePassword = (e: any) => {
+    const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value)
         console.log(password)
     }
