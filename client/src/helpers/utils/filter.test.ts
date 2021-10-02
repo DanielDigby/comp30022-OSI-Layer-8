@@ -1,4 +1,4 @@
-import { filterNotes } from "./filter";
+import { filterNotes, FilterOn } from "./filter";
 import { INote } from "../../interfaces/note";
 
 describe("Notes filter utils", () => {
@@ -10,7 +10,7 @@ describe("Notes filter utils", () => {
             const notes = new Array<INote>();
 
             // act
-            const output = filterNotes(notes, "Pinned");
+            const output = filterNotes(notes, FilterOn.PINNED);
 
             // assert
             expect(output.length).toBe(0);
@@ -39,7 +39,7 @@ describe("Notes filter utils", () => {
                 ];
 
                 // act
-                const output = filterNotes(notes, "Pinned");
+                const output = filterNotes(notes, FilterOn.PINNED);
 
                 // assert
                 expect(output.length).toBe(1);
@@ -68,7 +68,12 @@ describe("Notes filter utils", () => {
                 ];
 
                 // act
-                const output = filterNotes(notes, "EventTime");
+                const output = filterNotes(notes, FilterOn.EVENT_TIME);
+                // const output = filterNotes(
+                //     notes,
+                //     FilterOn.CUSTOM_TAG,
+                //     "Memories"
+                // );
 
                 // assert
                 expect(output.length).toBe(1);

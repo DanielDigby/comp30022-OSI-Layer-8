@@ -1,14 +1,24 @@
 import { INote } from "../../interfaces/note";
 
 /* Filter Notes by Pinned, EventTime, ReminderTime, and tags */
-export const filterNotes = (notes: INote[], filterOn: string): INote[] => {
+export enum FilterOn {
+    PINNED,
+    EVENT_TIME,
+    REMINDER_TIME,
+    CUSTOM_TAG,
+}
+export const filterNotes = (
+    notes: INote[],
+    filterOn: FilterOn,
+    customTag?: string
+): INote[] => {
     let filtered: INote[];
     switch (filterOn) {
-        case "Pinned":
+        case FilterOn.PINNED:
             filtered = notes.filter((note) => note.pinned === true);
             break;
 
-        case "EventTime":
+        case FilterOn.EVENT_TIME:
             filtered = notes
                 .filter((note) => note.eventTime !== null)
                 .sort((a, b) => {
@@ -17,7 +27,7 @@ export const filterNotes = (notes: INote[], filterOn: string): INote[] => {
                 });
             break;
 
-        case "ReminderTime":
+        case FilterOn.REMINDER_TIME:
             filtered = notes
                 .filter((note) => note.reminderTime !== null)
                 .sort((a, b) => {
@@ -27,10 +37,14 @@ export const filterNotes = (notes: INote[], filterOn: string): INote[] => {
                 });
             break;
 
-        default:
+        case FilterOn.CUSTOM_TAG:
+            if (!customTag)
+                throw new Error(
+                    "custom tag parameter must be supplied when filtering by custom tag"
+                );
             filtered = notes.filter(
                 (note) =>
-                    note.tags !== undefined && note.tags.includes(filterOn)
+                    note.tags !== undefined && note.tags.includes(customTag)
             );
     }
     return filtered;
