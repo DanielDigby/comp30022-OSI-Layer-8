@@ -7,8 +7,6 @@ import { useHistory } from "react-router-dom";
 import { Checkbox, Button } from "semantic-ui-react";
 
 import { logInAPI, Credentials } from "../../helpers/api/users";
-//import { setCacheNameDetails } from "workbox-core";
-//import { EphemeralKeyInfo } from "tls";
 
 const LogInView = (): JSX.Element => {
     const navHistory = useHistory();
