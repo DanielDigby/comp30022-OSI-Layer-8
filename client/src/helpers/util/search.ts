@@ -8,13 +8,13 @@ export const searchNotes = (
 
     const filteredNotes = notes.filter((note) => {
         let text = "";
-        if (note.title !== undefined) {
+        if (note.title) {
             text = text.concat(note.title.toLowerCase());
         }
-        if (note.text !== undefined) {
+        if (note.text) {
             text = text.concat(note.text.toLowerCase());
         }
-        if (note.image !== undefined) {
+        if (note.image) {
             text = text.concat(note.image.toLowerCase());
         }
 
