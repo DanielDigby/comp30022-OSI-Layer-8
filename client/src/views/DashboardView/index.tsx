@@ -5,6 +5,25 @@ import { Icon } from "semantic-ui-react";
 import ProfileImage from "../NotesView/ProfileImage";
 import { store } from "../../config/redux/store";
 
+//import { filterNotes, FilterOn } from "../../helpers/utils/filter";
+//import { INote } from "../../interfaces/note";
+
+/*
+const testNotes = [
+    {
+        _id: "a",
+        _clientId: "djfhjaskjdfa",
+        title: null,
+        text: null,
+        image: null,
+        reminderTime: null,
+        eventTime: null,
+        pinned: true,
+        tags: [],
+        relatedNotes: [],
+    },
+];*/
+
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
@@ -54,9 +73,11 @@ const DashboardView = (): JSX.Element => {
                 <div className={styles.calendarContainer}>
                     <Icon name="calendar alternate" size="big" />
                 </div>
+                <div className={styles.eventsContainer}></div>
                 <div className={styles.tumbtackContainer}>
                     <Icon name="thumbtack" size="big" />
                 </div>
+                <div className={styles.pinnedContainer}></div>
             </div>
         </div>
     );
