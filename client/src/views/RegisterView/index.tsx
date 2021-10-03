@@ -55,8 +55,8 @@ const RegisterView = (): JSX.Element => {
         try {
             await registerAPI(user);
             navigateLogin();
-        } catch (error: any) {
-            console.log(error.stack);
+        } catch (error: unknown) {
+            console.log(error);
             return;
         }
     };
