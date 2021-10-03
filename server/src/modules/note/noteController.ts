@@ -1,6 +1,5 @@
 import express from "express";
-import { AppError } from "../../helpers/errors";
-import mongoose, { Document } from "mongoose";
+import mongoose from "mongoose";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 import { INote } from "./noteModel";
 import { validateUser } from "../../helpers/security/index"
@@ -12,19 +11,6 @@ const Note = mongoose.model("Note");
 const getNotes = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const notes = await Note.find({ user: req.user._id });
-
-        if (
-            notes.length > 0 &&
-            (notes[0] as unknown as INote).user.toString() !==
-                req.user._id.toString()
-        )
-            throw new AppError(
-                "Forbidden",
-                403,
-                "Not able to modify note",
-                true
-            );
-
         return res.status(200).send(notes);
     } catch (err) {
         return res.send(err);
@@ -38,16 +24,8 @@ const getNote = async (req: IRequestWithUser, res: express.Response) => {
         const note = await Note.findById(id);
 
         validateUser((note as unknown as INote).user, 
-                                    req.user._id,
-                                    "Not able to get note");
-
-        if ((note as unknown as INote).user.toString() !== req.user._id.toString())
-            throw new AppError(
-                "Forbidden",
-                403,
-                "Not able to get note",
-                true
-            );
+                        req.user._id,
+                        "Not able to get note");
 
         return res.status(200).send(note);
     } catch (err) {
@@ -71,11 +49,9 @@ const postNote = async (req: IRequestWithUser, res: express.Response) => {
             relatedNotes: req.body?.relatedNotes,
         });
 
-        if (
-            (newNote as unknown as INote).user.toString() !==
-            req.user._id.toString()
-        )
-            throw new AppError("Forbidden", 403, "Not able to post note", true);
+        validateUser((newNote as unknown as INote).user, 
+                        req.user._id,
+                        "Not able to post note");
 
         await newNote.save();
         return res.status(200).send(newNote);
@@ -92,22 +68,15 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
             { _clientId: updatedNote._clientId },
             {}
         );
-        if (
-            (note as unknown as INote).user.toString() !==
-            req.user._id.toString()
-        )
-            throw new AppError(
-                "Forbidden",
-                403,
-                "Not able to modify note",
-                true
-            );
+
+        validateUser((note as unknown as INote).user, 
+                        req.user._id,
+                        "Not able to modify note");    
 
         Object.assign(note, updatedNote);
 
         await note.save();
         return res.status(200).send(note);
-        // return res.send({message: 'No blah Found'});
     } catch (err) {
         return res.send(err);
     }
@@ -119,16 +88,9 @@ const deleteNote = async (req: IRequestWithUser, res: express.Response) => {
         const id = req.params.Id;
         let note = await Note.findById(id);
 
-        if (
-            (note as unknown as INote).user.toString() !==
-            req.user._id.toString()
-        )
-            throw new AppError(
-                "Forbidden",
-                403,
-                "Not able to delete note",
-                true
-            );
+        validateUser((note as unknown as INote).user, 
+                        req.user._id,
+                        "Not able to delete note");    
 
         await note.remove();
         return res.status(200).send();
