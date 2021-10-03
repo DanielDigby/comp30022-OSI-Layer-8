@@ -1,4 +1,4 @@
-import { IUser } from "../../interfaces/user";
+import { IUser, INewUser } from "../../interfaces/user";
 import { setUser, updateUser } from "../../config/redux/userSlice";
 import { setNotes } from "../../config/redux/noteSlice";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
@@ -12,10 +12,11 @@ import axios from "axios";
 
 // post username password to backend then load notes and populate redux
 // reject with unauthorized error when credentials are incorrect
-interface Credentials {
+export interface Credentials {
     email: string;
     password: string;
 }
+
 export const logInAPI = async (credentials: Credentials): Promise<void> => {
     const authRes = await axios.post(LOG_IN, credentials, {
         withCredentials: true,
@@ -52,15 +53,8 @@ export const logOutAPI = async (): Promise<void> => {
 // post new user to backend
 // and set returned user in redux
 // rejects with Password error on non matching passwords
-interface NewUser {
-    email: string;
-    firstName: string;
-    lastName: string;
-    password1: string;
-    password2: string;
-    profilePic: string;
-}
-export const registerAPI = async (newUser: NewUser): Promise<void> => {
+
+export const registerAPI = async (newUser: INewUser): Promise<void> => {
     const res = await axios.post(REGISTER, newUser, {
         withCredentials: true,
     });

@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import ProfileImage from "../NotesView/ProfileImage";
+import { store } from "../../config/redux/store";
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
     const navigateNotes = () => history.push("/notes");
+
+    // Boot user out if not logged in
+    useEffect(() => {
+        if (!store.getState().user.account) history.push("/login");
+    });
 
     return (
         <div className={styles.basecontainer}>
