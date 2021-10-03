@@ -3,6 +3,7 @@ import { AppError } from "../../helpers/errors";
 import mongoose from "mongoose";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 import { INote } from "./noteModel";
+import { validateUser } from "../../helpers/security/index"
 
 // import model
 const Note = mongoose.model("Note");
@@ -31,6 +32,10 @@ const getNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
         const note = await Note.findById(id);
+
+        validateUser((note as unknown as INote).user, 
+                                    req.user._id,
+                                    "Not able to get note");
 
         if ((note as unknown as INote).user.toString() !== req.user._id.toString())
             throw new AppError(
