@@ -1,4 +1,4 @@
-import { INote } from "../../interfaces/note";
+import { INote, INoteWithoutIds } from "../../interfaces/note";
 import { store } from "../../config/redux/store";
 import {
     createNote,
@@ -6,7 +6,7 @@ import {
     deleteNote,
 } from "../../config/redux/noteSlice";
 
-export const createNoteAPI = (note: INote): void => {
+export const createNoteAPI = (note: INoteWithoutIds): void => {
     store.dispatch(createNote(note));
 };
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INote } from "../../interfaces/note";
+import { INote, INoteWithoutIds } from "../../interfaces/note";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
 import { NOTES } from "../../interfaces/endpoints";
@@ -25,13 +25,13 @@ export const noteSlice = createSlice({
             reducer: (state, action: PayloadAction<INote>) => {
                 state.array.push(action.payload);
             },
-            prepare: (note: INote) => {
+            prepare: (note: INoteWithoutIds) => {
                 // create and assign _clientId
-                note._clientId = uuidv4();
+                (note as INote)._clientId = uuidv4();
 
                 return {
                     // save the temp note
-                    payload: note,
+                    payload: note as INote,
                     meta: {
                         offline: {
                             // send original note to server

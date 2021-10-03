@@ -36,6 +36,13 @@ describe("Notes API Helpers", () => {
                 // This is the note we are creating
                 const note = {
                     title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 // The note we expect back
                 // notice the clientId, as well as the normal id field -
@@ -45,11 +52,16 @@ describe("Notes API Helpers", () => {
                 // The clientId's get generated in the createNote reducer
                 // the backend id gets set in the updateNoteAfterResponse reducer
                 const apiNote = {
-                    title: "NEW NOTE TEST",
+                    _id: "61514289e3c2e405ab49db7e",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
                     tags: [],
                     relatedNotes: [],
-                    _id: "61514289e3c2e405ab49db7e",
                 };
 
                 // mock the axios return value
@@ -96,10 +108,24 @@ describe("Notes API Helpers", () => {
                 // This is the note we are creating
                 const note = {
                     title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 const storeNote = {
-                    title: "NEW NOTE TEST",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 // here I mock the uuid generated _clientId to make sure that our api note expected object matches
                 // the one that gets generated when saving to redux
@@ -137,13 +163,25 @@ describe("Notes API Helpers", () => {
                 });
                 const note = {
                     title: "NEW NOTE TEST",
-                };
-                const apiNote = {
-                    title: "NEW NOTE TEST",
-                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
                     tags: [],
                     relatedNotes: [],
+                };
+                const apiNote = {
                     _id: "61514289e3c2e405ab49db7e",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 const mockRes = { status: 200, data: apiNote };
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);
@@ -154,12 +192,16 @@ describe("Notes API Helpers", () => {
                 await new Promise((r) => setTimeout(r, 50));
 
                 const noteUpdated = {
+                    _id: "61514289e3c2e405ab49db7e",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                     title: "UPDATED NAME",
                     text: "NEW TEXT",
-                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
                     tags: ["new user tag"],
                     relatedNotes: [],
-                    _id: "61514289e3c2e405ab49db7e",
                 };
                 const mockRes2 = { status: 200, data: noteUpdated };
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes2);
@@ -187,13 +229,25 @@ describe("Notes API Helpers", () => {
                 });
                 const note = {
                     title: "NEW NOTE TEST",
-                };
-                const apiNote = {
-                    title: "NEW NOTE TEST",
-                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
                     tags: [],
                     relatedNotes: [],
+                };
+                const apiNote = {
                     _id: "61514289e3c2e405ab49db7e",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 const mockRes = { status: 200, data: apiNote };
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);
