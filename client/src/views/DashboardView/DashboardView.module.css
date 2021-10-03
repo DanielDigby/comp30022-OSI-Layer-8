@@ -1,0 +1,78 @@
+/* container for the pfp*/
+.topcontainer {
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+/* Container for the greeting, date, and link to all notes*/
+.midContainer {
+    display: flex;
+    width: 62%;
+    align-items: stretch;
+    flex-direction: row;
+    align-content: top;
+}
+
+/* Container for the Icons for calendar and notes*/
+.bottomContainer {
+    display: flex;
+    width: 75%;
+    flex-direction: row;
+}
+
+.calendarContainer {
+    display: flex;
+    width: 50%;
+}
+
+.viewAllNotesContainer {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.viewNotesContainer {
+    display: flex;
+    width: 62%;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.greetingsContainer {
+    width: 62%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-bottom: 5vh;
+}
+
+.basecontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date {
+    margin-bottom: 0px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.label {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
