@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 // import model
 const Note = mongoose.model("Note");
@@ -52,13 +52,14 @@ const postNote = async (req: express.Request, res: express.Response) => {
 // controller for updating a specific note
 const putNote = async (req: express.Request, res: express.Response) => {
     try {
-        const id = req.params.Id;
-        const newData = req.body;
-        const note = await Note.findByIdAndUpdate(id, newData).setOptions({
-            new: true,
-            overwrite: true,
-        });
+        const updatedNote = req.body;
+        const note = await Note.findOne(
+            { _clientId: updatedNote._clientId },
+            {}
+        );
+        Object.assign(note, updatedNote);
 
+        note.save();
         return res.status(200).send(note);
     } catch (err) {
         return res.send(err);
@@ -68,10 +69,12 @@ const putNote = async (req: express.Request, res: express.Response) => {
 // controller for deleting a specific note
 const deleteNote = async (req: express.Request, res: express.Response) => {
     try {
-        const id = req.params.Id;
-        const deletedNote = await Note.findByIdAndDelete(id);
+        const clientId = req.params.clientId;
+        const note = await Note.findOne({ _clientId: clientId }, {});
 
-        return res.status(200).send(deletedNote);
+        note.delete();
+
+        return res.status(200).send(note);
     } catch (err) {
         return res.send(err);
     }

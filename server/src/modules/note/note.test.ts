@@ -184,9 +184,13 @@ describe("Note route tests", () => {
                     pinned: true,
                 };
                 await new Note(note).save();
-                const id = (await Note.findOne({ title: "title" }))._id;
+                const clientId = (
+                    (await Note.findOne({ title: "title" })) as any
+                )._clientId;
 
-                const res = await supertest(app).delete(`/api/notes/${id}`);
+                const res = await supertest(app).delete(
+                    `/api/notes/${clientId}`
+                );
                 expect(res.statusCode).toBe(200);
             }
         );
