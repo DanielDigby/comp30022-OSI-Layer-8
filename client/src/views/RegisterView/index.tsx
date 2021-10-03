@@ -5,15 +5,13 @@ import { useHistory } from "react-router-dom";
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
-import { registerAPI, NewUser } from "../../helpers/api/users";
-
-const submitRegistration = (newUser: NewUser) => {
-    return 0;
-};
+import { INewUser } from "../../interfaces/user";
+import { registerAPI } from "../../helpers/api/users";
 
 const RegisterView = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateHome = () => navHistory.push("/");
+    const navigateLogin = () => navHistory.push("/login");
 
     // Variables to hold our register form inputs
     const [firstName, setFirstName] = useState("");
@@ -22,7 +20,7 @@ const RegisterView = (): JSX.Element => {
     const [password1, setPassword1] = useState("");
     const [password2, setPassword2] = useState("");
 
-    // Handlers to update state when form is filled out 
+    // Handlers to update state when form is filled out
     const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFirstName(e.target.value);
     };
@@ -41,6 +39,25 @@ const RegisterView = (): JSX.Element => {
 
     const handlePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword2(e.target.value);
+    };
+
+    const submitRegistration = async () => {
+        const user: INewUser = {
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            password1: password1,
+            password2: password2,
+            profilePic: null,
+        };
+
+        try {
+            await registerAPI(user);
+            navigateLogin();
+        } catch (error: any) {
+            console.log(error.stack);
+            return;
+        }
     };
 
     // api call
@@ -123,7 +140,9 @@ const RegisterView = (): JSX.Element => {
             </div>
 
             <div className={styles.footer}>
-                <Button positive>Register</Button>
+                <Button onClick={() => submitRegistration()} positive>
+                    Register
+                </Button>
             </div>
 
             <div className={styles.footer}>
