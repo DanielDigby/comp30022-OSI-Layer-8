@@ -1,31 +1,6 @@
 import { INote } from "../../interfaces/note";
 
-/* Function to sort notes by Date */
-/*
-function sortByTime(inputNotes: INote[], noteType: string): any {
-    // sorts Reminder notes by Date
-    if (noteType === "ReminderTime") {
-        inputNotes.sort(function compare(a, b) {
-            if (a.reminderTime !== null && b.reminderTime !== null) {
-                return b.reminderTime.valueOf() - a.reminderTime.valueOf();
-            } else {
-                return 0;
-            }
-        });
-    }
-    // Sorts Event notes by Date
-    else {
-        inputNotes.sort(function compare(a, b) {
-            if (a.eventTime !== null && b.eventTime !== null) {
-                return b.eventTime.valueOf() - a.eventTime.valueOf();
-            } else {
-                return 0;
-            }
-        });
-    }
-}*/
-
-/* Filter Notes by Pinned, EventTime, ReminderTime, and tags */
+/* Filter Notes by Pinned, EventTime, ReminderTime, and tags, sorts by time */
 export enum FilterOn {
     PINNED,
     EVENT_TIME,

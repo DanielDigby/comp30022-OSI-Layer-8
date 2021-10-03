@@ -175,11 +175,6 @@ describe("Notes filter utils", () => {
 
                 // act
                 const output = filterNotes(notes, FilterOn.REMINDER_TIME);
-                // const output = filterNotes(
-                //     notes,
-                //     FilterOn.CUSTOM_TAG,
-                //     "Memories"
-                // );
 
                 // assert
                 expect(output.length).toBe(1);
@@ -231,15 +226,61 @@ describe("Notes filter utils", () => {
 
                 // act
                 const output = filterNotes(notes, FilterOn.REMINDER_TIME);
-                // const output = filterNotes(
-                //     notes,
-                //     FilterOn.CUSTOM_TAG,
-                //     "Memories"
-                // );
 
                 // assert
                 //expect(output.length).toBe(2);
                 expect(output[0]._id).toBe("c");
+            }
+        );
+        it(
+            "Array of length 3 with 0 Reminder notes is passed expect return to be\n" +
+                "\t 0 notes in date order",
+            () => {
+                // arrange
+                const notes = [
+                    {
+                        _id: "a",
+                        _clientId: "djfasdfdfa",
+                        title: null,
+                        text: null,
+                        image: null,
+                        reminderTime: null,
+                        eventTime: null,
+                        pinned: true,
+                        tags: [],
+                        relatedNotes: [],
+                    },
+                    {
+                        _id: "b",
+                        _clientId: "djsadfssdf",
+                        title: null,
+                        text: null,
+                        image: null,
+                        reminderTime: null,
+                        eventTime: null,
+                        pinned: true,
+                        tags: [],
+                        relatedNotes: [],
+                    },
+                    {
+                        _id: "c",
+                        _clientId: "djassdfsddf",
+                        title: null,
+                        text: null,
+                        image: null,
+                        reminderTime: null,
+                        eventTime: null,
+                        pinned: true,
+                        tags: [],
+                        relatedNotes: [],
+                    },
+                ];
+
+                // act
+                const output = filterNotes(notes, FilterOn.REMINDER_TIME);
+
+                // assert
+                expect(output.length).toBe(0);
             }
         );
     });
@@ -266,11 +307,6 @@ describe("Notes filter utils", () => {
 
                 // act
                 const output = filterNotes(notes, FilterOn.CUSTOM_TAG, "hello");
-                // const output = filterNotes(
-                //     notes,
-                //     FilterOn.CUSTOM_TAG,
-                //     "Memories"
-                // );
 
                 // assert
                 expect(output.length).toBe(1);
@@ -278,7 +314,7 @@ describe("Notes filter utils", () => {
         );
         it(
             "When an array of length 3 with 2 Tag note (hello) is passed expect return to be\n" +
-                "\t 2 notes in date order",
+                "\t 2 notes",
             () => {
                 // arrange
                 const notes = [
@@ -322,14 +358,60 @@ describe("Notes filter utils", () => {
 
                 // act
                 const output = filterNotes(notes, FilterOn.CUSTOM_TAG, "hello");
-                // const output = filterNotes(
-                //     notes,
-                //     FilterOn.CUSTOM_TAG,
-                //     "Memories"
-                // );
 
                 // assert
                 expect(output.length).toBe(2);
+            }
+        );
+        it(
+            "When an array of length 3 with 0 Tag note 'hello' is passed expect return to be\n" +
+                "\t 0 notes",
+            () => {
+                // arrange
+                const notes = [
+                    {
+                        _id: "a",
+                        _clientId: "dsklkmbdfdfa",
+                        title: null,
+                        text: null,
+                        image: null,
+                        reminderTime: null,
+                        eventTime: null,
+                        pinned: true,
+                        tags: ["no"],
+                        relatedNotes: [],
+                    },
+                    {
+                        _id: "b",
+                        _clientId: "dopopopopf",
+                        title: null,
+                        text: null,
+                        image: null,
+                        reminderTime: null,
+                        eventTime: null,
+                        pinned: true,
+                        tags: ["no"],
+                        relatedNotes: [],
+                    },
+                    {
+                        _id: "c",
+                        _clientId: "djadf",
+                        title: null,
+                        text: null,
+                        image: null,
+                        reminderTime: null,
+                        eventTime: null,
+                        pinned: true,
+                        tags: ["no"],
+                        relatedNotes: [],
+                    },
+                ];
+
+                // act
+                const output = filterNotes(notes, FilterOn.CUSTOM_TAG, "hello");
+
+                // assert
+                expect(output.length).toBe(0);
             }
         );
     });
