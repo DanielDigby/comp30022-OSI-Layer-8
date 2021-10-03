@@ -20,5 +20,8 @@
     "start": "yarn workspace server start",
     "dev": "yarn workspace client dev & yarn workspace server dev"
   },
-  "packageManager": "yarn@3.0.0"
+  "packageManager": "yarn@3.0.0",
+  "devDependencies": {
+    "prettier": "2.4.1"
+  }
 }
