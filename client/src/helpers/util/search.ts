@@ -1,12 +1,15 @@
 import { INote } from "../../interfaces/note";
 
-export const searchNotes = (notes: INote[], searchKeywords: string): INote[] => {
-
+export const searchNotes = (
+    notes: INote[],
+    searchKeywords: string
+): INote[] => {
     const keywords = searchKeywords.split(" ");
 
-    const filteredNotes = notes.filter(note => {
+    const filteredNotes = notes.filter((note) => {
+        let text = "";
         if (note.title !== undefined) {
-            var text = note.title?.toLowerCase();
+            text = note.title?.toLowerCase();
             if (note.text !== undefined) {
                 text = text.concat(note.text?.toLowerCase());
             }
@@ -15,11 +18,11 @@ export const searchNotes = (notes: INote[], searchKeywords: string): INote[] => 
             }
         }
 
-        if( keywords.some(keyword => text.includes(keyword) )) {
+        if (keywords.some((keyword) => text.includes(keyword))) {
             return true;
         }
         return false;
     });
 
     return filteredNotes;
-}
+};
