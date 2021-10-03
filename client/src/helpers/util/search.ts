@@ -9,13 +9,13 @@ export const searchNotes = (
     const filteredNotes = notes.filter((note) => {
         let text = "";
         if (note.title !== undefined) {
-            text = text.concat(note.title?.toLowerCase());
+            text = text.concat(note.title.toLowerCase());
         }
         if (note.text !== undefined) {
-            text = text.concat(note.text?.toLowerCase());
+            text = text.concat(note.text.toLowerCase());
         }
         if (note.image !== undefined) {
-            text = text.concat(note.image?.toLowerCase());
+            text = text.concat(note.image.toLowerCase());
         }
 
         if (keywords.some((keyword) => text.includes(keyword))) {
