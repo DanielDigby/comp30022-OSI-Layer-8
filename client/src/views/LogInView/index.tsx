@@ -1,4 +1,4 @@
-import React, { DOMElement, useState } from "react";
+import React, { useState } from "react";
 import styles from "./LogInView.module.css";
 import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
@@ -7,8 +7,8 @@ import { useHistory } from "react-router-dom";
 import { Checkbox, Button } from "semantic-ui-react";
 
 import { logInAPI, Credentials } from "../../helpers/api/users";
-import { setCacheNameDetails } from "workbox-core";
-import { EphemeralKeyInfo } from "tls";
+//import { setCacheNameDetails } from "workbox-core";
+//import { EphemeralKeyInfo } from "tls";
 
 const LogInView = (): JSX.Element => {
     const navHistory = useHistory();
@@ -36,7 +36,7 @@ const LogInView = (): JSX.Element => {
         try {
             await logInAPI({ email: email, password: password });
             navigateDashboard();
-        } catch (error: any) {
+        } catch (error: Error) {
             console.log(error.stack);
             return;
         }
@@ -90,7 +90,7 @@ const LogInView = (): JSX.Element => {
             </div>
 
             <div className={styles.footer}>
-                <Button positive onClick={() => navigateDashboard()}>
+                <Button positive onClick={() => validateUserLogIn()}>
                     Log in
                 </Button>
             </div>
