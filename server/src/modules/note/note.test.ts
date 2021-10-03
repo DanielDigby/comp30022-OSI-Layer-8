@@ -128,8 +128,8 @@ describe("Note route tests", () => {
 
                 const id = (await Note.findOne({ title: "title" }))._id;
                 const res = await supertest(app)
-                                    .get(`/api/notes/${id}`)
-                                    .set("Cookie", ["jwt=" + jwt]);
+                    .get(`/api/notes/${id}`)
+                    .set("Cookie", ["jwt=" + jwt]);
                 expect(res.statusCode).toBe(200);
                 expect(res.body).toMatchObject(note);
             }
@@ -170,9 +170,9 @@ describe("Note route tests", () => {
                 };
 
                 const res = await supertest(app)
-                                        .post("/api/notes/")
-                                        .set("Cookie", ["jwt=" + jwt])
-                                        .send(note);
+                    .post("/api/notes/")
+                    .set("Cookie", ["jwt=" + jwt])
+                    .send(note);
 
                 const newCount = await Note.countDocuments();
 
@@ -231,8 +231,6 @@ describe("Note route tests", () => {
                     .set("Cookie", ["jwt=" + jwt])
                     .send(changedNote);
                 expect(res.statusCode).toBe(200);
-                console.log(res.statusCode);
-                console.log(res.body);
                 expect(res.body).toMatchObject(changedNote);
             }
         );
@@ -271,8 +269,8 @@ describe("Note route tests", () => {
                 const id = (await Note.findOne({ title: "title" }))._id;
 
                 const res = await supertest(app)
-                                    .delete(`/api/notes/${id}`)
-                                    .set("Cookie", ["jwt=" + jwt]);
+                    .delete(`/api/notes/${id}`)
+                    .set("Cookie", ["jwt=" + jwt]);
                 expect(res.statusCode).toBe(200);
             }
         );

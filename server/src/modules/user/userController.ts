@@ -11,8 +11,8 @@ mongoose.model("User");
 const updateUser = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const id = req.params.Id;
-        if (id !== req.user._id)
-            throw new AppError("Unauthorized", 403, "Forbidden ", true);
+        if (id.toString() !== req.user._id.toString())
+            throw new AppError("Unauthorized", 403, "Forbidden", true);
 
         const newData = req.body;
         const user = await User.findByIdAndUpdate(id, newData).setOptions({
