@@ -7,6 +7,7 @@ import {
 } from "../../config/redux/store";
 import axios from "axios";
 import * as uuid from "uuid";
+import { offline } from "@redux-offline/redux-offline";
 
 jest.mock("axios");
 jest.mock("uuid");
@@ -150,6 +151,7 @@ describe("Notes API Helpers", () => {
     });
 
     describe("Patch a note to backend", () => {
+        // Testing edit request when status is online
         it(
             "When a valid note is passed it should:\n" +
                 "\t update the note to the redux store\n" +
@@ -214,7 +216,7 @@ describe("Notes API Helpers", () => {
             }
         );
 
-        // Testing change request queue when offline
+        // Testing create then edit request when status is offline
         it(
             "When a valid note is passed it should:\n" +
                 "\t add the note to the redux store\n" +
@@ -256,15 +258,92 @@ describe("Notes API Helpers", () => {
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                 };
 
+                console.log((redux as RootStateWithOffline).offline.outbox);
                 updateNoteAPI(noteUpdated);
 
                 const outbox = (redux as RootStateWithOffline).offline.outbox;
+                // one action to create and one action of edit
+                expect(outbox.length).toEqual(2);
+                expect(notes[0]).toMatchObject(noteUpdated);
+            }
+        );
+        // Testing create online, then edit offline
+        it(
+            "When a valid note is passed it should:\n" +
+                "\t update the note to the redux store\n" +
+                "\t send a patch request to the backend\n",
+            async () => {
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
+                const note = {
+                    title: "NEW NOTE TEST",
+                };
+                const apiNote = {
+                    title: "NEW NOTE TEST",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    tags: [],
+                    relatedNotes: [],
+                    _id: "61514289e3c2e405ab49db7e",
+                };
+                const mockRes = { status: 200, data: apiNote };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);
+                jest.spyOn(uuid, "v4").mockImplementation(
+                    () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
+                );
+                createNoteAPI(note);
+                await new Promise((r) => setTimeout(r, 50));
+
+                // Switch to offline and update the note
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: false,
+                    },
+                });
+
+                const noteUpdated = {
+                    title: "UPDATED NAME",
+                    text: "NEW TEXT",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    tags: ["new user tag"],
+                    relatedNotes: [],
+                    _id: "61514289e3c2e405ab49db7e",
+                };
+                const mockRes2 = { status: 200, data: noteUpdated };
+                (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes2);
+
+                // Update note while offline
+                updateNoteAPI(noteUpdated);
+
+                // Check notes are changed offline
+                const redux = store.getState();
+                const notes = redux.notes.array;
+                const outbox = (redux as RootStateWithOffline).offline.outbox;
+
+                // one action of edit note
                 expect(outbox.length).toEqual(1);
                 expect(notes[0]).toMatchObject(noteUpdated);
+
+                // Switch back to online and check update
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: true,
+                    },
+                });
+
+                const notes1 = store.getState().notes.array;
+                expect(axios).toHaveBeenCalledTimes(1);
+                expect(notes1[0]).toMatchObject(noteUpdated);
             }
         );
     });
 
+    // Delete a note while online
     describe("Delete a note to backend", () => {
         it(
             "When a valid note is passed it should:\n" +
@@ -351,19 +430,22 @@ describe("Notes API Helpers", () => {
                 await new Promise((r) => setTimeout(r, 50));
 
                 // Check create note request is in queue
-
-                deleteNoteAPI(storeNote);
-                // ASSERT
-                // wait for 50ms to ensure that the fake api request resolves
-                await new Promise((r) => setTimeout(r, 50));
-
                 const notes = store.getState().notes.array;
                 expect(notes[0]).toMatchObject(storeNote);
                 expect(notes.length).toBe(1);
 
+                // Now delete the note
+                deleteNoteAPI(storeNote);
+                // wait for 50ms to ensure that the fake api request resolves
+                await new Promise((r) => setTimeout(r, 50));
+
                 const redux = store.getState();
                 const outbox = (redux as RootStateWithOffline).offline.outbox;
+
+                // Two actions in outbox, one create and one delete
                 expect(outbox.length).toEqual(2);
+                // The note is deleted
+                expect(notes.length).toBe(0);
             }
         );
     });

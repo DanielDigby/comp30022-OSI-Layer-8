@@ -57,6 +57,9 @@ export const noteSlice = createSlice({
                 const note = state.array.find(
                     (note) => note._clientId === action.payload._clientId
                 );
+                console.log("note is:");
+                console.log(note);
+                console.log(note);
                 if (note) {
                     Object.assign(note, action.payload);
                 }
