@@ -32,13 +32,13 @@ const LogInView = (): JSX.Element => {
 
     // api call
 
-    const validateUserLogIn = (creds: Credentials) => {
-        const res = logInAPI(creds);
-
-        if (!res) {
+    const validateUserLogIn = async () => {
+        try {
+            await logInAPI({ email: email, password: password });
             navigateDashboard();
-        } else {
-            console.log("Login error\n");
+        } catch (error: any) {
+            console.log(error.stack);
+            return;
         }
     };
 
