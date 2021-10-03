@@ -15,5 +15,5 @@ export const updateNoteAPI = (note: INote): void => {
 };
 
 export const deleteNoteAPI = (note: INote): void => {
-    if (note._id) store.dispatch(deleteNote(note));
+    store.dispatch(deleteNote(note));
 };

@@ -7,7 +7,6 @@ import {
 } from "../../config/redux/store";
 import axios from "axios";
 import * as uuid from "uuid";
-import { offline } from "@redux-offline/redux-offline";
 
 jest.mock("axios");
 jest.mock("uuid");
