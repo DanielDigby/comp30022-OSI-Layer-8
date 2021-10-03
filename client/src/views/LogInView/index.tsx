@@ -36,7 +36,7 @@ const LogInView = (): JSX.Element => {
         try {
             await logInAPI({ email: email, password: password });
             navigateDashboard();
-        } catch (error: Error) {
+        } catch (error: any) {
             console.log(error.stack);
             return;
         }
