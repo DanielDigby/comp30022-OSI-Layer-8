@@ -1,7 +1,8 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import LogInView from "../views/LogInView";
+import { render } from "@testing-library/react";
+import Note from "../components/Note";
 
 test("check that jest is working", () => {
+    render(<Note />);
     expect(1).toBe(1);
 });
