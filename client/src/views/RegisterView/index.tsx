@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import { INewUser } from "../../interfaces/user";
 import { registerAPI } from "../../helpers/api/users";
+//import internal from "stream";
 
 const RegisterView = (): JSX.Element => {
     const navHistory = useHistory();
