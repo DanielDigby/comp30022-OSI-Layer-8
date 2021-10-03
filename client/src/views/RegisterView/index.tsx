@@ -60,7 +60,7 @@ const RegisterView = (): JSX.Element => {
             return;
         }
     };
-
+    //
     // api call
     return (
         <div className={styles.basecontainer}>
