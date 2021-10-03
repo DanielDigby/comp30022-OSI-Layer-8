@@ -10,29 +10,34 @@ import { logInAPI, Credentials } from "../../helpers/api/users";
 import { setCacheNameDetails } from "workbox-core";
 
 const validateUserLogIn = (creds: Credentials) => {
-    return 0
-}
+    const res = logInAPI(creds);
 
+    if (!res) {
+        navigateDashboard();
+    } else {
+        console.log("Login error\n");
+    }
+};
 
 const LogInView = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateHome = () => navHistory.push("/");
     const navigateDashboard = () => navHistory.push("/dashboard");
 
-    // Components to send over to our api call 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    // Components to send over to our api call
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     // Functions to update email and password entered
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value)
-        console.log(email)
-    }
-    
+        setEmail(e.target.value);
+        console.log(email);
+    };
+
     const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value)
-        console.log(password)
-    }
+        setPassword(e.target.value);
+        console.log(password);
+    };
 
     // api call
     return (
