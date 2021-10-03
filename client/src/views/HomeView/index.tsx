@@ -19,6 +19,15 @@ const HomeView = (): JSX.Element => {
     const postNote = async () => {
         const note: INote = {
             title: "NEW NOTE TEST",
+            _id: null,
+            _clientId: "asdkfjalsdk",
+            text: null,
+            image: null,
+            reminderTime: null,
+            eventTime: null,
+            pinned: false,
+            tags: [],
+            relatedNotes: [],
         };
         dispatch(createNote(note));
     };
@@ -26,6 +35,15 @@ const HomeView = (): JSX.Element => {
     const putNote = async () => {
         const note: INote = {
             title: "NEW NOTE TEST 2",
+            _id: null,
+            _clientId: "asldkfs",
+            text: null,
+            image: null,
+            reminderTime: null,
+            eventTime: null,
+            pinned: false,
+            tags: [],
+            relatedNotes: [],
         };
         dispatch(updateNote(note));
     };
