@@ -226,6 +226,13 @@ describe("Notes API Helpers", () => {
 
                 const note = {
                     title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
                 };
 
                 jest.spyOn(uuid, "v4").mockImplementation(
@@ -239,6 +246,14 @@ describe("Notes API Helpers", () => {
                 const noteUpdated = {
                     title: "UPDATED NAME",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    _id: null,
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
                 };
 
                 updateNoteAPI(noteUpdated);
@@ -267,13 +282,25 @@ describe("Notes API Helpers", () => {
                 });
                 const note = {
                     title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 const apiNote = {
                     title: "NEW NOTE TEST",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    _id: "61514289e3c2e405ab49db7e",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
                     tags: [],
                     relatedNotes: [],
-                    _id: "61514289e3c2e405ab49db7e",
                 };
                 const mockRes = { status: 200, data: apiNote };
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);
@@ -295,9 +322,13 @@ describe("Notes API Helpers", () => {
                     title: "UPDATED NAME",
                     text: "NEW TEXT",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    _id: "61514289e3c2e405ab49db7e",
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
                     tags: ["new user tag"],
                     relatedNotes: [],
-                    _id: "61514289e3c2e405ab49db7e",
                 };
                 const mockRes2 = { status: 200, data: noteUpdated };
                 (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes2);
@@ -387,10 +418,25 @@ describe("Notes API Helpers", () => {
                 // This is the note we are creating
                 const note = {
                     title: "NEW NOTE TEST",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 const storeNote = {
                     title: "NEW NOTE TEST",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    _id: null,
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 jest.spyOn(uuid, "v4").mockImplementation(
                     () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
@@ -429,13 +475,25 @@ describe("Notes API Helpers", () => {
             });
             const note = {
                 title: "NEW NOTE TEST",
+                text: null,
+                image: null,
+                reminderTime: null,
+                eventTime: null,
+                pinned: false,
+                tags: [],
+                relatedNotes: [],
             };
             const apiNote = {
                 title: "NEW NOTE TEST",
                 _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                _id: "61514289e3c2e405ab49db7e",
+                text: null,
+                image: null,
+                reminderTime: null,
+                eventTime: null,
+                pinned: false,
                 tags: [],
                 relatedNotes: [],
-                _id: "61514289e3c2e405ab49db7e",
             };
             const mockRes = { status: 200, data: apiNote };
             (axios as unknown as jest.Mock).mockResolvedValueOnce(mockRes);

@@ -56,6 +56,14 @@ const HomeView = (): JSX.Element => {
         const note: INote = {
             title: "EDIT NOTE TEST 2",
             _clientId: "3deec471-f6b6-4f8a-8299-3eedd101552b",
+            _id: null,
+            text: null,
+            image: null,
+            reminderTime: null,
+            eventTime: null,
+            pinned: false,
+            tags: [],
+            relatedNotes: [],
         };
         dispatch(deleteNote(note));
     };
