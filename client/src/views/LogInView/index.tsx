@@ -8,16 +8,7 @@ import { Checkbox, Button } from "semantic-ui-react";
 
 import { logInAPI, Credentials } from "../../helpers/api/users";
 import { setCacheNameDetails } from "workbox-core";
-
-const validateUserLogIn = (creds: Credentials) => {
-    const res = logInAPI(creds);
-
-    if (!res) {
-        navigateDashboard();
-    } else {
-        console.log("Login error\n");
-    }
-};
+import { EphemeralKeyInfo } from "tls";
 
 const LogInView = (): JSX.Element => {
     const navHistory = useHistory();
@@ -25,8 +16,8 @@ const LogInView = (): JSX.Element => {
     const navigateDashboard = () => navHistory.push("/dashboard");
 
     // Components to send over to our api call
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState<Credentials["email"]>("");
+    const [password, setPassword] = useState<Credentials["password"]>("");
 
     // Functions to update email and password entered
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +31,17 @@ const LogInView = (): JSX.Element => {
     };
 
     // api call
+
+    const validateUserLogIn = (creds: Credentials) => {
+        const res = logInAPI(creds);
+
+        if (!res) {
+            navigateDashboard();
+        } else {
+            console.log("Login error\n");
+        }
+    };
+
     return (
         <div className={styles.basecontainer}>
             <div className={styles.header}>Login Page</div>
