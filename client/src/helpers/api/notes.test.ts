@@ -213,6 +213,56 @@ describe("Notes API Helpers", () => {
                 expect(notes[0]).toMatchObject(noteUpdated);
             }
         );
+
+        // Testing change request queue when offline
+        it(
+            "When a valid note is passed it should:\n" +
+                "\t add the note to the redux store\n" +
+                "\t send a post request to the backend\n",
+            async () => {
+                //tell redux that it is OFFLINE
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: false,
+                    },
+                });
+
+                // This is the note we are creating
+                const note = {
+                    title: "NEW NOTE TEST",
+                };
+                const storeNote = {
+                    title: "NEW NOTE TEST",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                };
+                // here I mock the uuid generated _clientId to make sure that our api note expected object matches
+                // the one that gets generated when saving to redux
+                jest.spyOn(uuid, "v4").mockImplementation(
+                    () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
+                );
+
+                // ACT
+                createNoteAPI(note);
+                await new Promise((r) => setTimeout(r, 50));
+
+                // Check create note request is in queue
+                const redux = store.getState();
+                const notes = redux.notes.array;
+                expect(notes[0]).toMatchObject(storeNote);
+
+                const noteUpdated = {
+                    title: "UPDATED NAME",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                };
+
+                updateNoteAPI(noteUpdated);
+
+                const outbox = (redux as RootStateWithOffline).offline.outbox;
+                expect(outbox.length).toEqual(1);
+                expect(notes[0]).toMatchObject(noteUpdated);
+            }
+        );
     });
 
     describe("Delete a note to backend", () => {
@@ -265,6 +315,55 @@ describe("Notes API Helpers", () => {
                 const notes = store.getState().notes.array;
                 expect(axios).toHaveBeenCalledTimes(2);
                 expect(notes.length).toBe(0);
+            }
+        );
+
+        // Delete a note (created offline) while offline
+        it(
+            "When a valid note is passed it should:\n" +
+                "\t add the note to the redux store\n" +
+                "\t send a post request to the backend\n",
+            async () => {
+                //tell redux that it is OFFLINE
+                store.dispatch({
+                    type: "Offline/STATUS_CHANGED",
+                    payload: {
+                        online: false,
+                    },
+                });
+
+                // This is the note we are creating
+                const note = {
+                    title: "NEW NOTE TEST",
+                };
+                const storeNote = {
+                    title: "NEW NOTE TEST",
+                    _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                };
+                // here I mock the uuid generated _clientId to make sure that our api note expected object matches
+                // the one that gets generated when saving to redux
+                jest.spyOn(uuid, "v4").mockImplementation(
+                    () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
+                );
+
+                // ACT
+                createNoteAPI(note);
+                await new Promise((r) => setTimeout(r, 50));
+
+                // Check create note request is in queue
+
+                deleteNoteAPI(storeNote);
+                // ASSERT
+                // wait for 50ms to ensure that the fake api request resolves
+                await new Promise((r) => setTimeout(r, 50));
+
+                const notes = store.getState().notes.array;
+                expect(notes[0]).toMatchObject(storeNote);
+                expect(notes.length).toBe(1);
+
+                const redux = store.getState();
+                const outbox = (redux as RootStateWithOffline).offline.outbox;
+                expect(outbox.length).toEqual(2);
             }
         );
     });

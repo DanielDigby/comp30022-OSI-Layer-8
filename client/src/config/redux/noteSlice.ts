@@ -55,7 +55,7 @@ export const noteSlice = createSlice({
         updateNote: {
             reducer: (state, action: PayloadAction<INote>) => {
                 const note = state.array.find(
-                    (note) => note._id === action.payload._id
+                    (note) => note._clientId === action.payload._clientId
                 );
                 if (note) {
                     Object.assign(note, action.payload);
@@ -92,19 +92,19 @@ export const noteSlice = createSlice({
 
         // delete a note and send delete to backend
         deleteNote: {
-            reducer: (state, action: PayloadAction<string>) => {
+            reducer: (state, action: PayloadAction<INote>) => {
                 const index = state.array.findIndex((note) => {
-                    return note._id === action.payload;
+                    return note._clientId === action.payload._clientId;
                 });
                 if (index !== -1) state.array.splice(index, 1);
             },
-            prepare: (id: string) => {
+            prepare: (note: INote) => {
                 return {
-                    payload: id,
+                    payload: note,
                     meta: {
                         offline: {
                             effect: {
-                                url: NOTES + id,
+                                url: NOTES + note._id,
                                 method: "DELETE",
                             },
                         },
