@@ -23,9 +23,30 @@
     flex-direction: row;
 }
 
+/* Container for event notes */
+.eventsContainer {
+    display: flex;
+    width: 40%;
+    flex-direction: row;
+}
+
+/* Container for pinned notes */
+.pinnedContainer {
+    display: flex;
+    width: 40%;
+    flex-direction: row;
+}
+
+/* Container for Calenter icon */
 .calendarContainer {
     display: flex;
-    width: 50%;
+    width: 10%;
+}
+
+/* Container for thumbtack icon */
+.tumbtackContainer {
+    display: flex;
+    width: 10%;
 }
 
 .viewAllNotesContainer {
