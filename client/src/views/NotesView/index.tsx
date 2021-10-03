@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Semantic UI button
 
@@ -7,7 +7,7 @@ import MenuItem from "./Menu";
 import SearchBarItem from "./SearchBar";
 import ProfileImage from "./ProfileImage";
 import styles from "./NotesView.module.css";
-
+import { store } from "../../config/redux/store";
 import { useHistory } from "react-router-dom";
 
 {
@@ -71,7 +71,11 @@ const NotesView = (): JSX.Element => {
 
     /* State for our drag and drop */
     const [columns, updateColumns] = useState(testColumns);
-    // api call
+
+    // Boot user out if not logged in
+    useEffect(() => {
+        if (!store.getState().user.account) history.push("/login");
+    });
 
     /* Do we need to reshuffle and render notes into their respective columns? */
 

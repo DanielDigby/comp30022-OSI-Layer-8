@@ -2,11 +2,14 @@ import React from "react";
 import styles from "./NotesView.module.css";
 import globalStyles from "../../App.module.css";
 
+import { useHistory } from "react-router-dom";
+
 // Semantic UI button
 import { Menu, Icon } from "semantic-ui-react";
 
 const MenuItem = (): JSX.Element => {
-    // api call
+    const navHistory = useHistory();
+    const navigateSettings = () => navHistory.push("/settings");
 
     return (
         <div className={styles.sideContainer}>
@@ -23,7 +26,11 @@ const MenuItem = (): JSX.Element => {
                 <Icon name="plus" />
             </div>
             <div>
-                <Icon name="cog" size="large" />
+                <Icon
+                    name="cog"
+                    size="large"
+                    onClick={() => navigateSettings()}
+                />
             </div>
         </div>
     );
