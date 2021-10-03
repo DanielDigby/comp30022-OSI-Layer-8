@@ -1,8 +1,9 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 import { INote } from "./noteModel";
 import { validateUser } from "../../helpers/security/index"
+
 
 // import model
 const Note = mongoose.model("Note");
@@ -68,7 +69,6 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
             { _clientId: updatedNote._clientId },
             {}
         );
-
         validateUser((note as unknown as INote).user, 
                         req.user._id,
                         "Not able to modify note");    
@@ -85,8 +85,8 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
 // controller for deleting a specific note
 const deleteNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
-        const id = req.params.Id;
-        let note = await Note.findById(id);
+        const clientId = req.params.clientId;
+        const note = await Note.findOne({ _clientId: clientId }, {});
 
         validateUser((note as unknown as INote).user, 
                         req.user._id,

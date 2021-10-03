@@ -3,7 +3,11 @@ import styles from "./HomeView.module.css";
 import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createNote, updateNote } from "../../config/redux/noteSlice";
+import {
+    createNote,
+    updateNote,
+    deleteNote,
+} from "../../config/redux/noteSlice";
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
@@ -36,7 +40,7 @@ const HomeView = (): JSX.Element => {
         const note: INote = {
             title: "NEW NOTE TEST 2",
             _id: null,
-            _clientId: "asldkfs",
+            _clientId: "3deec471-f6b6-4f8a-8299-3eedd101552b",
             text: null,
             image: null,
             reminderTime: null,
@@ -46,6 +50,22 @@ const HomeView = (): JSX.Element => {
             relatedNotes: [],
         };
         dispatch(updateNote(note));
+    };
+
+    const removeNote = async () => {
+        const note: INote = {
+            title: "EDIT NOTE TEST 2",
+            _clientId: "3deec471-f6b6-4f8a-8299-3eedd101552b",
+            _id: null,
+            text: null,
+            image: null,
+            reminderTime: null,
+            eventTime: null,
+            pinned: false,
+            tags: [],
+            relatedNotes: [],
+        };
+        dispatch(deleteNote(note));
     };
 
     // api call
@@ -81,8 +101,14 @@ const HomeView = (): JSX.Element => {
                 <Button
                     basic
                     colour="black"
-                    content="test api 2"
+                    content="test api edit"
                     onClick={() => putNote()}
+                />
+                <Button
+                    basic
+                    colour="black"
+                    content="test api delete"
+                    onClick={() => removeNote()}
                 />
             </div>
         </div>

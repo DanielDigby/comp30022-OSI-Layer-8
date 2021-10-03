@@ -55,7 +55,7 @@ export const noteSlice = createSlice({
         updateNote: {
             reducer: (state, action: PayloadAction<INote>) => {
                 const note = state.array.find(
-                    (note) => note._id === action.payload._id
+                    (note) => note._clientId === action.payload._clientId
                 );
                 if (note) {
                     Object.assign(note, action.payload);
@@ -67,7 +67,7 @@ export const noteSlice = createSlice({
                     meta: {
                         offline: {
                             effect: {
-                                url: NOTES + note._id,
+                                url: NOTES + note._clientId,
                                 method: "PUT",
                                 data: note,
                             },
@@ -92,20 +92,20 @@ export const noteSlice = createSlice({
 
         // delete a note and send delete to backend
         deleteNote: {
-            reducer: (state, action: PayloadAction<string>) => {
-                const index = state.array.findIndex((note) => {
-                    return note._id === action.payload;
-                });
-                if (index !== -1) state.array.splice(index, 1);
+            reducer: (state, action: PayloadAction<INote>) => {
+                state.array = state.array.filter(
+                    (note) => note._clientId !== action.payload._clientId
+                );
             },
-            prepare: (id: string) => {
+            prepare: (note: INote) => {
                 return {
-                    payload: id,
+                    payload: note,
                     meta: {
                         offline: {
                             effect: {
-                                url: NOTES + id,
+                                url: NOTES + note._clientId,
                                 method: "DELETE",
+                                data: "delete",
                             },
                         },
                     },
