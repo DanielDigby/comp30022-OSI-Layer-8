@@ -101,8 +101,22 @@ describe("Note route tests", () => {
                 "- success code" +
                 "- Note object in response body",
             async () => {
+                const User = mongoose.model<IUser>("User");
+                const user = new User({
+                    email: "testuser@email.com",
+                    firstName: "test",
+                    lastName: "user",
+                    password: hashPassword("password"),
+                    profilePic: "someImgUrl",
+                });
+                await user.save();
+                const jwt = generateJwt(
+                    await User.findOne({ email: "testuser@email.com" })
+                );
+
                 const note = {
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "title",
                     text: "text",
                     image: "img",
@@ -113,7 +127,9 @@ describe("Note route tests", () => {
                 await new Note(note).save();
 
                 const id = (await Note.findOne({ title: "title" }))._id;
-                const res = await supertest(app).get(`/api/notes/${id}`);
+                const res = await supertest(app)
+                                    .get(`/api/notes/${id}`)
+                                    .set("Cookie", ["jwt=" + jwt]);
                 expect(res.statusCode).toBe(200);
                 expect(res.body).toMatchObject(note);
             }
@@ -127,9 +143,23 @@ describe("Note route tests", () => {
                 "- Note object in response body" +
                 "- number of Note documents to increase by 1",
             async () => {
+                const User = mongoose.model<IUser>("User");
+                const user = new User({
+                    email: "testuser@email.com",
+                    firstName: "test",
+                    lastName: "user",
+                    password: hashPassword("password"),
+                    profilePic: "someImgUrl",
+                });
+                await user.save();
+                const jwt = generateJwt(
+                    await User.findOne({ email: "testuser@email.com" })
+                );
+
                 const count = await Note.countDocuments();
                 const note = {
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "title",
                     text: "text",
                     image: "img",
@@ -139,7 +169,10 @@ describe("Note route tests", () => {
                     tags: ["tag"],
                 };
 
-                const res = await supertest(app).post("/api/notes/").send(note);
+                const res = await supertest(app)
+                                        .post("/api/notes/")
+                                        .set("Cookie", ["jwt=" + jwt])
+                                        .send(note);
 
                 const newCount = await Note.countDocuments();
 
@@ -156,20 +189,35 @@ describe("Note route tests", () => {
                 "- success code" +
                 "- Note object in response body",
             async () => {
-                const note = {
+                const User = mongoose.model<IUser>("User");
+                const user = new User({
+                    email: "testuser@email.com",
+                    firstName: "test",
+                    lastName: "user",
+                    password: hashPassword("password"),
+                    profilePic: "someImgUrl",
+                });
+                await user.save();
+                const jwt = generateJwt(
+                    await User.findOne({ email: "testuser@email.com" })
+                );
+
+                const note = new Note({
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "title",
                     text: "text",
                     image: "img",
                     reminderTime: new Date("2021-01-09").toISOString(),
                     eventTime: new Date("2021-01-09").toISOString(),
                     pinned: true,
-                };
-                await new Note(note).save();
-                const id = (await Note.findOne({ title: "title" }))._id;
+                });
+                await note.save();
+                const id = (await Note.findOne({ text: "text" }))._id;
 
                 const changedNote = {
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "putChange",
                     text: "putChange",
                     image: "img",
@@ -180,8 +228,11 @@ describe("Note route tests", () => {
 
                 const res = await supertest(app)
                     .put(`/api/notes/${id}`)
+                    .set("Cookie", ["jwt=" + jwt])
                     .send(changedNote);
                 expect(res.statusCode).toBe(200);
+                console.log(res.statusCode);
+                console.log(res.body);
                 expect(res.body).toMatchObject(changedNote);
             }
         );
@@ -193,8 +244,22 @@ describe("Note route tests", () => {
                 "- success code" +
                 "- Note object in response body",
             async () => {
+                const User = mongoose.model<IUser>("User");
+                const user = new User({
+                    email: "testuser@email.com",
+                    firstName: "test",
+                    lastName: "user",
+                    password: hashPassword("password"),
+                    profilePic: "someImgUrl",
+                });
+                await user.save();
+                const jwt = generateJwt(
+                    await User.findOne({ email: "testuser@email.com" })
+                );
+
                 const note = {
                     _clientId: "somelongidgeneratedclientside",
+                    user: user._id,
                     title: "title",
                     text: "text",
                     image: "img",
@@ -205,7 +270,9 @@ describe("Note route tests", () => {
                 await new Note(note).save();
                 const id = (await Note.findOne({ title: "title" }))._id;
 
-                const res = await supertest(app).delete(`/api/notes/${id}`);
+                const res = await supertest(app)
+                                    .delete(`/api/notes/${id}`)
+                                    .set("Cookie", ["jwt=" + jwt]);
                 expect(res.statusCode).toBe(200);
             }
         );

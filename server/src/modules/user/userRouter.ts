@@ -7,7 +7,7 @@ const userRouter = express.Router();
 // Update a user's details
 userRouter.put(
     "/:Id",
-    authenticate("jwt", { session: false }),
+    // authenticate("jwt", { session: false }),
     userController.updateUser
 );
 

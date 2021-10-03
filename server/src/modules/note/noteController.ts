@@ -12,6 +12,14 @@ const getNotes = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const notes = await Note.find({ user: req.user._id });
 
+        // if ((note as unknown as INote).user.toString() !== req.user._id.toString())
+        //     throw new AppError(
+        //         "Forbidden",
+        //         403,
+        //         "Not able to modify note",
+        //         true
+        //     );
+
         return res.status(200).send(notes);
     } catch (err) {
         return res.send(err);
@@ -24,11 +32,11 @@ const getNote = async (req: IRequestWithUser, res: express.Response) => {
         const id = req.params.Id;
         const note = await Note.findById(id);
 
-        if ((note as unknown as INote).user !== req.user._id)
+        if ((note as unknown as INote).user.toString() !== req.user._id.toString())
             throw new AppError(
                 "Forbidden",
                 403,
-                "Not able to modify note",
+                "Not able to get note",
                 true
             );
 
@@ -54,6 +62,14 @@ const postNote = async (req: IRequestWithUser, res: express.Response) => {
             relatedNotes: req.body?.relatedNotes,
         });
 
+        if ((newNote as unknown as INote).user.toString() !== req.user._id.toString())
+            throw new AppError(
+                "Forbidden",
+                403,
+                "Not able to post note",
+                true
+            );
+
         await newNote.save();
         return res.status(200).send(newNote);
     } catch (err) {
@@ -68,7 +84,7 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
         const newData = req.body;
         let note = await Note.findById(id);
 
-        if ((note as unknown as INote).user !== req.user._id)
+        if ((note as unknown as INote).user.toString() !== req.user._id.toString())
             throw new AppError(
                 "Forbidden",
                 403,
@@ -79,7 +95,9 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
         note = Object.assign(newData);
 
         await note.save();
+        console.log('hii');
         return res.status(200).send(note);
+        // return res.send({message: 'No blah Found'});
     } catch (err) {
         return res.send(err);
     }
@@ -91,11 +109,11 @@ const deleteNote = async (req: IRequestWithUser, res: express.Response) => {
         const id = req.params.Id;
         let note = await Note.findById(id);
 
-        if ((note as unknown as INote).user !== req.user._id)
+        if ((note as unknown as INote).user.toString() !== req.user._id.toString())
             throw new AppError(
                 "Forbidden",
                 403,
-                "Not able to modify note",
+                "Not able to delete note",
                 true
             );
 

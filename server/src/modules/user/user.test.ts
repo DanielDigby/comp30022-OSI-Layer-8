@@ -51,6 +51,7 @@ describe("User route tests", () => {
 
                 const res = await supertest(app)
                                         .put(`/api/users/${id}`)
+                                        // .set("Cookie", ["jwt=" + jwt])
                                         .send(changedUser);
                                     
                 expect(res.statusCode).toBe(200);  
