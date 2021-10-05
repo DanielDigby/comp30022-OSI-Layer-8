@@ -8,38 +8,15 @@ on:
 
 jobs:
   build:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for backend build
+      - name: Wait for checks to pass
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: backend-build-check
+        id: wait-for-checks
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: backend-build (14.x)
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-
-      - name: Wait for backend tests
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: backend-test-check
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: backend-tests (14.x)
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-
-      - name: Wait for frontend build
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: frontend-build-check
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: frontend-build (14.x)
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-
-      - name: Wait for frontend tests
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: frontend-test-check
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: frontend-tests (14.x)
+          running-workflow-name: 'Build and Deploy'
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Checkout
