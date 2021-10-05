@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Wait for backend build
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-tests-passed
+        id: backend-build-check
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: backend-build (14.x)
@@ -20,7 +20,7 @@ jobs:
 
       - name: Wait for backend tests
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-tests-passed
+        id: backend-test-check
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: backend-tests (14.x)
@@ -28,7 +28,7 @@ jobs:
 
       - name: Wait for frontend build
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-tests-passed
+        id: frontend-build-check
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: frontend-build (14.x)
@@ -36,7 +36,7 @@ jobs:
 
       - name: Wait for frontend tests
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-tests-passed
+        id: frontend-test-check
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: frontend-tests (14.x)
