@@ -1,5 +1,6 @@
 import React from "react";
-import { INote } from "../../interfaces/note";
+import { INote, NoteModes } from "../../interfaces/note";
+import Note from "../../components/Note";
 import dndStyles from "./dragAndDrop.module.css";
 import {
     DragDropContext,
@@ -15,14 +16,11 @@ export interface ColumnDict {
         items: Array<INote>;
     };
 }
-interface NotesViewProps {
+interface DnDProps {
     updateColumns: React.Dispatch<React.SetStateAction<ColumnDict>>;
     columns: ColumnDict;
 }
-export const DnD = ({
-    updateColumns,
-    columns,
-}: NotesViewProps): JSX.Element => {
+export const DnD = ({ updateColumns, columns }: DnDProps): JSX.Element => {
     return (
         <div className={dndStyles.notesSection}>
             <DragDropContext
@@ -69,16 +67,21 @@ export const DnD = ({
                                                                     /* If an item is being dragged, change its color */
                                                                     style={{
                                                                         backgroundColor:
-                                                                            snapshot.draggingOver
-                                                                                ? "lightgrey"
-                                                                                : "grey",
+                                                                            snapshot.draggingOver,
                                                                         ...provided
                                                                             .draggableProps
                                                                             .style,
                                                                     }}
                                                                 >
                                                                     {/* THIS DIV IS WHERE THE NOTE OBJECT SHOULD BE RENDERED */}
-                                                                    {note.text}
+                                                                    <Note
+                                                                        note={
+                                                                            note
+                                                                        }
+                                                                        mode={
+                                                                            NoteModes.STANDARD
+                                                                        }
+                                                                    />
                                                                 </div>
                                                             );
                                                         }}

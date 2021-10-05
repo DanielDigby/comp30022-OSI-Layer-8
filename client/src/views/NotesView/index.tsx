@@ -86,7 +86,7 @@ const NotesView = (): JSX.Element => {
     ];
 
     // api call
-    const testColumns: ColumnDict = {
+    const initialColumns: ColumnDict = {
         /* UUID returns a segment of bytes, which isn't a valid identifier. JS requires us to use
         segment-literal notation. Basically for uuid() to be a key, need to wrap in []. */
         [uuid()]: {
@@ -107,7 +107,7 @@ const NotesView = (): JSX.Element => {
         },
     };
 
-    const [columns, updateColumns] = useState(testColumns);
+    const [columns, updateColumns] = useState(initialColumns);
     /* Do we need to reshuffle and render notes into their respective columns? */
 
     return (
@@ -122,7 +122,11 @@ const NotesView = (): JSX.Element => {
                 <MenuItem />
             </div>
 
-            {/* Main notes area */}
+            {/* Main notes area 
+            Pass in:
+            the updateColumns state function defined on line 110
+            the columns data structure, initially set to initialColumns
+            */}
             <DnD {...{ updateColumns, columns }} />
 
             {/* Searchbar on top right corner */}
