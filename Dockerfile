@@ -56,7 +56,7 @@ RUN yarn workspace server build
 
 FROM build-server AS production
 WORKDIR /usr/src
-COPY --from=build-client usr/src/client/build/ .
+COPY --from=build-client usr/src/client/build/ ./client/build/
 
 # trim dev dependencies
 ENV NODE_ENV production
