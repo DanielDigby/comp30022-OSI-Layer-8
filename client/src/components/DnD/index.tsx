@@ -16,13 +16,35 @@ export interface ColumnDict {
         items: Array<INote>;
     };
 }
+export enum DnDModes {
+    NOTES,
+    EVENTS,
+    REMINDERS,
+}
 interface DnDProps {
     updateColumns: React.Dispatch<React.SetStateAction<ColumnDict>>;
     columns: ColumnDict;
+    mode: DnDModes;
 }
-export const DnD = ({ updateColumns, columns }: DnDProps): JSX.Element => {
+export const DnD = ({
+    updateColumns,
+    columns,
+    mode,
+}: DnDProps): JSX.Element => {
+    // IMPORTANT:
+    // Idea here is to define the styles for different DnD layouts in dragAndDrop.module.css
+    // and switch based on mode - all other logic should be able to stay same
+    let style: string;
+    switch (mode) {
+        case DnDModes.NOTES:
+            style = dndStyles.notesSection;
+            break;
+        default:
+            style = "";
+            break;
+    }
     return (
-        <div className={dndStyles.notesSection}>
+        <div className={style}>
             <DragDropContext
                 onDragEnd={(result: DropResult) =>
                     onDragEnd(result, columns, updateColumns)

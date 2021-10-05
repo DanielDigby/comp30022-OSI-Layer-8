@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 // Semantic UI button
-import { DnD, ColumnDict } from "../../components/DnD";
+import { DnD, DnDModes, ColumnDict } from "../../components/DnD";
 import { INote } from "../../interfaces/note";
 import globalStyles from "../../App.module.css";
 import MenuItem from "./Menu";
@@ -127,7 +127,7 @@ const NotesView = (): JSX.Element => {
             the updateColumns state function defined on line 110
             the columns data structure, initially set to initialColumns
             */}
-            <DnD {...{ updateColumns, columns }} />
+            <DnD {...{ updateColumns, columns, DnDModes.NOTES }} />
 
             {/* Searchbar on top right corner */}
             <div className={styles.containerRight}>
