@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for checks to pass
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-checks
+        uses: lewagon/wait-on-check-action@v1.0.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.ref }}
           running-workflow-name: 'Build and Deploy'
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
 
       - name: Checkout
         uses: actions/checkout@v2
