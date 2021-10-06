@@ -1,3 +1,5 @@
+import express from "express";
+import { redisClient } from "../../config/redis";
 import jsonwebtoken from "jsonwebtoken";
 import { IUser } from "../../modules/user/userModel";
 import { IRequestWithCookie } from "../../interfaces/expressInterfaces";
@@ -39,3 +41,27 @@ export function validateUser(id1: ObjectId, id2: ObjectId, msg: string) {
         throw new AppError("Forbidden", 403, msg, true);
     }
 }
+
+const BLACKLISTKEY = "tokenBlacklist";
+
+export const checkJwtBlacklist = async (req: express.Request) => {
+    const tokenId = extractJwt(req);
+    // check for blacklisted token
+    await redisClient.lrange(BLACKLISTKEY, 0, -1, (err, reply) => {
+        if (err) throw new AppError("Unknown", 500, err.message, false);
+        if (reply.includes(tokenId)) {
+            throw new AppError(
+                "Invalid token",
+                401,
+                "log in again to aquire a new token",
+                true
+            );
+        }
+    });
+};
+
+export const addJwtBlacklist = async (req: express.Request) => {
+    const token = await extractJwt(req);
+    // add token to blacklist
+    await redisClient.rpush(BLACKLISTKEY, token);
+};

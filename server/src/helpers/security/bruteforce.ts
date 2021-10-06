@@ -4,8 +4,6 @@ import { AppError } from "../../helpers/errors";
 import { redisClient } from "../../config/redis";
 import { RateLimiterRedis } from "rate-limiter-flexible";
 
-const BLACKLISTKEY = "tokenBlacklist";
-
 const maxWrongAttemptsByIPperDay = 100;
 const maxConsecutiveFailsByUsernameAndIP = 10;
 

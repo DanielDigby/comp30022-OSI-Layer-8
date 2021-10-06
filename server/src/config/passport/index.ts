@@ -1,9 +1,13 @@
+import express from "express";
 import passport from "passport";
 import mongoose from "mongoose";
 import passportLocal from "passport-local";
 import passportJwt from "passport-jwt";
-import { AppError } from "../../helpers/errors";
-import { extractJwt, validatePassword } from "../../helpers/security";
+import {
+    extractJwt,
+    checkJwtBlacklist,
+    validatePassword,
+} from "../../helpers/security";
 
 import { IUser } from "../../modules/user/userModel";
 import {
@@ -45,26 +49,36 @@ passport.use(
 
 // Decrypt incoming jwt to find associated user
 // TODO (Daniel) change secret to environment variable
-const JWTStrategyConfig = {
-    secretOrKey: "secret",
-    jwtFromRequest: extractJwt,
-};
 passport.use(
-    new JwtStrategy(JWTStrategyConfig, async function jwtStrategyCB(
-        jwt_payload,
-        done
-    ) {
-        try {
-            const user = <IUser>await User.findOne({ id: jwt_payload._id });
-            if (!user) {
-                return done(null, false);
-            }
+    new JwtStrategy(
+        {
+            secretOrKey: "secret",
+            jwtFromRequest: extractJwt,
+            passReqToCallback: true,
+        },
+        async function jwtStrategyCB(
+            req: express.Request,
+            jwt_payload: { _id: string },
+            done: (
+                error: any,
+                user?: any,
+                options?: passportLocal.IVerifyOptions
+            ) => void
+        ) {
+            try {
+                await checkJwtBlacklist(req);
 
-            // success
-            user.password = "redacted";
-            return done(null, user);
-        } catch (err) {
-            return done(err);
+                const user = <IUser>await User.findOne({ id: jwt_payload._id });
+                if (!user) {
+                    return done(null, false);
+                }
+
+                // success
+                user.password = "redacted";
+                return done(null, user);
+            } catch (err) {
+                return done(err);
+            }
         }
-    })
+    )
 );

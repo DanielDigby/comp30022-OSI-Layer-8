@@ -1,6 +1,5 @@
 import express from "express";
-import { resetBruteForce } from "../../helpers/security/bruteforce";
-import { generateJwt } from "../../helpers/security";
+import { generateJwt, addJwtBlacklist } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 const postLogin = async (req: IRequestWithUser, res: express.Response) => {
@@ -13,8 +12,7 @@ const postLogin = async (req: IRequestWithUser, res: express.Response) => {
 };
 
 const getLogout = async (req: IRequestWithUser, res: express.Response) => {
-    // TODO (Daniel) blacklist jwt on logout
-
+    await addJwtBlacklist(req);
     return res
         .status(200)
         .cookie("jwt", "null", {
