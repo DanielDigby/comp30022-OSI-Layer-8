@@ -9,7 +9,7 @@ export const validator = (schema: Joi.ObjectSchema<any>) => {
         next: express.NextFunction
     ) {
         try {
-            const validated = schema.validate(req.body);
+            const validated = schema.validate(req.body).value;
             req.body = validated;
             next();
         } catch (err) {

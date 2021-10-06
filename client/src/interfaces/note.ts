@@ -5,6 +5,7 @@ export interface INote extends INoteWithoutIds {
 
 export interface INoteWithoutIds {
     title: string | null;
+    user: string | null;
     text: string | null;
     image: string | null;
     reminderTime: Date | null;
