@@ -106,10 +106,8 @@ export const countBruteForce = async (
             true
         );
     } catch (err) {
-        if (err instanceof Error) {
-            throw err;
-        } else {
-            throw new AppError(
+        if (err instanceof AppError && err.name !== "Unauthorized") {
+            return new AppError(
                 "Too many requests",
                 429,
                 "Retry-After" +
@@ -117,5 +115,6 @@ export const countBruteForce = async (
                 true
             );
         }
+        return err;
     }
 };
