@@ -17,7 +17,6 @@
         "coverage": false
     },
     "dependencies": {
-        "@types/joi": "^17.2.3",
         "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
@@ -42,6 +41,7 @@
         "@types/cors": "^2.8.12",
         "@types/express": "^4.17.13",
         "@types/jest": "^26.0.24",
+        "@types/joi": "^17.2.3",
         "@types/mongodb": "^4.0.7",
         "@types/mongodb-memory-server": "^2.3.0",
         "@types/mongoose": "^5.11.97",

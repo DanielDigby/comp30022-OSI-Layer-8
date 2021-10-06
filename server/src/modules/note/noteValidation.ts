@@ -2,6 +2,7 @@ import Joi from "joi";
 
 export const postNoteSchema = Joi.object({
     _clientId: Joi.string().max(255).required(),
+    user: Joi.string().max(255).required(),
     title: Joi.string().max(255),
     text: Joi.string().max(5000),
     image: Joi.string().max(255),
