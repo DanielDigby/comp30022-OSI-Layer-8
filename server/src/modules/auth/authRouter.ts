@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { validator } from "../../helpers/security/middleware";
+import { validate } from "../../helpers/security/middleware";
 import { loginSchema, registerSchema } from "./authValidation";
 import { createUser } from "../user/userMiddleware";
 
@@ -14,7 +14,7 @@ authRouter.post("/register", createUser, authController.postLogin);
 authRouter.post(
     "/login",
     passport.authenticate("local", { session: false }),
-    validator(loginSchema),
+    validate(loginSchema),
     authController.postLogin
 );
 
@@ -22,7 +22,7 @@ authRouter.post(
 authRouter.get(
     "/logout",
     passport.authenticate("jwt", { session: false }),
-    validator(registerSchema),
+    validate(registerSchema),
     authController.getLogout
 );
 

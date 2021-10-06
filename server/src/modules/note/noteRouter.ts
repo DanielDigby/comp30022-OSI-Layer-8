@@ -1,6 +1,6 @@
 import express from "express";
 import { authenticate } from "passport";
-import { validator } from "../../helpers/security/middleware";
+import { validate } from "../../helpers/security/middleware";
 import { postNoteSchema, putNoteSchema } from "./noteValidation";
 const noteController = require("./noteController");
 const noteRouter = express.Router();
@@ -23,7 +23,7 @@ noteRouter.get(
 noteRouter.post(
     "/",
     authenticate("jwt", { session: false }),
-    validator(postNoteSchema),
+    validate(postNoteSchema),
     noteController.postNote
 );
 
@@ -31,7 +31,7 @@ noteRouter.post(
 noteRouter.put(
     "/:Id",
     authenticate("jwt", { session: false }),
-    validator(putNoteSchema),
+    validate(putNoteSchema),
     noteController.putNote
 );
 

@@ -2,7 +2,7 @@ import express from "express";
 import Joi from "joi";
 import { AppError } from "../errors";
 
-export const validator = (schema: Joi.ObjectSchema<any>) => {
+export const validate = (schema: Joi.ObjectSchema<any>) => {
     return async function (
         req: express.Request,
         res: express.Response,
