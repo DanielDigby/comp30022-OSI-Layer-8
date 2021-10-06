@@ -68,10 +68,9 @@ const testEventNotes = [
     },
 ];*/
 
-const DashboardView = (
-    eventNotes: INote[],
-    pinnedNotes: INote[]
-): JSX.Element => {
+const DashboardView = (): //eventNotes: INote[],
+//pinnedNotes: INote[]
+JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
     const navigateNotes = () => history.push("/notes");
@@ -82,16 +81,57 @@ const DashboardView = (
     });
 
     /* Filter the Event Notes, up to 3 */
+    const eventNotes = [
+        {
+            _id: "event-november",
+            _clientId: "djfhjaskjdfa",
+            title: null,
+            text: null,
+            image: null,
+            reminderTime: null,
+            eventTime: nov,
+            pinned: true,
+            tags: [],
+            relatedNotes: [],
+        },
+        {
+            _id: "event-october",
+            _clientId: "djfhjaskjdfa",
+            title: null,
+            text: null,
+            image: null,
+            reminderTime: null,
+            eventTime: nov,
+            pinned: true,
+            tags: [],
+            relatedNotes: [],
+        },
+        {
+            _id: "event-december",
+            _clientId: "djfhjaskjdfa",
+            title: null,
+            text: null,
+            image: null,
+            reminderTime: null,
+            eventTime: dec,
+            pinned: true,
+            tags: [],
+            relatedNotes: [],
+        },
+    ];
+
+    /*
     eventNotes = filterNotes(eventNotes, FilterOn.EVENT_TIME);
     if (eventNotes.length > 3) {
         eventNotes.slice(0, 4);
-    }
+    }*/
 
     /* Filter the Pinned Notes, up to 4 */
+    /*
     pinnedNotes = filterNotes(pinnedNotes, FilterOn.PINNED);
     if (pinnedNotes.length > 4) {
         pinnedNotes.slice(0, 5);
-    }
+    }*/
 
     return (
         <div className={styles.basecontainer}>
@@ -132,7 +172,12 @@ const DashboardView = (
                 <div className={styles.calendarContainer}>
                     <Icon name="calendar alternate" size="big" />
                 </div>
-                <div className={styles.eventsContainer}></div>
+                <div className={styles.eventsContainer}>
+                    {eventNotes.map(function (content, idx) {
+                        return <li key={idx}>{content._id}</li>;
+                    })}
+                </div>
+
                 <div className={styles.tumbtackContainer}>
                     <Icon name="thumbtack" size="big" />
                 </div>

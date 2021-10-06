@@ -27,7 +27,8 @@
 .eventsContainer {
     display: flex;
     width: 38%;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: stretch;
     background-color: rgb(255, 223, 248);
 }
 
@@ -51,6 +52,22 @@
     display: flex;
     width: 8%;
     background-color: rgb(216, 244, 253);
+}
+
+/* eventNote box*/
+.eventNote {
+    display: flex;
+    width: 85%;
+    height: 15vh;
+    background-color: rgb(233, 216, 253);
+}
+
+/* a gap between notes vertically */
+.something {
+    display: flex;
+    width: 100%;
+    height: 5vh;
+    background-color: rgb(255, 223, 248);
 }
 
 .viewAllNotesContainer {
