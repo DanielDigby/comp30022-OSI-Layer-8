@@ -7,70 +7,8 @@ import { store } from "../../config/redux/store";
 
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
 import { INote } from "../../interfaces/note";
-//import { filterNotes } from "../../helpers/utils/filter";
 
-const nov = new Date();
-nov.setFullYear(2021, 11, 20);
-const oct = new Date();
-oct.setFullYear(2021, 10, 31);
-const dec = new Date();
-dec.setFullYear(2021, 12, 10);
-
-/*
-const testEventNotes = [
-    {
-        _id: "event-november",
-        _clientId: "djfhjaskjdfa",
-        title: null,
-        text: null,
-        image: null,
-        reminderTime: null,
-        eventTime: nov,
-        pinned: true,
-        tags: [],
-        relatedNotes: [],
-    },
-    {
-        _id: "event-october",
-        _clientId: "djfhjaskjdfa",
-        title: null,
-        text: null,
-        image: null,
-        reminderTime: null,
-        eventTime: nov,
-        pinned: true,
-        tags: [],
-        relatedNotes: [],
-    },
-    {
-        _id: "event-december",
-        _clientId: "djfhjaskjdfa",
-        title: null,
-        text: null,
-        image: null,
-        reminderTime: null,
-        eventTime: dec,
-        pinned: true,
-        tags: [],
-        relatedNotes: [],
-    },
-    {
-        _id: "no-event",
-        _clientId: "djfhjaskjdfa",
-        title: null,
-        text: null,
-        image: null,
-        reminderTime: null,
-        eventTime: null,
-        pinned: true,
-        tags: [],
-        relatedNotes: [],
-    },
-];*/
-
-const DashboardView = (): //eventNotes: INote[],
-//pinnedNotes: INote[]
-JSX.Element => {
+const DashboardView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
     const navigateNotes = () => history.push("/notes");
@@ -80,58 +18,21 @@ JSX.Element => {
         if (!store.getState().user.account) history.push("/login");
     });
 
-    /* Filter the Event Notes, up to 3 */
-    const eventNotes = [
-        {
-            _id: "event-november",
-            _clientId: "djfhjaskjdfa",
-            title: null,
-            text: null,
-            image: null,
-            reminderTime: null,
-            eventTime: nov,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            _id: "event-october",
-            _clientId: "djfhjaskjdfa",
-            title: null,
-            text: null,
-            image: null,
-            reminderTime: null,
-            eventTime: nov,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            _id: "event-december",
-            _clientId: "djfhjaskjdfa",
-            title: null,
-            text: null,
-            image: null,
-            reminderTime: null,
-            eventTime: dec,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-    ];
+    /* get the First name of User */
+    const firstName = store.getState().user.firstName;
 
-    /*
-    eventNotes = filterNotes(eventNotes, FilterOn.EVENT_TIME);
+    /* store.getState the arrays of notes */
+    const allNotes = store.getState().notes.array;
+    const eventNotes = filterNotes(allNotes, FilterOn.EVENT_TIME);
     if (eventNotes.length > 3) {
         eventNotes.slice(0, 4);
-    }*/
+    }
 
     /* Filter the Pinned Notes, up to 4 */
-    /*
-    pinnedNotes = filterNotes(pinnedNotes, FilterOn.PINNED);
+    const pinnedNotes = filterNotes(allNotes, FilterOn.PINNED);
     if (pinnedNotes.length > 4) {
         pinnedNotes.slice(0, 5);
-    }*/
+    }
 
     return (
         <div className={styles.basecontainer}>
@@ -147,7 +48,7 @@ JSX.Element => {
                 <div className={styles.greetingsContainer}>
                     <div className={styles.heading}>
                         <h1>Good Morning,</h1>
-                        <h1>Sonja.</h1>
+                        <h1>{firstName}</h1>
                     </div>
 
                     <div className={styles.date}>
