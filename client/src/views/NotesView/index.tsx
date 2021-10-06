@@ -127,7 +127,11 @@ const NotesView = (): JSX.Element => {
             the updateColumns state function defined on line 110
             the columns data structure, initially set to initialColumns
             */}
-            <DnD {...{ updateColumns, columns, DnDModes.NOTES }} />
+            <DnD
+                updateColumns={updateColumns}
+                columns={columns}
+                mode={DnDModes.NOTES}
+            />
 
             {/* Searchbar on top right corner */}
             <div className={styles.containerRight}>
