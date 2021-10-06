@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./helpers/errors";
 
@@ -10,14 +11,15 @@ require("./config/passport");
 const app = express();
 const port = process.env.PORT || 8080;
 
+// middleware
+app.use(helmet());
+app.use(express.json());
+app.use(cookieParser());
+
 // health route
 app.get("/api/", (_, res) => {
     res.status(200).send("alive");
 });
-
-// middleware
-app.use(express.json());
-app.use(cookieParser());
 
 // note URLs
 const noteRouter = require("./modules/note/noteRouter");
