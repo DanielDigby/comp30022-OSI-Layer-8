@@ -101,7 +101,7 @@ export const countBruteForce = async (
 
         throw new AppError(
             "Unauthorized",
-            400,
+            401,
             "incorrect email or password",
             true
         );
@@ -115,6 +115,7 @@ export const countBruteForce = async (
                 true
             );
         }
-        return err;
+        if (err instanceof AppError) return err;
+        else return new AppError("Unknown", 500, err.message, false);
     }
 };
