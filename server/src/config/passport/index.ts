@@ -60,7 +60,7 @@ passport.use(
                 return done(null, false);
             }
 
-            // sucess
+            // success
             user.password = "redacted";
             return done(null, user);
         } catch (err) {
