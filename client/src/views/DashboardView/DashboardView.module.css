@@ -29,29 +29,25 @@
     width: 38%;
     flex-direction: column;
     align-items: stretch;
-    background-color: rgb(255, 223, 248);
 }
 
 /* Container for pinned notes */
 .pinnedContainer {
     display: flex;
-    width: 37%;
-    flex-direction: row;
-    background-color: rgb(255, 223, 248);
+    width: 39%;
+    flex-direction: column;
 }
 
 /* Container for Calenter icon */
 .calendarContainer {
     display: flex;
     width: 8%;
-    background-color: rgb(216, 244, 253);
 }
 
 /* Container for thumbtack icon */
 .tumbtackContainer {
     display: flex;
-    width: 8%;
-    background-color: rgb(216, 244, 253);
+    width: 7%;
 }
 
 /* eventNote box*/
@@ -59,14 +55,13 @@
     display: flex;
     width: 85%;
     height: 15vh;
-    background-color: rgb(233, 216, 253);
 }
 
 /* a gap between notes vertically */
 .something {
     display: flex;
     width: 100%;
-    height: 5vh;
+    height: 2vh;
     background-color: rgb(255, 223, 248);
 }
 
