@@ -17,6 +17,15 @@ app.use(require("sanitize").middleware);
 app.use(express.json({ limit: "300kb" }));
 app.use(cookieParser());
 
+// rate limit setup
+const rateLimit = require("express-rate-limit");
+app.set("trust proxy", 1);
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 500, // limit each IP to 5000 requests per windowMs
+});
+app.use("/api/", apiLimiter);
+
 // health route
 app.get("/api/", (_, res) => {
     res.status(200).send("alive");
