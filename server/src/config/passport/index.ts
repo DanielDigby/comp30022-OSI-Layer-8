@@ -27,11 +27,12 @@ passport.use(
             try {
                 const user = <IUser>await User.findOne({ email: email });
                 countBruteForce(user, email, req.ip);
+
                 if (!user || !validatePassword(password, user.password)) {
-                    // TODO (Daniel) rate limit failed login attempts
                     return done(null, false);
                 }
-                // TODO (Daniel) reset rate limiter on successful login
+
+                // success
                 user.password = "redacted";
                 resetBruteForce(req.ip, email);
                 return done(null, user);
@@ -56,10 +57,10 @@ passport.use(
         try {
             const user = <IUser>await User.findOne({ id: jwt_payload._id });
             if (!user) {
-                // TODO (Daniel) rate limit failed login attempts
                 return done(null, false);
             }
-            // TODO (Daniel) reset rate limiter on successful login
+
+            // sucess
             user.password = "redacted";
             return done(null, user);
         } catch (err) {
