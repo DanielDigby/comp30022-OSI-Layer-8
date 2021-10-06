@@ -13,6 +13,7 @@ const port = process.env.PORT || 8080;
 
 // middleware
 app.use(helmet());
+app.use(require("sanitize").middleware);
 app.use(express.json());
 app.use(cookieParser());
 

@@ -11759,7 +11759,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.x, lodash@npm:>=3.5 <5, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.17.5, lodash@npm:^4.7.0":
+"lodash@npm:4.x, lodash@npm:>=3.5 <5, lodash@npm:^4.17.0, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.17.5, lodash@npm:^4.7.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -15908,6 +15908,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"sanitize@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "sanitize@npm:2.1.0"
+  dependencies:
+    lodash: ^4.17.0
+    validator: ^3.33.0
+  checksum: 6e7bfc6438bceee9fb2854aee7f5959765ad94be9131d0427b5c4ceca3f922571cef98ed0d279bf503e0a00f4277742028584922f902cabb88e5e8b00a80eb71
+  languageName: node
+  linkType: hard
+
 "saslprep@npm:^1.0.0":
   version: 1.0.3
   resolution: "saslprep@npm:1.0.3"
@@ -16225,6 +16235,7 @@ resolve@^2.0.0-next.3:
     passport-local: ^1.0.0
     path: ^0.12.7
     prettier: ^2.3.2
+    sanitize: ^2.1.0
     superagent: ^6.1.0
     supertest: ^6.1.6
     ts-jest: ^27.0.4
@@ -18220,6 +18231,13 @@ resolve@^2.0.0-next.3:
     spdx-correct: ^3.0.0
     spdx-expression-parse: ^3.0.0
   checksum: 35703ac889d419cf2aceef63daeadbe4e77227c39ab6287eeb6c1b36a746b364f50ba22e88591f5d017bc54685d8137bc2d328d0a896e4d3fd22093c0f32a9ad
+  languageName: node
+  linkType: hard
+
+"validator@npm:^3.33.0":
+  version: 3.43.0
+  resolution: "validator@npm:3.43.0"
+  checksum: 2557cb5b9837cd55ee31228adeedecac82e2f4199806d5e191bdff3dfae8b104702536660c418c5c6fed4ab0fe7c2f7e19be19a62791d6aa836e510d18fab5f8
   languageName: node
   linkType: hard
 
