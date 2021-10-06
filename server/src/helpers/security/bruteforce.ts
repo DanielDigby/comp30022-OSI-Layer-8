@@ -57,8 +57,12 @@ export const watchBruteforce = async (
     }
 
     if (retrySecs > 0) {
-        res.set("Retry-After", String(retrySecs));
-        res.status(429).send("Too Many Requests");
+        throw new AppError(
+            "Too Many Requests",
+            429,
+            "Retry-After" + String(retrySecs),
+            true
+        );
     } else {
         next();
     }
@@ -107,7 +111,7 @@ export const countBruteForce = async (
         } else {
             throw new AppError(
                 "Too many requests",
-                400,
+                429,
                 "Retry-After" +
                     String(Math.round((err as any).msBeforeNext / 1000) || 1),
                 true
