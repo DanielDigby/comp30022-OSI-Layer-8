@@ -29,44 +29,25 @@
     width: 38%;
     flex-direction: column;
     align-items: stretch;
-<<<<<<< HEAD
-=======
-    background-color: rgb(255, 223, 248);
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
 }
 
 /* Container for pinned notes */
 .pinnedContainer {
     display: flex;
-<<<<<<< HEAD
     width: 39%;
     flex-direction: column;
-=======
-    width: 37%;
-    flex-direction: row;
-    background-color: rgb(255, 223, 248);
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
 }
 
 /* Container for Calenter icon */
 .calendarContainer {
     display: flex;
     width: 8%;
-<<<<<<< HEAD
-=======
-    background-color: rgb(216, 244, 253);
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
 }
 
 /* Container for thumbtack icon */
 .tumbtackContainer {
     display: flex;
-<<<<<<< HEAD
     width: 7%;
-=======
-    width: 8%;
-    background-color: rgb(216, 244, 253);
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
 }
 
 /* eventNote box*/
@@ -74,21 +55,13 @@
     display: flex;
     width: 85%;
     height: 15vh;
-<<<<<<< HEAD
-=======
-    background-color: rgb(233, 216, 253);
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
 }
 
 /* a gap between notes vertically */
 .something {
     display: flex;
     width: 100%;
-<<<<<<< HEAD
     height: 2vh;
-=======
-    height: 5vh;
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
     background-color: rgb(255, 223, 248);
 }
 

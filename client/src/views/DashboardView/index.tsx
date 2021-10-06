@@ -6,12 +6,8 @@ import ProfileImage from "../NotesView/ProfileImage";
 import { store } from "../../config/redux/store";
 
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
-<<<<<<< HEAD
 import { INote, NoteModes } from "../../interfaces/note";
 import Note from "../../components/Note";
-=======
-import { INote } from "../../interfaces/note";
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
@@ -24,7 +20,6 @@ const DashboardView = (): JSX.Element => {
     });
 
     /* get the First name of User */
-<<<<<<< HEAD
     //const firstName = store.getState().user.firstName;
 
     const oct = new Date();
@@ -144,21 +139,6 @@ const DashboardView = (): JSX.Element => {
     let pinnedNotes = filterNotes(allNotes, FilterOn.PINNED);
     if (pinnedNotes.length > 3) {
         pinnedNotes = pinnedNotes.slice(0, 3);
-=======
-    const firstName = store.getState().user.firstName;
-
-    /* store.getState the arrays of notes */
-    const allNotes = store.getState().notes.array;
-    const eventNotes = filterNotes(allNotes, FilterOn.EVENT_TIME);
-    if (eventNotes.length > 3) {
-        eventNotes.slice(0, 4);
-    }
-
-    /* Filter the Pinned Notes, up to 4 */
-    const pinnedNotes = filterNotes(allNotes, FilterOn.PINNED);
-    if (pinnedNotes.length > 4) {
-        pinnedNotes.slice(0, 5);
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
     }
 
     return (
@@ -175,11 +155,7 @@ const DashboardView = (): JSX.Element => {
                 <div className={styles.greetingsContainer}>
                     <div className={styles.heading}>
                         <h1>Good Morning,</h1>
-<<<<<<< HEAD
                         <h1>Sonja</h1>
-=======
-                        <h1>{firstName}</h1>
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
                     </div>
 
                     <div className={styles.date}>
@@ -205,7 +181,6 @@ const DashboardView = (): JSX.Element => {
                     <Icon name="calendar alternate" size="big" />
                 </div>
                 <div className={styles.eventsContainer}>
-<<<<<<< HEAD
                     {eventNotes.map((note: INote) => {
                         return (
                             <Note
@@ -214,17 +189,12 @@ const DashboardView = (): JSX.Element => {
                                 key={note._id}
                             />
                         );
-=======
-                    {eventNotes.map(function (content, idx) {
-                        return <li key={idx}>{content._id}</li>;
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
                     })}
                 </div>
 
                 <div className={styles.tumbtackContainer}>
                     <Icon name="thumbtack" size="big" />
                 </div>
-<<<<<<< HEAD
                 <div className={styles.pinnedContainer}>
                     {pinnedNotes.map((note: INote) => {
                         return (
@@ -236,9 +206,6 @@ const DashboardView = (): JSX.Element => {
                         );
                     })}
                 </div>
-=======
-                <div className={styles.pinnedContainer}></div>
->>>>>>> b0bb9b1b39f2cd603249e77beb790fed7ef0003b
             </div>
         </div>
     );
