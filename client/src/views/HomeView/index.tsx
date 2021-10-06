@@ -11,7 +11,7 @@ import {
 
 // Semantic UI button
 import { Button } from "semantic-ui-react";
-import { INote } from "../../interfaces/note";
+import { INote, INoteWithoutIds } from "../../interfaces/note";
 
 const HomeView = (): JSX.Element => {
     const navHistory = useHistory();
@@ -21,10 +21,8 @@ const HomeView = (): JSX.Element => {
     const dispatch = useDispatch();
 
     const postNote = async () => {
-        const note: INote = {
+        const note: INoteWithoutIds = {
             title: "NEW NOTE TEST",
-            _id: null,
-            _clientId: "asdkfjalsdk",
             text: null,
             image: null,
             reminderTime: null,

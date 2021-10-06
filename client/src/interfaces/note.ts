@@ -13,3 +13,11 @@ export interface INoteWithoutIds {
     tags: Array<string>;
     relatedNotes: Array<string>;
 }
+
+export enum NoteModes {
+    STANDARD,
+    STANDARD_DETAIL,
+    EVENT,
+    EVENT_DETAIL,
+    EDIT,
+}
