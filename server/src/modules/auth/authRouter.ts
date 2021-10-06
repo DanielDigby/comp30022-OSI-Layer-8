@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import { validate } from "../../helpers/security/middleware";
+import { watchBruteforce } from "../../helpers/security/bruteforce";
 import { loginSchema, registerSchema } from "./authValidation";
 import { createUser } from "../user/userMiddleware";
 
@@ -13,6 +14,7 @@ authRouter.post("/register", createUser, authController.postLogin);
 // post a user login action
 authRouter.post(
     "/login",
+    watchBruteforce,
     passport.authenticate("local", { session: false }),
     validate(loginSchema),
     authController.postLogin

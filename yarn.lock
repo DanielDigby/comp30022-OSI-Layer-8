@@ -3170,6 +3170,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/redis@npm:^2.8.32":
+  version: 2.8.32
+  resolution: "@types/redis@npm:2.8.32"
+  dependencies:
+    "@types/node": "*"
+  checksum: 2b12103e05977941870c9a248f6ea51f4b7ad7e0f16a7403799c2ed1b3e63b60f693c39f9186be0ea02776934c4595ddcd2a5bde41e530aaad42d26449f6a669
+  languageName: node
+  linkType: hard
+
 "@types/resolve@npm:0.0.8":
   version: 0.0.8
   resolution: "@types/resolve@npm:0.0.8"
@@ -7900,6 +7909,13 @@ __metadata:
     jest-message-util: ^27.0.6
     jest-regex-util: ^27.0.6
   checksum: 26e63420b00620dffd3a7e98db9e815a31b2787930823a89d01fcc008b9827bd734e8104c58b91493054636fbc3b123cbaa48da5dc24b16ebe641b7ee98adeab
+  languageName: node
+  linkType: hard
+
+"express-rate-limit@npm:^5.4.1":
+  version: 5.4.1
+  resolution: "express-rate-limit@npm:5.4.1"
+  checksum: 067520034f050ee9b9bb6587d29e6e1f0bca3f986c7b403e4d1fb984c0325afc8858c5aaa32ae6d95f897c69dce4ba50a00d872b51705f13ce4274fe94a1701e
   languageName: node
   linkType: hard
 
@@ -14894,6 +14910,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"rate-limiter-flexible@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "rate-limiter-flexible@npm:2.3.1"
+  checksum: 74b447692b14aee3461f0867cc25d9e185a496d794a551a8d61c0e8a4697101cb5a3411227046212fab580cf83e5a2875fa36399ab2a7f61f00950fe74bb54c5
+  languageName: node
+  linkType: hard
+
 "raw-body@npm:2.4.0":
   version: 2.4.0
   resolution: "raw-body@npm:2.4.0"
@@ -15297,6 +15320,48 @@ fsevents@^1.2.7:
     indent-string: ^4.0.0
     strip-indent: ^3.0.0
   checksum: fa1ef20404a2d399235e83cc80bd55a956642e37dd197b4b612ba7327bf87fa32745aeb4a1634b2bab25467164ab4ed9c15be2c307923dd08b0fe7c52431ae6b
+  languageName: node
+  linkType: hard
+
+"redis-commands@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "redis-commands@npm:1.7.0"
+  checksum: d1ff7fbcb5e54768c77f731f1d49679d2a62c3899522c28addb4e2e5813aea8bcac3f22519d71d330224c3f2937f935dfc3d8dc65e90db0f5fe22dc2c1515aa7
+  languageName: node
+  linkType: hard
+
+"redis-errors@npm:^1.0.0, redis-errors@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "redis-errors@npm:1.2.0"
+  checksum: f28ac2692113f6f9c222670735aa58aeae413464fd58ccf3fce3f700cae7262606300840c802c64f2b53f19f65993da24dc918afc277e9e33ac1ff09edb394f4
+  languageName: node
+  linkType: hard
+
+"redis-mock@npm:^0.56.3":
+  version: 0.56.3
+  resolution: "redis-mock@npm:0.56.3"
+  checksum: 8c1293a59610c89a13849191de62aec9e68cb0a116e898b8fd5235235100f987caaeb5dacf56a076263474a2f556bd7fc2e7d2c52364a940f392dacb178b9ff4
+  languageName: node
+  linkType: hard
+
+"redis-parser@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "redis-parser@npm:3.0.0"
+  dependencies:
+    redis-errors: ^1.0.0
+  checksum: 89290ae530332f2ae37577647fa18208d10308a1a6ba750b9d9a093e7398f5e5253f19855b64c98757f7129cccce958e4af2573fdc33bad41405f87f1943459a
+  languageName: node
+  linkType: hard
+
+"redis@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "redis@npm:3.1.2"
+  dependencies:
+    denque: ^1.5.0
+    redis-commands: ^1.7.0
+    redis-errors: ^1.2.0
+    redis-parser: ^3.0.0
+  checksum: baec42198626b22d2dfc063b6a6f30394daee994c21f380e58ecf91c3edee333c4e32907c30f082fe66d2177695f7b2567902eef399ecb22da3e199ea6363a30
   languageName: node
   linkType: hard
 
@@ -16210,6 +16275,7 @@ resolve@^2.0.0-next.3:
     "@types/passport": ^1.0.7
     "@types/passport-jwt": ^3.0.6
     "@types/passport-local": ^1.0.34
+    "@types/redis": ^2.8.32
     "@types/superagent": ^4.1.12
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": ^4.29.0
@@ -16223,6 +16289,7 @@ resolve@^2.0.0-next.3:
     eslint-plugin-prettier: ^3.4.0
     eslint-plugin-security: ^1.4.0
     express: ^4.17.1
+    express-rate-limit: ^5.4.1
     helmet: ^4.6.0
     jest: ^27.0.6
     joi: ^17.4.2
@@ -16235,6 +16302,9 @@ resolve@^2.0.0-next.3:
     passport-local: ^1.0.0
     path: ^0.12.7
     prettier: ^2.3.2
+    rate-limiter-flexible: ^2.3.1
+    redis: ^3.1.2
+    redis-mock: ^0.56.3
     sanitize: ^2.1.0
     superagent: ^6.1.0
     supertest: ^6.1.6

@@ -6,6 +6,7 @@ import { AppError } from "../helpers/errors";
 import { extractJwt, validatePassword } from "../helpers/security/";
 
 import { IUser } from "../modules/user/userModel";
+import { resetBruteForce } from "../helpers/security/bruteforce";
 const User = mongoose.model("User");
 
 const LocalStrategy = passportLocal.Strategy;
