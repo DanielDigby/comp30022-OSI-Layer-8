@@ -4,7 +4,6 @@ import { generateJwt } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 const postLogin = async (req: IRequestWithUser, res: express.Response) => {
-    resetBruteForce(req.ip, req.user.email);
     const jwt = generateJwt(req.user);
 
     return res

@@ -6,36 +6,40 @@ import { AppError } from "../../helpers/errors";
 import { extractJwt, validatePassword } from "../../helpers/security";
 
 import { IUser } from "../../modules/user/userModel";
-import { resetBruteForce } from "../../helpers/security/bruteforce";
+import {
+    countBruteForce,
+    resetBruteForce,
+} from "../../helpers/security/bruteforce";
 const User = mongoose.model("User");
 
 const LocalStrategy = passportLocal.Strategy;
 const JwtStrategy = passportJwt.Strategy;
 
 // Match email and password to locally stored values
-var LocalStrategyConfig = {
-    usernameField: "email",
-    passwordField: "password",
-};
 passport.use(
-    new LocalStrategy(LocalStrategyConfig, async function localStrategyCB(
-        email,
-        password,
-        done
-    ) {
-        try {
-            const user = <IUser>await User.findOne({ email: email });
-            if (!user || !validatePassword(password, user.password)) {
-                // TODO (Daniel) rate limit failed login attempts
-                return done(null, false);
+    new LocalStrategy(
+        {
+            usernameField: "email",
+            passwordField: "password",
+            passReqToCallback: true,
+        },
+        async function localStrategyCB(req, email, password, done) {
+            try {
+                const user = <IUser>await User.findOne({ email: email });
+                countBruteForce(user, email, req.ip);
+                if (!user || !validatePassword(password, user.password)) {
+                    // TODO (Daniel) rate limit failed login attempts
+                    return done(null, false);
+                }
+                // TODO (Daniel) reset rate limiter on successful login
+                user.password = "redacted";
+                resetBruteForce(req.ip, email);
+                return done(null, user);
+            } catch (err) {
+                return done(err);
             }
-            // TODO (Daniel) reset rate limiter on successful login
-            user.password = "redacted";
-            return done(null, user);
-        } catch (err) {
-            return done(err);
         }
-    })
+    )
 );
 
 // Decrypt incoming jwt to find associated user
