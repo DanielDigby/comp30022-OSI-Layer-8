@@ -22,7 +22,7 @@ const rateLimit = require("express-rate-limit");
 app.set("trust proxy", 1);
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 500, // limit each IP to 500 requests per windowMs
+    max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use("/api/", apiLimiter);
 
