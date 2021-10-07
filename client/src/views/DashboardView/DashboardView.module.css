@@ -44,17 +44,24 @@
     align-items: stretch;
 }
 
-/* Container for left column of pinned notes */
-.pinnedLeftContainer {
+/* For all the rows of pinned notes*/
+.pinnedNotesContainer {
     display: flex;
-    width: 30%;
+    width: 60%;
     flex-direction: column;
 }
 
-.pinnedRightContainer {
+/* Container for left column of pinned notes */
+.pinnedTopContainer {
     display: flex;
-    width: 30%;
-    flex-direction: column;
+    width: 100%;
+    flex-direction: row;
+}
+
+.pinnedBottomContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
 }
 
 /* Container for Calenter icon */
@@ -77,11 +84,16 @@
 }
 
 /* a gap between notes vertically */
-.something {
+.somethingVerticle {
     display: flex;
     width: 100%;
     height: 2vh;
-    background-color: rgb(255, 223, 248);
+}
+
+/* a gap between notes vertically */
+.somethingHorizontal {
+    display: flex;
+    height: 2vh;
 }
 
 .viewAllNotesContainer {

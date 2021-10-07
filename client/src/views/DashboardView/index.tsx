@@ -219,27 +219,30 @@ const DashboardView = (): JSX.Element => {
                 <div className={styles.tumbtackContainer}>
                     <Icon name="thumbtack" size="big" />
                 </div>
-                <div className={styles.pinnedLeftContainer}>
-                    {pinnedNotes1.map((note: INote) => {
-                        return (
-                            <Note
-                                note={note}
-                                mode={NoteModes.STANDARD}
-                                key={note._id}
-                            />
-                        );
-                    })}
-                </div>
-                <div className={styles.pinnedRightContainer}>
-                    {pinnedNotes2.map((note: INote) => {
-                        return (
-                            <Note
-                                note={note}
-                                mode={NoteModes.STANDARD}
-                                key={note._id}
-                            />
-                        );
-                    })}
+                <div className={styles.pinnedNotesContainer}>
+                    <div className={styles.pinnedTopContainer}>
+                        {pinnedNotes1.map((note: INote) => {
+                            return (
+                                <Note
+                                    note={note}
+                                    mode={NoteModes.STANDARD}
+                                    key={note._id}
+                                />
+                            );
+                        })}
+                    </div>
+                    <div className={styles.somethingHorizontal} />
+                    <div className={styles.pinnedBottomContainer}>
+                        {pinnedNotes2.map((note: INote) => {
+                            return (
+                                <Note
+                                    note={note}
+                                    mode={NoteModes.STANDARD}
+                                    key={note._id}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
