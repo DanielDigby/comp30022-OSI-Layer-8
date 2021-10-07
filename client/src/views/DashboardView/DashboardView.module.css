@@ -10,7 +10,20 @@
 /* Container for the greeting, date, and link to all notes*/
 .midContainer {
     display: flex;
-    width: 62%;
+    width: 73%;
+    align-items: stretch;
+    flex-direction: row;
+    align-content: top;
+}
+
+.margin {
+    display: flex;
+    width: 7%;
+}
+
+.midContentContainer {
+    display: flex;
+    width: 93%;
     align-items: stretch;
     flex-direction: row;
     align-content: top;
@@ -23,9 +36,64 @@
     flex-direction: row;
 }
 
+/* Container for event notes */
+.eventsContainer {
+    display: flex;
+    width: 32%;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* For all the rows of pinned notes*/
+.pinnedNotesContainer {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+}
+
+/* Container for left column of pinned notes */
+.pinnedTopContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.pinnedBottomContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+/* Container for Calenter icon */
 .calendarContainer {
     display: flex;
-    width: 50%;
+    width: 8%;
+}
+
+/* Container for thumbtack icon */
+.tumbtackContainer {
+    display: flex;
+    width: 5%;
+}
+
+/* eventNote box*/
+.eventNote {
+    display: flex;
+    width: 85%;
+    height: 15vh;
+}
+
+/* a gap between notes vertically */
+.somethingVerticle {
+    display: flex;
+    width: 100%;
+    height: 2vh;
+}
+
+/* a gap between notes vertically */
+.somethingHorizontal {
+    display: flex;
+    height: 2vh;
 }
 
 .viewAllNotesContainer {
