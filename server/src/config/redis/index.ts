@@ -9,6 +9,7 @@ else {
     internalClient = redis.createClient(process.env.REDIS_URL, {
         enable_offline_queue: false,
     });
+    console.log("Redis connected on: " + process.env.REDIS_URL);
 }
 
 export const redisClient = internalClient;
