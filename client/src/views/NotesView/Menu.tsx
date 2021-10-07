@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./NotesView.module.css";
 import globalStyles from "../../App.module.css";
 
 import { useHistory } from "react-router-dom";
 
 // Semantic UI button
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Input } from "semantic-ui-react";
 
 const MenuItem = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateSettings = () => navHistory.push("/settings");
+    const [show, setShow] = useState(false);
 
     return (
         <div className={styles.sideContainer}>
@@ -23,8 +24,12 @@ const MenuItem = (): JSX.Element => {
                     <Menu.Item name="Contacts" />
                     <Menu.Item name="Links" />
                 </Menu>
-                <Icon name="plus" />
             </div>
+            <div>
+                <Icon name="plus" size="large" onClick={() => setShow(!show)} />
+            </div>
+            <div>{show ? <Input placeholder="New Tag..." /> : null}</div>
+
             <div>
                 <Icon
                     name="cog"

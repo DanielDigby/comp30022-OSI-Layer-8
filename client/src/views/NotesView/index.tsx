@@ -73,9 +73,9 @@ const NotesView = (): JSX.Element => {
     const [columns, updateColumns] = useState(testColumns);
 
     // Boot user out if not logged in
-    useEffect(() => {
-        if (!store.getState().user.account) history.push("/login");
-    });
+    // useEffect(() => {
+    //     if (!store.getState().user.account) history.push("/login");
+    // });
 
     /* Do we need to reshuffle and render notes into their respective columns? */
 
