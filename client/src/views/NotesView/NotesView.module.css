@@ -1,7 +1,7 @@
 /* For the profile, tag icon  and side menu */
 .containerLeft {
     display: flex;
-    width: 20%;
+    width: 22%;
     flex-direction: column;
     align-items: flex-start;
     background-color: cadetblue;
@@ -27,16 +27,21 @@
     padding-top: 5vh;
     flex-direction: column;
     align-items: center;
-}
-set {
-    margin-bottom: auto;
+    background-color: darkcyan;
 }
 
 .menu {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 15vw;
     padding-top: 10px;
     padding-left: 10px;
+    align-items: left;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
     align-items: left;
 }
