@@ -1,4 +1,5 @@
 services:
+  ###########
   # Uncomment this to check production configuration with docker-compose
   # production:
   #   build:
@@ -17,25 +18,38 @@ services:
   #   ports:
   #     - "6379:6379"
 
+  ###########
   # Uncomment this to check development configuration with docker-compose
-  develop:
-    container_name: web
+  server:
+    container_name: server
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: develop
+      target: develop-server
+    image: develop-server
     ports:
       - "8080:8080"
-      - "3000:3000"
     volumes:
-      - ./client:/usr/src/client
-      - ./client/node_modules:/usr/src/client/node_modules
       - ./server:/user/src/server
       - ./server/node_modules:/usr/src/server/node_modules
     links:
       - redis
     environment:
       - REDIS_URL=redis://cache
+
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: develop-client
+    image: develop-client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/client
+      - ./client/node_modules:/usr/src/client/node_modules
+
   redis:
     image: redis:alpine
     container_name: cache

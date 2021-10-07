@@ -20,7 +20,7 @@
     "build": "yarn workspaces foreach run build",
     "start": "yarn workspace server start",
     "local": "yarn workspace client dev & yarn workspace server dev",
-    "build-dev": "docker-compose build",
+    "build-dev": "yarn install && COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
     "dev": "docker-compose up"
   },
   "packageManager": "yarn@3.0.0"

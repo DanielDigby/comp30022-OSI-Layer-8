@@ -85,7 +85,7 @@ const HomeView = (): JSX.Element => {
                     className={styles.button}
                     basic
                     colour="black"
-                    content="Test hot reload"
+                    content="Sign up"
                     onClick={() => navigateLogin()}
                 />
                 <Button
