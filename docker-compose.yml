@@ -6,3 +6,12 @@ services:
     image: production
     ports:
       - "8080:8080"
+    links:
+      - redis
+    environment:
+      - REDIS_URL=redis://cache
+  redis:
+    image: redis:alpine
+    container_name: cache
+    ports:
+      - "6379:6379"
