@@ -42,7 +42,8 @@ async function crashIfUntrustedErrorOrSendResponse(err: Error, res: Response) {
     if (err instanceof AppError && err.isOperational) {
         return res.status(err.httpCode).send(err.name);
     } else {
-        res.send(500);
+        console.log(err);
+        res.status(500).send();
         // TODO (Daniel) gracefully crash and restart
     }
 }

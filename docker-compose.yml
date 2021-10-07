@@ -2,6 +2,7 @@ services:
   ###########
   # Uncomment this to check production configuration with docker-compose
   # production:
+  #   container_name: production
   #   build:
   #     context: .
   #     dockerfile: Dockerfile
@@ -46,6 +47,8 @@ services:
     image: develop-client
     ports:
       - "3000:3000"
+    links:
+      - server
     volumes:
       - ./client:/usr/src/client
       - ./client/node_modules:/usr/src/client/node_modules

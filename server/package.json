@@ -9,7 +9,7 @@
     "scripts": {
         "build": "tsc",
         "start": "node .",
-        "dev": "ts-node-dev --respawn -- src/index.ts",
+        "dev": "ts-node-dev --poll --respawn -- src/index.ts",
         "test": "jest"
     },
     "jest": {
