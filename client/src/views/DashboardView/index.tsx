@@ -126,6 +126,18 @@ const DashboardView = (): JSX.Element => {
             tags: [],
             relatedNotes: [],
         },
+        {
+            _id: "sfjsqoqoqx",
+            _clientId: "hdjafsaasd",
+            title: "pinned-five",
+            text: "test",
+            image: "test",
+            reminderTime: null,
+            eventTime: null,
+            pinned: true,
+            tags: [],
+            relatedNotes: [],
+        },
     ];
 
     /* store.getState the arrays of notes */
@@ -136,9 +148,18 @@ const DashboardView = (): JSX.Element => {
     }
 
     /* Filter the Pinned Notes, up to 3 */
-    let pinnedNotes = filterNotes(allNotes, FilterOn.PINNED);
-    if (pinnedNotes.length > 3) {
-        pinnedNotes = pinnedNotes.slice(0, 3);
+    const pinnedNotes = filterNotes(allNotes, FilterOn.PINNED);
+    let pinnedNotes1: Array<INote> = [];
+    let pinnedNotes2: Array<INote> = [];
+    if (pinnedNotes.length <= 2) {
+        pinnedNotes1 = pinnedNotes.slice(0, 2);
+        pinnedNotes2;
+    } else if (pinnedNotes.length === 3) {
+        pinnedNotes1 = pinnedNotes.slice(0, 2);
+        pinnedNotes2 = pinnedNotes.slice(2, 3);
+    } else {
+        pinnedNotes1 = pinnedNotes.slice(0, 2);
+        pinnedNotes2 = pinnedNotes.slice(2, 4);
     }
 
     return (
@@ -152,26 +173,29 @@ const DashboardView = (): JSX.Element => {
             </div>
 
             <div className={styles.midContainer}>
-                <div className={styles.greetingsContainer}>
-                    <div className={styles.heading}>
-                        <h1>Good Morning,</h1>
-                        <h1>Sonja</h1>
-                    </div>
+                <div className={styles.margin} />
+                <div className={styles.midContentContainer}>
+                    <div className={styles.greetingsContainer}>
+                        <div className={styles.heading}>
+                            <h1>Good Morning,</h1>
+                            <h1>Sonja</h1>
+                        </div>
 
-                    <div className={styles.date}>
-                        <label className={styles.label}>
-                            16 September 2021
-                        </label>
+                        <div className={styles.date}>
+                            <label className={styles.label}>
+                                16 September 2021
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div className={styles.viewNotesContainer}>
-                    <Icon
-                        name="sticky note outline"
-                        size="big"
-                        onClick={navigateNotes}
-                    />
-                    <div className={styles.viewAllNotesContainer}>
-                        View <p>all notes</p>
+                    <div className={styles.viewNotesContainer}>
+                        <Icon
+                            name="sticky note outline"
+                            size="big"
+                            onClick={navigateNotes}
+                        />
+                        <div className={styles.viewAllNotesContainer}>
+                            View <p>all notes</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,8 +219,19 @@ const DashboardView = (): JSX.Element => {
                 <div className={styles.tumbtackContainer}>
                     <Icon name="thumbtack" size="big" />
                 </div>
-                <div className={styles.pinnedContainer}>
-                    {pinnedNotes.map((note: INote) => {
+                <div className={styles.pinnedLeftContainer}>
+                    {pinnedNotes1.map((note: INote) => {
+                        return (
+                            <Note
+                                note={note}
+                                mode={NoteModes.STANDARD}
+                                key={note._id}
+                            />
+                        );
+                    })}
+                </div>
+                <div className={styles.pinnedRightContainer}>
+                    {pinnedNotes2.map((note: INote) => {
                         return (
                             <Note
                                 note={note}
