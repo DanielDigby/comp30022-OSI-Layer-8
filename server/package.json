@@ -9,7 +9,7 @@
     "scripts": {
         "build": "tsc",
         "start": "node .",
-        "dev": "ts-node-dev --poll --respawn -- src/index.ts",
+        "dev": "nodemon -L src/index.ts",
         "test": "jest"
     },
     "jest": {
@@ -60,14 +60,13 @@
         "eslint-plugin-security": "^1.4.0",
         "jest": "^27.0.6",
         "mongodb-memory-server": "^7.4.0",
-        "nodemon": "^2.0.12",
+        "nodemon": "^2.0.13",
         "prettier": "^2.3.2",
         "redis-mock": "^0.56.3",
         "superagent": "^6.1.0",
         "supertest": "^6.1.6",
         "ts-jest": "^27.0.4",
         "ts-node": "^10.1.0",
-        "ts-node-dev": "^1.1.8",
         "typescript": "^4.3.5"
     }
 }

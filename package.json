@@ -21,7 +21,7 @@
     "start": "yarn workspace server start",
     "local": "yarn workspace client dev & yarn workspace server dev",
     "build-dev": "yarn install && COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
-    "dev": "docker-compose up"
+    "dev": "docker-compose -p 'cara' up"
   },
   "packageManager": "yarn@3.0.0"
 }

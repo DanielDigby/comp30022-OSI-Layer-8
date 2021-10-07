@@ -15,8 +15,8 @@ authRouter.post("/register", createUser, authController.postLogin);
 authRouter.post(
     "/login",
     watchBruteforce,
-    passport.authenticate("local", { session: false }),
     validate(loginSchema),
+    passport.authenticate("local", { session: false }),
     authController.postLogin
 );
 
