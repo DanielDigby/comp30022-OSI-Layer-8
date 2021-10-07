@@ -35,6 +35,7 @@ describe("Notes API Helpers", () => {
 
                 // This is the note we are creating
                 const note = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -54,6 +55,7 @@ describe("Notes API Helpers", () => {
                 const apiNote = {
                     _id: "61514289e3c2e405ab49db7e",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -105,6 +107,7 @@ describe("Notes API Helpers", () => {
                 });
 
                 const note = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -117,6 +120,7 @@ describe("Notes API Helpers", () => {
                 const storeNote = {
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                     title: "NEW NOTE TEST",
+                    user: "sadfasdfas",
                     text: null,
                     image: null,
                     reminderTime: null,
@@ -158,6 +162,7 @@ describe("Notes API Helpers", () => {
                     },
                 });
                 const note = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -170,6 +175,7 @@ describe("Notes API Helpers", () => {
                 const apiNote = {
                     _id: "61514289e3c2e405ab49db7e",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -191,6 +197,7 @@ describe("Notes API Helpers", () => {
                 const noteUpdated = {
                     _id: "61514289e3c2e405ab49db7e",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    user: "sadfasdfas",
                     title: "UPDATED NAME",
                     text: "NEW TEXT",
                     image: null,
@@ -225,6 +232,7 @@ describe("Notes API Helpers", () => {
                 });
 
                 const note = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -246,6 +254,7 @@ describe("Notes API Helpers", () => {
                 const noteUpdated = {
                     title: "UPDATED NAME",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    user: "sadfasdfas",
                     _id: null,
                     text: null,
                     image: null,
@@ -281,6 +290,7 @@ describe("Notes API Helpers", () => {
                     },
                 });
                 const note = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -291,6 +301,7 @@ describe("Notes API Helpers", () => {
                     relatedNotes: [],
                 };
                 const apiNote = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                     _id: "61514289e3c2e405ab49db7e",
@@ -323,6 +334,7 @@ describe("Notes API Helpers", () => {
                     text: "NEW TEXT",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                     _id: "61514289e3c2e405ab49db7e",
+                    user: "sadfasdfas",
                     image: null,
                     reminderTime: null,
                     eventTime: null,
@@ -360,6 +372,7 @@ describe("Notes API Helpers", () => {
                     },
                 });
                 const note = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -370,6 +383,7 @@ describe("Notes API Helpers", () => {
                     relatedNotes: [],
                 };
                 const apiNote = {
+                    user: "sadfasdfas",
                     _id: "61514289e3c2e405ab49db7e",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                     title: "NEW NOTE TEST",
@@ -417,6 +431,7 @@ describe("Notes API Helpers", () => {
 
                 // This is the note we are creating
                 const note = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     text: null,
                     image: null,
@@ -427,6 +442,7 @@ describe("Notes API Helpers", () => {
                     relatedNotes: [],
                 };
                 const storeNote = {
+                    user: "sadfasdfas",
                     title: "NEW NOTE TEST",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                     _id: null,
@@ -474,6 +490,7 @@ describe("Notes API Helpers", () => {
                 },
             });
             const note = {
+                user: "sadfasdfas",
                 title: "NEW NOTE TEST",
                 text: null,
                 image: null,
@@ -484,6 +501,7 @@ describe("Notes API Helpers", () => {
                 relatedNotes: [],
             };
             const apiNote = {
+                user: "sadfasdfas",
                 title: "NEW NOTE TEST",
                 _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
                 _id: "61514289e3c2e405ab49db7e",
