@@ -19,7 +19,9 @@
     "heroku-prebuild": "yarn plugin import workspace-tools",
     "build": "yarn workspaces foreach run build",
     "start": "yarn workspace server start",
-    "dev": "yarn workspace client dev & yarn workspace server dev"
+    "local": "yarn workspace client dev & yarn workspace server dev",
+    "build-dev": "docker-compose build",
+    "dev": "docker-compose up"
   },
   "packageManager": "yarn@3.0.0"
 }
