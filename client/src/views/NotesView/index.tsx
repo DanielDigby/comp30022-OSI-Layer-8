@@ -24,6 +24,7 @@ const NotesView = (): JSX.Element => {
 
     const testNotes: Array<INote> = [
         {
+            user: store.getState().user.account._id,
             title: "NOTE TEST 1",
             _id: null,
             _clientId: uuid(),
@@ -36,6 +37,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
+            user: store.getState().user.account._id,
             title: "NOTE TEST 2",
             _id: null,
             _clientId: uuid(),
@@ -48,6 +50,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
+            user: store.getState().user.account._id,
             title: "NOTE TEST 3",
             _id: null,
             _clientId: uuid(),
@@ -60,6 +63,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
+            user: store.getState().user.account._id,
             title: "NOTE TEST 4",
             _id: null,
             _clientId: uuid(),
@@ -72,6 +76,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
+            user: store.getState().user.account._id,
             title: "NOTE TEST 5",
             _id: null,
             _clientId: uuid(),

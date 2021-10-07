@@ -1,4 +1,5 @@
 import React from "react";
+import { store } from "../../config/redux/store";
 import styles from "./HomeView.module.css";
 import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
@@ -23,6 +24,7 @@ const HomeView = (): JSX.Element => {
     const postNote = async () => {
         const note: INoteWithoutIds = {
             title: "NEW NOTE TEST",
+            user: store.getState().user.account._id,
             text: null,
             image: null,
             reminderTime: null,
@@ -37,6 +39,7 @@ const HomeView = (): JSX.Element => {
     const putNote = async () => {
         const note: INote = {
             title: "NEW NOTE TEST 2",
+            user: store.getState().user.account._id,
             _id: null,
             _clientId: "3deec471-f6b6-4f8a-8299-3eedd101552b",
             text: null,
@@ -53,6 +56,7 @@ const HomeView = (): JSX.Element => {
     const removeNote = async () => {
         const note: INote = {
             title: "EDIT NOTE TEST 2",
+            user: store.getState().user.account._id,
             _clientId: "3deec471-f6b6-4f8a-8299-3eedd101552b",
             _id: null,
             text: null,
