@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./NotesView.module.css";
 import globalStyles from "../../App.module.css";
-
+import { v4 as uuid } from "uuid";
 import { useHistory } from "react-router-dom";
 import { addTagAPI } from "../../helpers/api/tags";
 
 // Semantic UI button
 import { Menu, Icon, Input } from "semantic-ui-react";
+import { store } from "../../config/redux/store";
 
 const MenuItem = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateSettings = () => navHistory.push("/settings");
     const [show, setShow] = useState(false);
     const [tag, setTag] = useState("");
+    const baseFilters = ["Pinned", "Reminders", "Events"];
+    const [filterNames, updateFilterNames] = useState(baseFilters);
 
-    const handleTag = (e: React.ChangeEvent<HTMLInputElement>) => {
+    useEffect(() => {
+        async () => {
+            const userTags = await store.getState().user.account.tags;
+            updateFilterNames(baseFilters + userTags);
+        };
+    });
+
+    const handleTag = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setTag(e.target.value);
     };
 
@@ -25,10 +35,9 @@ const MenuItem = (): JSX.Element => {
             </div>
             <div className={`${globalStyles.sideMenu} ${styles.menu}`}>
                 <Menu fluid vertical tabular>
-                    <Menu.Item name="Pinned" />
-                    <Menu.Item name="Events" />
-                    <Menu.Item name="Contacts" />
-                    <Menu.Item name="Links" />
+                    {filterNames.map((name: string) => (
+                        <Menu.Item name={name} key={uuid()} />
+                    ))}
                 </Menu>
             </div>
             <div>
@@ -39,7 +48,15 @@ const MenuItem = (): JSX.Element => {
                     <Input
                         action={{
                             icon: "plus",
-                            onClick: () => (addTagAPI(tag), setShow(false)),
+                            onClick: () => (
+                                addTagAPI(tag),
+                                setShow(false),
+                                updateFilterNames(
+                                    baseFilters.concat(
+                                        store.getState().user.account.tags
+                                    )
+                                )
+                            ),
                         }}
                         placeholder="New Tag"
                         onChange={handleTag}
