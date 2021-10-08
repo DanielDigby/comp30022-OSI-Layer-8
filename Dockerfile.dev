@@ -10,17 +10,26 @@ COPY package.json .
 # copy and install all workspace packages
 RUN yarn plugin import workspace-tools
 
-# DEVELOPMENT BUILD
-FROM install-base AS develop-server
+# SERVER STAGES
+FROM install-base AS install-server
+
+# copy and install all workspace packages
+COPY ./server/package.json ./server/package.json
+RUN yarn workspaces focus server
+
+FROM install-server AS develop-server
 COPY ./server ./server
-RUN yarn workspace server install
 
 EXPOSE 8080
-CMD ["yarn", "workspace", "server", "dev"]
+CMD ["yarn", "workspace", "server", "container"]
 
-FROM install-base AS develop-client
+# CLIENT STAGES
+FROM install-base AS install-client
+COPY ./client/package.json ./client/package.json 
+RUN yarn workspaces focus client
+
+FROM install-client as develop-client
 COPY ./client ./client
-RUN yarn workspace client install
 
 EXPOSE 3000
 CMD ["yarn", "workspace", "client", "dev"]

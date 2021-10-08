@@ -3,21 +3,30 @@ import passport from "passport";
 import mongoose from "mongoose";
 import passportLocal from "passport-local";
 import passportJwt from "passport-jwt";
-import {
-    extractJwt,
-    checkJwtBlacklist,
-    validatePassword,
-} from "../../helpers/security";
-
+import { extractJwt, validatePassword } from "../../helpers/security";
 import { IUser } from "../../modules/user/userModel";
-import {
-    countBruteForce,
-    resetBruteForce,
-} from "../../helpers/security/bruteforce";
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 const User = mongoose.model("User");
 
 const LocalStrategy = passportLocal.Strategy;
 const JwtStrategy = passportJwt.Strategy;
+
+let cache: {
+    countBruteForce: (arg0: IUser, arg1: string, arg2: string) => void;
+    resetBruteForce: (arg0: string, arg1: string) => void;
+    checkJwtBlacklist: (
+        arg0: express.Request<
+            ParamsDictionary,
+            any,
+            any,
+            ParsedQs,
+            Record<string, any>
+        >
+    ) => any;
+};
+if (process.env.CACHE !== "false")
+    cache = require("../../helpers/security/cache");
 
 // Match email and password to locally stored values
 passport.use(
@@ -30,7 +39,9 @@ passport.use(
         async function localStrategyCB(req, email, password, done) {
             try {
                 const user = <IUser>await User.findOne({ email: email });
-                countBruteForce(user, email, req.ip);
+
+                if (process.env.CACHE !== "false")
+                    cache.countBruteForce(user, email, req.ip);
 
                 if (!user || !validatePassword(password, user.password)) {
                     return done(null, false);
@@ -38,7 +49,8 @@ passport.use(
 
                 // success
                 user.password = "redacted";
-                resetBruteForce(req.ip, email);
+                if (process.env.CACHE !== "false")
+                    cache.resetBruteForce(req.ip, email);
                 return done(null, user);
             } catch (err) {
                 return done(err);
@@ -66,7 +78,8 @@ passport.use(
             ) => void
         ) {
             try {
-                await checkJwtBlacklist(req);
+                if (process.env.CACHE !== "false")
+                    await cache.checkJwtBlacklist(req);
 
                 const user = <IUser>await User.findOne({ id: jwt_payload._id });
                 if (!user) {

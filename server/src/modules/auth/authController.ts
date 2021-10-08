@@ -1,5 +1,5 @@
 import express from "express";
-import { generateJwt, addJwtBlacklist } from "../../helpers/security";
+import { generateJwt } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
 const postLogin = async (req: IRequestWithUser, res: express.Response) => {
@@ -12,7 +12,10 @@ const postLogin = async (req: IRequestWithUser, res: express.Response) => {
 };
 
 const getLogout = async (req: IRequestWithUser, res: express.Response) => {
-    await addJwtBlacklist(req);
+    if (process.env.CACHE !== "false") {
+        const cache = require("../../helpers/security/cache");
+        await cache.addJwtBlacklist(req);
+    }
     return res
         .status(200)
         .cookie("jwt", "null", {

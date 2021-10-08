@@ -9,7 +9,8 @@
     "scripts": {
         "build": "tsc",
         "start": "node .",
-        "dev": "nodemon -L src/index.ts",
+        "dev": "cross-env-shell CACHE=false nodemon src/index.ts",
+        "container": "nodemon -L src/index.ts",
         "test": "jest"
     },
     "jest": {
@@ -54,6 +55,7 @@
         "@types/supertest": "^2.0.11",
         "@typescript-eslint/eslint-plugin": "^4.29.0",
         "@typescript-eslint/parser": "^4.29.0",
+        "cross-env": "^7.0.3",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",

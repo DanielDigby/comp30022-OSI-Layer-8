@@ -1,7 +1,8 @@
 import express from "express";
 import { IUser } from "../../modules/user/userModel";
-import { AppError } from "../../helpers/errors";
+import { AppError } from "../errors";
 import { redisClient } from "../../config/redis";
+import { extractJwt } from ".";
 import { RateLimiterRedis } from "rate-limiter-flexible";
 
 const maxWrongAttemptsByIPperDay = 100;
@@ -25,7 +26,7 @@ const limiterConsecutiveFailsByUsernameAndIP = new RateLimiterRedis({
 
 const getUsernameIPkey = (username: string, ip: string) => `${username}_${ip}`;
 
-export const watchBruteforce = async (
+const watchBruteforce = async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
@@ -66,7 +67,7 @@ export const watchBruteforce = async (
     }
 };
 
-export const resetBruteForce = async (ip: string, email: string) => {
+const resetBruteForce = async (ip: string, email: string) => {
     const usernameIPkey = getUsernameIPkey(email, ip);
 
     const resUsernameAndIP = await limiterConsecutiveFailsByUsernameAndIP.get(
@@ -79,11 +80,7 @@ export const resetBruteForce = async (ip: string, email: string) => {
     }
 };
 
-export const countBruteForce = async (
-    user: IUser,
-    email: string,
-    ip: string
-) => {
+const countBruteForce = async (user: IUser, email: string, ip: string) => {
     const usernameIPkey = getUsernameIPkey(email, ip);
 
     try {
@@ -116,4 +113,36 @@ export const countBruteForce = async (
         if (err instanceof AppError) return err;
         else return new AppError("Unknown", 500, err.message, false);
     }
+};
+
+const BLACKLISTKEY = "tokenBlacklist";
+
+const checkJwtBlacklist = async (req: express.Request) => {
+    const tokenId = extractJwt(req);
+    // check for blacklisted token
+    await redisClient.lrange(BLACKLISTKEY, 0, -1, (err, reply) => {
+        if (err) throw new AppError("Unknown", 500, err.message, false);
+        if (reply.includes(tokenId)) {
+            throw new AppError(
+                "Invalid token",
+                401,
+                "log in again to aquire a new token",
+                true
+            );
+        }
+    });
+};
+
+const addJwtBlacklist = async (req: express.Request) => {
+    const token = await extractJwt(req);
+    // add token to blacklist
+    await redisClient.rpush(BLACKLISTKEY, token);
+};
+
+module.exports = {
+    checkJwtBlacklist,
+    addJwtBlacklist,
+    watchBruteforce,
+    countBruteForce,
+    resetBruteForce,
 };
