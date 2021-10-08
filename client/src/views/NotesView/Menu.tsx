@@ -41,7 +41,6 @@ const MenuItem = (): JSX.Element => {
                             icon: "plus",
                             onClick: () => (addTagAPI(tag), setShow(false)),
                         }}
-                        h
                         placeholder="New Tag"
                         onChange={handleTag}
                     />

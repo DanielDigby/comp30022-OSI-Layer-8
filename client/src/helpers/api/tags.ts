@@ -1,10 +1,12 @@
 import { store } from "../../config/redux/store";
 import { updateUser } from "../../config/redux/userSlice";
+import lodash from "lodash";
 
 export const addTagAPI = (tag: string): void => {
-    const user = store.getState().user.account;
+    const user = lodash.cloneDeep(store.getState().user.account);
     user.tags.push(tag);
     store.dispatch(updateUser(user));
+    console.log(user.tags);
 };
 
 export const removeTagAPI = (tag: string): void => {
