@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import { generateJwt } from "../../helpers/security";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 
@@ -13,8 +12,10 @@ const postLogin = async (req: IRequestWithUser, res: express.Response) => {
 };
 
 const getLogout = async (req: IRequestWithUser, res: express.Response) => {
-    // TODO (Daniel) blacklist jwt on logout
-
+    if (process.env.CACHE !== "false") {
+        const cache = require("../../helpers/security/cache");
+        await cache.addJwtBlacklist(req);
+    }
     return res
         .status(200)
         .cookie("jwt", "null", {

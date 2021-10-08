@@ -159,7 +159,6 @@ describe("Note route tests", () => {
                 const count = await Note.countDocuments();
                 const note = {
                     _clientId: "somelongidgeneratedclientside",
-                    user: user._id,
                     title: "title",
                     text: "text",
                     image: "img",
@@ -213,9 +212,10 @@ describe("Note route tests", () => {
                     pinned: true,
                 });
                 await note.save();
-                const id = (await Note.findOne({ text: "text" }))._id;
+                const id: string = (await Note.findOne({ text: "text" }))._id;
 
                 const changedNote = {
+                    _id: id,
                     _clientId: "somelongidgeneratedclientside",
                     user: user._id,
                     title: "putChange",

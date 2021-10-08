@@ -4,6 +4,7 @@ export interface INote extends INoteWithoutIds {
 }
 
 export interface INoteWithoutIds {
+    user: string | null;
     title: string | null;
     text: string | null;
     image: string | null;

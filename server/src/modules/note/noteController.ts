@@ -2,8 +2,7 @@ import express from "express";
 import mongoose, { Document } from "mongoose";
 import { IRequestWithUser } from "../../interfaces/expressInterfaces";
 import { INote } from "./noteModel";
-import { validateUser } from "../../helpers/security/index"
-
+import { validateUser } from "../../helpers/security/index";
 
 // import model
 const Note = mongoose.model("Note");
@@ -11,7 +10,7 @@ const Note = mongoose.model("Note");
 // controller for getting all notes
 const getNotes = async (req: IRequestWithUser, res: express.Response) => {
     try {
-        const notes = await Note.find({ user: req.user._id });
+        const notes = await Note.find({ user: req.user._id.toString() });
         return res.status(200).send(notes);
     } catch (err) {
         return res.send(err);
@@ -24,9 +23,11 @@ const getNote = async (req: IRequestWithUser, res: express.Response) => {
         const id = req.params.Id;
         const note = await Note.findById(id);
 
-        validateUser((note as unknown as INote).user, 
-                        req.user._id,
-                        "Not able to get note");
+        validateUser(
+            (note as unknown as INote).user,
+            req.user._id,
+            "Not able to get note"
+        );
 
         return res.status(200).send(note);
     } catch (err) {
@@ -50,9 +51,11 @@ const postNote = async (req: IRequestWithUser, res: express.Response) => {
             relatedNotes: req.body?.relatedNotes,
         });
 
-        validateUser((newNote as unknown as INote).user, 
-                        req.user._id,
-                        "Not able to post note");
+        validateUser(
+            (newNote as unknown as INote).user,
+            req.user._id,
+            "Not able to post note"
+        );
 
         await newNote.save();
         return res.status(200).send(newNote);
@@ -69,9 +72,11 @@ const putNote = async (req: IRequestWithUser, res: express.Response) => {
             { _clientId: updatedNote._clientId },
             {}
         );
-        validateUser((note as unknown as INote).user, 
-                        req.user._id,
-                        "Not able to modify note");    
+        validateUser(
+            (note as unknown as INote).user,
+            req.user._id,
+            "Not able to modify note"
+        );
 
         Object.assign(note, updatedNote);
 
@@ -88,9 +93,11 @@ const deleteNote = async (req: IRequestWithUser, res: express.Response) => {
         const clientId = req.params.clientId;
         const note = await Note.findOne({ _clientId: clientId }, {});
 
-        validateUser((note as unknown as INote).user, 
-                        req.user._id,
-                        "Not able to delete note");    
+        validateUser(
+            (note as unknown as INote).user,
+            req.user._id,
+            "Not able to delete note"
+        );
 
         await note.remove();
         return res.status(200).send();
