@@ -24,9 +24,9 @@ const NotesView = (): JSX.Element => {
 
     const testNotes: Array<INote> = [
         {
-            user: store.getState().user.account._id,
+            user: store.getState().user.account,
             title: "NOTE TEST 1",
-            _id: null,
+            _id: "dsfradsf",
             _clientId: uuid(),
             text: "note1",
             image: null,
@@ -37,9 +37,9 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account._id,
+            user: store.getState().user.account,
             title: "NOTE TEST 2",
-            _id: null,
+            _id: "dsfradsf",
             _clientId: uuid(),
             text: "note2",
             image: null,
@@ -50,9 +50,9 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account._id,
+            user: store.getState().user.account,
             title: "NOTE TEST 3",
-            _id: null,
+            _id: "dsfradsf",
             _clientId: uuid(),
             text: "note3",
             image: null,
@@ -63,9 +63,9 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account._id,
+            user: store.getState().user.account,
             title: "NOTE TEST 4",
-            _id: null,
+            _id: "dsfradsf",
             _clientId: uuid(),
             text: "note4",
             image: null,
@@ -76,9 +76,9 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account._id,
+            user: store.getState().user.account,
             title: "NOTE TEST 5",
-            _id: null,
+            _id: "dsfradsf",
             _clientId: uuid(),
             text: "note5",
             image: null,
