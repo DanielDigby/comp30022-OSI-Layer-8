@@ -4,6 +4,7 @@ export interface INote extends INoteWithoutIds {
 }
 
 export interface INoteWithoutIds {
+    user: string | null;
     title: string | null;
     text: string | null;
     image: string | null;
@@ -12,4 +13,12 @@ export interface INoteWithoutIds {
     pinned: boolean;
     tags: Array<string>;
     relatedNotes: Array<string>;
+}
+
+export enum NoteModes {
+    STANDARD,
+    STANDARD_DETAIL,
+    EVENT,
+    EVENT_DETAIL,
+    EDIT,
 }

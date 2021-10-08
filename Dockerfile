@@ -27,6 +27,8 @@ FROM install-client AS build-client
 # copy source
 COPY ./client ./client
 
+ENV INLINE_RUNTIME_CHUNK false
+
 # build production files
 ENV NODE_ENV production
 RUN yarn workspace client build

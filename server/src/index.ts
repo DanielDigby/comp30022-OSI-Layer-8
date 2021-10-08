@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./helpers/errors";
 
@@ -10,14 +11,25 @@ require("./config/passport");
 const app = express();
 const port = process.env.PORT || 8080;
 
+// middleware
+app.use(helmet());
+app.use(require("sanitize").middleware);
+app.use(express.json({ limit: "300kb" }));
+app.use(cookieParser());
+
+// rate limit setup
+const rateLimit = require("express-rate-limit");
+app.set("trust proxy", 1);
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+});
+app.use("/api/", apiLimiter);
+
 // health route
 app.get("/api/", (_, res) => {
     res.status(200).send("alive");
 });
-
-// middleware
-app.use(express.json());
-app.use(cookieParser());
 
 // note URLs
 const noteRouter = require("./modules/note/noteRouter");
