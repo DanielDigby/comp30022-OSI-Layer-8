@@ -10,7 +10,7 @@
         "build": "tsc",
         "start": "node .",
         "dev": "cross-env-shell CACHE=false nodemon src/index.ts",
-        "container": "nodemon -L src/index.ts",
+        "docker": "nodemon -L src/index.ts",
         "test": "jest"
     },
     "jest": {

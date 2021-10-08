@@ -21,7 +21,7 @@ FROM install-server AS develop-server
 COPY ./server ./server
 
 EXPOSE 8080
-CMD ["yarn", "workspace", "server", "container"]
+CMD ["yarn", "workspace", "server", "docker"]
 
 # CLIENT STAGES
 FROM install-base AS install-client
@@ -30,6 +30,8 @@ RUN yarn workspaces focus client
 
 FROM install-client as develop-client
 COPY ./client ./client
+
+ENV DOCKER "true"
 
 EXPOSE 3000
 CMD ["yarn", "workspace", "client", "dev"]
