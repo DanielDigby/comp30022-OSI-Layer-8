@@ -1,10 +1,13 @@
 .Segment {
-    width: 50vw;
-    height: 1000px;
+    width: 65vw;
+    height: 50vh;
     line-height: 5vh;
 }
 
 .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     height: 5ch;
 }
 
@@ -12,6 +15,7 @@
     line-height: 1ch;
     padding-top: 1ch;
     padding-bottom: 3ch;
+    height: 60vh;
 }
 
 .bottom {

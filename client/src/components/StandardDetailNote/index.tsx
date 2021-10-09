@@ -4,7 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import { NoteProps } from "../../interfaces/note";
 import Text from "../ContentText/index";
 
-import { Segment } from "semantic-ui-react";
+import { Segment, Icon } from "semantic-ui-react";
 
 // Added a the <Route path="/note" component={Note} /> for this
 import Tag from "../Tag";
@@ -19,6 +19,7 @@ const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
                         <HeadingText
                             headingText={note.title ? note.title : ""}
                         />
+                        <Icon name="thumbtack" size="large" />
                     </div>
                     <div className={styles.middle}>
                         <Text text={note.text ? note.text : ""} />
