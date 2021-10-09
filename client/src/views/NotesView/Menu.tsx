@@ -30,40 +30,46 @@ const MenuItem = (): JSX.Element => {
 
     return (
         <div className={styles.containerLeft}>
-            <div>
-                <Icon name="tag" size="large" />
-            </div>
-            <div className={`${globalStyles.sideMenu} ${styles.menu}`}>
-                <Menu fluid vertical tabular>
-                    {filterNames.map((name: string) => (
-                        <Menu.Item name={name} key={uuid()} />
-                    ))}
-                </Menu>
-            </div>
-            <div>
-                <Icon name="plus" size="large" onClick={() => setShow(!show)} />
-            </div>
-            <div className={styles.input}>
-                {show ? (
-                    <Input
-                        action={{
-                            icon: "plus",
-                            onClick: () => (
-                                addTagAPI(tag),
-                                setShow(false),
-                                updateFilterNames(
-                                    baseFilters.concat(
-                                        store.getState().user.account.tags
-                                    )
-                                )
-                            ),
-                        }}
-                        placeholder="New Tag"
-                        onChange={handleTag}
+            <div className={styles.sideContainer}>
+                <div>
+                    <Icon name="tag" size="large" />
+                </div>
+                <div className={`${globalStyles.sideMenu} ${styles.menu}`}>
+                    <Menu fluid vertical tabular>
+                        {filterNames.map((name: string) => (
+                            <Menu.Item name={name} key={uuid()} />
+                        ))}
+                    </Menu>
+                </div>
+                <div>
+                    <Icon
+                        name="plus"
+                        size="large"
+                        onClick={() => setShow(!show)}
                     />
-                ) : null}
+                </div>
+                <div className={styles.input}>
+                    {show ? (
+                        <Input
+                            action={{
+                                icon: "plus",
+                                onClick: () => (
+                                    addTagAPI(tag),
+                                    setShow(false),
+                                    updateFilterNames(
+                                        baseFilters.concat(
+                                            store.getState().user.account.tags
+                                        )
+                                    )
+                                ),
+                            }}
+                            placeholder="New Tag"
+                            onChange={handleTag}
+                        />
+                    ) : null}
+                </div>
             </div>
-            <div>
+            <div className={styles.settingContainer}>
                 <Icon
                     name="cog"
                     size="large"
