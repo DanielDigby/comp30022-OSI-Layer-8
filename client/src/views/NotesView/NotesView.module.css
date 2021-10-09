@@ -50,6 +50,7 @@
 .input {
     display: flex;
     flex-direction: column;
-    width: 10vw;
+    width: 15vw;
+    padding-right: 3vw;
     align-items: left;
 }
