@@ -22,6 +22,15 @@ const DashboardView = (): JSX.Element => {
     // Boot user out if not logged in
     if (!store.user.account) history.push("/login");
 
+    if (store.user.isNewLogin) {
+        const shouldInstall = confirm(
+            "Would you like to install cara to your device?\n\n" +
+                "Installing will enable offline usage"
+        );
+        if (shouldInstall) register();
+        dispatch(toggleIsNewLogin());
+    }
+
     /* get the First name of User */
     //const firstName = store.getState().user.firstName;
 
@@ -172,14 +181,6 @@ const DashboardView = (): JSX.Element => {
     } else {
         pinnedNotes1 = pinnedNotes.slice(0, 2);
         pinnedNotes2 = pinnedNotes.slice(2, 4);
-    }
-
-    if (store.user.isNewLogin) {
-        const shouldInstall = confirm(
-            "Would you like to install cara to your homescreen?"
-        );
-        if (shouldInstall) register();
-        dispatch(toggleIsNewLogin());
     }
 
     return (
