@@ -1,5 +1,9 @@
 import { IUser, INewUser } from "../../interfaces/user";
-import { setUser, updateUser } from "../../config/redux/userSlice";
+import {
+    setUser,
+    toggleIsNewLogin,
+    updateUser,
+} from "../../config/redux/userSlice";
 import { setNotes } from "../../config/redux/noteSlice";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
 import {
@@ -31,6 +35,8 @@ export const logInAPI = async (credentials: Credentials): Promise<void> => {
         const notes = notesRes.data;
         if (notes) store.dispatch(setNotes(notes));
         else throw new Error(notesRes.statusText);
+        if (store.getState().user.isNewLogin == false)
+            store.dispatch(toggleIsNewLogin());
     } else throw new Error(authRes.statusText);
 };
 

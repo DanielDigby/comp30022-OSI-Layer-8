@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleIsNewLogin } from "../../config/redux/userSlice";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import ProfileImage from "../NotesView/ProfileImage";
-import { store } from "../../config/redux/store";
+import { RootState } from "../../config/redux/store";
+import { register } from "../../serviceWorkerRegistration";
 
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
 import { INote, NoteModes } from "../../interfaces/note";
@@ -13,12 +16,20 @@ const DashboardView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
     const navigateNotes = () => history.push("/notes");
-    const redux = store.getState();
+    const store = useSelector((state: RootState) => state);
+    const dispatch = useDispatch();
 
     // Boot user out if not logged in
-    useEffect(() => {
-        if (!store.getState().user.account) history.push("/login");
-    });
+    if (!store.user.account) history.push("/login");
+
+    if (store.user.isNewLogin) {
+        const shouldInstall = confirm(
+            "Would you like to install cara to your device?\n\n" +
+                "Installing will enable offline usage"
+        );
+        if (shouldInstall) register();
+        dispatch(toggleIsNewLogin());
+    }
 
     /* get the First name of User */
     //const firstName = store.getState().user.firstName;
@@ -32,7 +43,7 @@ const DashboardView = (): JSX.Element => {
 
     const allNotes: Array<INote> = [
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "sdjfasdfa",
             _clientId: "sfhkjasd",
             title: "event-october",
@@ -45,7 +56,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "alvndslks",
             _clientId: "hdjaasdsdakjasd",
             title: "event-december",
@@ -58,7 +69,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "alsdkfasd",
             _clientId: "hdjafsaasd",
             title: "no event or pin",
@@ -71,7 +82,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "aslslfvjd",
             _clientId: "sfhkjasd",
             title: "event-november",
@@ -84,7 +95,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "sdhfjhas",
             _clientId: "hdjaasdsdakjasd",
             title: "pinned-one",
@@ -97,7 +108,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "sfkadfklhasdfa",
             _clientId: "hdjafsaasd",
             title: "pinned-two",
@@ -110,7 +121,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "sfkadfknxmxcnx",
             _clientId: "hdjafsaasd",
             title: "pinned-three",
@@ -123,7 +134,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "sfjsncohslcmx",
             _clientId: "hdjafsaasd",
             title: "pinned-four",
@@ -136,7 +147,7 @@ const DashboardView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: redux.user.account,
+            user: store.user.account,
             _id: "sfjsqoqoqx",
             _clientId: "hdjafsaasd",
             title: "pinned-five",
