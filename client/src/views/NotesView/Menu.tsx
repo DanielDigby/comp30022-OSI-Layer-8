@@ -7,7 +7,8 @@ import { addTagAPI } from "../../helpers/api/tags";
 
 // Semantic UI button
 import { Menu, Icon, Input } from "semantic-ui-react";
-import { store } from "../../config/redux/store";
+import { store, RootState } from "../../config/redux/store";
+import { useSelector } from "react-redux";
 
 const MenuItem = (): JSX.Element => {
     const navHistory = useHistory();
@@ -15,13 +16,13 @@ const MenuItem = (): JSX.Element => {
     const [show, setShow] = useState(false);
     const [tag, setTag] = useState("");
     const baseFilters = ["Pinned", "Reminders", "Events"];
-    const [filterNames, updateFilterNames] = useState(baseFilters);
+
+    const userTags = useSelector((state: RootState) => state.user.account.tags);
+    const [filterNames, updateFilterNames] = useState(baseFilters + userTags);
 
     useEffect(() => {
-        async () => {
-            const userTags = await store.getState().user.account.tags;
-            updateFilterNames(baseFilters + userTags);
-        };
+        //const userTags = store.getState().user.account.tags;
+        updateFilterNames(baseFilters + userTags);
     });
 
     const handleTag = async (e: React.ChangeEvent<HTMLInputElement>) => {
