@@ -11,6 +11,9 @@ import RegisterView from "./views/RegisterView";
 import DashboardView from "./views/DashboardView";
 import SettingsView from "./views/SettingsView";
 
+// Page to test what the note looks like
+import NoteTestView from "./components/Note/testview";
+
 const App = (): JSX.Element => {
     return (
         <div className={styles.pageContainer}>
@@ -23,6 +26,9 @@ const App = (): JSX.Element => {
                 <Route path="/dashboard" component={DashboardView} />
                 <Route path="/settings" component={SettingsView} />
                 <Route path="/notes" component={NotesView} />
+
+                {/* Delete this after testing */}
+                <Route path="/test" component={NoteTestView} />
             </Switch>
         </div>
     );
