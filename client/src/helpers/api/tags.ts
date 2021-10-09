@@ -7,7 +7,6 @@ export const addTagAPI = (tag: string): void => {
         const user = lodash.cloneDeep(store.getState().user.account);
         user.tags.push(tag);
         store.dispatch(updateUser(user));
-        console.log(user.tags);
     }
 };
 
