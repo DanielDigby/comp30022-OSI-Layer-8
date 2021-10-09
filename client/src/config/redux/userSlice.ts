@@ -39,8 +39,8 @@ export const userSlice = createSlice({
                     meta: {
                         offline: {
                             effect: {
-                                url: USERS,
-                                method: "POST",
+                                url: USERS + "/" + user._id,
+                                method: "PUT",
                             },
                         },
                     },
