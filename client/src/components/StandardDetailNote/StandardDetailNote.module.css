@@ -1,5 +1,18 @@
 .Segment {
-    width: 100vw;
-    height: 50px;
+    width: 50vw;
+    height: 1000px;
     line-height: 5vh;
+}
+
+.top {
+    height: 5ch;
+}
+
+.middle {
+    line-height: 1ch;
+    padding-top: 1ch;
+    padding-bottom: 3ch;
+}
+
+.bottom {
 }

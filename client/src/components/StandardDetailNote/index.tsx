@@ -15,11 +15,19 @@ const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
         <div className={styles.Segment}>
             <Segment.Group raised>
                 <Segment>
-                    <HeadingText headingText={note.title ? note.title : ""} />
-                    <Text text={note.text ? note.text : ""} />
-                    <a>
-                        <Tag tagName={note.tags[0]} />
-                    </a>
+                    <div className={styles.top}>
+                        <HeadingText
+                            headingText={note.title ? note.title : ""}
+                        />
+                    </div>
+                    <div className={styles.middle}>
+                        <Text text={note.text ? note.text : ""} />
+                    </div>
+                    <div className={styles.bottom}>
+                        <a>
+                            <Tag tagName={note.tags[0]} />
+                        </a>
+                    </div>
                 </Segment>
             </Segment.Group>
         </div>
