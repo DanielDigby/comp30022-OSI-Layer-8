@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleIsNewLogin } from "../../config/redux/userSlice";
 import styles from "./DashboardView.module.css";
