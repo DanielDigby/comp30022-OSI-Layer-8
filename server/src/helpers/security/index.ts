@@ -1,9 +1,10 @@
-import bcrypt from "bcrypt";
+import express from "express";
 import jsonwebtoken from "jsonwebtoken";
 import { IUser } from "../../modules/user/userModel";
 import { IRequestWithCookie } from "../../interfaces/expressInterfaces";
 import { ObjectId } from "mongoose";
 import { AppError } from "../../helpers/errors";
+const bcrypt = require("bcryptjs");
 
 export function validatePassword(password1: string, password2: string) {
     return bcrypt.compareSync(password1, password2);
@@ -36,12 +37,6 @@ export function extractJwt(req: IRequestWithCookie) {
 // Throw an AppError if the user making the request is not the same as the request resource's
 export function validateUser(id1: ObjectId, id2: ObjectId, msg: string) {
     if (id1.toString() !== id2.toString()) {
-        throw new AppError(
-            "Forbidden",
-            403,
-            msg,
-            true
-        );
-    }  
+        throw new AppError("Forbidden", 403, msg, true);
+    }
 }
-

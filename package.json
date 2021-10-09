@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "yarn": "3.0.0"
   },
   "workspaces": {
     "packages": [
@@ -18,11 +19,10 @@
     "heroku-prebuild": "yarn plugin import workspace-tools",
     "build": "yarn workspaces foreach run build",
     "start": "yarn workspace server start",
-    "dev": "yarn workspace client dev & yarn workspace server dev"
+    "dev": "yarn workspace client dev & yarn workspace server dev",
+    "image": "yarn install && COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
+    "docker": "docker-compose -p 'cara' up",
+    "down": "docker-compose down"
   },
-  "packageManager": "yarn@3.0.0",
-  "devDependencies": {
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.3"
-  }
+  "packageManager": "yarn@3.0.0"
 }
