@@ -55,6 +55,7 @@ const MenuItem = (): JSX.Element => {
                                 icon: "plus",
                                 onClick: () => (
                                     addTagAPI(tag),
+                                    setTag(""),
                                     setShow(false),
                                     updateFilterNames(
                                         baseFilters.concat(
