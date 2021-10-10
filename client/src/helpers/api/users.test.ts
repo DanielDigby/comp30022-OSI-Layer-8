@@ -212,10 +212,26 @@ describe("Users API Helpers", () => {
                 });
                 const note = {
                     title: "NEW NOTE TEST",
+                    user: "asfhdklasdjfl",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 const storeNote = {
                     title: "NEW NOTE TEST",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    user: "asfhdklasdjfl",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 jest.spyOn(uuid, "v4").mockImplementation(
                     () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
