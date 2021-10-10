@@ -4,6 +4,7 @@ import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/c
 import { store, RESET_BASE } from "../../config/redux/store";
 import axios from "axios";
 import * as uuid from "uuid";
+import { createMemoryHistory } from "history";
 
 jest.mock("axios");
 jest.mock("uuid");
@@ -159,8 +160,7 @@ describe("Users API Helpers", () => {
                 (axios.get as unknown as jest.Mock).mockResolvedValueOnce(
                     mockRes3
                 );
-
-                await logOutAPI();
+                await logOutAPI(createMemoryHistory());
 
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
@@ -229,7 +229,7 @@ describe("Users API Helpers", () => {
                 );
 
                 expect(async () => {
-                    await logOutAPI();
+                    await logOutAPI(createMemoryHistory());
                 }).rejects.toEqual(Error("Non Empty Outbox"));
 
                 const user = store.getState().user.account;
@@ -257,7 +257,7 @@ describe("Users API Helpers", () => {
                 );
 
                 expect(async () => {
-                    await logOutAPI();
+                    await logOutAPI(createMemoryHistory());
                 }).rejects.toEqual(Error("Unauthorized"));
             }
         );
