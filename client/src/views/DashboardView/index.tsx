@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import ProfileImage from "../NotesView/ProfileImage";
 import { RootState } from "../../config/redux/store";
-import { register } from "../../serviceWorkerRegistration";
 import { InstallPrompt } from "./InstallPrompt";
+import { capitalize } from "lodash";
 
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
 import { INote, NoteModes } from "../../interfaces/note";
@@ -185,8 +185,8 @@ const DashboardView = (): JSX.Element => {
         <div className={styles.basecontainer}>
             <div className={styles.topcontainer}>
                 <ProfileImage
-                    firstName="Sonja"
-                    lastName="Pedell"
+                    firstName={capitalize(store.user.account.firstName)}
+                    lastName={capitalize(store.user.account.lastName)}
                     onClick={navigateDashboard}
                 />
             </div>
@@ -196,20 +196,25 @@ const DashboardView = (): JSX.Element => {
                 <div className={styles.midContentContainer}>
                     <div className={styles.greetingsContainer}>
                         <div className={styles.heading}>
-                            <h1>Good Morning,</h1>
-                            <h1>Sonja</h1>
-                        </div>
-
-                        <div className={styles.date}>
-                            <label className={styles.label}>
-                                16 September 2021
-                            </label>
+                            <h1>
+                                Good Morning, <br />
+                                {capitalize(store.user.account.firstName)}
+                            </h1>
+                            <div className={styles.date}>
+                                {new Date(Date.now()).toLocaleString("en-US", {
+                                    weekday: "long",
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </div>
                         </div>
                     </div>
                     <div className={styles.viewNotesContainer}>
                         <Icon
-                            name="sticky note outline"
+                            name="arrow right"
                             size="big"
+                            color="grey"
                             onClick={navigateNotes}
                         />
                         <div className={styles.viewAllNotesContainer}>
@@ -221,7 +226,7 @@ const DashboardView = (): JSX.Element => {
 
             <div className={styles.bottomContainer}>
                 <div className={styles.calendarContainer}>
-                    <Icon name="calendar alternate" size="big" />
+                    <Icon name="calendar alternate" color="orange" size="big" />
                 </div>
                 <div className={styles.eventsContainer}>
                     {eventNotes.map((note: INote) => {
@@ -236,7 +241,7 @@ const DashboardView = (): JSX.Element => {
                 </div>
 
                 <div className={styles.tumbtackContainer}>
-                    <Icon name="thumbtack" size="big" />
+                    <Icon name="thumbtack" color="orange" size="big" />
                 </div>
                 <div className={styles.pinnedNotesContainer}>
                     <div className={styles.pinnedTopContainer}>

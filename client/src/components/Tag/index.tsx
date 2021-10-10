@@ -11,7 +11,7 @@ const Tag = ({ tagName }: TagProps): JSX.Element => {
     // api call
     return (
         <div>
-            <Icon name="tag" />
+            <Icon name="tag" color="grey" />
             {tagName}
         </div>
     );
