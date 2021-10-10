@@ -7,6 +7,7 @@ import { Icon } from "semantic-ui-react";
 import ProfileImage from "../NotesView/ProfileImage";
 import { RootState } from "../../config/redux/store";
 import { register } from "../../serviceWorkerRegistration";
+import { InstallPrompt } from "./InstallPrompt";
 
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
 import { INote, NoteModes } from "../../interfaces/note";
@@ -14,22 +15,19 @@ import Note from "../../components/Note";
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
-    const navigateDashboard = () => history.push("/dashboard");
-    const navigateNotes = () => history.push("/notes");
+    const navigateDashboard = () => {
+        if (store.user.isNewLogin) dispatch(toggleIsNewLogin());
+        history.push("/dashboard");
+    };
+    const navigateNotes = () => {
+        if (store.user.isNewLogin) dispatch(toggleIsNewLogin());
+        history.push("/notes");
+    };
     const store = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
 
     // Boot user out if not logged in
     if (!store.user.account) history.push("/login");
-
-    if (store.user.isNewLogin) {
-        const shouldInstall = confirm(
-            "Would you like to install cara to your device?\n\n" +
-                "Installing will enable offline usage"
-        );
-        if (shouldInstall) register();
-        dispatch(toggleIsNewLogin());
-    }
 
     /* get the First name of User */
     //const firstName = store.getState().user.firstName;
@@ -266,6 +264,7 @@ const DashboardView = (): JSX.Element => {
                     </div>
                 </div>
             </div>
+            {store.user.isNewLogin && <InstallPrompt />}
         </div>
     );
 };
