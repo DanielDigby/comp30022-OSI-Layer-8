@@ -73,14 +73,12 @@ const MenuItem = (): JSX.Element => {
                 </div>
             </div>
             <div className={styles.settings}>
-                <div className={styles.icon}>
-                    <Icon
-                        name="cog"
-                        size="large"
-                        color="grey"
-                        onClick={() => navigateSettings()}
-                    />
-                </div>
+                <Icon
+                    name="cog"
+                    size="big"
+                    color="grey"
+                    onClick={() => navigateSettings()}
+                />
             </div>
         </div>
     );

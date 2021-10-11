@@ -1,27 +1,42 @@
-.footer {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    margin-bottom: 50px;
-}
-
 .container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 1112px;
-    height: 834px;
-    background-color: #aaaa;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
 }
 
 .block {
     display: flex;
     flex-direction: column;
-    width: 70%;
-    height: 45%;
+    width: 90%;
+    min-height: 300px;
+}
 
-    left: 25%;
-    top: 5%;
+.leftBanner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15vw;
+}
+
+.signOut {
+    margin-left: 28px;
+    margin-top: 30px;
+}
+
+.backButton {
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 10vh;
+    margin-left: 10vw;
+    width: 100%;
 }
 
 .heading {
@@ -31,8 +46,6 @@
 }
 
 .personal {
-    margin-top: 10px;
-    margin-left: 10px;
     display: grid;
     grid-template-columns: 40% 60%;
 }
