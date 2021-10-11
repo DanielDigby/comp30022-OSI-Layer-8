@@ -7,9 +7,7 @@ const ColourBlocks = (): JSX.Element => {
     return (
         <div className={styles.blocks}>
             <div className={styles.block}>
-                <Segment raised className={styles.colour}>
-                    light
-                </Segment>
+                <Segment raised className={styles.colour}></Segment>
                 <Checkbox className={styles.checkbox} label="light" />
             </div>
             <div className={styles.block}>

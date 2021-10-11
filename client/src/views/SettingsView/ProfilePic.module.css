@@ -6,6 +6,7 @@
 }
 
 .heading {
+    font-size: 20px;
     margin-left: 20%;
     display: grid;
     grid-template-columns: 70% 30%;

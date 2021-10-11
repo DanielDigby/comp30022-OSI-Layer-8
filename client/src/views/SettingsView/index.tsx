@@ -49,7 +49,7 @@ const SettingsView = (): JSX.Element => {
                 <div className={styles.main}>
                     <Segment raised className={styles.block}>
                         <div className={styles.heading}>
-                            <h3>personal details</h3>
+                            <h3>Personal details</h3>
                         </div>
                         {/* All the different forms to enter, split 30% for forms 70% for profile pic */}
                         <div className={styles.personal}>
@@ -61,17 +61,22 @@ const SettingsView = (): JSX.Element => {
                             </div>
                         </div>
                         {/* Section for the password and confirmation forms */}
-                        <div className={styles.password}>
-                            <PasswordForm />
-                        </div>
+                        {false && (
+                            <div className={styles.password}>
+                                <PasswordForm />
+                            </div>
+                        )}
                     </Segment>
                     {/* Bottom block of settings */}
-                    <Segment raised className={styles.block}>
-                        <div className={styles.heading}>
-                            <h3>color schemes</h3>
-                        </div>
-                        <ColourBlocks />
-                    </Segment>
+                    {/* TOGGLE OFF FALSE TO REENABLE FEATURE WHEN READY TO WORK ON COLOURSCHEMES */}
+                    {false && (
+                        <Segment raised className={styles.block}>
+                            <div className={styles.heading}>
+                                <h3>color schemes</h3>
+                            </div>
+                            <ColourBlocks />
+                        </Segment>
+                    )}
                 </div>
             </div>
         </div>
