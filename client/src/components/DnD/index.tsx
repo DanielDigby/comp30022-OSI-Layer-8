@@ -24,101 +24,96 @@ export enum DnDModes {
 interface DnDProps {
     updateColumns: React.Dispatch<React.SetStateAction<ColumnDict>>;
     columns: ColumnDict;
-    mode: DnDModes;
 }
-export const DnD = ({
-    updateColumns,
-    columns,
-    mode,
-}: DnDProps): JSX.Element => {
+export const DnD = ({ updateColumns, columns }: DnDProps): JSX.Element => {
     // IMPORTANT:
     // Idea here is to define the styles for different DnD layouts in dragAndDrop.module.css
     // and switch based on mode - all other logic should be able to stay same
-    let style: string;
-    switch (mode) {
-        case DnDModes.NOTES:
-            style = dndStyles.notesSection;
-            break;
-        default:
-            style = "";
-            break;
-    }
     return (
-        <div className={style}>
-            <DragDropContext
-                onDragEnd={(result: DropResult) =>
-                    onDragEnd(result, columns, updateColumns)
-                }
-            >
-                {/* For every column */}
-                {Object.entries(columns).map(([id, column]) => {
-                    return (
-                        <Droppable droppableId={id} key={id}>
-                            {(provided) => {
-                                return (
-                                    <div
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef}
-                                        className={dndStyles.column}
-                                    >
-                                        {column.items.map(
-                                            (note: INote, index: number) => {
-                                                return (
-                                                    /* Wrap each item in draggable */
-                                                    <Draggable
-                                                        key={note._clientId}
-                                                        draggableId={
-                                                            note._clientId
-                                                        }
-                                                        index={index}
-                                                    >
-                                                        {(
-                                                            provided,
-                                                            snapshot
-                                                        ) => {
-                                                            return (
-                                                                <div
-                                                                    ref={
-                                                                        provided.innerRef
-                                                                    }
-                                                                    {...provided.draggableProps}
-                                                                    {...provided.dragHandleProps}
-                                                                    className={
-                                                                        dndStyles.item
-                                                                    }
-                                                                    /* If an item is being dragged, change its color */
-                                                                    style={{
-                                                                        backgroundColor:
-                                                                            snapshot.draggingOver,
-                                                                        ...provided
-                                                                            .draggableProps
-                                                                            .style,
-                                                                    }}
-                                                                >
-                                                                    {/* THIS DIV IS WHERE THE NOTE OBJECT SHOULD BE RENDERED */}
-                                                                    <Note
-                                                                        note={
-                                                                            note
-                                                                        }
-                                                                        mode={
-                                                                            NoteModes.STANDARD
-                                                                        }
-                                                                    />
-                                                                </div>
-                                                            );
-                                                        }}
-                                                    </Draggable>
-                                                );
-                                            }
-                                        )}
-                                        {provided.placeholder}
-                                    </div>
-                                );
-                            }}
-                        </Droppable>
-                    );
-                })}
-            </DragDropContext>
+        <div className={dndStyles.scroll}>
+            <div className={dndStyles.dndContainer}>
+                <div className={dndStyles.notesSection}>
+                    <DragDropContext
+                        onDragEnd={(result: DropResult) =>
+                            onDragEnd(result, columns, updateColumns)
+                        }
+                    >
+                        {/* For every column */}
+                        {Object.entries(columns).map(([id, column]) => {
+                            return (
+                                <Droppable droppableId={id} key={id}>
+                                    {(provided) => {
+                                        return (
+                                            <div
+                                                {...provided.droppableProps}
+                                                ref={provided.innerRef}
+                                                className={dndStyles.column}
+                                            >
+                                                {column.items.map(
+                                                    (
+                                                        note: INote,
+                                                        index: number
+                                                    ) => {
+                                                        return (
+                                                            /* Wrap each item in draggable */
+                                                            <Draggable
+                                                                key={
+                                                                    note._clientId
+                                                                }
+                                                                draggableId={
+                                                                    note._clientId
+                                                                }
+                                                                index={index}
+                                                            >
+                                                                {(
+                                                                    provided,
+                                                                    snapshot
+                                                                ) => {
+                                                                    return (
+                                                                        <div
+                                                                            ref={
+                                                                                provided.innerRef
+                                                                            }
+                                                                            {...provided.draggableProps}
+                                                                            {...provided.dragHandleProps}
+                                                                            className={
+                                                                                dndStyles.item
+                                                                            }
+                                                                            /* If an item is being dragged, change its color */
+                                                                            style={{
+                                                                                backgroundColor:
+                                                                                    snapshot.draggingOver,
+                                                                                ...provided
+                                                                                    .draggableProps
+                                                                                    .style,
+                                                                            }}
+                                                                        >
+                                                                            {/* THIS DIV IS WHERE THE NOTE OBJECT SHOULD BE RENDERED */}
+                                                                            <Note
+                                                                                note={
+                                                                                    note
+                                                                                }
+                                                                                mode={
+                                                                                    NoteModes.STANDARD
+                                                                                }
+                                                                            />
+                                                                        </div>
+                                                                    );
+                                                                }}
+                                                            </Draggable>
+                                                        );
+                                                    }
+                                                )}
+                                                {provided.placeholder}
+                                            </div>
+                                        );
+                                    }}
+                                </Droppable>
+                            );
+                        })}
+                    </DragDropContext>
+                </div>
+            </div>
         </div>
     );
 };

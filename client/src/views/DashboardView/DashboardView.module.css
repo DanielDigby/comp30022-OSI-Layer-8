@@ -4,19 +4,18 @@
     flex-direction: column;
     width: 100%;
     height: 10vh;
-    padding-top: 10px;
-    padding-left: 10px;
 }
 
 .cog {
-    margin-top: 10px;
-    margin-left: 7px;
+    margin-top: 20px;
+    margin-left: 27.5px;
 }
 
 /* Container for the greeting, date, and link to all notes*/
 .midContainer {
     display: flex;
     width: 73%;
+    margin-top: 7%;
     align-items: stretch;
     flex-direction: row;
     align-content: top;
@@ -45,7 +44,7 @@
 /* Container for event notes */
 .eventsContainer {
     display: flex;
-    width: 32%;
+    width: 45%;
     flex-direction: column;
     align-items: stretch;
 }
@@ -80,6 +79,7 @@
 .tumbtackContainer {
     display: flex;
     width: 5%;
+    margin-right: 13px;
 }
 
 /* eventNote box*/
@@ -113,6 +113,7 @@
     width: 62%;
     flex-direction: row-reverse;
     align-items: center;
+    margin-right: 6%;
 }
 
 .greetingsContainer {
@@ -128,6 +129,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.greeting {
+    font-size: 40px;
+    line-height: 50px;
+    width: 300px;
 }
 
 .date {
