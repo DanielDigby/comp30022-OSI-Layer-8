@@ -1,4 +1,7 @@
 .footer {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
     margin-bottom: 50px;
 }
 
@@ -36,4 +39,8 @@
 
 .forms {
     height: 70%;
+}
+
+.backbutton {
+    margin-top: 10px;
 }
