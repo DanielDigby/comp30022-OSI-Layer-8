@@ -8,6 +8,7 @@ import { Segment } from "semantic-ui-react";
 // Added a the <Route path="/note" component={Note} /> for this
 import Tag from "../Tag";
 import Event from "../Event";
+import Time from "../Time";
 
 /* Deleted NotesText folder and it's working now */
 interface NoteProps {
@@ -34,6 +35,9 @@ const Note = ({ note }: NoteProps): JSX.Element => {
                     </div>
                     <div className={styles.eventContainer}>
                         <Event eventName="1 Event" />
+                    </div>
+                    <div className={styles.timeContainer}>
+                        <Time timeVar="Sep 5, 9:00 AM" />
                     </div>
                 </Segment>
             </Segment.Group>
