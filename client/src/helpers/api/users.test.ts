@@ -8,6 +8,15 @@ import { createMemoryHistory } from "history";
 
 jest.mock("axios");
 jest.mock("uuid");
+jest.mock("redux-persist", () => {
+    const real = jest.requireActual("redux-persist");
+    return {
+        ...real,
+        persistReducer: jest
+            .fn()
+            .mockImplementation((config, reducers) => reducers),
+    };
+});
 
 describe("Users API Helpers", () => {
     afterEach(() => {
