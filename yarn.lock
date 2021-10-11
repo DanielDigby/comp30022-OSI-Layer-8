@@ -3195,6 +3195,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/redux-persist@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "@types/redux-persist@npm:4.3.1"
+  dependencies:
+    redux-persist: "*"
+  checksum: 0b4518fd8a38ddf4538c7f7141323ea81f8b5918df1ce2ba35c609b71b0766a23c8d4ab1bcfb5021b8b3546f2365670b33ff5de870f40f72c65e8c45a47ef1b1
+  languageName: node
+  linkType: hard
+
 "@types/resolve@npm:0.0.8":
   version: 0.0.8
   resolution: "@types/resolve@npm:0.0.8"
@@ -5538,6 +5547,7 @@ __metadata:
     "@types/react-beautiful-dnd": ^13.1.2
     "@types/react-dom": ^16.9.8
     "@types/react-router-dom": ^5.1.8
+    "@types/redux-persist": ^4.3.1
     "@types/uuid": ^8.3.1
     "@typescript-eslint/eslint-plugin": ^4.29.2
     "@typescript-eslint/parser": ^4.29.2
@@ -5556,6 +5566,8 @@ __metadata:
     react-redux: ^7.2.5
     react-router-dom: ^5.2.0
     react-scripts: 4.0.3
+    redux-offline: ^2.0.0
+    redux-persist: ^6.0.0
     semantic-ui-css: ^2.4.1
     semantic-ui-react: ^2.0.3
     typescript: ^4.0.3
@@ -15400,7 +15412,27 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"redux-persist@npm:^4.6.0":
+"redux-offline@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "redux-offline@npm:2.0.0"
+  dependencies:
+    redux-persist: ^4.5.0
+  peerDependencies:
+    redux: ">=3"
+  checksum: 36ab3c6695343c702fa989ea30b6db3352ba61ce86c65b20ca0dc7607af65e81856646af794a2a39cece34afad49c8ef79a15cc5922f835b952c256e28366195
+  languageName: node
+  linkType: hard
+
+"redux-persist@npm:*, redux-persist@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "redux-persist@npm:6.0.0"
+  peerDependencies:
+    redux: ">4.0.0"
+  checksum: edaf10dbf17351ce8058d0802357adae8665b3a1ff39371834e37838ddbe1a79cccbc717b8ba54acb5307651ccf51d0f7dc1cbc8dbae0726ff952d11ef61c6b8
+  languageName: node
+  linkType: hard
+
+"redux-persist@npm:^4.5.0, redux-persist@npm:^4.6.0":
   version: 4.10.2
   resolution: "redux-persist@npm:4.10.2"
   dependencies:

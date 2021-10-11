@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./SettingsView.module.css";
 
 import { useHistory } from "react-router-dom";
@@ -9,16 +9,13 @@ import ColourBlocks from "./ColourBlocks";
 import FirstNameForm from "./Forms";
 import PasswordForm from "./PasswordForm";
 import ProfilePic from "./ProfilePic";
-import { store } from "../../config/redux/store";
+import { checkAuthAPI } from "../../helpers/api/users";
 
 const SettingsView = (): JSX.Element => {
-    const navHistory = useHistory();
-    const navigateDashboard = () => navHistory.push("/dashboard");
+    const history = useHistory();
+    const navigateDashboard = () => history.push("/");
 
-    // Boot user out if not logged in
-    useEffect(() => {
-        if (!store.getState().user.account) navHistory.push("/login");
-    });
+    checkAuthAPI(history);
 
     // api call
     return (

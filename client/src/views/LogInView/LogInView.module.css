@@ -1,80 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
 .container {
-    margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 0px;
 }
 
-.image {
-    width: 110px;
-    align-items: center;
-    display: flex;
+.logo {
+    margin-top: 12%;
+    max-width: 10%;
     height: auto;
-    border-radius: 50%;
-    border-radius: 4px;
 }
 
-.basecontainer {
-    width: 100%;
+.title {
+    margin-top: 2%;
+    font-family: "Lato", sans-serif;
+    font-size: 55px;
+}
+
+.subtitle {
+    margin-top: 4%;
+    font-family: "Lato", sans-serif;
+    font-size: 1.6vw;
+}
+
+.inputTitle {
+    margin-top: 10%;
+    margin-bottom: 3%;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.inputSection {
+    margin-top: 2%;
+    min-height: 10%;
+    min-width: 19%;
+    width: inherit;
+}
+
+.buttons {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.header {
-    font-size: 24px;
-    font-family: "Open Sans", sans-serif;
-    padding: 10px;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-}
-
-.form {
-    margin-bottom: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.label {
-    font-size: 20px;
-    margin-bottom: 0px;
-}
-
-.input {
-    margin-top: 6px;
-    min-width: 18em;
-    height: 37px;
-    padding: 0px 10px;
-    font-size: 16px;
-    font-family: "Open Sans", sans-serif;
-    background-color: #f3f3f3;
-    border: 0;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    transition: all 250ms ease-in-out;
-}
-
-.heading {
-    margin-top: 0px;
-    margin-bottom: 50px;
-}
-
-.heading2 {
-    margin-top: 0px;
-    margin-bottom: 100px;
-    font-style: italic;
-    font-weight: normal;
-}
-
-.footer {
-    margin-bottom: 50px;
-}
-
-.rememberMe {
-    margin-bottom: 15px;
+    margin-top: 15%;
+    justify-content: space-between;
 }

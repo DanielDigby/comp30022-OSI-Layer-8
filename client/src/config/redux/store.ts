@@ -12,6 +12,18 @@ import userReducer from "./userSlice";
 import noteReducer from "./noteSlice";
 import { OfflineAction } from "@redux-offline/redux-offline/lib/types";
 
+import storage from "redux-persist/lib/storage";
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from "redux-persist";
+
 // _action variable used for redux-offline
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const effect = (effect: AxiosRequestConfig, _action: OfflineAction) =>
@@ -30,10 +42,31 @@ const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
     return combinedReducer(state, action);
 };
 
+const persistConfig = {
+    key: "root",
+    storage,
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     enhancers: [offline({ ...config, effect }) as StoreEnhancer],
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }),
 });
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export interface RootStateWithOffline extends RootState {

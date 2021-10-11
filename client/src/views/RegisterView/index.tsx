@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import styles from "./RegisterView.module.css";
-import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
-
-// Semantic UI button
-import { Button } from "semantic-ui-react";
+import { Button, Form, Input } from "semantic-ui-react";
+import logo from "../../assets/logo.png";
 import { INewUser } from "../../interfaces/user";
-import { registerAPI } from "../../helpers/api/users";
+import { registerAPI, logOutAPI } from "../../helpers/api/users";
 //import internal from "stream";
 
 const RegisterView = (): JSX.Element => {
-    const navHistory = useHistory();
-    const navigateHome = () => navHistory.push("/");
-    const navigateLogin = () => navHistory.push("/login");
+    const history = useHistory();
 
     // Variables to hold our register form inputs
     const [firstName, setFirstName] = useState("");
@@ -25,24 +21,20 @@ const RegisterView = (): JSX.Element => {
     const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFirstName(e.target.value);
     };
-
     const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLastName(e.target.value);
     };
-
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     };
-
     const handlePassword1 = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword1(e.target.value);
     };
-
     const handlePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword2(e.target.value);
     };
 
-    const submitRegistration = async () => {
+    const handleSubmit = async () => {
         const user: INewUser = {
             email: email,
             firstName: firstName,
@@ -52,104 +44,94 @@ const RegisterView = (): JSX.Element => {
             profilePic: null,
         };
 
+        setPassword1("");
+        setPassword2("");
         try {
             await registerAPI(user);
-            navigateLogin();
+            const allowCookies = confirm(
+                "We use cookies to personalise content in cara.\n\n" +
+                    "Accept and continue?"
+            );
+            if (allowCookies) {
+                history.push("/");
+            } else {
+                logOutAPI(history);
+            }
         } catch (error: unknown) {
             console.log(error);
             return;
         }
     };
-    //
-    // api call
+
     return (
-        <div className={styles.basecontainer}>
-            <div className={styles.header}>Registration Page</div>
+        <div className={styles.container}>
+            <img className={styles.logo} src={logo} alt="logo" />
+            <div className={styles.title}>cara</div>
+            <div className={styles.subtitle}>Untangle your personal life</div>
+            <div className={styles.inputSection}>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Field>
+                        <label>Email</label>
+                        <Input
+                            placeholder="Email"
+                            value={email}
+                            onChange={handleEmail}
+                        />
+                    </Form.Field>
+                    <Form.Group widths="equal">
+                        <Form.Field>
+                            <label>First Name</label>
+                            <Input
+                                placeholder="First Name"
+                                value={firstName}
+                                onChange={handleFirstName}
+                            />
+                        </Form.Field>
 
-            <div className={styles.container}>
-                <div className="image">
-                    <img
-                        className={styles.image}
-                        src={logo}
-                        onClick={() => navigateHome()}
-                    />
-                </div>
+                        <Form.Field>
+                            <label>Last Name</label>
+                            <Input
+                                placeholder="Last Name"
+                                value={lastName}
+                                onChange={handleLastName}
+                            />
+                        </Form.Field>
+                    </Form.Group>
+                    <Form.Group widths="equal">
+                        <Form.Field>
+                            <label>Password</label>
+                            <Input
+                                placeholder="Password"
+                                type="password"
+                                value={password1}
+                                onChange={handlePassword1}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Confirm</label>
+                            <Input
+                                placeholder="Password"
+                                type="password"
+                                value={password2}
+                                onChange={handlePassword2}
+                            />
+                        </Form.Field>
+                    </Form.Group>
 
-                <div className={styles.container}>
-                    <h1 className={styles.heading}>Cara</h1>
-                </div>
+                    <div className={styles.buttons}>
+                        <Button
+                            content="Sign Up"
+                            color="orange"
+                            type="submit"
+                        />
 
-                <div className={styles.form}>
-                    <label className={styles.label} htmlFor="firstname">
-                        First name
-                    </label>
-                    <input
-                        className={styles.input}
-                        type="name"
-                        placeholder="First name"
-                        onChange={handleFirstName}
-                    ></input>
-                </div>
-
-                <div className={styles.form}>
-                    <label className={styles.label} htmlFor="lastname">
-                        Last name
-                    </label>
-                    <input
-                        className={styles.input}
-                        type="name"
-                        placeholder="Last name"
-                        onChange={handleLastName}
-                    ></input>
-                </div>
-
-                <div className={styles.form}>
-                    <label className={styles.label} htmlFor="email">
-                        Enter Email
-                    </label>
-                    <input
-                        className={styles.input}
-                        type="email"
-                        placeholder="enter email"
-                        onChange={handleEmail}
-                    ></input>
-                </div>
-
-                <div className={styles.form}>
-                    <label className={styles.label} htmlFor="password">
-                        Enter Password
-                    </label>
-                    <input
-                        className={styles.input}
-                        type="password"
-                        placeholder="password"
-                        onChange={handlePassword1}
-                    ></input>
-                </div>
-
-                <div className={styles.form}>
-                    <label className={styles.label} htmlFor="password">
-                        Enter Password again
-                    </label>
-                    <input
-                        className={styles.input}
-                        type="password"
-                        placeholder="password"
-                        onChange={handlePassword2}
-                    ></input>
-                </div>
-            </div>
-
-            <div className={styles.footer}>
-                <Button onClick={() => submitRegistration()} positive>
-                    Register
-                </Button>
-            </div>
-
-            <div className={styles.footer}>
-                <Button size="medium" onClick={() => navigateHome()}>
-                    Go Back
-                </Button>
+                        <Button
+                            content="Back"
+                            color="black"
+                            onClick={() => history.goBack()}
+                        />
+                    </div>
+                </Form>
             </div>
         </div>
     );

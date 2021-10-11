@@ -7,13 +7,21 @@ import { Image } from "semantic-ui-react";
 interface Fullname {
     firstName: string;
     lastName: string;
-    onClick(): void;
+    onClick?: () => void;
 }
 
 const ProfileImage = (props: Fullname): JSX.Element => {
+    let handleClick: () => void;
+    if (props.onClick) {
+        handleClick = props.onClick;
+    } else {
+        handleClick = () => {
+            return;
+        };
+    }
     // api call
     return (
-        <div onClick={() => props.onClick()}>
+        <div onClick={() => handleClick()}>
             <div className={styles.horizontal}>
                 <div className={styles.image}>
                     <Image

@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleIsNewLogin } from "../../config/redux/userSlice";
+import { checkAuthAPI } from "../../helpers/api/users";
+import { useSelector } from "react-redux";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
@@ -15,22 +15,12 @@ import Note from "../../components/Note";
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
-    const navigateDashboard = () => {
-        if (store.user.isNewLogin) dispatch(toggleIsNewLogin());
-        history.push("/dashboard");
-    };
     const navigateNotes = () => {
-        if (store.user.isNewLogin) dispatch(toggleIsNewLogin());
         history.push("/notes");
     };
     const store = useSelector((state: RootState) => state);
-    const dispatch = useDispatch();
 
-    // Boot user out if not logged in
-    if (!store.user.account) history.push("/login");
-
-    /* get the First name of User */
-    //const firstName = store.getState().user.firstName;
+    checkAuthAPI(history);
 
     const oct = new Date();
     oct.setFullYear(2021, 10, 31);
@@ -187,7 +177,6 @@ const DashboardView = (): JSX.Element => {
                 <ProfileImage
                     firstName={capitalize(store.user.account.firstName)}
                     lastName={capitalize(store.user.account.lastName)}
-                    onClick={navigateDashboard}
                 />
             </div>
 
