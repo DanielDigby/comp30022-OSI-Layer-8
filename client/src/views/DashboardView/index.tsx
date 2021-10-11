@@ -1,6 +1,7 @@
 import React from "react";
 import { checkAuthAPI } from "../../helpers/api/users";
 import { useSelector } from "react-redux";
+import globalStyles from "./../../App.module.css";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
@@ -175,100 +176,106 @@ const DashboardView = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.basecontainer}>
-            <div className={styles.topcontainer}>
-                <Profile
-                    firstName={capitalize(store.user.account.firstName)}
-                    lastName={capitalize(store.user.account.lastName)}
-                />
-                <div className={styles.cog}>
-                    <Icon
-                        name="cog"
-                        size="large"
-                        onClick={() => navigateSettings()}
-                    />
+        <div className={globalStyles.light}>
+            <div className={styles.basecontainer}>
+                <div className={styles.topcontainer}>
+                    <Profile />
+                    <div className={styles.cog}>
+                        <Icon
+                            name="cog"
+                            size="large"
+                            onClick={() => navigateSettings()}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <div className={styles.midContainer}>
-                <div className={styles.margin} />
-                <div className={styles.midContentContainer}>
-                    <div className={styles.greetingsContainer}>
-                        <div className={styles.heading}>
-                            <h1>
-                                Good Morning, <br />
-                                {capitalize(store.user.account.firstName)}
-                            </h1>
-                            <div className={styles.date}>
-                                {new Date(Date.now()).toLocaleString("en-US", {
-                                    weekday: "long",
-                                    day: "numeric",
-                                    month: "long",
-                                    year: "numeric",
-                                })}
+                <div className={styles.midContainer}>
+                    <div className={styles.margin} />
+                    <div className={styles.midContentContainer}>
+                        <div className={styles.greetingsContainer}>
+                            <div className={styles.heading}>
+                                <h1>
+                                    Good Morning, <br />
+                                    {capitalize(store.user.account.firstName)}
+                                </h1>
+                                <div className={styles.date}>
+                                    {new Date(Date.now()).toLocaleString(
+                                        "en-US",
+                                        {
+                                            weekday: "long",
+                                            day: "numeric",
+                                            month: "long",
+                                            year: "numeric",
+                                        }
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.viewNotesContainer}>
+                            <Icon
+                                name="arrow right"
+                                size="big"
+                                color="grey"
+                                onClick={navigateNotes}
+                            />
+                            <div className={styles.viewAllNotesContainer}>
+                                View <p>all notes</p>
                             </div>
                         </div>
                     </div>
-                    <div className={styles.viewNotesContainer}>
+                </div>
+
+                <div className={styles.bottomContainer}>
+                    <div className={styles.calendarContainer}>
                         <Icon
-                            name="arrow right"
+                            name="calendar alternate"
+                            color="orange"
                             size="big"
-                            color="grey"
-                            onClick={navigateNotes}
                         />
-                        <div className={styles.viewAllNotesContainer}>
-                            View <p>all notes</p>
+                    </div>
+                    <div className={styles.eventsContainer}>
+                        {eventNotes.map((note: INote) => {
+                            return (
+                                <Note
+                                    note={note}
+                                    mode={NoteModes.STANDARD}
+                                    key={note._id}
+                                />
+                            );
+                        })}
+                    </div>
+
+                    <div className={styles.tumbtackContainer}>
+                        <Icon name="thumbtack" color="orange" size="big" />
+                    </div>
+                    <div className={styles.pinnedNotesContainer}>
+                        <div className={styles.pinnedTopContainer}>
+                            {pinnedNotes1.map((note: INote) => {
+                                return (
+                                    <Note
+                                        note={note}
+                                        mode={NoteModes.STANDARD}
+                                        key={note._id}
+                                    />
+                                );
+                            })}
+                        </div>
+                        <div className={styles.somethingHorizontal} />
+                        <div className={styles.pinnedBottomContainer}>
+                            {pinnedNotes2.map((note: INote) => {
+                                return (
+                                    <Note
+                                        note={note}
+                                        mode={NoteModes.STANDARD}
+                                        key={note._id}
+                                    />
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
+                {store.user.isNewLogin && <InstallPrompt />}
             </div>
-
-            <div className={styles.bottomContainer}>
-                <div className={styles.calendarContainer}>
-                    <Icon name="calendar alternate" color="orange" size="big" />
-                </div>
-                <div className={styles.eventsContainer}>
-                    {eventNotes.map((note: INote) => {
-                        return (
-                            <Note
-                                note={note}
-                                mode={NoteModes.STANDARD}
-                                key={note._id}
-                            />
-                        );
-                    })}
-                </div>
-
-                <div className={styles.tumbtackContainer}>
-                    <Icon name="thumbtack" color="orange" size="big" />
-                </div>
-                <div className={styles.pinnedNotesContainer}>
-                    <div className={styles.pinnedTopContainer}>
-                        {pinnedNotes1.map((note: INote) => {
-                            return (
-                                <Note
-                                    note={note}
-                                    mode={NoteModes.STANDARD}
-                                    key={note._id}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div className={styles.somethingHorizontal} />
-                    <div className={styles.pinnedBottomContainer}>
-                        {pinnedNotes2.map((note: INote) => {
-                            return (
-                                <Note
-                                    note={note}
-                                    mode={NoteModes.STANDARD}
-                                    key={note._id}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
-            </div>
-            {store.user.isNewLogin && <InstallPrompt />}
         </div>
     );
 };

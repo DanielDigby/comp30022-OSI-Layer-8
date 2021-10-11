@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import globalStyles from "./../../App.module.css";
 import styles from "./LogInView.module.css";
 import logo from "../../assets/logo.png";
 import { Input } from "semantic-ui-react";
@@ -40,45 +41,49 @@ const LogInView = (): JSX.Element => {
         }
     };
     return (
-        <div className={styles.container}>
-            <img className={styles.logo} src={logo} alt="logo" />
-            <div className={styles.title}>cara</div>
-            <div className={styles.subtitle}>Untangle your personal life</div>
-            <div className={styles.inputSection}>
-                <Form onSubmit={handleSubmit}>
-                    <div className={styles.inputTitle}>Email </div>
-                    <Form.Field>
-                        <Input
-                            fluid
-                            placeholder="name@email.com"
-                            value={email}
-                            onChange={handleEmail}
-                        />
-                    </Form.Field>
-                    <div className={styles.inputTitle}>Password</div>
-                    <Form.Field>
-                        <Input
-                            fluid
-                            placeholder="password"
-                            type="password"
-                            value={password}
-                            onChange={handlePassword}
-                        />
-                    </Form.Field>
-                    <div className={styles.buttons}>
-                        <Button
-                            content="Sign in"
-                            color="orange"
-                            type="submit"
-                        />
+        <div className={globalStyles.light}>
+            <div className={styles.container}>
+                <img className={styles.logo} src={logo} alt="logo" />
+                <div className={styles.title}>cara</div>
+                <div className={styles.subtitle}>
+                    Untangle your personal life
+                </div>
+                <div className={styles.inputSection}>
+                    <Form onSubmit={handleSubmit}>
+                        <div className={styles.inputTitle}>Email </div>
+                        <Form.Field>
+                            <Input
+                                fluid
+                                placeholder="name@email.com"
+                                value={email}
+                                onChange={handleEmail}
+                            />
+                        </Form.Field>
+                        <div className={styles.inputTitle}>Password</div>
+                        <Form.Field>
+                            <Input
+                                fluid
+                                placeholder="password"
+                                type="password"
+                                value={password}
+                                onChange={handlePassword}
+                            />
+                        </Form.Field>
+                        <div className={styles.buttons}>
+                            <Button
+                                content="Sign in"
+                                color="orange"
+                                type="submit"
+                            />
 
-                        <Button
-                            content="Sign up"
-                            color="black"
-                            onClick={() => history.push("/register")}
-                        />
-                    </div>
-                </Form>
+                            <Button
+                                content="Sign up"
+                                color="black"
+                                onClick={() => history.push("/register")}
+                            />
+                        </div>
+                    </Form>
+                </div>
             </div>
         </div>
     );

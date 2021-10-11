@@ -24,7 +24,7 @@
 
 /* Light/Dark mode */
 .light {
-    background-color: var(--colour-background);
+    /* background-color: var(--colour-background); */
     display: flex;
     flex-direction: row;
     height: 100%;

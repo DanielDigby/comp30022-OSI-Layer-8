@@ -39,23 +39,26 @@ const MenuItem = (): JSX.Element => {
     return (
         <div className={styles.containerLeft}>
             <div className={styles.sideContainer}>
-                <div>
-                    <Icon name="tag" size="large" />
+                <div className={styles.icon}>
+                    <Icon name="tag" size="large" color="orange" />
                 </div>
                 <div className={styles.menu}>
                     <Menu fluid vertical tabular>
                         {filterNames.map((name: string) => (
-                            <Menu.Item name={name} key={uuid()} />
+                            <Menu.Item header name={name} key={uuid()} />
                         ))}
                     </Menu>
                 </div>
-                <div>
-                    <Icon
-                        name="plus"
-                        size="large"
-                        onClick={() => setShow(!show)}
-                    />
-                </div>
+                {show ? (
+                    <div className={styles.icon}>
+                        <Icon name="times" onClick={() => setShow(!show)} />
+                    </div>
+                ) : (
+                    <div className={styles.icon}>
+                        <Icon name="plus" onClick={() => setShow(!show)} />
+                    </div>
+                )}
+
                 <div className={styles.input}>
                     {show ? (
                         <Input
@@ -69,12 +72,15 @@ const MenuItem = (): JSX.Element => {
                     ) : null}
                 </div>
             </div>
-            <div className={styles.settingContainer}>
-                <Icon
-                    name="cog"
-                    size="large"
-                    onClick={() => navigateSettings()}
-                />
+            <div>
+                <div className={styles.icon}>
+                    <Icon
+                        name="cog"
+                        size="large"
+                        color="grey"
+                        onClick={() => navigateSettings()}
+                    />
+                </div>
             </div>
         </div>
     );

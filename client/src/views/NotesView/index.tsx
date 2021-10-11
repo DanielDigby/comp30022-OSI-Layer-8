@@ -9,19 +9,21 @@ import SearchBarItem from "./SearchBar";
 import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
 import NewNote from "./NewNote";
-import { store } from "../../config/redux/store";
 import { useHistory } from "react-router-dom";
 import { checkAuthAPI } from "../../helpers/api/users";
+import { useSelector } from "react-redux";
+import { RootState } from "../../config/redux/store";
 
 const NotesView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/");
+    const store = useSelector((state: RootState) => state);
 
     checkAuthAPI(history);
 
     const testNotes: Array<INote> = [
         {
-            user: store.getState().user.account,
+            user: store.user.account,
             title: "NOTE TEST 1",
             _id: "dsfradsf",
             _clientId: uuid(),
@@ -34,7 +36,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account,
+            user: store.user.account,
             title: "NOTE TEST 2",
             _id: "dsfradsf",
             _clientId: uuid(),
@@ -47,7 +49,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account,
+            user: store.user.account,
             title: "NOTE TEST 3",
             _id: "dsfradsf",
             _clientId: uuid(),
@@ -60,7 +62,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account,
+            user: store.user.account,
             title: "NOTE TEST 4",
             _id: "dsfradsf",
             _clientId: uuid(),
@@ -73,7 +75,7 @@ const NotesView = (): JSX.Element => {
             relatedNotes: [],
         },
         {
-            user: store.getState().user.account,
+            user: store.user.account,
             title: "NOTE TEST 5",
             _id: "dsfradsf",
             _clientId: uuid(),
@@ -117,11 +119,8 @@ const NotesView = (): JSX.Element => {
             {/* Sidebar with profile pic */}
             <div className={styles.staticLeft}>
                 <div>
-                    <Profile
-                        firstName="Sonja"
-                        lastName="Pedell"
-                        onClick={navigateDashboard}
-                    />
+                    <Profile onClick={navigateDashboard} />
+
                     <MenuItem />
                 </div>
                 <NewNote />

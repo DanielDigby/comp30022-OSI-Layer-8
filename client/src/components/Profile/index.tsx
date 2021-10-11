@@ -1,16 +1,18 @@
 import React from "react";
 import styles from "./Profile.module.css";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../config/redux/store";
+import { capitalize } from "lodash";
 // Semantic UI button
 import { Image } from "semantic-ui-react";
+import placeholder from "./placeholder.png";
 
 interface Fullname {
-    firstName: string;
-    lastName: string;
     onClick?: () => void;
 }
 
 const ProfileImage = (props: Fullname): JSX.Element => {
+    const store = useSelector((state: RootState) => state);
     let handleClick: () => void;
     if (props.onClick) {
         handleClick = props.onClick;
@@ -24,15 +26,13 @@ const ProfileImage = (props: Fullname): JSX.Element => {
         <div onClick={() => handleClick()}>
             <div className={styles.horizontal}>
                 <div className={styles.image}>
-                    <Image
-                        src="https://cdn.theconversation.com/avatars/1193792/width238/file-20210106-15-zlm7jy.jpg"
-                        circular
-                    />
+                    <Image src={placeholder} circular />
                 </div>
-
-                <h4 className={styles.text}>
-                    {props.firstName + " " + props.lastName}
-                </h4>
+                <div className={styles.text}>
+                    {capitalize(store.user.account.firstName) +
+                        " " +
+                        capitalize(store.user.account.lastName)}
+                </div>
             </div>
         </div>
     );
