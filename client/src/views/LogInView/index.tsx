@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./LogInView.module.css";
-import logo from "./logo.png";
+import logo from "../../assets/logo.png";
 import { Input } from "semantic-ui-react";
 import { Button, Form } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
@@ -72,7 +72,11 @@ const LogInView = (): JSX.Element => {
                             type="submit"
                         />
 
-                        <Button content="Sign up" color="black" />
+                        <Button
+                            content="Sign up"
+                            color="black"
+                            onClick={() => history.push("/register")}
+                        />
                     </div>
                 </Form>
             </div>
