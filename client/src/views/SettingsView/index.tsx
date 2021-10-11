@@ -26,13 +26,11 @@ const SettingsView = (): JSX.Element => {
                 <div className={styles.leftBanner}>
                     <div>
                         <Profile />
-                        <div className={styles.signOut}>
-                            <Icon
-                                name="sign out"
-                                size="big"
-                                color="grey"
-                                onClick={async () => await logOutAPI(history)}
-                            />
+                        <div
+                            className={styles.signOut}
+                            onClick={async () => await logOutAPI(history)}
+                        >
+                            <Icon name="sign out" size="big" color="grey" />
                             Sign out
                         </div>
                     </div>
