@@ -16,14 +16,18 @@ interface NoteProps {
 const Note = ({ note }: NoteProps): JSX.Element => {
     // api call
     return (
-        <div className={styles.Segment}>
+        <div className={styles.container}>
             <Segment.Group raised>
                 <Segment>
-                    <b>{note.title ? note.title : ""}</b>
-                    <br />
-                    <div> {note.text ? note.text : ""} </div>
-                    <br />
-                    <Tag tagName="Event" />
+                    <div className={styles.body}>
+                        <div className={styles.title}>
+                            {note.title ? note.title : ""}
+                        </div>
+                        {note.text ? note.text : ""}
+                        <br />
+                        <br />
+                        <Tag tagName="Event" />
+                    </div>
                 </Segment>
             </Segment.Group>
         </div>

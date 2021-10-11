@@ -9,9 +9,9 @@ const NewNote = (): JSX.Element => {
         <div className={styles.container}>
             <Segment.Group raised>
                 <Segment>
-                    <Icon name="edit outline" size="large" color="grey" />
                     <div className={styles.body}>
-                        <div>Add a new note</div>
+                        <Icon name="edit outline" size="large" color="grey" />
+                        <div className={styles.text}>Add a new note</div>
                         <br />
                     </div>
                 </Segment>

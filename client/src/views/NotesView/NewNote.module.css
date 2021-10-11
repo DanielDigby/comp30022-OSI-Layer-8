@@ -4,15 +4,19 @@
     margin-top: 8.5rem;
     margin-left: 2.5vw;
     margin-right: 1.5vw;
-    width: 160px;
+    width: 170px;
 }
 
 .body {
     display: flex;
-    flex-direction: row;
-    align-items: end;
+    flex-direction: column;
+    align-items: start;
     font-family: "Lato", sans-serif;
     font-size: 15px;
     color: #666666;
     height: 150px;
+}
+
+.text {
+    margin-top: 110px;
 }
