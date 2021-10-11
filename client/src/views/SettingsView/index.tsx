@@ -13,7 +13,7 @@ import { checkAuthAPI } from "../../helpers/api/users";
 
 const SettingsView = (): JSX.Element => {
     const history = useHistory();
-    const navigateDashboard = () => history.push("/dashboard");
+    const navigateDashboard = () => history.push("/");
 
     checkAuthAPI(history);
 

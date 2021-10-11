@@ -15,9 +15,6 @@ import Note from "../../components/Note";
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
-    const navigateDashboard = () => {
-        history.push("/dashboard");
-    };
     const navigateNotes = () => {
         history.push("/notes");
     };
@@ -180,7 +177,6 @@ const DashboardView = (): JSX.Element => {
                 <ProfileImage
                     firstName={capitalize(store.user.account.firstName)}
                     lastName={capitalize(store.user.account.lastName)}
-                    onClick={navigateDashboard}
                 />
             </div>
 
