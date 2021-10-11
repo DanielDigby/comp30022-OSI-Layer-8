@@ -5,7 +5,7 @@ import { DnD, DnDModes, ColumnDict } from "../../components/DnD";
 import { INote } from "../../interfaces/note";
 import globalStyles from "../../App.module.css";
 import MenuItem from "./Menu";
-import SearchBarItem from "./SearchBar";
+import { Search, Grid } from "semantic-ui-react";
 import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
 import NewNote from "./NewNote";
@@ -105,10 +105,6 @@ const NotesView = (): JSX.Element => {
             name: "col3",
             items: [],
         },
-        [uuid()]: {
-            name: "col4",
-            items: [],
-        },
     };
 
     const [columns, updateColumns] = useState(initialColumns);
@@ -138,7 +134,11 @@ const NotesView = (): JSX.Element => {
 
             {/* Searchbar on top right corner */}
             <div className={styles.containerRight}>
-                <SearchBarItem />
+                <Grid>
+                    <Grid.Column width={6}>
+                        <Search />
+                    </Grid.Column>
+                </Grid>
             </div>
         </div>
     );

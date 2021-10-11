@@ -1,13 +1,12 @@
 .notesSection {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 0.5rem;
 
     margin-top: 7.5rem;
     margin-bottom: 7.5rem;
     margin-left: 0rem;
     margin-right: -15rem;
-    width: 100%;
     padding: 0.5rem;
     border-radius: 10px;
 

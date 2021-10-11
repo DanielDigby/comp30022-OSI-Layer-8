@@ -8,10 +8,10 @@
 /* For the search bar and help (question mark) */
 .containerRight {
     padding-top: 25px;
-    padding-right: 30px;
+    margin-left: 40px;
     display: flex;
     width: 250px;
     height: 70px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
 }
