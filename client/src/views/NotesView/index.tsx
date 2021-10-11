@@ -8,6 +8,7 @@ import MenuItem from "./Menu";
 import SearchBarItem from "./SearchBar";
 import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
+import NewNote from "./NewNote";
 import { store } from "../../config/redux/store";
 import { useHistory } from "react-router-dom";
 import { checkAuthAPI } from "../../helpers/api/users";
@@ -114,15 +115,17 @@ const NotesView = (): JSX.Element => {
     return (
         <div className={globalStyles.light}>
             {/* Sidebar with profile pic */}
-            <div className={styles.containerLeft}>
-                <Profile
-                    firstName="Sonja"
-                    lastName="Pedell"
-                    onClick={navigateDashboard}
-                />
-                <MenuItem />
+            <div className={styles.staticLeft}>
+                <div className={styles.containerLeft}>
+                    <Profile
+                        firstName="Sonja"
+                        lastName="Pedell"
+                        onClick={navigateDashboard}
+                    />
+                    <MenuItem />
+                </div>
+                <NewNote />
             </div>
-
             {/* Main notes area 
             Pass in:
             the updateColumns state function defined on line 110
@@ -141,4 +144,5 @@ const NotesView = (): JSX.Element => {
         </div>
     );
 };
+
 export default NotesView;

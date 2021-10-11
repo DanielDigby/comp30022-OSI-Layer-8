@@ -7,6 +7,11 @@
     background-color: cadetblue;
 }
 
+.staticLeft {
+    display: flex;
+    flex-direction: row;
+}
+
 /* For the search bar and help (question mark) */
 .containerRight {
     padding-top: 20px;
