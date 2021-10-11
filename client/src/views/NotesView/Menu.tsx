@@ -72,7 +72,7 @@ const MenuItem = (): JSX.Element => {
                     ) : null}
                 </div>
             </div>
-            <div>
+            <div className={styles.settings}>
                 <div className={styles.icon}>
                     <Icon
                         name="cog"

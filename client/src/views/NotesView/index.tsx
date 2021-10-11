@@ -117,7 +117,7 @@ const NotesView = (): JSX.Element => {
                 <div className={styles.containerRight}>
                     <Grid>
                         <Grid.Column width={6}>
-                            <Search />
+                            <Search placeholder="Search notes" />
                         </Grid.Column>
                     </Grid>
                 </div>

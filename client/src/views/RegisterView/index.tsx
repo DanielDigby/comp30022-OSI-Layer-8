@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import globalStyles from "./../../App.module.css";
 import styles from "./RegisterView.module.css";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Input } from "semantic-ui-react";
@@ -65,78 +64,73 @@ const RegisterView = (): JSX.Element => {
     };
 
     return (
-        <div className={globalStyles.light}>
-            <div className={styles.container}>
-                <img className={styles.logo} src={logo} alt="logo" />
-                <div className={styles.title}>cara</div>
-                <div className={styles.subtitle}>
-                    Untangle your personal life
-                </div>
-                <div className={styles.inputSection}>
-                    <Form onSubmit={handleSubmit}>
+        <div className={styles.container}>
+            <img className={styles.logo} src={logo} alt="logo" />
+            <div className={styles.title}>cara</div>
+            <div className={styles.subtitle}>Untangle your personal life</div>
+            <div className={styles.inputSection}>
+                <Form onSubmit={handleSubmit}>
+                    <Form.Field>
+                        <label>Email</label>
+                        <Input
+                            placeholder="Email"
+                            value={email}
+                            onChange={handleEmail}
+                        />
+                    </Form.Field>
+                    <Form.Group widths="equal">
                         <Form.Field>
-                            <label>Email</label>
+                            <label>First Name</label>
                             <Input
-                                placeholder="Email"
-                                value={email}
-                                onChange={handleEmail}
+                                placeholder="First Name"
+                                value={firstName}
+                                onChange={handleFirstName}
                             />
                         </Form.Field>
-                        <Form.Group widths="equal">
-                            <Form.Field>
-                                <label>First Name</label>
-                                <Input
-                                    placeholder="First Name"
-                                    value={firstName}
-                                    onChange={handleFirstName}
-                                />
-                            </Form.Field>
 
-                            <Form.Field>
-                                <label>Last Name</label>
-                                <Input
-                                    placeholder="Last Name"
-                                    value={lastName}
-                                    onChange={handleLastName}
-                                />
-                            </Form.Field>
-                        </Form.Group>
-                        <Form.Group widths="equal">
-                            <Form.Field>
-                                <label>Password</label>
-                                <Input
-                                    placeholder="Password"
-                                    type="password"
-                                    value={password1}
-                                    onChange={handlePassword1}
-                                />
-                            </Form.Field>
-                            <Form.Field>
-                                <label>Confirm</label>
-                                <Input
-                                    placeholder="Password"
-                                    type="password"
-                                    value={password2}
-                                    onChange={handlePassword2}
-                                />
-                            </Form.Field>
-                        </Form.Group>
-
-                        <div className={styles.buttons}>
-                            <Button
-                                content="Sign Up"
-                                color="orange"
-                                type="submit"
+                        <Form.Field>
+                            <label>Last Name</label>
+                            <Input
+                                placeholder="Last Name"
+                                value={lastName}
+                                onChange={handleLastName}
                             />
-
-                            <Button
-                                content="Back"
-                                color="black"
-                                onClick={() => history.goBack()}
+                        </Form.Field>
+                    </Form.Group>
+                    <Form.Group widths="equal">
+                        <Form.Field>
+                            <label>Password</label>
+                            <Input
+                                placeholder="Password"
+                                type="password"
+                                value={password1}
+                                onChange={handlePassword1}
                             />
-                        </div>
-                    </Form>
-                </div>
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Confirm</label>
+                            <Input
+                                placeholder="Password"
+                                type="password"
+                                value={password2}
+                                onChange={handlePassword2}
+                            />
+                        </Form.Field>
+                    </Form.Group>
+
+                    <div className={styles.buttons}>
+                        <Button
+                            content="Back"
+                            color="black"
+                            onClick={() => history.goBack()}
+                        />
+                        <Button
+                            content="Sign Up"
+                            color="orange"
+                            type="submit"
+                        />
+                    </div>
+                </Form>
             </div>
         </div>
     );
