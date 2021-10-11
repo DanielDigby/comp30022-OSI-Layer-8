@@ -116,7 +116,7 @@ const NotesView = (): JSX.Element => {
         <div className={globalStyles.light}>
             {/* Sidebar with profile pic */}
             <div className={styles.staticLeft}>
-                <div className={styles.containerLeft}>
+                <div>
                     <Profile
                         firstName="Sonja"
                         lastName="Pedell"
@@ -144,5 +144,4 @@ const NotesView = (): JSX.Element => {
         </div>
     );
 };
-
 export default NotesView;

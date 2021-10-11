@@ -1,11 +1,4 @@
 /* For the profile, tag icon  and side menu */
-.containerLeft {
-    display: flex;
-    width: 22%;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: cadetblue;
-}
 
 .staticLeft {
     display: flex;
@@ -22,40 +15,4 @@
     flex-direction: column;
     align-items: flex-start;
     background-color: burlywood;
-}
-
-/* Formats the side menu */
-.sideContainer {
-    display: flex;
-    height: 80vh;
-    width: 15vw;
-    padding-top: 5vh;
-    flex-direction: column;
-    align-items: center;
-    background-color: darkcyan;
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    width: 15vw;
-    padding-top: 10px;
-    padding-left: 10px;
-    align-items: left;
-}
-
-.settingContainer {
-    display: flex;
-    width: 15vw;
-    flex-direction: column;
-    align-items: center;
-    background-color: darkturquoise;
-}
-
-.input {
-    display: flex;
-    flex-direction: column;
-    width: 15vw;
-    padding-right: 3vw;
-    align-items: left;
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./NotesView.module.css";
-import globalStyles from "../../App.module.css";
+import styles from "./Menu.module.css";
 import { v4 as uuid } from "uuid";
 import { useHistory } from "react-router-dom";
 import { addTagAPI } from "../../helpers/api/tags";
@@ -24,6 +23,15 @@ const MenuItem = (): JSX.Element => {
         setTag(e.target.value);
     };
 
+    const handlePlusClick = () => {
+        addTagAPI(tag);
+        setTag("");
+        setShow(false);
+        updateFilterNames(
+            baseFilters.concat(store.getState().user.account.tags)
+        );
+    };
+
     useEffect(() => {
         updateFilterNames(baseFilters.concat(user?.tags));
     }, [user]);
@@ -34,7 +42,7 @@ const MenuItem = (): JSX.Element => {
                 <div>
                     <Icon name="tag" size="large" />
                 </div>
-                <div className={`${globalStyles.sideMenu} ${styles.menu}`}>
+                <div className={styles.menu}>
                     <Menu fluid vertical tabular>
                         {filterNames.map((name: string) => (
                             <Menu.Item name={name} key={uuid()} />
@@ -53,16 +61,7 @@ const MenuItem = (): JSX.Element => {
                         <Input
                             action={{
                                 icon: "plus",
-                                onClick: () => (
-                                    addTagAPI(tag),
-                                    setTag(""),
-                                    setShow(false),
-                                    updateFilterNames(
-                                        baseFilters.concat(
-                                            store.getState().user.account.tags
-                                        )
-                                    )
-                                ),
+                                onClick: handlePlusClick,
                             }}
                             placeholder="New Tag"
                             onChange={handleTag}
