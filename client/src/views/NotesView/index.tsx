@@ -21,89 +21,76 @@ const NotesView = (): JSX.Element => {
 
     checkAuthAPI(history);
 
-    const testNotes: Array<INote> = [
-        {
-            user: store.user.account,
-            title: "NOTE TEST 1",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note1",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            title: "NOTE TEST 2",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note2",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            title: "NOTE TEST 3",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note3",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            title: "NOTE TEST 4",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note4",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            title: "NOTE TEST 5",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note5",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-    ];
-
     // api call
     const initialColumns: ColumnDict = {
         /* UUID returns a segment of bytes, which isn't a valid identifier. JS requires us to use
         segment-literal notation. Basically for uuid() to be a key, need to wrap in []. */
         [uuid()]: {
             name: "col1",
-            items: testNotes,
+            items: [
+                {
+                    user: store.user.account,
+                    title: "NOTE TEST 1",
+                    _id: "dsfradsf",
+                    _clientId: uuid(),
+                    text: "note1",
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
+                },
+                {
+                    user: store.user.account,
+                    title: "NOTE TEST 2",
+                    _id: "dsfradsf",
+                    _clientId: uuid(),
+                    text: "note2",
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
+                },
+            ],
         },
         [uuid()]: {
             name: "col2",
-            items: [],
+            items: [
+                {
+                    user: store.user.account,
+                    title: "NOTE TEST 3",
+                    _id: "dsfradsf",
+                    _clientId: uuid(),
+                    text: "note3",
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
+                },
+            ],
         },
         [uuid()]: {
             name: "col3",
-            items: [],
+            items: [
+                {
+                    user: store.user.account,
+                    title: "NOTE TEST 4",
+                    _id: "dsfradsf",
+                    _clientId: uuid(),
+                    text: "note4",
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: false,
+                    tags: [],
+                    relatedNotes: [],
+                },
+            ],
         },
     };
 
@@ -126,19 +113,16 @@ const NotesView = (): JSX.Element => {
             the updateColumns state function defined on line 110
             the columns data structure, initially set to initialColumns
             */}
-            <DnD
-                updateColumns={updateColumns}
-                columns={columns}
-                mode={DnDModes.NOTES}
-            />
-
-            {/* Searchbar on top right corner */}
-            <div className={styles.containerRight}>
-                <Grid>
-                    <Grid.Column width={6}>
-                        <Search />
-                    </Grid.Column>
-                </Grid>
+            <div className={styles.main}>
+                {/* Searchbar on top right corner */}
+                <div className={styles.containerRight}>
+                    <Grid>
+                        <Grid.Column width={6}>
+                            <Search />
+                        </Grid.Column>
+                    </Grid>
+                </div>
+                <DnD updateColumns={updateColumns} columns={columns} />
             </div>
         </div>
     );

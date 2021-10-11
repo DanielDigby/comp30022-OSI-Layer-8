@@ -1,12 +1,9 @@
 .notesSection {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 190px 190px 190px;
     gap: 0.5rem;
-
-    margin-top: 7.5rem;
     margin-bottom: 7.5rem;
     margin-left: 0rem;
-    margin-right: -15rem;
     padding: 0.5rem;
     border-radius: 10px;
 
@@ -14,12 +11,25 @@
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.scroll {
+    margin-top: 34.5px;
+    width: 95%;
+    overflow: scroll;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+.scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.dndContainer {
+    width: 80%;
+}
+
 .column {
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     padding: 0.5rem;
-
     height: 100%;
     /* To get rid of bullet points in list */
     list-style-type: none;

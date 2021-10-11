@@ -7,11 +7,16 @@
 
 /* For the search bar and help (question mark) */
 .containerRight {
-    padding-top: 25px;
-    margin-left: 40px;
     display: flex;
-    width: 250px;
-    height: 70px;
     flex-direction: column;
     align-items: flex-end;
+    padding-top: 25px;
+    height: 70px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
 }
