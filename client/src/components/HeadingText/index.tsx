@@ -1,5 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
+import styles from "./HeadingText.module.css";
 
 type HeadingProps = {
     headingText: string;
@@ -7,6 +8,6 @@ type HeadingProps = {
 
 const HeadingText = ({ headingText }: HeadingProps): JSX.Element => {
     // api call
-    return <div>{headingText}</div>;
+    return <div className={styles.title}>{headingText}</div>;
 };
 export default HeadingText;

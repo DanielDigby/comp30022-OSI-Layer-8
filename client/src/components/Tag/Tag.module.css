@@ -1,0 +1,13 @@
+@import "../../App.module.css";
+
+.tagRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: var(--colour-darkgray);
+}
+
+.tagName {
+    font-size: var(--text-small);
+}

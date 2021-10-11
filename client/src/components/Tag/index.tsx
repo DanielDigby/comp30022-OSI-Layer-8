@@ -1,5 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
+import styles from "./Tag.module.css";
 
 import { Icon } from "semantic-ui-react";
 
@@ -10,9 +11,9 @@ type TagProps = {
 const Tag = ({ tagName }: TagProps): JSX.Element => {
     // api call
     return (
-        <div>
-            <Icon name="tag" />
-            {tagName}
+        <div className={styles.tagRow}>
+            <Icon name="tag" size="large" />
+            <div className={styles.tagName}>{tagName}</div>
         </div>
     );
 };
