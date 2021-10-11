@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./SettingsView.module.css";
+import { logOutAPI } from "../../helpers/api/users";
 
 import { useHistory } from "react-router-dom";
 // Semantic UI button
@@ -48,9 +49,17 @@ const SettingsView = (): JSX.Element => {
             </Segment>
 
             <div className={styles.footer}>
-                <Button positive onClick={() => navigateDashboard()}>
-                    Back
+                <Button
+                    color="black"
+                    onClick={async () => await logOutAPI(history)}
+                >
+                    Sign out
                 </Button>
+                <div className={styles.backbutton}>
+                    <Button positive onClick={() => navigateDashboard()}>
+                        Back
+                    </Button>
+                </div>
             </div>
         </div>
     );
