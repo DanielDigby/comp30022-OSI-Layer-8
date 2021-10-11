@@ -12,7 +12,7 @@
 .scroll {
     margin-top: 41.7px;
     margin-right: 45px;
-    width: 95%;
+    width: 92.5%;
     overflow: scroll;
     overflow-x: hidden; /* Hide horizontal scrollbar */
 }

@@ -184,6 +184,7 @@ const DashboardView = (): JSX.Element => {
                         <Icon
                             name="cog"
                             size="large"
+                            color="grey"
                             onClick={() => navigateSettings()}
                         />
                     </div>
@@ -194,10 +195,10 @@ const DashboardView = (): JSX.Element => {
                     <div className={styles.midContentContainer}>
                         <div className={styles.greetingsContainer}>
                             <div className={styles.heading}>
-                                <h1>
+                                <div className={styles.greeting}>
                                     Good Morning, <br />
                                     {capitalize(store.user.account.firstName)}
-                                </h1>
+                                </div>
                                 <div className={styles.date}>
                                     {new Date(Date.now()).toLocaleString(
                                         "en-US",
