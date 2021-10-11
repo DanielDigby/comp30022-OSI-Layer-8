@@ -44,6 +44,8 @@ const RegisterView = (): JSX.Element => {
             profilePic: null,
         };
 
+        setPassword1("");
+        setPassword2("");
         try {
             await registerAPI(user);
             const allowCookies = confirm(
@@ -51,7 +53,7 @@ const RegisterView = (): JSX.Element => {
                     "Accept and continue?"
             );
             if (allowCookies) {
-                history.push("/dashboard");
+                history.push("/");
             } else {
                 logOutAPI(history);
             }

@@ -30,7 +30,7 @@ const LogInView = (): JSX.Element => {
                     "Accept and continue?"
             );
             if (allowCookies) {
-                history.push("/dashboard");
+                history.push("/");
             } else {
                 logOutAPI(history);
             }
