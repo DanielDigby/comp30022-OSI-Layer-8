@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 // Semantic UI button
-import { DnD, DnDModes, ColumnDict } from "../../components/DnD";
-import { INote } from "../../interfaces/note";
+import { DnD, ColumnDict } from "../../components/DnD";
 import globalStyles from "../../App.module.css";
 import MenuItem from "./Menu";
 import { Search, Grid } from "semantic-ui-react";
