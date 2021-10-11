@@ -6,7 +6,7 @@ import { INote } from "../../interfaces/note";
 import globalStyles from "../../App.module.css";
 import MenuItem from "./Menu";
 import SearchBarItem from "./SearchBar";
-import ProfileImage from "./ProfileImage";
+import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
 import { store } from "../../config/redux/store";
 import { useHistory } from "react-router-dom";
@@ -115,7 +115,7 @@ const NotesView = (): JSX.Element => {
         <div className={globalStyles.light}>
             {/* Sidebar with profile pic */}
             <div className={styles.containerLeft}>
-                <ProfileImage
+                <Profile
                     firstName="Sonja"
                     lastName="Pedell"
                     onClick={navigateDashboard}

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
-import ProfileImage from "../NotesView/ProfileImage";
+import Profile from "../../components/Profile";
 import { RootState } from "../../config/redux/store";
 import { InstallPrompt } from "./InstallPrompt";
 import { capitalize } from "lodash";
@@ -17,6 +17,9 @@ const DashboardView = (): JSX.Element => {
     const history = useHistory();
     const navigateNotes = () => {
         history.push("/notes");
+    };
+    const navigateSettings = () => {
+        history.push("/settings");
     };
     const store = useSelector((state: RootState) => state);
 
@@ -174,10 +177,17 @@ const DashboardView = (): JSX.Element => {
     return (
         <div className={styles.basecontainer}>
             <div className={styles.topcontainer}>
-                <ProfileImage
+                <Profile
                     firstName={capitalize(store.user.account.firstName)}
                     lastName={capitalize(store.user.account.lastName)}
                 />
+                <div className={styles.cog}>
+                    <Icon
+                        name="cog"
+                        size="large"
+                        onClick={() => navigateSettings()}
+                    />
+                </div>
             </div>
 
             <div className={styles.midContainer}>

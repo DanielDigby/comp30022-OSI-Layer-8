@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ProfileImage.module.css";
+import styles from "./Profile.module.css";
 
 // Semantic UI button
 import { Image } from "semantic-ui-react";
