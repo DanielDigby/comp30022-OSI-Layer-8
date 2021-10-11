@@ -1,6 +1,6 @@
 import React from "react";
 import { INote, NoteModes } from "../../interfaces/note";
-import Note from "../../components/Note";
+import Note from "../../components/StandardNote";
 import dndStyles from "./dragAndDrop.module.css";
 import {
     DragDropContext,
