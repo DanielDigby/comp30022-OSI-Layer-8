@@ -4,22 +4,16 @@ import { IUser } from "../../interfaces/user";
 
 export interface UserState {
     account: IUser | null;
-    isNewLogin: boolean;
 }
 
 const initialState: UserState = {
     account: null,
-    isNewLogin: false,
 };
 
 export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        toggleIsNewLogin: (state) => {
-            state.isNewLogin = !state.isNewLogin;
-        },
-
         setUser: (state, action: PayloadAction<IUser>) => {
             state.account = action.payload;
         },
@@ -50,7 +44,6 @@ export const userSlice = createSlice({
     },
 });
 
-export const { toggleIsNewLogin, setUser, clearUser, updateUser } =
-    userSlice.actions;
+export const { setUser, clearUser, updateUser } = userSlice.actions;
 
 export default userSlice.reducer;

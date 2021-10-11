@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleIsNewLogin } from "../../config/redux/userSlice";
+import { checkAuthAPI } from "../../helpers/api/users";
+import { useSelector } from "react-redux";
 import styles from "./DashboardView.module.css";
 import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
@@ -31,6 +31,8 @@ const DashboardView = (): JSX.Element => {
 
     /* get the First name of User */
     //const firstName = store.getState().user.firstName;
+
+    checkAuthAPI(history);
 
     const oct = new Date();
     oct.setFullYear(2021, 10, 31);

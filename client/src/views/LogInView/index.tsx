@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./LogInView.module.css";
 import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
+import { logOutAPI } from "../../helpers/api/users";
 
 // Semantic UI button
 import { Checkbox, Button } from "semantic-ui-react";
@@ -9,9 +10,9 @@ import { Checkbox, Button } from "semantic-ui-react";
 import { logInAPI, Credentials } from "../../helpers/api/users";
 
 const LogInView = (): JSX.Element => {
-    const navHistory = useHistory();
-    const navigateHome = () => navHistory.push("/");
-    const navigateDashboard = () => navHistory.push("/dashboard");
+    const history = useHistory();
+    const navigateHome = () => history.push("/");
+    const navigateDashboard = () => history.push("/dashboard");
 
     // Components to send over to our api call
     const [email, setEmail] = useState<Credentials["email"]>("");
@@ -20,12 +21,10 @@ const LogInView = (): JSX.Element => {
     // Functions to update email and password entered
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
-        console.log(email);
     };
 
     const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
-        console.log(password);
     };
 
     // api call
@@ -33,7 +32,16 @@ const LogInView = (): JSX.Element => {
     const validateUserLogIn = async () => {
         try {
             await logInAPI({ email: email, password: password });
-            navigateDashboard();
+            setPassword("");
+            const allowCookies = confirm(
+                "We use cookies to personalise content in cara.\n\n" +
+                    "Accept and continue?"
+            );
+            if (allowCookies) {
+                navigateDashboard();
+            } else {
+                logOutAPI(history);
+            }
         } catch (error: unknown) {
             console.log(error);
             return;

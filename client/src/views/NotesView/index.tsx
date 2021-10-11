@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 // Semantic UI button
 import { DnD, DnDModes, ColumnDict } from "../../components/DnD";
@@ -10,20 +10,13 @@ import ProfileImage from "./ProfileImage";
 import styles from "./NotesView.module.css";
 import { store } from "../../config/redux/store";
 import { useHistory } from "react-router-dom";
+import { checkAuthAPI } from "../../helpers/api/users";
 
 const NotesView = (): JSX.Element => {
     const history = useHistory();
     const navigateDashboard = () => history.push("/dashboard");
 
-    /* State for our drag and drop */
-
-    // Boot user out if not logged in
-    useEffect(() => {
-        async () => {
-            if ((await store.getState().user.account) === null)
-                history.push("/login");
-        };
-    });
+    checkAuthAPI(history);
 
     const testNotes: Array<INote> = [
         {
