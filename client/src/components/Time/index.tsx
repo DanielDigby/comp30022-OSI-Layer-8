@@ -11,7 +11,7 @@ type TimeProps = {
 const Time = ({ timeVar }: TimeProps): JSX.Element => {
     // api call
     return (
-        <div className={styles.tag}>
+        <div className={styles.time}>
             {timeVar + "  "}
             <Icon name="clock outline" color="grey" />
         </div>

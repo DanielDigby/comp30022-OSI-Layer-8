@@ -1,6 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-
+import styles from "./Event.module.css";
 import { Icon } from "semantic-ui-react";
 
 type EventProps = {
@@ -10,7 +10,7 @@ type EventProps = {
 const Event = ({ eventName }: EventProps): JSX.Element => {
     // api call
     return (
-        <div>
+        <div className={styles.event}>
             {eventName + "  "}
             <Icon name="calendar alternate" color="grey" />
         </div>
