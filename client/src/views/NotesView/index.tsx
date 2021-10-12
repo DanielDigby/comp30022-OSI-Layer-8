@@ -2,7 +2,7 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 import _ from "lodash";
-import { Search, Grid, Header, Segment } from "semantic-ui-react";
+import { Search } from "semantic-ui-react";
 import { INote } from "../../interfaces/note";
 import { DnD, ColumnDict } from "./DnD";
 import globalStyles from "../../App.module.css";
