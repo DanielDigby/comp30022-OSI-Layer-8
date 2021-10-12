@@ -7,9 +7,7 @@ import { useHistory } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import Profile from "../../components/Profile";
 import { RootState } from "../../config/redux/store";
-import { InstallPrompt } from "./InstallPrompt";
 import { capitalize } from "lodash";
-
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
 import { INote, NoteModes } from "../../interfaces/note";
 import Note from "../../components/Note";
@@ -156,3 +154,15 @@ const DashboardView = (): JSX.Element => {
 };
 
 export default DashboardView;
+
+const InstallPrompt = (): JSX.Element => {
+    return (
+        <div className={styles.InstallPrompt}>
+            <Icon name="download" />
+            <div>
+                Cara can be installed on mobile devices by tapping on your
+                browser options, then selecting <b>Add to Home screen</b>
+            </div>
+        </div>
+    );
+};

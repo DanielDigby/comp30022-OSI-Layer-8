@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import styles from "./Menu.module.css";
 import { v4 as uuid } from "uuid";
 import { useHistory } from "react-router-dom";
-import { addTagAPI } from "../../helpers/api/tags";
+import { addTagAPI } from "../../../helpers/api/tags";
 
 // Semantic UI button
 import { Menu, Icon, Input } from "semantic-ui-react";
-import { store, RootState } from "../../config/redux/store";
+import { store, RootState } from "../../../config/redux/store";
 import { useSelector } from "react-redux";
-import { IUser } from "../../interfaces/user";
+import { IUser } from "../../../interfaces/user";
 
-const MenuItem = (): JSX.Element => {
+const MenuBar = (): JSX.Element => {
     const user: IUser = useSelector((state: RootState) => state.user.account);
     const navHistory = useHistory();
     const navigateSettings = () => navHistory.push("/settings");
@@ -83,4 +83,4 @@ const MenuItem = (): JSX.Element => {
         </div>
     );
 };
-export default MenuItem;
+export default MenuBar;
