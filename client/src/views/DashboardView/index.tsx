@@ -22,146 +22,21 @@ const DashboardView = (): JSX.Element => {
     const navigateSettings = () => {
         history.push("/settings");
     };
-    const store = useSelector((state: RootState) => state);
 
     checkAuthAPI(history);
 
-    const oct = new Date();
-    oct.setFullYear(2021, 10, 31);
-    const nov = new Date();
-    nov.setFullYear(2021, 11, 20);
-    const dec = new Date();
-    dec.setFullYear(2021, 12, 10);
-
-    const allNotes: Array<INote> = [
-        {
-            user: store.user.account,
-            _id: "sdjfasdfa",
-            _clientId: "sfhkjasd",
-            title: "event-october",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: oct,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "alvndslks",
-            _clientId: "hdjaasdsdakjasd",
-            title: "event-december",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: dec,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "alsdkfasd",
-            _clientId: "hdjafsaasd",
-            title: "no event or pin",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "aslslfvjd",
-            _clientId: "sfhkjasd",
-            title: "event-november",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: nov,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "sdhfjhas",
-            _clientId: "hdjaasdsdakjasd",
-            title: "pinned-one",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: null,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "sfkadfklhasdfa",
-            _clientId: "hdjafsaasd",
-            title: "pinned-two",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: null,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "sfkadfknxmxcnx",
-            _clientId: "hdjafsaasd",
-            title: "pinned-three",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: null,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "sfjsncohslcmx",
-            _clientId: "hdjafsaasd",
-            title: "pinned-four",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: null,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.user.account,
-            _id: "sfjsqoqoqx",
-            _clientId: "hdjafsaasd",
-            title: "pinned-five",
-            text: "test",
-            image: "test",
-            reminderTime: null,
-            eventTime: null,
-            pinned: true,
-            tags: [],
-            relatedNotes: [],
-        },
-    ];
+    const store = useSelector((state: RootState) => state);
+    const notes = store.notes.array;
 
     /* store.getState the arrays of notes */
     //const allNotes = store.getState().notes.array;
-    let eventNotes = filterNotes(allNotes, FilterOn.EVENT_TIME);
+    let eventNotes = filterNotes(notes, FilterOn.EVENT_TIME);
     if (eventNotes.length > 3) {
         eventNotes = eventNotes.slice(0, 3);
     }
 
     /* Filter the Pinned Notes, up to 3 */
-    const pinnedNotes = filterNotes(allNotes, FilterOn.PINNED);
+    const pinnedNotes = filterNotes(notes, FilterOn.PINNED);
     let pinnedNotes1: Array<INote> = [];
     let pinnedNotes2: Array<INote> = [];
     if (pinnedNotes.length <= 2) {
