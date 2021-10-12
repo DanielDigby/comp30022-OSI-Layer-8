@@ -3,7 +3,7 @@ import styles from "./Note.module.css";
 import "semantic-ui-css/semantic.min.css";
 import { INote, NoteModes } from "../../interfaces/note";
 
-import { Segment } from "semantic-ui-react";
+import { Segment, Icon } from "semantic-ui-react";
 
 // Added a the <Route path="/note" component={Note} /> for this
 import Tag from "../Tag";
@@ -21,6 +21,9 @@ const Note = ({ note }: NoteProps): JSX.Element => {
         <div className={styles.outerContainer}>
             <Segment.Group raised>
                 <Segment>
+                    <div className={styles.pinContainer}>
+                        <Icon name="pin" color="grey" />
+                    </div>
                     <div className={styles.titleContainer}>
                         <b>{note.title ? note.title : ""}</b>
                     </div>
