@@ -1,0 +1,42 @@
+.outerContainer {
+    display: flex;
+    width: 20vw;
+    flex-direction: column;
+}
+.pinContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+}
+.pinContainer {
+    display: flex;
+    flex-direction: column;
+}
+.noteContainer {
+    display: flex;
+    flex-direction: column;
+}
+.tagContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.timeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.eventContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

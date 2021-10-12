@@ -42,7 +42,7 @@ const NotesView = (): JSX.Element => {
                 },
                 {
                     user: store.user.account,
-                    title: "NOTE TEST 2",
+                    title: "NOTE TEST 2 (This here is a super long title test!!!!!)",
                     _id: "dsfradsf",
                     _clientId: uuid(),
                     text: "note2",
@@ -63,7 +63,7 @@ const NotesView = (): JSX.Element => {
                     title: "NOTE TEST 3",
                     _id: "dsfradsf",
                     _clientId: uuid(),
-                    text: "note3",
+                    text: "note3 (This here is a super long text test: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.)",
                     image: null,
                     reminderTime: null,
                     eventTime: null,
