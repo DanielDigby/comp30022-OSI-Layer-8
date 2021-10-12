@@ -42,6 +42,7 @@ export const logInAPI = async (credentials: Credentials): Promise<void> => {
 export const logOutAPI = async (
     history: ReturnType<typeof useHistory>
 ): Promise<void> => {
+    history.replace("/login");
     const outbox = (store.getState() as RootStateWithOffline).offline.outbox;
     if (outbox.length !== 0) throw new Error("Non Empty Outbox");
 
@@ -50,7 +51,6 @@ export const logOutAPI = async (
     if (res.status == 200) {
         store.dispatch({ type: RESET_OFFLINE });
         store.dispatch({ type: RESET_BASE });
-        history.replace("/login");
     } else throw new Error(res.statusText);
 };
 

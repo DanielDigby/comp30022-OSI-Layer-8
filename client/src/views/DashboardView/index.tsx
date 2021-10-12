@@ -177,19 +177,18 @@ const DashboardView = (): JSX.Element => {
 
     return (
         <div className={globalStyles.light}>
-            <div className={styles.basecontainer}>
-                <div className={styles.topcontainer}>
-                    <Profile />
-                    <div className={styles.cog}>
-                        <Icon
-                            name="cog"
-                            size="large"
-                            color="grey"
-                            onClick={() => navigateSettings()}
-                        />
-                    </div>
+            <div className={styles.leftBanner}>
+                <Profile />
+                <div className={styles.cog}>
+                    <Icon
+                        name="cog"
+                        size="big"
+                        color="grey"
+                        onClick={() => navigateSettings()}
+                    />
                 </div>
-
+            </div>
+            <div className={styles.main}>
                 <div className={styles.midContainer}>
                     <div className={styles.margin} />
                     <div className={styles.midContentContainer}>

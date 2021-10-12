@@ -1,14 +1,12 @@
-/* container for the pfp*/
-.topcontainer {
+.leftBanner {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 10vh;
+    justify-content: space-between;
 }
 
 .cog {
-    margin-top: 20px;
-    margin-left: 27.5px;
+    margin-bottom: 30px;
+    margin-left: 30px;
 }
 
 /* Container for the greeting, date, and link to all notes*/
@@ -21,14 +19,10 @@
     align-content: top;
 }
 
-.margin {
-    display: flex;
-    width: 7%;
-}
-
 .midContentContainer {
     display: flex;
     width: 93%;
+    margin-left: 1vw;
     align-items: stretch;
     flex-direction: row;
     align-content: top;
@@ -110,10 +104,10 @@
 
 .viewNotesContainer {
     display: flex;
-    width: 62%;
+    width: 100%;
     flex-direction: row-reverse;
     align-items: center;
-    margin-right: 6%;
+    margin-right: -2%;
 }
 
 .greetingsContainer {
@@ -124,8 +118,10 @@
     margin-bottom: 5vh;
 }
 
-.basecontainer {
+.main {
     width: 100%;
+    margin-top: 60px;
+    margin-left: -10px;
     display: flex;
     flex-direction: column;
     align-items: center;

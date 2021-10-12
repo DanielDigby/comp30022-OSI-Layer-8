@@ -42,13 +42,11 @@
     align-items: center;
 }
 
-.icon {
-    padding-left: 32px;
+.settings {
+    margin-top: 4.5vh;
+    margin-left: 32px;
+    margin-bottom: 20px;
     display: flex;
     width: 100%;
     align-items: flex-start;
-}
-
-.settings {
-    margin-top: 5vh;
 }
