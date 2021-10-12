@@ -3106,6 +3106,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/random-name@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@types/random-name@npm:0.1.0"
+  checksum: b1c8eed5bbec382531fea5fe98551dc26e9694c9008ff4efc336860bb655bbcc6fa7353892ea4f97a6e6650972e30306c9ec63d8da31a49ac0305ae315691113
+  languageName: node
+  linkType: hard
+
 "@types/range-parser@npm:*":
   version: 1.2.4
   resolution: "@types/range-parser@npm:1.2.4"
@@ -5543,6 +5550,7 @@ __metadata:
     "@types/jest": ^26.0.15
     "@types/lodash": ^4.14.175
     "@types/node": ^12.0.0
+    "@types/random-name": ^0.1.0
     "@types/react": ^16.9.53
     "@types/react-beautiful-dnd": ^13.1.2
     "@types/react-dom": ^16.9.8
@@ -5560,6 +5568,7 @@ __metadata:
     http-proxy-middleware: ^2.0.1
     lodash: ^4.17.21
     prettier: ^2.3.2
+    random-name: ^0.1.2
     react: ^17.0.2
     react-beautiful-dnd: ^13.1.0
     react-dom: ^17.0.2
@@ -14928,6 +14937,13 @@ fsevents@^1.2.7:
   dependencies:
     performance-now: ^2.1.0
   checksum: 50ba284e481c8185dbcf45fc4618ba3aec580bb50c9121385d5698cb6012fe516d2015b1df6dd407a7b7c58d44be8086108236affbce1861edd6b44637c8cd52
+  languageName: node
+  linkType: hard
+
+"random-name@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "random-name@npm:0.1.2"
+  checksum: 9756759af1e2c4902d35113617939426e487bad97d9cbd5d8ad0c28256e7c6dc5602daad5572a4e35c14d096fffc9c1ea33c2f95fb0d326a9d25c21400dd7eef
   languageName: node
   linkType: hard
 

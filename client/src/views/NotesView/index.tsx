@@ -14,17 +14,17 @@ import { useHistory } from "react-router-dom";
 import { checkAuthAPI } from "../../helpers/api/users";
 import { useSelector } from "react-redux";
 import { RootState } from "../../config/redux/store";
+import { searchNotes } from "../../helpers/utils/search";
 
-export type NotesState = {
+type NotesState = {
     loading: boolean;
-    notes: Array<INote> | undefined;
+    notes: Array<INote>;
     columns: ColumnDict;
     value: string | undefined;
 };
 
 type Action = {
     type: string;
-    initialState?: NotesState;
     columns?: ColumnDict;
     query?: string;
     notes?: Array<INote>;
@@ -36,13 +36,6 @@ const placeholderColumn = {
         name: "col1",
         items: new Array<INote>(),
     },
-};
-
-const defaultState = {
-    loading: false,
-    notes: [],
-    columns: placeholderColumn,
-    value: "",
 };
 
 const mapNotesToColumns = (notes: Array<INote>): ColumnDict => {
@@ -78,113 +71,50 @@ const mapNotesToColumns = (notes: Array<INote>): ColumnDict => {
             if (note) newDict[id1].items.push(note);
         }
     }
-    console.log(newDict);
     return newDict;
 };
-
-export const notesReducer = (state: NotesState, action: Action): NotesState => {
-    switch (action.type) {
-        case "UPDATE_COLUMNS":
-            return {
-                ...state,
-                columns: action.columns ? action.columns : placeholderColumn,
-            };
-        case "CLEAN_QUERY":
-            return action.initialState ? action.initialState : defaultState;
-        case "START_SEARCH":
-            return { ...state, loading: true, value: action.query };
-        case "FINISH_SEARCH":
-            return { ...state, loading: false, notes: action.notes };
-        case "UPDATE_SELECTION":
-            return { ...state, value: action.selection };
-
-        default:
-            throw new Error();
-    }
-};
-
-// const initialColumns: ColumnDict = {
-//     /* UUID returns a segment of bytes, which isn't a valid identifier. JS requires us to use
-//     segment-literal notation. Basically for uuid() to be a key, need to wrap in []. */
-//     [uuid()]: {
-//         name: "col1",
-//         items: [
-//             {
-//                 user: "asdfasd",
-//                 title: "NOTE TEST 1",
-//                 _id: "dsfradsf",
-//                 _clientId: uuid(),
-//                 text: "note1",
-//                 image: null,
-//                 reminderTime: null,
-//                 eventTime: null,
-//                 pinned: false,
-//                 tags: [],
-//                 relatedNotes: [],
-//             },
-//             {
-//                 user: "asdfasd",
-//                 title: "NOTE TEST 2",
-//                 _id: "dsfradsf",
-//                 _clientId: uuid(),
-//                 text: "note2",
-//                 image: null,
-//                 reminderTime: null,
-//                 eventTime: null,
-//                 pinned: false,
-//                 tags: [],
-//                 relatedNotes: [],
-//             },
-//         ],
-//     },
-//     [uuid()]: {
-//         name: "col2",
-//         items: [
-//             {
-//                 user: "asdfasd",
-//                 title: "NOTE TEST 3",
-//                 _id: "dsfradsf",
-//                 _clientId: uuid(),
-//                 text: "note3",
-//                 image: null,
-//                 reminderTime: null,
-//                 eventTime: null,
-//                 pinned: false,
-//                 tags: [],
-//                 relatedNotes: [],
-//             },
-//         ],
-//     },
-//     [uuid()]: {
-//         name: "col3",
-//         items: [
-//             {
-//                 user: "asdfasd",
-//                 title: "NOTE TEST 4",
-//                 _id: "dsfradsf",
-//                 _clientId: uuid(),
-//                 text: "note4",
-//                 image: null,
-//                 reminderTime: null,
-//                 eventTime: null,
-//                 pinned: false,
-//                 tags: [],
-//                 relatedNotes: [],
-//             },
-//         ],
-//     },
-// };
 
 const NotesView = (): JSX.Element => {
     const history = useHistory();
     checkAuthAPI(history);
     const store = useSelector((state: RootState) => state);
+    const source = store.notes.array;
     const initialState: NotesState = {
         loading: false,
         notes: [],
-        columns: mapNotesToColumns(store.notes.array),
+        columns: mapNotesToColumns(source),
         value: "",
     };
+    const notesReducer = (state: NotesState, action: Action): NotesState => {
+        switch (action.type) {
+            case "UPDATE_COLUMNS":
+                return {
+                    ...state,
+                    columns: action.columns
+                        ? action.columns
+                        : placeholderColumn,
+                };
+            case "CLEAN_QUERY":
+                return initialState;
+            case "START_SEARCH":
+                return { ...state, loading: true, value: action.query };
+            case "FINISH_SEARCH":
+                if (action.notes)
+                    return {
+                        ...state,
+                        loading: false,
+                        notes: action.notes,
+                        columns: mapNotesToColumns(action.notes),
+                    };
+                return { ...state };
+            case "UPDATE_SELECTION":
+                return { ...state, value: action.selection };
+
+            default:
+                throw new Error();
+        }
+    };
+
     const [state, dispatch] = React.useReducer(notesReducer, initialState);
     const updateColumns = (columns: ColumnDict) => {
         dispatch({ type: "UPDATE_COLUMNS", columns: columns });
@@ -210,7 +140,7 @@ const NotesView = (): JSX.Element => {
             <div className={styles.main}>
                 {/* Searchbar on top right corner */}
                 <div className={styles.containerRight}>
-                    <SearchBar {...{ state, initialState, dispatch }} />
+                    <SearchBar {...{ state, source, dispatch }} />
                 </div>
                 <DnD updateColumns={updateColumns} columns={state.columns} />
             </div>
@@ -219,46 +149,13 @@ const NotesView = (): JSX.Element => {
 };
 export default NotesView;
 
-const source = [
-    {
-        user: "dsafads",
-        title: "NOTE TEST 1",
-        _id: "dsfradsf",
-        _clientId: "dsafads",
-        text: "note1",
-        image: null,
-        reminderTime: null,
-        eventTime: null,
-        pinned: false,
-        tags: [],
-        relatedNotes: [],
-    },
-    {
-        user: "dsafads",
-        title: "NOTE TEST 2",
-        _id: "dsfradsf",
-        _clientId: "dsafads",
-        text: "note2",
-        image: null,
-        reminderTime: null,
-        eventTime: null,
-        pinned: false,
-        tags: [],
-        relatedNotes: [],
-    },
-];
-
 type SearchBarProps = {
     state: NotesState;
-    initialState: NotesState;
+    source: Array<INote>;
     dispatch: React.Dispatch<Action>;
 };
 
-function SearchBar({
-    state,
-    initialState,
-    dispatch,
-}: SearchBarProps): JSX.Element {
+function SearchBar({ state, source, dispatch }: SearchBarProps): JSX.Element {
     const { loading, notes, value } = state;
 
     const timeoutRef = React.useRef(
@@ -272,18 +169,13 @@ function SearchBar({
 
         timeoutRef.current = setTimeout(() => {
             if (data.value.length === 0) {
-                dispatch({ type: "CLEAN_QUERY", initialState: initialState });
+                dispatch({ type: "CLEAN_QUERY" });
                 return;
             }
 
-            // eslint-disable-next-line security/detect-non-literal-regexp
-            const re = new RegExp(_.escapeRegExp(data.value), "i");
-            const isMatch = (result: INote) =>
-                re.test(result.title ? result.title : "");
-
             dispatch({
                 type: "FINISH_SEARCH",
-                notes: _.filter(source, isMatch),
+                notes: searchNotes(source, data.value),
             });
         }, 300);
     }, []);
@@ -294,34 +186,17 @@ function SearchBar({
     }, []);
 
     return (
-        <Grid>
-            <Grid.Column width={6}>
-                <Search
-                    loading={loading}
-                    onResultSelect={(e, data) =>
-                        dispatch({
-                            type: "UPDATE_SELECTION",
-                            selection: data.result.title,
-                        })
-                    }
-                    onSearchChange={handleSearchChange}
-                    notes={notes}
-                    value={value}
-                />
-            </Grid.Column>
-
-            <Grid.Column width={10}>
-                <Segment>
-                    <Header>SearchbarState</Header>
-                    <pre style={{ overflowX: "auto" }}>
-                        {JSON.stringify({ loading, notes, value }, null, 2)}
-                    </pre>
-                    <Header>Options</Header>
-                    <pre style={{ overflowX: "auto" }}>
-                        {JSON.stringify(source, null, 2)}
-                    </pre>
-                </Segment>
-            </Grid.Column>
-        </Grid>
+        <Search
+            loading={loading}
+            onResultSelect={(e, data) =>
+                dispatch({
+                    type: "UPDATE_SELECTION",
+                    selection: data.result.title,
+                })
+            }
+            onSearchChange={handleSearchChange}
+            notes={notes}
+            value={value}
+        />
     );
 }
