@@ -1,146 +1,108 @@
-import React, { useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
-// Semantic UI button
-import { DnD, DnDModes, ColumnDict } from "../../components/DnD";
-import { INote } from "../../interfaces/note";
+import React from "react";
 import globalStyles from "../../App.module.css";
-import MenuItem from "./Menu";
-import SearchBarItem from "./SearchBar";
-import ProfileImage from "./ProfileImage";
+import MenuBar from "./MenuBar";
+import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
-import { store } from "../../config/redux/store";
+import NewNote from "./NewNote";
+import { INote } from "../../interfaces/note";
 import { useHistory } from "react-router-dom";
+import { checkAuthAPI } from "../../helpers/api/users";
+import { useSelector } from "react-redux";
+import { SearchBar } from "./SearchBar";
+import { RootState } from "../../config/redux/store";
+import { DnD, ColumnDict } from "./DnD";
+import { mapNotesToColumns } from "../../helpers/utils/columns";
+
+export type NotesState = {
+    loading: boolean;
+    notes: Array<INote>;
+    columns: ColumnDict;
+    value: string | undefined;
+};
+
+export type Action = {
+    type: string;
+    columns?: ColumnDict;
+    query?: string;
+    notes?: Array<INote>;
+    selection?: string;
+};
 
 const NotesView = (): JSX.Element => {
     const history = useHistory();
-    const navigateDashboard = () => history.push("/dashboard");
+    const navigateDashboard = () => history.push("/");
+    checkAuthAPI(history);
 
-    /* State for our drag and drop */
+    // get redux state
+    const store = useSelector((state: RootState) => state);
+    const source = store.notes.array;
 
-    // Boot user out if not logged in
-    useEffect(() => {
-        if (!store.getState().user.account) history.push("/login");
-    });
-
-    const testNotes: Array<INote> = [
-        {
-            user: store.getState().user.account,
-            title: "NOTE TEST 1",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note1",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.getState().user.account,
-            title: "NOTE TEST 2",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note2",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.getState().user.account,
-            title: "NOTE TEST 3",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note3",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.getState().user.account,
-            title: "NOTE TEST 4",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note4",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-        {
-            user: store.getState().user.account,
-            title: "NOTE TEST 5",
-            _id: "dsfradsf",
-            _clientId: uuid(),
-            text: "note5",
-            image: null,
-            reminderTime: null,
-            eventTime: null,
-            pinned: false,
-            tags: [],
-            relatedNotes: [],
-        },
-    ];
-
-    // api call
-    const initialColumns: ColumnDict = {
-        /* UUID returns a segment of bytes, which isn't a valid identifier. JS requires us to use
-        segment-literal notation. Basically for uuid() to be a key, need to wrap in []. */
-        [uuid()]: {
-            name: "col1",
-            items: testNotes,
-        },
-        [uuid()]: {
-            name: "col2",
-            items: [],
-        },
-        [uuid()]: {
-            name: "col3",
-            items: [],
-        },
-        [uuid()]: {
-            name: "col4",
-            items: [],
-        },
+    // set component state based on user notes, reducer and actions are passed
+    // down to child components
+    // reducer is used to combine multiple sources of state changes into one
+    // manageable ruleset (filtering/searching/crud)
+    //
+    // code for reducer and search bar state management sourced from semantic ui
+    // docs here:
+    // https://react.semantic-ui.com/modules/search/
+    const initialState: NotesState = {
+        loading: false,
+        notes: [],
+        columns: mapNotesToColumns(source),
+        value: "",
     };
+    const notesReducer = (state: NotesState, action: Action): NotesState => {
+        switch (action.type) {
+            case "CLEAN_QUERY":
+                return initialState;
 
-    const [columns, updateColumns] = useState(initialColumns);
-    /* Do we need to reshuffle and render notes into their respective columns? */
+            case "START_SEARCH":
+                return { ...state, loading: true, value: action.query };
+
+            case "FINISH_SEARCH":
+                if (action.notes)
+                    return {
+                        ...state,
+                        loading: false,
+                        notes: action.notes,
+                        columns: mapNotesToColumns(action.notes),
+                    };
+                else return { ...state };
+
+            case "UPDATE_SELECTION":
+                return { ...state, value: action.selection };
+
+            case "UPDATE_COLUMNS":
+                if (action.columns)
+                    return {
+                        ...state,
+                        columns: action.columns,
+                    };
+                else return { ...state };
+
+            default:
+                throw new Error();
+        }
+    };
+    const [state, dispatch] = React.useReducer(notesReducer, initialState);
+    const updateColumns = (columns: ColumnDict) => {
+        dispatch({ type: "UPDATE_COLUMNS", columns: columns });
+    };
 
     return (
         <div className={globalStyles.light}>
-            {/* Sidebar with profile pic */}
-            <div className={styles.containerLeft}>
-                <ProfileImage
-                    firstName="Sonja"
-                    lastName="Pedell"
-                    onClick={navigateDashboard}
-                />
-                <MenuItem />
+            <div className={styles.staticLeft}>
+                <div>
+                    <Profile onClick={navigateDashboard} />
+                    <MenuBar />
+                </div>
+                <NewNote />
             </div>
-
-            {/* Main notes area 
-            Pass in:
-            the updateColumns state function defined on line 110
-            the columns data structure, initially set to initialColumns
-            */}
-            <DnD
-                updateColumns={updateColumns}
-                columns={columns}
-                mode={DnDModes.NOTES}
-            />
-
-            {/* Searchbar on top right corner */}
-            <div className={styles.containerRight}>
-                <SearchBarItem />
+            <div className={styles.main}>
+                <div className={styles.containerRight}>
+                    <SearchBar {...{ state, source, dispatch }} />
+                </div>
+                <DnD updateColumns={updateColumns} columns={state.columns} />
             </div>
         </div>
     );

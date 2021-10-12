@@ -1,9 +1,6 @@
+import { useHistory } from "react-router";
 import { IUser, INewUser } from "../../interfaces/user";
-import {
-    setUser,
-    toggleIsNewLogin,
-    updateUser,
-} from "../../config/redux/userSlice";
+import { setUser, updateUser } from "../../config/redux/userSlice";
 import { setNotes } from "../../config/redux/noteSlice";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
 import {
@@ -35,8 +32,6 @@ export const logInAPI = async (credentials: Credentials): Promise<void> => {
         const notes = notesRes.data;
         if (notes) store.dispatch(setNotes(notes));
         else throw new Error(notesRes.statusText);
-        if (store.getState().user.isNewLogin == false)
-            store.dispatch(toggleIsNewLogin());
     } else throw new Error(authRes.statusText);
 };
 
@@ -44,7 +39,10 @@ export const logInAPI = async (credentials: Credentials): Promise<void> => {
 // clear redux store and redux offline
 // rejects with Non Empty Outbox if there are unsaved http requests
 // rejects with Unauthorized when no user jwt
-export const logOutAPI = async (): Promise<void> => {
+export const logOutAPI = async (
+    history: ReturnType<typeof useHistory>
+): Promise<void> => {
+    history.replace("/login");
     const outbox = (store.getState() as RootStateWithOffline).offline.outbox;
     if (outbox.length !== 0) throw new Error("Non Empty Outbox");
 
@@ -72,4 +70,9 @@ export const registerAPI = async (newUser: INewUser): Promise<void> => {
 
 export const updateUserAPI = (user: IUser): void => {
     store.dispatch(updateUser(user));
+};
+
+// Boot user out if not logged in
+export const checkAuthAPI = (history: ReturnType<typeof useHistory>): void => {
+    if (!store.getState().user.account) history.replace("/login");
 };

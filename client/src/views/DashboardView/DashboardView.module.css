@@ -1,29 +1,28 @@
-/* container for the pfp*/
-.topcontainer {
+.leftBanner {
     display: flex;
-    width: 100%;
-    height: 10vh;
-    padding-top: 10px;
-    padding-left: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cog {
+    margin-bottom: 30px;
+    margin-left: 30px;
 }
 
 /* Container for the greeting, date, and link to all notes*/
 .midContainer {
     display: flex;
     width: 73%;
+    margin-top: 7%;
     align-items: stretch;
     flex-direction: row;
     align-content: top;
 }
 
-.margin {
-    display: flex;
-    width: 7%;
-}
-
 .midContentContainer {
     display: flex;
     width: 93%;
+    margin-left: 1vw;
     align-items: stretch;
     flex-direction: row;
     align-content: top;
@@ -39,7 +38,7 @@
 /* Container for event notes */
 .eventsContainer {
     display: flex;
-    width: 32%;
+    width: 45%;
     flex-direction: column;
     align-items: stretch;
 }
@@ -74,6 +73,7 @@
 .tumbtackContainer {
     display: flex;
     width: 5%;
+    margin-right: 13px;
 }
 
 /* eventNote box*/
@@ -104,9 +104,10 @@
 
 .viewNotesContainer {
     display: flex;
-    width: 62%;
+    width: 100%;
     flex-direction: row-reverse;
     align-items: center;
+    margin-right: -2%;
 }
 
 .greetingsContainer {
@@ -117,16 +118,26 @@
     margin-bottom: 5vh;
 }
 
-.basecontainer {
+.main {
     width: 100%;
+    margin-top: 60px;
+    margin-left: -10px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.greeting {
+    font-size: 40px;
+    line-height: 50px;
+    width: 300px;
+}
+
 .date {
+    color: #707070;
+    font-size: 20px;
     margin-bottom: 0px;
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -143,4 +154,10 @@
     align-items: left;
     margin-top: 0px;
     margin-bottom: 20px;
+}
+
+.installPrompt {
+    color: #707070;
+    margin-top: 8%;
+    display: flex;
 }

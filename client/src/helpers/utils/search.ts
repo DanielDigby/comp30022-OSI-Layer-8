@@ -4,7 +4,7 @@ export const searchNotes = (
     notes: INote[],
     searchKeywords: string
 ): INote[] => {
-    const keywords = searchKeywords.split(" ");
+    const keywords = searchKeywords.toLowerCase().split(" ");
 
     const filteredNotes = notes.filter((note) => {
         let text = "";

@@ -27,6 +27,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "djfhjaskjdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -56,6 +57,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "djfhjaskjdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -94,6 +96,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "december",
                         _clientId: "djfhjaskjdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -106,6 +109,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "djfhjaskjdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -118,6 +122,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "october",
                         _clientId: "djasdfsdf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -130,6 +135,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "november",
                         _clientId: "djfhsdf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -162,6 +168,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "djfhjaskjdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -189,6 +196,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "djfasdfdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -201,6 +209,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "b",
                         _clientId: "djsadfssdf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -213,6 +222,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "c",
                         _clientId: "djassdfsddf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -241,6 +251,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "djfasdfdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -253,6 +264,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "b",
                         _clientId: "djsadfssdf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -265,6 +277,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "c",
                         _clientId: "djassdfsddf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -294,6 +307,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "djfhwerdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -321,6 +335,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "dsklkmbdfdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -333,6 +348,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "b",
                         _clientId: "dopopopopf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -345,6 +361,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "c",
                         _clientId: "djadf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -372,6 +389,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "a",
                         _clientId: "dsklkmbdfdfa",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -384,6 +402,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "b",
                         _clientId: "dopopopopf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,
@@ -396,6 +415,7 @@ describe("Notes filter utils", () => {
                     {
                         _id: "c",
                         _clientId: "djadf",
+                        user: "asfhdklasdjfl",
                         title: null,
                         text: null,
                         image: null,

@@ -9,7 +9,7 @@ const ProfilePic = (): JSX.Element => {
         <div className={styles.container}>
             <div className={styles.heading}>
                 <h3>Profile picture</h3>
-                <Icon classNamesize="small" name="edit outline" />
+                <Icon size="small" name="pencil alternate" color="grey" />
             </div>
 
             <div className={styles.image}>
