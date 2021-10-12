@@ -42,7 +42,7 @@ const NotesView = (): JSX.Element => {
                 },
                 {
                     user: store.user.account,
-                    title: "NOTE TEST 2",
+                    title: "NOTE TEST 2 (This here is created for a super long title test!!!)",
                     _id: "dsfradsf",
                     _clientId: uuid(),
                     text: "note2",

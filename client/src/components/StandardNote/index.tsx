@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Note.module.css";
+import styles from "./StandardNote.module.css";
 import "semantic-ui-css/semantic.min.css";
 import { INote, NoteModes } from "../../interfaces/note";
 
@@ -21,11 +21,13 @@ const Note = ({ note }: NoteProps): JSX.Element => {
         <div className={styles.outerContainer}>
             <Segment.Group raised>
                 <Segment>
-                    <div className={styles.pinContainer}>
-                        <Icon name="pin" color="grey" />
-                    </div>
-                    <div className={styles.titleContainer}>
-                        <b>{note.title ? note.title : ""}</b>
+                    <div className={styles.topContainer}>
+                        <div className={styles.titleContainer}>
+                            <b>{note.title ? note.title : ""}</b>
+                        </div>
+                        <div className={styles.pinContainer}>
+                            <Icon name="pin" color="grey" />
+                        </div>
                     </div>
                     <br />
                     <div className={styles.noteContainer}>
