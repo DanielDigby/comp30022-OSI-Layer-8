@@ -1,27 +1,26 @@
 import React from "react";
 import globalStyles from "../../App.module.css";
-import MenuItem from "./Menu";
+import MenuBar from "./MenuBar";
 import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
 import NewNote from "./NewNote";
-import { Search } from "semantic-ui-react";
 import { INote } from "../../interfaces/note";
 import { useHistory } from "react-router-dom";
 import { checkAuthAPI } from "../../helpers/api/users";
 import { useSelector } from "react-redux";
+import { SearchBar } from "./SearchBar";
 import { RootState } from "../../config/redux/store";
-import { searchNotes } from "../../helpers/utils/search";
 import { DnD, ColumnDict } from "./DnD";
 import { mapNotesToColumns } from "../../helpers/utils/columns";
 
-type NotesState = {
+export type NotesState = {
     loading: boolean;
     notes: Array<INote>;
     columns: ColumnDict;
     value: string | undefined;
 };
 
-type Action = {
+export type Action = {
     type: string;
     columns?: ColumnDict;
     query?: string;
@@ -95,7 +94,7 @@ const NotesView = (): JSX.Element => {
             <div className={styles.staticLeft}>
                 <div>
                     <Profile onClick={navigateDashboard} />
-                    <MenuItem />
+                    <MenuBar />
                 </div>
                 <NewNote />
             </div>
@@ -109,59 +108,3 @@ const NotesView = (): JSX.Element => {
     );
 };
 export default NotesView;
-
-// Search bar component handles the logic for applying the results of search by
-// using the dispatch function passed in as prop
-type SearchBarProps = {
-    state: NotesState;
-    source: Array<INote>;
-    dispatch: React.Dispatch<Action>;
-};
-function SearchBar({ state, source, dispatch }: SearchBarProps): JSX.Element {
-    const { loading, notes, value } = state;
-
-    // manage search animation, set zero for typescript
-    const timeoutRef = React.useRef(
-        setTimeout(() => {
-            return;
-        }, 0)
-    );
-
-    const handleSearchChange = React.useCallback((e, data) => {
-        clearTimeout(timeoutRef.current);
-        dispatch({ type: "START_SEARCH", query: data.value });
-
-        timeoutRef.current = setTimeout(() => {
-            if (data.value.length === 0) {
-                dispatch({ type: "CLEAN_QUERY" });
-                return;
-            }
-
-            dispatch({
-                type: "FINISH_SEARCH",
-                notes: searchNotes(source, data.value),
-            });
-        }, 300);
-    }, []);
-
-    React.useEffect(() => {
-        return () => {
-            clearTimeout(timeoutRef.current);
-        };
-    }, []);
-
-    return (
-        <Search
-            loading={loading}
-            onResultSelect={(e, data) =>
-                dispatch({
-                    type: "UPDATE_SELECTION",
-                    selection: data.result.title,
-                })
-            }
-            onSearchChange={handleSearchChange}
-            notes={notes}
-            value={value}
-        />
-    );
-}
