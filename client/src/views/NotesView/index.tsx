@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+/* eslint-disable security/detect-object-injection */
+import React from "react";
 import { v4 as uuid } from "uuid";
-// Semantic UI button
-import { DnD, ColumnDict } from "../../components/DnD";
+import _ from "lodash";
+import { Search, Grid, Header, Segment } from "semantic-ui-react";
+import { INote } from "../../interfaces/note";
+import { DnD, ColumnDict } from "./DnD";
 import globalStyles from "../../App.module.css";
 import MenuItem from "./Menu";
-import { Search, Grid } from "semantic-ui-react";
 import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
 import NewNote from "./NewNote";
@@ -13,88 +15,181 @@ import { checkAuthAPI } from "../../helpers/api/users";
 import { useSelector } from "react-redux";
 import { RootState } from "../../config/redux/store";
 
-const NotesView = (): JSX.Element => {
-    const history = useHistory();
-    const navigateDashboard = () => history.push("/");
-    const store = useSelector((state: RootState) => state);
+export type NotesState = {
+    loading: boolean;
+    notes: Array<INote> | undefined;
+    columns: ColumnDict;
+    value: string | undefined;
+};
 
-    checkAuthAPI(history);
+type Action = {
+    type: string;
+    initialState?: NotesState;
+    columns?: ColumnDict;
+    query?: string;
+    notes?: Array<INote>;
+    selection?: string;
+};
 
-    // api call
-    const initialColumns: ColumnDict = {
-        /* UUID returns a segment of bytes, which isn't a valid identifier. JS requires us to use
-        segment-literal notation. Basically for uuid() to be a key, need to wrap in []. */
-        [uuid()]: {
+const placeholderColumn = {
+    [uuid()]: {
+        name: "col1",
+        items: new Array<INote>(),
+    },
+};
+
+const defaultState = {
+    loading: false,
+    notes: [],
+    columns: placeholderColumn,
+    value: "",
+};
+
+const mapNotesToColumns = (notes: Array<INote>): ColumnDict => {
+    const temp = _.cloneDeep(notes);
+    const id1 = uuid();
+    const id2 = uuid();
+    const id3 = uuid();
+    const newDict = {
+        [id1]: {
             name: "col1",
-            items: [
-                {
-                    user: store.user.account,
-                    title: "NOTE TEST 1",
-                    _id: "dsfradsf",
-                    _clientId: uuid(),
-                    text: "note1",
-                    image: null,
-                    reminderTime: null,
-                    eventTime: null,
-                    pinned: false,
-                    tags: [],
-                    relatedNotes: [],
-                },
-                {
-                    user: store.user.account,
-                    title: "NOTE TEST 2 (This here is a super long title test!!!!!)",
-                    _id: "dsfradsf",
-                    _clientId: uuid(),
-                    text: "note2",
-                    image: null,
-                    reminderTime: null,
-                    eventTime: null,
-                    pinned: false,
-                    tags: [],
-                    relatedNotes: [],
-                },
-            ],
+            items: new Array<INote>(),
         },
-        [uuid()]: {
+        [id2]: {
             name: "col2",
-            items: [
-                {
-                    user: store.user.account,
-                    title: "NOTE TEST 3",
-                    _id: "dsfradsf",
-                    _clientId: uuid(),
-                    text: "note3 (This here is a super long text test: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.)",
-                    image: null,
-                    reminderTime: null,
-                    eventTime: null,
-                    pinned: false,
-                    tags: [],
-                    relatedNotes: [],
-                },
-            ],
+            items: new Array<INote>(),
         },
-        [uuid()]: {
+        [id3]: {
             name: "col3",
-            items: [
-                {
-                    user: store.user.account,
-                    title: "NOTE TEST 4",
-                    _id: "dsfradsf",
-                    _clientId: uuid(),
-                    text: "note4",
-                    image: null,
-                    reminderTime: null,
-                    eventTime: null,
-                    pinned: false,
-                    tags: [],
-                    relatedNotes: [],
-                },
-            ],
+            items: new Array<INote>(),
         },
     };
 
-    const [columns, updateColumns] = useState(initialColumns);
-    /* Do we need to reshuffle and render notes into their respective columns? */
+    while (temp.length !== 0) {
+        if (temp.length % 3 === 0) {
+            const note = temp.shift();
+            if (note) newDict[id3].items.push(note);
+        }
+        if (temp.length % 2 === 0) {
+            const note = temp.shift();
+            if (note) newDict[id2].items.push(note);
+        } else {
+            const note = temp.shift();
+            if (note) newDict[id1].items.push(note);
+        }
+    }
+    console.log(newDict);
+    return newDict;
+};
+
+export const notesReducer = (state: NotesState, action: Action): NotesState => {
+    switch (action.type) {
+        case "UPDATE_COLUMNS":
+            return {
+                ...state,
+                columns: action.columns ? action.columns : placeholderColumn,
+            };
+        case "CLEAN_QUERY":
+            return action.initialState ? action.initialState : defaultState;
+        case "START_SEARCH":
+            return { ...state, loading: true, value: action.query };
+        case "FINISH_SEARCH":
+            return { ...state, loading: false, notes: action.notes };
+        case "UPDATE_SELECTION":
+            return { ...state, value: action.selection };
+
+        default:
+            throw new Error();
+    }
+};
+
+// const initialColumns: ColumnDict = {
+//     /* UUID returns a segment of bytes, which isn't a valid identifier. JS requires us to use
+//     segment-literal notation. Basically for uuid() to be a key, need to wrap in []. */
+//     [uuid()]: {
+//         name: "col1",
+//         items: [
+//             {
+//                 user: "asdfasd",
+//                 title: "NOTE TEST 1",
+//                 _id: "dsfradsf",
+//                 _clientId: uuid(),
+//                 text: "note1",
+//                 image: null,
+//                 reminderTime: null,
+//                 eventTime: null,
+//                 pinned: false,
+//                 tags: [],
+//                 relatedNotes: [],
+//             },
+//             {
+//                 user: "asdfasd",
+//                 title: "NOTE TEST 2",
+//                 _id: "dsfradsf",
+//                 _clientId: uuid(),
+//                 text: "note2",
+//                 image: null,
+//                 reminderTime: null,
+//                 eventTime: null,
+//                 pinned: false,
+//                 tags: [],
+//                 relatedNotes: [],
+//             },
+//         ],
+//     },
+//     [uuid()]: {
+//         name: "col2",
+//         items: [
+//             {
+//                 user: "asdfasd",
+//                 title: "NOTE TEST 3",
+//                 _id: "dsfradsf",
+//                 _clientId: uuid(),
+//                 text: "note3",
+//                 image: null,
+//                 reminderTime: null,
+//                 eventTime: null,
+//                 pinned: false,
+//                 tags: [],
+//                 relatedNotes: [],
+//             },
+//         ],
+//     },
+//     [uuid()]: {
+//         name: "col3",
+//         items: [
+//             {
+//                 user: "asdfasd",
+//                 title: "NOTE TEST 4",
+//                 _id: "dsfradsf",
+//                 _clientId: uuid(),
+//                 text: "note4",
+//                 image: null,
+//                 reminderTime: null,
+//                 eventTime: null,
+//                 pinned: false,
+//                 tags: [],
+//                 relatedNotes: [],
+//             },
+//         ],
+//     },
+// };
+
+const NotesView = (): JSX.Element => {
+    const history = useHistory();
+    checkAuthAPI(history);
+    const store = useSelector((state: RootState) => state);
+    const initialState: NotesState = {
+        loading: false,
+        notes: [],
+        columns: mapNotesToColumns(store.notes.array),
+        value: "",
+    };
+    const [state, dispatch] = React.useReducer(notesReducer, initialState);
+    const updateColumns = (columns: ColumnDict) => {
+        dispatch({ type: "UPDATE_COLUMNS", columns: columns });
+    };
+    const navigateDashboard = () => history.push("/");
 
     return (
         <div className={globalStyles.light}>
@@ -115,15 +210,118 @@ const NotesView = (): JSX.Element => {
             <div className={styles.main}>
                 {/* Searchbar on top right corner */}
                 <div className={styles.containerRight}>
-                    <Grid>
-                        <Grid.Column width={6}>
-                            <Search placeholder="Search notes" />
-                        </Grid.Column>
-                    </Grid>
+                    <SearchBar {...{ state, initialState, dispatch }} />
                 </div>
-                <DnD updateColumns={updateColumns} columns={columns} />
+                <DnD updateColumns={updateColumns} columns={state.columns} />
             </div>
         </div>
     );
 };
 export default NotesView;
+
+const source = [
+    {
+        user: "dsafads",
+        title: "NOTE TEST 1",
+        _id: "dsfradsf",
+        _clientId: "dsafads",
+        text: "note1",
+        image: null,
+        reminderTime: null,
+        eventTime: null,
+        pinned: false,
+        tags: [],
+        relatedNotes: [],
+    },
+    {
+        user: "dsafads",
+        title: "NOTE TEST 2",
+        _id: "dsfradsf",
+        _clientId: "dsafads",
+        text: "note2",
+        image: null,
+        reminderTime: null,
+        eventTime: null,
+        pinned: false,
+        tags: [],
+        relatedNotes: [],
+    },
+];
+
+type SearchBarProps = {
+    state: NotesState;
+    initialState: NotesState;
+    dispatch: React.Dispatch<Action>;
+};
+
+function SearchBar({
+    state,
+    initialState,
+    dispatch,
+}: SearchBarProps): JSX.Element {
+    const { loading, notes, value } = state;
+
+    const timeoutRef = React.useRef(
+        setTimeout(() => {
+            return;
+        }, 0)
+    );
+    const handleSearchChange = React.useCallback((e, data) => {
+        clearTimeout(timeoutRef.current);
+        dispatch({ type: "START_SEARCH", query: data.value });
+
+        timeoutRef.current = setTimeout(() => {
+            if (data.value.length === 0) {
+                dispatch({ type: "CLEAN_QUERY", initialState: initialState });
+                return;
+            }
+
+            // eslint-disable-next-line security/detect-non-literal-regexp
+            const re = new RegExp(_.escapeRegExp(data.value), "i");
+            const isMatch = (result: INote) =>
+                re.test(result.title ? result.title : "");
+
+            dispatch({
+                type: "FINISH_SEARCH",
+                notes: _.filter(source, isMatch),
+            });
+        }, 300);
+    }, []);
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(timeoutRef.current);
+        };
+    }, []);
+
+    return (
+        <Grid>
+            <Grid.Column width={6}>
+                <Search
+                    loading={loading}
+                    onResultSelect={(e, data) =>
+                        dispatch({
+                            type: "UPDATE_SELECTION",
+                            selection: data.result.title,
+                        })
+                    }
+                    onSearchChange={handleSearchChange}
+                    notes={notes}
+                    value={value}
+                />
+            </Grid.Column>
+
+            <Grid.Column width={10}>
+                <Segment>
+                    <Header>SearchbarState</Header>
+                    <pre style={{ overflowX: "auto" }}>
+                        {JSON.stringify({ loading, notes, value }, null, 2)}
+                    </pre>
+                    <Header>Options</Header>
+                    <pre style={{ overflowX: "auto" }}>
+                        {JSON.stringify(source, null, 2)}
+                    </pre>
+                </Segment>
+            </Grid.Column>
+        </Grid>
+    );
+}

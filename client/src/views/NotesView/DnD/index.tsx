@@ -1,6 +1,6 @@
 import React from "react";
-import { INote, NoteModes } from "../../interfaces/note";
-import Note from "../../components/Note";
+import { INote, NoteModes } from "../../../interfaces/note";
+import Note from "../../../components/Note";
 import dndStyles from "./dragAndDrop.module.css";
 import {
     DragDropContext,
@@ -22,7 +22,7 @@ export enum DnDModes {
     REMINDERS,
 }
 interface DnDProps {
-    updateColumns: React.Dispatch<React.SetStateAction<ColumnDict>>;
+    updateColumns: (columns: ColumnDict) => void;
     columns: ColumnDict;
 }
 export const DnD = ({ updateColumns, columns }: DnDProps): JSX.Element => {
@@ -121,7 +121,7 @@ export const DnD = ({ updateColumns, columns }: DnDProps): JSX.Element => {
 const onDragEnd = (
     result: DropResult,
     columns: ColumnDict,
-    updateColumns: React.Dispatch<ColumnDict>
+    updateColumns: (columns: ColumnDict) => void
 ) => {
     /* If we drag the box into an invalid destination (off the screen), don't update state */
     if (!result.destination) return;
