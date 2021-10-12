@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./StandardNote.module.css";
 import "semantic-ui-css/semantic.min.css";
-import { INote } from "../../interfaces/note";
+import { INote } from "../../../interfaces/note";
 
 import { Segment, Icon } from "semantic-ui-react";
 
 // Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../Tag";
-import Event from "../Event";
-import Time from "../Time";
+import Tag from "../../Tag";
+import Event from "../../Event";
+import Time from "../../Time";
 
 /* Deleted NotesText folder and it's working now */
 interface NoteProps {
