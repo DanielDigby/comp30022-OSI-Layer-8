@@ -1,19 +1,20 @@
 import React from "react";
-import { checkAuthAPI } from "../../helpers/api/users";
-import { useSelector } from "react-redux";
-import globalStyles from "./../../App.module.css";
-import styles from "./DashboardView.module.css";
-import { useHistory } from "react-router-dom";
-import { Icon } from "semantic-ui-react";
-import Profile from "../../components/Profile";
-import { RootState } from "../../config/redux/store";
-import { capitalize } from "lodash";
-import { filterNotes, FilterOn } from "../../helpers/utils/filter";
-import { INote, NoteModes } from "../../interfaces/note";
 import Note from "../../components/Note";
+import styles from "./DashboardView.module.css";
+import Profile from "../../components/Profile";
+import globalStyles from "./../../App.module.css";
+import { Icon } from "semantic-ui-react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../config/redux/store";
+import { useHistory } from "react-router-dom";
+import { capitalize } from "lodash";
+import { checkAuthAPI } from "../../helpers/api/users";
+import { INote, NoteModes } from "../../interfaces/note";
+import { filterNotes, FilterOn } from "../../helpers/utils/filter";
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
+    checkAuthAPI(history);
     const navigateNotes = () => {
         history.push("/notes");
     };
@@ -21,13 +22,9 @@ const DashboardView = (): JSX.Element => {
         history.push("/settings");
     };
 
-    checkAuthAPI(history);
-
     const store = useSelector((state: RootState) => state);
     const notes = store.notes.array;
-
-    /* store.getState the arrays of notes */
-    //const allNotes = store.getState().notes.array;
+    const name = store.user.account.firstName;
 
     return (
         <div className={globalStyles.light}>
@@ -44,37 +41,17 @@ const DashboardView = (): JSX.Element => {
             </div>
             <div className={styles.main}>
                 <div className={styles.midContainer}>
-                    <div className={styles.margin} />
-                    <div className={styles.midContentContainer}>
-                        <div className={styles.greetingsContainer}>
-                            <div className={styles.heading}>
-                                <div className={styles.greeting}>
-                                    Good Morning, <br />
-                                    {capitalize(store.user.account.firstName)}
-                                </div>
-                                <div className={styles.date}>
-                                    {new Date(Date.now()).toLocaleString(
-                                        "en-US",
-                                        {
-                                            weekday: "long",
-                                            day: "numeric",
-                                            month: "long",
-                                            year: "numeric",
-                                        }
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles.viewNotesContainer}>
-                            <Icon
-                                name="arrow right"
-                                size="big"
-                                color="grey"
-                                onClick={navigateNotes}
-                            />
-                            <div className={styles.viewAllNotesContainer}>
-                                View <p>all notes</p>
-                            </div>
+                    <Greeting {...{ name }} />
+
+                    <div className={styles.viewNotesContainer}>
+                        <Icon
+                            name="arrow right"
+                            size="big"
+                            color="grey"
+                            onClick={navigateNotes}
+                        />
+                        <div className={styles.viewAllNotesContainer}>
+                            View <p>all notes</p>
                         </div>
                     </div>
                 </div>
@@ -100,6 +77,36 @@ const DashboardView = (): JSX.Element => {
 };
 
 export default DashboardView;
+
+type GreetingProps = {
+    name: string;
+};
+const Greeting = ({ name }: GreetingProps): JSX.Element => {
+    const now = new Date(Date.now());
+    const hr = now.getHours();
+    let welcome;
+    if (hr < 12) welcome = "Good morning";
+    else if (hr < 18) welcome = "Good afternoon";
+    else welcome = "Good evening";
+
+    const date = now.toLocaleString("en-US", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    });
+    return (
+        <div className={styles.greetingsContainer}>
+            <div className={styles.heading}>
+                <div className={styles.greeting}>
+                    {welcome}, <br />
+                    {capitalize(name)}
+                </div>
+                <div className={styles.date}>{date}</div>
+            </div>
+        </div>
+    );
+};
 
 const InstallPrompt = (): JSX.Element => {
     return (

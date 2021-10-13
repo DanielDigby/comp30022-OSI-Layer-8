@@ -30,15 +30,6 @@
     align-content: top;
 }
 
-.midContentContainer {
-    display: flex;
-    width: 93%;
-    margin-left: 1vw;
-    align-items: stretch;
-    flex-direction: row;
-    align-content: top;
-}
-
 /* Container for the Icons for calendar and notes*/
 .bottomContainer {
     display: flex;
