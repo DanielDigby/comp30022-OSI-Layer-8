@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SettingsView.module.css";
 import { logOutAPI } from "../../helpers/api/users";
 import Profile from "../../components/Profile";
 import { useHistory } from "react-router-dom";
 // Semantic UI button
 import globalStyles from "../../App.module.css";
-import { Segment, Icon } from "semantic-ui-react";
+import { Segment, Icon, Image } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
-import FirstNameForm from "./Forms";
-import PasswordForm from "./PasswordForm";
-import ProfilePic from "./ProfilePic";
+
 import { checkAuthAPI } from "../../helpers/api/users";
 
 const SettingsView = (): JSX.Element => {
     const history = useHistory();
     const back = () => history.goBack();
+    const logOut = async () => await logOutAPI(history);
 
     checkAuthAPI(history);
 
@@ -26,10 +25,7 @@ const SettingsView = (): JSX.Element => {
                 <div className={styles.leftBanner}>
                     <div>
                         <Profile />
-                        <div
-                            className={styles.signOut}
-                            onClick={async () => await logOutAPI(history)}
-                        >
+                        <div className={styles.signOut} onClick={logOut}>
                             <Icon name="sign out" size="big" color="grey" />
                             Sign out
                         </div>
@@ -52,18 +48,10 @@ const SettingsView = (): JSX.Element => {
                         {/* All the different forms to enter, split 30% for forms 70% for profile pic */}
                         <div className={styles.personal}>
                             <div className={styles.forms}>
-                                <FirstNameForm />
+                                <UserDetails />
                             </div>
-                            <div>
-                                <ProfilePic />
-                            </div>
+                            <ProfilePic />
                         </div>
-                        {/* Section for the password and confirmation forms */}
-                        {false && (
-                            <div className={styles.password}>
-                                <PasswordForm />
-                            </div>
-                        )}
                     </Segment>
                     {/* Bottom block of settings */}
                     {/* TOGGLE OFF FALSE TO REENABLE FEATURE WHEN READY TO WORK ON COLOURSCHEMES */}
@@ -82,3 +70,78 @@ const SettingsView = (): JSX.Element => {
 };
 
 export default SettingsView;
+
+const UserDetails = (): JSX.Element => {
+    const firstNameStateVariable = useState("first name");
+    const firstName = firstNameStateVariable[0];
+    const lastNameStateVariable = useState("last name");
+    const lastName = lastNameStateVariable[0];
+    const emailStateVariable = useState("email");
+    const email = emailStateVariable[0];
+    const password = "*********";
+
+    return (
+        <div>
+            <div className={styles.formheading}>
+                <div className={styles.formtitle}>
+                    <div className={styles.field}>
+                        {firstName}
+                        <Icon
+                            size="small"
+                            name="pencil alternate"
+                            color="grey"
+                        />{" "}
+                    </div>
+                    <div className={styles.field}>
+                        {lastName}
+                        <Icon
+                            size="small"
+                            name="pencil alternate"
+                            color="grey"
+                        />
+                    </div>
+                    <div className={styles.field}>
+                        {email}
+                        <Icon
+                            size="small"
+                            name="pencil alternate"
+                            color="grey"
+                        />
+                    </div>
+                    <div className={styles.field}>
+                        {password}
+                        <Icon
+                            size="small"
+                            name="pencil alternate"
+                            color="grey"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const ProfilePic = (): JSX.Element => {
+    return (
+        <div className={styles.profilePic}>
+            <div className={styles.profileTitle}>
+                profile image
+                <Icon
+                    size="small"
+                    name="pencil alternate"
+                    color="grey"
+                    style={{ marginLeft: "60px" }}
+                />{" "}
+            </div>
+
+            <div className={styles.image}>
+                <Image
+                    src="https://react.semantic-ui.com/images/wireframe/square-image.png"
+                    size="medium"
+                    rounded
+                />
+            </div>
+        </div>
+    );
+};
