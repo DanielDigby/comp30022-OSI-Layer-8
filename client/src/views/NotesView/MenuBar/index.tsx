@@ -50,6 +50,7 @@ const MenuBar = (): JSX.Element => {
                                 header
                                 name={name}
                                 key={uuid()}
+                                style={{ fontSize: "16px" }}
                                 active={filter === name}
                                 onClick={() => dispatch(updateFilter(name))}
                             />
@@ -58,11 +59,19 @@ const MenuBar = (): JSX.Element => {
                 </div>
                 {show ? (
                     <div className={styles.icon}>
-                        <Icon name="times" onClick={() => setShow(!show)} />
+                        <Icon
+                            name="times"
+                            size="large"
+                            onClick={() => setShow(!show)}
+                        />
                     </div>
                 ) : (
                     <div className={styles.icon}>
-                        <Icon name="plus" onClick={() => setShow(!show)} />
+                        <Icon
+                            name="plus"
+                            size="large"
+                            onClick={() => setShow(!show)}
+                        />
                     </div>
                 )}
 
