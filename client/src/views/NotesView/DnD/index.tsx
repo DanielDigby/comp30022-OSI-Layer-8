@@ -11,8 +11,8 @@ import {
 import { RootState } from "../../../config/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { updateColumns } from "../../../config/redux/noteSlice";
+import { isEmptyColumns } from "../../../helpers/utils/columns";
 
-/* uuid generates a unique set of bytes, to use as a key for each object */
 export interface ColumnDict {
     [x: string]: {
         name: string;
@@ -32,7 +32,9 @@ export const DnD = (): JSX.Element => {
     const update = (columns: ColumnDict) => {
         dispatch(updateColumns(columns));
     };
-
+    console.log(isEmptyColumns(columns));
+    if (isEmptyColumns(columns))
+        return <div className={dndStyles.noNotes}>No notes to display</div>;
     // IMPORTANT:
     // Idea here is to define the styles for different DnD layouts in dragAndDrop.module.css
     // and switch based on mode - all other logic should be able to stay same

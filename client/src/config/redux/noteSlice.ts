@@ -7,7 +7,6 @@ import { NOTES } from "../../interfaces/endpoints";
 import { mapNotesToColumns } from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
 import { searchNotes } from "../../helpers/utils/search";
-import { v4 as uuid } from "uuid";
 export interface NoteState {
     array: Array<INote>;
     stringMap: {
@@ -26,15 +25,15 @@ const initialState: NoteState = {
     array: [],
     stringMap: {},
     columnDict: {
-        [uuid()]: {
+        ["col1"]: {
             name: "col1",
             items: [],
         },
-        [uuid()]: {
+        ["col2"]: {
             name: "col2",
             items: [],
         },
-        [uuid()]: {
+        ["col3"]: {
             name: "col3",
             items: [],
         },

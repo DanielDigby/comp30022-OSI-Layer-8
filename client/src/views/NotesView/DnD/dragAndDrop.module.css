@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
 .notesSection {
     display: grid;
     grid-template-columns: 190px 190px 190px;
@@ -46,4 +48,14 @@
 
 .item:not(:last-of-type) {
     margin-bottom: 1rem;
+}
+
+.noNotes {
+    font-family: "Lato", sans-serif;
+    font-size: 17px;
+    color: #707070;
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    margin-top: 50px;
 }
