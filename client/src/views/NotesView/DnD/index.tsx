@@ -32,7 +32,7 @@ export const DnD = (): JSX.Element => {
     const update = (columns: ColumnDict) => {
         dispatch(updateColumns(columns));
     };
-    console.log(isEmptyColumns(columns));
+
     if (isEmptyColumns(columns))
         return <div className={dndStyles.noNotes}>No notes to display</div>;
     // IMPORTANT:
