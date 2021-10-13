@@ -1,4 +1,3 @@
-import StandardDetailNote from "./index";
 import Note from "../Note/index";
 import React from "react";
 import { NoteModes } from "../../interfaces/note";
@@ -19,6 +18,6 @@ const testNote: INote = {
 };
 
 const NotesView = (): JSX.Element => {
-    return <Note note={testNote} mode={NoteModes.STANDARD} />;
+    return <Note note={testNote} mode={NoteModes.EDIT} />;
 };
 export default NotesView;

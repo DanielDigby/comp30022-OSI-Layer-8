@@ -9,7 +9,6 @@ type TagProps = {
 };
 
 const Tag = ({ tagName }: TagProps): JSX.Element => {
-    // api call
     return (
         <div className={styles.tagRow}>
             <Icon name="tag" size="big" />

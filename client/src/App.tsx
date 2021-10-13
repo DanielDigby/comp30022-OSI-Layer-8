@@ -12,7 +12,8 @@ import DashboardView from "./views/DashboardView";
 import SettingsView from "./views/SettingsView";
 
 // Page to test what the note looks like
-import NoteTestView from "./components/Note/testview";
+import StandardTestView from "./components/StandardDetailNote/testview";
+import EditTestView from "./components/EditNote/testview";
 
 const App = (): JSX.Element => {
     return (
@@ -28,7 +29,8 @@ const App = (): JSX.Element => {
                 <Route path="/notes" component={NotesView} />
 
                 {/* Delete this after testing */}
-                <Route path="/standardtest" component={NoteTestView} />
+                <Route path="/standardtest" component={StandardTestView} />
+                <Route path="/edittest" component={EditTestView} />
             </Switch>
         </div>
     );

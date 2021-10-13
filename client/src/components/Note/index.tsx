@@ -9,6 +9,7 @@ import { Segment } from "semantic-ui-react";
 import Tag from "../Tag";
 import HeadingText from "../HeadingText";
 import StandardDetailNote from "../StandardDetailNote/index";
+import EditNote from "../EditNote/index";
 
 /* Deleted NotesText folder and it's working now */
 interface NoteProps {
@@ -19,6 +20,8 @@ const Note = ({ note, mode }: NoteProps): JSX.Element => {
     // api call
     if (mode == NoteModes.STANDARD) {
         return <StandardDetailNote note={note} mode={NoteModes.STANDARD} />;
+    } else if (mode == NoteModes.EDIT) {
+        return <EditNote note={note} mode={NoteModes.EDIT} />;
     }
     return <div></div>;
     // return (
