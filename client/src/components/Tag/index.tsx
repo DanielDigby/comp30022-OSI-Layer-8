@@ -17,7 +17,7 @@ const Tag = ({ tagName }: TagProps): JSX.Element => {
             {tagName}
 =======
         <div className={styles.tagRow}>
-            <Icon name="tag" size="large" />
+            <Icon name="tag" size="big" />
             <div className={styles.tagName}>{tagName}</div>
 >>>>>>> 6e67809... feat: add all button symbols and format note
         </div>

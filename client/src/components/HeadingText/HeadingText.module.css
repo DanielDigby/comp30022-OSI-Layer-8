@@ -2,7 +2,6 @@
 
 .title {
     font-family: var(--font-family);
-    /* font-size: var(--text-big); */
     font-size: 2vw;
     font-weight: bold;
 }

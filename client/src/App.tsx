@@ -27,7 +27,7 @@ const App = (): JSX.Element => {
                 <Route path="/notes" component={NotesView} />
 
                 {/* Delete this after testing */}
-                <Route path="/test" component={NoteTestView} />
+                <Route path="/standardtest" component={NoteTestView} />
             </Switch>
         </div>
     );

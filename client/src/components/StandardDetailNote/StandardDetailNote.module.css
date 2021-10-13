@@ -1,9 +1,13 @@
 @import "../../App.module.css";
 
 .Segment {
-    width: 65vw;
-    height: 50vh;
+    width: 50vw;
     line-height: 5vh;
+}
+
+.whole {
+    display: flex;
+    flex-direction: column;
 }
 
 .top {
@@ -12,6 +16,8 @@
     justify-content: space-between;
     height: 5vh;
     padding: 1vw;
+    height: auto;
+    align-items: flex-start;
 }
 
 .thumbtack {
@@ -19,11 +25,12 @@
 }
 
 .middle {
-    height: 60vh;
+    height: 40vh;
     padding-left: 1vw;
     padding-right: 1vw;
-    padding-top: 15px;
+    /* padding-top: 15px; */
     overflow-wrap: break-word;
+    overflow: auto;
 }
 
 .bottom {
@@ -31,13 +38,13 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 1vw;
-    /* background-color: lightsalmon; */
 }
 
 .leftBottom {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    justify-content: center;
 }
 
 .editRow {
