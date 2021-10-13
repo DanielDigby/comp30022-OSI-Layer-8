@@ -12,7 +12,7 @@ const Tag = ({ tagName }: TagProps): JSX.Element => {
     // api call
     return (
         <div className={styles.tagRow}>
-            <Icon name="tag" size="large" />
+            <Icon name="tag" size="big" />
             <div className={styles.tagName}>{tagName}</div>
         </div>
     );

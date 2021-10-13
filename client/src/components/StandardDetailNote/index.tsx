@@ -15,29 +15,33 @@ const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
         <div className={styles.Segment}>
             <Segment.Group raised>
                 <Segment>
-                    <div className={styles.top}>
-                        <HeadingText
-                            headingText={note.title ? note.title : ""}
-                        />
-                        <div className={styles.thumbtack}>
-                            <Icon name="thumbtack" size="large" />
-                        </div>
-                    </div>
-                    <div className={styles.middle}>
-                        <Text text={note.text ? note.text : ""} />
-                    </div>
-                    <div className={styles.bottom}>
-                        <div className={styles.leftBottom}>
-                            <Tag tagName={note.tags[0]} />
-                            <div className={styles.editRow}>
-                                <Icon name="edit outline" size="large" />
-                                <div className={styles.editText}>Edit note</div>
+                    <div className={styles.whole}>
+                        <div className={styles.top}>
+                            <HeadingText
+                                headingText={note.title ? note.title : ""}
+                            />
+                            <div className={styles.thumbtack}>
+                                <Icon name="thumbtack" size="big" />
                             </div>
                         </div>
-                        <div className={styles.rightBottom}>
-                            <Icon name="address book outline" size="large" />
-                            <Icon name="bell slash outline" size="large" />
-                            <Icon name="clock outline" size="large" />
+                        <div className={styles.middle}>
+                            <Text text={note.text ? note.text : ""} />
+                        </div>
+                        <div className={styles.bottom}>
+                            <div className={styles.leftBottom}>
+                                <Tag tagName={note.tags[0]} />
+                                <div className={styles.editRow}>
+                                    <Icon name="edit outline" size="big" />
+                                    <div className={styles.editText}>
+                                        Edit note
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.rightBottom}>
+                                <Icon name="address book outline" size="big" />
+                                <Icon name="bell slash outline" size="big" />
+                                <Icon name="clock outline" size="big" />
+                            </div>
                         </div>
                     </div>
                 </Segment>
