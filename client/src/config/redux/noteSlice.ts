@@ -2,13 +2,46 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { INote, INoteWithoutIds } from "../../interfaces/note";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
+import { ColumnDict } from "../../views/NotesView/DnD";
 import { NOTES } from "../../interfaces/endpoints";
+import { mapNotesToColumns } from "../../helpers/utils/columns";
+import { filter } from "../../helpers/utils/filter";
+import { searchNotes } from "../../helpers/utils/search";
+import { v4 as uuid } from "uuid";
 export interface NoteState {
     array: Array<INote>;
+    stringMap: {
+        [x: string]: {
+            name: string;
+            items: Array<string>;
+        };
+    };
+    columnDict: ColumnDict;
+    filter: string;
+    search: string;
+    searchLoading: boolean;
 }
 
 const initialState: NoteState = {
     array: [],
+    stringMap: {},
+    columnDict: {
+        [uuid()]: {
+            name: "col1",
+            items: [],
+        },
+        [uuid()]: {
+            name: "col2",
+            items: [],
+        },
+        [uuid()]: {
+            name: "col3",
+            items: [],
+        },
+    },
+    filter: "",
+    search: "",
+    searchLoading: false,
 };
 
 export const noteSlice = createSlice({
@@ -112,10 +145,54 @@ export const noteSlice = createSlice({
                 };
             },
         },
+
+        updateColumns: (state, action: PayloadAction<ColumnDict>) => {
+            state.columnDict = action.payload;
+        },
+
+        updateFilter: (state, action: PayloadAction<string>) => {
+            if (state.filter === action.payload) {
+                state.filter = "";
+            } else {
+                state.filter = action.payload;
+            }
+            const filtered = filter(state.array, state.filter);
+            const searched = searchNotes(filtered, state.search);
+            state.columnDict = mapNotesToColumns(searched);
+        },
+
+        clearSearch: (state) => {
+            const filtered = filter(state.array, state.filter);
+            state.search = "";
+            state.searchLoading = false;
+            state.columnDict = mapNotesToColumns(filtered);
+        },
+
+        startSearch: (state, action: PayloadAction<string>) => {
+            state.search = action.payload;
+            state.searchLoading = true;
+        },
+
+        finishSearch: (state, action: PayloadAction<string>) => {
+            state.search = action.payload;
+            state.searchLoading = false;
+            const filtered = filter(state.array, state.filter);
+            const searched = searchNotes(filtered, state.search);
+            state.columnDict = mapNotesToColumns(searched);
+        },
     },
 });
 
-export const { setNotes, createNote, updateNote, deleteNote } =
-    noteSlice.actions;
+export const {
+    setNotes,
+    createNote,
+    updateNote,
+    deleteNote,
+    updateColumns,
+    updateFilter,
+    clearSearch,
+    startSearch,
+    finishSearch,
+} = noteSlice.actions;
 
 export default noteSlice.reducer;

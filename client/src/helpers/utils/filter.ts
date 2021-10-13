@@ -50,3 +50,22 @@ export const filterNotes = (
     }
     return filtered;
 };
+
+export const filter = (notes: Array<INote>, filter: string): Array<INote> => {
+    let filtered;
+    if (filter === "") return notes;
+    switch (filter) {
+        case "Pinned":
+            filtered = filterNotes(notes, FilterOn.PINNED);
+            break;
+        case "Reminders":
+            filtered = filterNotes(notes, FilterOn.REMINDER_TIME);
+            break;
+        case "Events":
+            filtered = filterNotes(notes, FilterOn.EVENT_TIME);
+            break;
+        default:
+            filtered = filterNotes(notes, FilterOn.CUSTOM_TAG, filter);
+    }
+    return filtered;
+};

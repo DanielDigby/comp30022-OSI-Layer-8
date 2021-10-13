@@ -6,17 +6,15 @@ import { addTagAPI } from "../../../helpers/api/tags";
 
 // Semantic UI button
 import { Menu, Icon, Input } from "semantic-ui-react";
-import { store, RootState } from "../../../config/redux/store";
-import { useSelector } from "react-redux";
+import { RootState } from "../../../config/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { IUser } from "../../../interfaces/user";
-import { NotesState } from "../index";
+import { updateFilter } from "../../../config/redux/noteSlice";
 
-type MenuBarProps = {
-    state: NotesState;
-    handleFilterClick: (name: string) => void;
-};
-const MenuBar = ({ state, handleFilterClick }: MenuBarProps): JSX.Element => {
-    const { filter } = state;
+const MenuBar = (): JSX.Element => {
+    const dispatch = useDispatch();
+    const store = useSelector((state: RootState) => state);
+    const filter = store.notes.filter;
     const user: IUser = useSelector((state: RootState) => state.user.account);
     const navHistory = useHistory();
     const navigateSettings = () => navHistory.push("/settings");
@@ -56,7 +54,7 @@ const MenuBar = ({ state, handleFilterClick }: MenuBarProps): JSX.Element => {
                                 name={name}
                                 key={uuid()}
                                 active={filter === name}
-                                onClick={() => handleFilterClick(name)}
+                                onClick={() => dispatch(updateFilter(name))}
                             />
                         ))}
                     </Menu>

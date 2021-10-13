@@ -1,22 +1,20 @@
 import React from "react";
-import { INote } from "../../../interfaces/note";
 import { Search } from "semantic-ui-react";
-import { searchNotes } from "../../../helpers/utils/search";
-import { NotesState, Action } from "../index";
+import { RootState } from "../../../config/redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    clearSearch,
+    startSearch,
+    finishSearch,
+} from "../../../config/redux/noteSlice";
 
 // Search bar component handles the logic for applying the results of search by
-// using the dispatch function passed in as prop
-type SearchBarProps = {
-    state: NotesState;
-    source: Array<INote>;
-    dispatch: React.Dispatch<Action>;
-};
-export const SearchBar = ({
-    state,
-    source,
-    dispatch,
-}: SearchBarProps): JSX.Element => {
-    const { loading, notes, value } = state;
+// using the dispatch function to set redux state
+export const SearchBar = (): JSX.Element => {
+    const dispatch = useDispatch();
+    const store = useSelector((state: RootState) => state);
+    const loading = store.notes.searchLoading;
+    const value = store.notes.search;
 
     // manage search animation, set zero for typescript
     const timeoutRef = React.useRef(
@@ -27,18 +25,13 @@ export const SearchBar = ({
 
     const handleSearchChange = React.useCallback((e, data) => {
         clearTimeout(timeoutRef.current);
-        dispatch({ type: "START_SEARCH", query: data.value });
+
+        dispatch(startSearch(data.value));
 
         timeoutRef.current = setTimeout(() => {
-            if (data.value.length === 0) {
-                dispatch({ type: "CLEAN_QUERY" });
-                return;
-            }
+            if (data.value.length === 0) return dispatch(clearSearch());
 
-            dispatch({
-                type: "FINISH_SEARCH",
-                notes: searchNotes(source, data.value),
-            });
+            dispatch(finishSearch(data.value));
         }, 300);
     }, []);
 
@@ -51,15 +44,9 @@ export const SearchBar = ({
     return (
         <Search
             loading={loading}
-            onResultSelect={(e, data) =>
-                dispatch({
-                    type: "UPDATE_SELECTION",
-                    selection: data.result.title,
-                })
-            }
             onSearchChange={handleSearchChange}
-            notes={notes}
             value={value}
+            showNoResults={false}
         />
     );
 };
