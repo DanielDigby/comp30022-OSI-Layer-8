@@ -28,25 +28,6 @@ const DashboardView = (): JSX.Element => {
 
     /* store.getState the arrays of notes */
     //const allNotes = store.getState().notes.array;
-    let eventNotes = filterNotes(notes, FilterOn.EVENT_TIME);
-    if (eventNotes.length > 3) {
-        eventNotes = eventNotes.slice(0, 3);
-    }
-
-    /* Filter the Pinned Notes, up to 3 */
-    const pinnedNotes = filterNotes(notes, FilterOn.PINNED);
-    let pinnedNotes1: Array<INote> = [];
-    let pinnedNotes2: Array<INote> = [];
-    if (pinnedNotes.length <= 2) {
-        pinnedNotes1 = pinnedNotes.slice(0, 2);
-        pinnedNotes2;
-    } else if (pinnedNotes.length === 3) {
-        pinnedNotes1 = pinnedNotes.slice(0, 2);
-        pinnedNotes2 = pinnedNotes.slice(2, 3);
-    } else {
-        pinnedNotes1 = pinnedNotes.slice(0, 2);
-        pinnedNotes2 = pinnedNotes.slice(2, 4);
-    }
 
     return (
         <div className={globalStyles.light}>
@@ -106,46 +87,11 @@ const DashboardView = (): JSX.Element => {
                             size="big"
                         />
                     </div>
-                    <div className={styles.eventsContainer}>
-                        {eventNotes.map((note: INote) => {
-                            return (
-                                <Note
-                                    note={note}
-                                    mode={NoteModes.STANDARD}
-                                    key={note._id}
-                                />
-                            );
-                        })}
-                    </div>
-
+                    <EventNotes {...{ notes }} />
                     <div className={styles.tumbtackContainer}>
                         <Icon name="thumbtack" color="orange" size="big" />
                     </div>
-                    <div className={styles.pinnedNotesContainer}>
-                        <div className={styles.pinnedTopContainer}>
-                            {pinnedNotes1.map((note: INote) => {
-                                return (
-                                    <Note
-                                        note={note}
-                                        mode={NoteModes.STANDARD}
-                                        key={note._id}
-                                    />
-                                );
-                            })}
-                        </div>
-                        <div className={styles.somethingHorizontal} />
-                        <div className={styles.pinnedBottomContainer}>
-                            {pinnedNotes2.map((note: INote) => {
-                                return (
-                                    <Note
-                                        note={note}
-                                        mode={NoteModes.STANDARD}
-                                        key={note._id}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </div>
+                    <PinnedNotes {...{ notes }} />
                 </div>
                 {store.user.isNewLogin && <InstallPrompt />}
             </div>
@@ -162,6 +108,80 @@ const InstallPrompt = (): JSX.Element => {
             <div>
                 Cara can be installed on mobile devices by tapping on your
                 browser options, then selecting <b>Add to Home screen</b>
+            </div>
+        </div>
+    );
+};
+
+type EventNotesProps = {
+    notes: Array<INote>;
+};
+const EventNotes = ({ notes }: EventNotesProps) => {
+    let eventNotes = filterNotes(notes, FilterOn.EVENT_TIME);
+    if (eventNotes.length > 3) {
+        eventNotes = eventNotes.slice(0, 3);
+    }
+    if (eventNotes.length === 0)
+        return <div className={styles.noNotes}>No events to display</div>;
+    return (
+        <div className={styles.eventsContainer}>
+            {eventNotes.map((note: INote) => {
+                return (
+                    <Note
+                        note={note}
+                        mode={NoteModes.STANDARD}
+                        key={note._id}
+                    />
+                );
+            })}
+        </div>
+    );
+};
+
+type PinnedNotesProps = {
+    notes: Array<INote>;
+};
+const PinnedNotes = ({ notes }: PinnedNotesProps) => {
+    /* Filter the Pinned Notes, up to 3 */
+    const pinnedNotes = filterNotes(notes, FilterOn.PINNED);
+    let pinnedNotes1: Array<INote> = [];
+    let pinnedNotes2: Array<INote> = [];
+    if (pinnedNotes.length <= 2) {
+        pinnedNotes1 = pinnedNotes.slice(0, 2);
+        pinnedNotes2;
+    } else if (pinnedNotes.length === 3) {
+        pinnedNotes1 = pinnedNotes.slice(0, 2);
+        pinnedNotes2 = pinnedNotes.slice(2, 3);
+    } else {
+        pinnedNotes1 = pinnedNotes.slice(0, 2);
+        pinnedNotes2 = pinnedNotes.slice(2, 4);
+    }
+    if (pinnedNotes1.length === 0)
+        return <div className={styles.noNotes}>No pinned notes to display</div>;
+    return (
+        <div className={styles.pinnedNotesContainer}>
+            <div className={styles.pinnedTopContainer}>
+                {pinnedNotes1.map((note: INote) => {
+                    return (
+                        <Note
+                            note={note}
+                            mode={NoteModes.STANDARD}
+                            key={note._id}
+                        />
+                    );
+                })}
+            </div>
+            <div className={styles.somethingHorizontal} />
+            <div className={styles.pinnedBottomContainer}>
+                {pinnedNotes2.map((note: INote) => {
+                    return (
+                        <Note
+                            note={note}
+                            mode={NoteModes.STANDARD}
+                            key={note._id}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
