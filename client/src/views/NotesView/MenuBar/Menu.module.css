@@ -13,18 +13,27 @@
     display: flex;
     height: 80vh;
     width: 15vw;
-    padding-top: 5vh;
+    padding-top: 3.6vh;
     flex-direction: column;
     align-items: center;
 }
+
+.icon {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding-left: 30px;
+    padding-bottom: 5px;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
     width: 15vw;
     padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 20px;
     align-items: left;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .input {
