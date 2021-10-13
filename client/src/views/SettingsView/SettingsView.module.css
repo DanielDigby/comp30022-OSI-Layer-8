@@ -52,7 +52,7 @@
 
 .forms {
     height: 70%;
-    width: 40%;
+    width: 50%;
 }
 
 .backbutton {
@@ -81,7 +81,7 @@
     margin-bottom: 35px;
     display: flex;
     flex-direction: row;
-    width: 60%;
+    width: 90%;
     justify-content: space-between;
 }
 
