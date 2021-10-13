@@ -18,6 +18,7 @@ export type NotesState = {
     notes: Array<INote>;
     columns: ColumnDict;
     value: string | undefined;
+    filter: string;
 };
 
 export type Action = {
@@ -26,6 +27,7 @@ export type Action = {
     query?: string;
     notes?: Array<INote>;
     selection?: string;
+    filter?: string;
 };
 
 const NotesView = (): JSX.Element => {
@@ -50,6 +52,7 @@ const NotesView = (): JSX.Element => {
         notes: [],
         columns: mapNotesToColumns(source),
         value: "",
+        filter: "",
     };
     const notesReducer = (state: NotesState, action: Action): NotesState => {
         switch (action.type) {
@@ -80,6 +83,13 @@ const NotesView = (): JSX.Element => {
                     };
                 else return { ...state };
 
+            case "UPDATE_FILTER":
+                if (action.filter) {
+                    if (action.filter === state.filter)
+                        return { ...state, filter: "" };
+                    else return { ...state, filter: action.filter };
+                }
+                return { ...state };
             default:
                 throw new Error();
         }
@@ -89,12 +99,16 @@ const NotesView = (): JSX.Element => {
         dispatch({ type: "UPDATE_COLUMNS", columns: columns });
     };
 
+    const handleFilterClick = (filter: string) => {
+        dispatch({ type: "UPDATE_FILTER", filter: filter });
+    };
+
     return (
         <div className={globalStyles.light}>
             <div className={styles.staticLeft}>
                 <div>
                     <Profile onClick={navigateDashboard} />
-                    <MenuBar />
+                    <MenuBar {...{ state, handleFilterClick }} />
                 </div>
                 <NewNote />
             </div>

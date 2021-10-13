@@ -9,8 +9,14 @@ import { Menu, Icon, Input } from "semantic-ui-react";
 import { store, RootState } from "../../../config/redux/store";
 import { useSelector } from "react-redux";
 import { IUser } from "../../../interfaces/user";
+import { NotesState } from "../index";
 
-const MenuBar = (): JSX.Element => {
+type MenuBarProps = {
+    state: NotesState;
+    handleFilterClick: (name: string) => void;
+};
+const MenuBar = ({ state, handleFilterClick }: MenuBarProps): JSX.Element => {
+    const { filter } = state;
     const user: IUser = useSelector((state: RootState) => state.user.account);
     const navHistory = useHistory();
     const navigateSettings = () => navHistory.push("/settings");
@@ -43,9 +49,15 @@ const MenuBar = (): JSX.Element => {
                     <Icon name="tag" size="large" color="orange" />
                 </div>
                 <div className={styles.menu}>
-                    <Menu fluid vertical tabular>
+                    <Menu fluid secondary vertical>
                         {filterNames.map((name: string) => (
-                            <Menu.Item header name={name} key={uuid()} />
+                            <Menu.Item
+                                header
+                                name={name}
+                                key={uuid()}
+                                active={filter === name}
+                                onClick={() => handleFilterClick(name)}
+                            />
                         ))}
                     </Menu>
                 </div>
