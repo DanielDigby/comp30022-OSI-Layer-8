@@ -1,6 +1,7 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import { INote, NoteModes } from "../../interfaces/note";
+import StandardNote from "./StandardNote";
 
 // Added a the <Route path="/note" component={Note} /> for this
 import StandardDetailNote from "../StandardDetailNote/index";
@@ -12,10 +13,26 @@ interface NoteProps {
     mode: NoteModes;
 }
 const Note = ({ note, mode }: NoteProps): JSX.Element => {
-    if (mode == NoteModes.STANDARD) {
-        return <StandardDetailNote note={note} mode={NoteModes.STANDARD} />;
-    } else if (mode == NoteModes.EDIT) {
-        return <EditNote note={note} mode={NoteModes.EDIT} />;
+    // if (mode == NoteModes.STANDARD) {
+    //     return <StandardNote {...{ note }} />;
+    // } else if (mode == NoteModes.STANDARD_DETAIL) {
+    //     return <StandardDetailNote note={note} mode={NoteModes.STANDARD_DETAIL} />;
+    // } else if (mode == NoteModes.EDIT) {
+    //     return <EditNote note={note} mode={NoteModes.EDIT} />;
+    // }
+    // return <div></div>;
+    switch (mode) {
+        case NoteModes.STANDARD:
+            return <StandardNote {...{ note }} />;
+        case NoteModes.STANDARD_DETAIL:
+            return (
+                <StandardDetailNote
+                    note={note}
+                    mode={NoteModes.STANDARD_DETAIL}
+                />
+            );
+        case NoteModes.EDIT:
+            return <EditNote note={note} mode={NoteModes.EDIT} />;
     }
     return <div></div>;
 };

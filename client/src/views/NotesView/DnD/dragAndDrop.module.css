@@ -1,18 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
 .notesSection {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 190px 190px 190px;
     gap: 0.5rem;
-
-    margin-top: 7.5rem;
     margin-bottom: 7.5rem;
-    margin-left: 0rem;
-    margin-right: -15rem;
-    width: 100%;
-    padding: 0.5rem;
     border-radius: 10px;
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.scroll {
+    margin-top: 52.3px;
+    margin-right: 45px;
+    width: 92.5%;
+    overflow: scroll;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+.scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.dndContainer {
+    width: 80%;
 }
 
 .column {
@@ -20,7 +31,6 @@
     flex-direction: column;
     border-radius: 10px;
     padding: 0.5rem;
-
     height: 100%;
     /* To get rid of bullet points in list */
     list-style-type: none;
@@ -38,4 +48,14 @@
 
 .item:not(:last-of-type) {
     margin-bottom: 1rem;
+}
+
+.noNotes {
+    font-family: "Lato", sans-serif;
+    font-size: 17px;
+    color: #707070;
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    margin-top: 50px;
 }

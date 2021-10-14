@@ -4,9 +4,19 @@ import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/c
 import { store, RESET_BASE } from "../../config/redux/store";
 import axios from "axios";
 import * as uuid from "uuid";
+import { createMemoryHistory } from "history";
 
 jest.mock("axios");
 jest.mock("uuid");
+jest.mock("redux-persist", () => {
+    const real = jest.requireActual("redux-persist");
+    return {
+        ...real,
+        persistReducer: jest
+            .fn()
+            .mockImplementation((config, reducers) => reducers),
+    };
+});
 
 describe("Users API Helpers", () => {
     afterEach(() => {
@@ -159,8 +169,7 @@ describe("Users API Helpers", () => {
                 (axios.get as unknown as jest.Mock).mockResolvedValueOnce(
                     mockRes3
                 );
-
-                await logOutAPI();
+                await logOutAPI(createMemoryHistory());
 
                 const user = store.getState().user.account;
                 const notes = store.getState().notes.array;
@@ -212,10 +221,26 @@ describe("Users API Helpers", () => {
                 });
                 const note = {
                     title: "NEW NOTE TEST",
+                    user: "asfhdklasdjfl",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 const storeNote = {
                     title: "NEW NOTE TEST",
                     _clientId: "75072f66-3b31-40f7-b3b7-5e46f4ea93fc",
+                    user: "asfhdklasdjfl",
+                    text: null,
+                    image: null,
+                    reminderTime: null,
+                    eventTime: null,
+                    pinned: true,
+                    tags: [],
+                    relatedNotes: [],
                 };
                 jest.spyOn(uuid, "v4").mockImplementation(
                     () => "75072f66-3b31-40f7-b3b7-5e46f4ea93fc"
@@ -229,7 +254,7 @@ describe("Users API Helpers", () => {
                 );
 
                 expect(async () => {
-                    await logOutAPI();
+                    await logOutAPI(createMemoryHistory());
                 }).rejects.toEqual(Error("Non Empty Outbox"));
 
                 const user = store.getState().user.account;
@@ -257,7 +282,7 @@ describe("Users API Helpers", () => {
                 );
 
                 expect(async () => {
-                    await logOutAPI();
+                    await logOutAPI(createMemoryHistory());
                 }).rejects.toEqual(Error("Unauthorized"));
             }
         );

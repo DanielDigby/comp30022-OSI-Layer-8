@@ -1,9 +1,9 @@
 import React from "react";
 import { store } from "../../config/redux/store";
 import styles from "./HomeView.module.css";
-import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import randomName from "random-name";
 import {
     createNote,
     updateNote,
@@ -23,9 +23,9 @@ const HomeView = (): JSX.Element => {
 
     const postNote = async () => {
         const note: INoteWithoutIds = {
-            title: "NEW NOTE TEST",
+            title: randomName.place(),
             user: store.getState().user.account._id,
-            text: null,
+            text: randomName.place(),
             image: null,
             reminderTime: null,
             eventTime: null,
@@ -38,11 +38,11 @@ const HomeView = (): JSX.Element => {
 
     const putNote = async () => {
         const note: INote = {
-            title: "NEW NOTE TEST 2",
+            title: randomName.place(),
             user: store.getState().user.account._id,
             _id: null,
             _clientId: "3deec471-f6b6-4f8a-8299-3eedd101552b",
-            text: null,
+            text: randomName.place(),
             image: null,
             reminderTime: null,
             eventTime: null,
@@ -55,11 +55,11 @@ const HomeView = (): JSX.Element => {
 
     const removeNote = async () => {
         const note: INote = {
-            title: "EDIT NOTE TEST 2",
+            title: randomName.place(),
             user: store.getState().user.account._id,
             _clientId: "3deec471-f6b6-4f8a-8299-3eedd101552b",
             _id: null,
-            text: null,
+            text: randomName.place(),
             image: null,
             reminderTime: null,
             eventTime: null,
@@ -73,10 +73,6 @@ const HomeView = (): JSX.Element => {
     // api call
     return (
         <div className={styles.container}>
-            <div className="image">
-                <img className={styles.image} src={logo} />
-            </div>
-
             <h1 className={styles.heading}>cara</h1>
             <h4 className={styles.heading2}>Untangle your personal life</h4>
 

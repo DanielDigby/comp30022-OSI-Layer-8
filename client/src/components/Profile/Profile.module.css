@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+/* Container for user profile */
+.horizontal {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+/* Profile picture */
+.image {
+    width: 40px;
+}
+
+/* User name */
+.text {
+    position: absolute;
+    margin-left: 40px;
+    padding-left: 15px;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 42.5px;
+    height: 42.5px;
+}

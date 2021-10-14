@@ -1,13 +1,25 @@
+import { storage } from "../../config/firebase/config";
+import { useHistory } from "react-router";
+import { cloneDeep } from "lodash";
 import { IUser, INewUser } from "../../interfaces/user";
 import { setUser, updateUser } from "../../config/redux/userSlice";
 import { setNotes } from "../../config/redux/noteSlice";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
+
 import {
     store,
     RootStateWithOffline,
     RESET_BASE,
 } from "../../config/redux/store";
-import { LOG_IN, LOG_OUT, NOTES, REGISTER } from "../../interfaces/endpoints";
+import {
+    LOG_IN,
+    LOG_OUT,
+    NOTES,
+    REGISTER,
+    USERS,
+    UPDATE_PASSWORD,
+} from "../../interfaces/endpoints";
 import axios from "axios";
 
 // post username password to backend then load notes and populate redux
@@ -38,7 +50,10 @@ export const logInAPI = async (credentials: Credentials): Promise<void> => {
 // clear redux store and redux offline
 // rejects with Non Empty Outbox if there are unsaved http requests
 // rejects with Unauthorized when no user jwt
-export const logOutAPI = async (): Promise<void> => {
+export const logOutAPI = async (
+    history: ReturnType<typeof useHistory>
+): Promise<void> => {
+    history.replace("/login");
     const outbox = (store.getState() as RootStateWithOffline).offline.outbox;
     if (outbox.length !== 0) throw new Error("Non Empty Outbox");
 
@@ -64,6 +79,66 @@ export const registerAPI = async (newUser: INewUser): Promise<void> => {
     } else throw new Error(res.statusText);
 };
 
-export const updateUserAPI = (user: IUser): void => {
-    store.dispatch(updateUser(user));
+export const updateUserAPI = async (updatedUser: IUser): Promise<void> => {
+    if (!store.getState().offline.online)
+        throw new Error("Must be online to update user details");
+
+    const res = await axios.put(USERS + "/" + updatedUser._id, updatedUser, {
+        withCredentials: true,
+    });
+    const user = res.data;
+    if (user && res.status == 200) {
+        store.dispatch(updateUser(user));
+    } else throw new Error(res.statusText);
+};
+
+export const updatePasswordAPI = async (
+    password1: string,
+    password2: string,
+    user: IUser
+): Promise<void> => {
+    if (!store.getState().offline.online)
+        throw new Error("Must be online to update user details");
+
+    const res = await axios.put(
+        UPDATE_PASSWORD + "/" + user._id,
+        {
+            password1: password1,
+            password2: password2,
+        },
+        {
+            withCredentials: true,
+        }
+    );
+    if (res.status !== 200) throw new Error(res.statusText);
+};
+
+// Boot user out if not logged in
+export const checkAuthAPI = (history: ReturnType<typeof useHistory>): void => {
+    if (!store.getState().user.account) history.replace("/login");
+};
+
+export const updateProfilePicAPI = async (
+    fileList: FileList | null
+): Promise<void> => {
+    const user = store.getState().user.account;
+
+    if (!fileList) throw new Error("No file selected");
+    if (fileList[0]) {
+        const file = fileList[0];
+        const fileType = file["type"];
+        const validImageTypes = ["image/jpeg", "image/png"];
+        if (validImageTypes.includes(fileType)) {
+            const temp = cloneDeep(user);
+
+            const fileRef = ref(storage, `images/${file.name}`);
+            await uploadBytes(fileRef, file);
+            const url = await getDownloadURL(fileRef);
+
+            if (!url) throw new Error("Failed upload");
+
+            temp.profilePic = url;
+            updateUserAPI(temp);
+        }
+    }
 };

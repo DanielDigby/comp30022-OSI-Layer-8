@@ -10,6 +10,15 @@ import * as uuid from "uuid";
 
 jest.mock("axios");
 jest.mock("uuid");
+jest.mock("redux-persist", () => {
+    const real = jest.requireActual("redux-persist");
+    return {
+        ...real,
+        persistReducer: jest
+            .fn()
+            .mockImplementation((config, reducers) => reducers),
+    };
+});
 
 describe("Notes API Helpers", () => {
     afterEach(() => {

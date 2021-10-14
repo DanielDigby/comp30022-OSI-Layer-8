@@ -1,105 +1,85 @@
 import React, { useState } from "react";
 import styles from "./LogInView.module.css";
-import logo from "../../images/cara.svg";
+import logo from "../../assets/logo.png";
+import { Input } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
-
-// Semantic UI button
-import { Checkbox, Button } from "semantic-ui-react";
-
-import { logInAPI, Credentials } from "../../helpers/api/users";
+import { logInAPI, logOutAPI, Credentials } from "../../helpers/api/users";
 
 const LogInView = (): JSX.Element => {
-    const navHistory = useHistory();
-    const navigateHome = () => navHistory.push("/");
-    const navigateDashboard = () => navHistory.push("/dashboard");
+    const history = useHistory();
 
-    // Components to send over to our api call
     const [email, setEmail] = useState<Credentials["email"]>("");
     const [password, setPassword] = useState<Credentials["password"]>("");
 
-    // Functions to update email and password entered
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
-        console.log(email);
     };
 
     const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
-        console.log(password);
     };
 
-    // api call
-
-    const validateUserLogIn = async () => {
+    const handleSubmit = async () => {
+        const submittedPassword = password;
+        setPassword("");
         try {
-            await logInAPI({ email: email, password: password });
-            navigateDashboard();
+            await logInAPI({ email: email, password: submittedPassword });
+            const allowCookies = confirm(
+                "We use cookies to personalise content in cara.\n\n" +
+                    "Accept and continue?"
+            );
+            if (allowCookies) {
+                history.push("/");
+            } else {
+                logOutAPI(history);
+            }
         } catch (error: unknown) {
             console.log(error);
             return;
         }
     };
-
     return (
-        <div className={styles.basecontainer}>
-            <div className={styles.header}>Login Page</div>
-
-            <div className={styles.container}>
-                <div className="image">
-                    <img
-                        className={styles.image}
-                        src={logo}
-                        onClick={() => navigateHome()}
-                    />
-                </div>
-
-                <div className={styles.heading}>
-                    <h1>Cara</h1>
-                </div>
-
-                <div className={styles.form}>
-                    <label className={styles.label} htmlFor="email">
-                        Email
-                    </label>
-                    <input
-                        className={styles.input}
-                        type="email"
-                        placeholder="enter email"
-                        onChange={handleEmail}
-                    ></input>
-                </div>
-
-                <div className={styles.form}>
-                    <label className={styles.label} htmlFor="password">
-                        Password
-                    </label>
-                    <input
-                        className={styles.input}
-                        type="password"
-                        placeholder="password"
-                        onChange={handlePassword}
-                    ></input>
-                </div>
-            </div>
-
-            {/* Centered right now*/}
-            <div className={styles.rememberMe}>
-                <Checkbox label="Remember me" />
-            </div>
-
-            <div className={styles.footer}>
-                <Button positive onClick={() => validateUserLogIn()}>
-                    Log in
-                </Button>
-            </div>
-
-            <div className={styles.footer}>
-                <Button size="medium" onClick={() => navigateHome()}>
-                    Go Back
-                </Button>
+        <div className={styles.container}>
+            <img className={styles.logo} src={logo} alt="logo" />
+            <div className={styles.title}>cara</div>
+            <div className={styles.subtitle}>Untangle your personal life</div>
+            <div className={styles.inputSection}>
+                <Form onSubmit={handleSubmit}>
+                    <div className={styles.inputTitle}>Email </div>
+                    <Form.Field>
+                        <Input
+                            fluid
+                            placeholder="name@email.com"
+                            value={email}
+                            onChange={handleEmail}
+                        />
+                    </Form.Field>
+                    <div className={styles.inputTitle}>Password</div>
+                    <Form.Field>
+                        <Input
+                            fluid
+                            placeholder="password"
+                            type="password"
+                            value={password}
+                            onChange={handlePassword}
+                        />
+                    </Form.Field>
+                    <div className={styles.buttons}>
+                        <Button
+                            content="Sign up"
+                            color="black"
+                            onClick={() => history.push("/register")}
+                        />
+                        <Button
+                            content="Sign in"
+                            color="orange"
+                            type="submit"
+                        />
+                    </div>
+                </Form>
             </div>
         </div>
     );
 };
-
 export default LogInView;

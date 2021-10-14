@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+.containerLeft {
+    display: flex;
+    width: 22%;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: "Lato", sans-serif;
+}
+
+/* Formats the side menu */
+.sideContainer {
+    display: flex;
+    height: 80vh;
+    width: 15vw;
+    padding-top: 3.6vh;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding-left: 30px;
+    padding-bottom: 5px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    padding-top: 10px;
+    padding-left: 20px;
+    align-items: left;
+    margin-bottom: 10px;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 8vw;
+    margin-left: -20px;
+}
+
+.settingContainer {
+    display: flex;
+    width: 15vw;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings {
+    margin-top: 4.5vh;
+    margin-left: 32px;
+    margin-bottom: 20px;
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+}

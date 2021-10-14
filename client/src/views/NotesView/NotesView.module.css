@@ -1,38 +1,23 @@
 /* For the profile, tag icon  and side menu */
-.containerLeft {
+
+.staticLeft {
     display: flex;
-    width: 20%;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: cadetblue;
+    flex-direction: row;
 }
 
 /* For the search bar and help (question mark) */
 .containerRight {
-    padding-top: 20px;
-    padding-right: 60px;
     display: flex;
-    width: 250px;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 30px;
+    padding-top: 25px;
     height: 70px;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: burlywood;
 }
 
-/* Formats the side menu */
-.sideContainer {
-    display: flex;
-    width: 50px;
-    padding-top: 5vh;
-    flex-direction: column;
-    align-items: center;
-}
-
-.menu {
+.main {
     display: flex;
     flex-direction: column;
-    height: 70vh;
-    padding-top: 10px;
-    padding-left: 10px;
-    align-items: center;
+    align-items: flex-end;
+    width: 100%;
 }

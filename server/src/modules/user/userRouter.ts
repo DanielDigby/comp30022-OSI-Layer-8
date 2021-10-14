@@ -11,4 +11,10 @@ userRouter.put(
     userController.updateUser
 );
 
+userRouter.put(
+    "/password/:Id",
+    authenticate("jwt", { session: false }),
+    userController.updatePassword
+);
+
 module.exports = userRouter;
