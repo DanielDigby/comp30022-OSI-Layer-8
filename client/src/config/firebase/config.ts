@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,14 +13,4 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
-const storage = getStorage(firebase);
-
-export const uploadImage = async (file: File): Promise<string> => {
-    try {
-        const fileRef = ref(storage, `images/${file.name}`);
-        await uploadBytes(fileRef, file);
-        return getDownloadURL(fileRef);
-    } catch {
-        throw Error("Failed upload");
-    }
-};
+export const storage = getStorage(firebase);

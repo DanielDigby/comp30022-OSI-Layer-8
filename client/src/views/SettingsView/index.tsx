@@ -5,10 +5,9 @@ import placeholder from "../../assets/placeholder.png";
 import globalStyles from "../../App.module.css";
 import ColourBlocks from "./ColourBlocks";
 import { RootState } from "../../config/redux/store";
-import { logOutAPI } from "../../helpers/api/users";
+import { logOutAPI, updateProfilePicAPI } from "../../helpers/api/users";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { uploadImage } from "../../config/firebase/config";
 import { checkAuthAPI } from "../../helpers/api/users";
 import { capitalize, cloneDeep } from "lodash";
 import { updateUserAPI, updatePasswordAPI } from "../../helpers/api/users";
@@ -341,23 +340,10 @@ const ProfilePic = (): JSX.Element => {
     const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const fileList = e.target.files;
 
-        if (!fileList) return;
-        if (fileList[0]) {
-            const file = fileList[0];
-            const fileType = file["type"];
-            const validImageTypes = ["image/jpeg", "image/png"];
-            if (validImageTypes.includes(fileType)) {
-                const temp = cloneDeep(user);
-                let url;
-                try {
-                    url = await uploadImage(file);
-                } catch {
-                    alert("File upload failed");
-                }
-
-                temp.profilePic = url;
-                updateUserAPI(temp);
-            }
+        try {
+            updateProfilePicAPI(fileList);
+        } catch (err) {
+            alert("Profile picture upload failed");
         }
     };
 

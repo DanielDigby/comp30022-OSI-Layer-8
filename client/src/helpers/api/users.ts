@@ -1,8 +1,12 @@
+import { storage } from "../../config/firebase/config";
 import { useHistory } from "react-router";
+import { cloneDeep } from "lodash";
 import { IUser, INewUser } from "../../interfaces/user";
 import { setUser, updateUser } from "../../config/redux/userSlice";
 import { setNotes } from "../../config/redux/noteSlice";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
+
 import {
     store,
     RootStateWithOffline,
@@ -76,6 +80,9 @@ export const registerAPI = async (newUser: INewUser): Promise<void> => {
 };
 
 export const updateUserAPI = async (updatedUser: IUser): Promise<void> => {
+    if (!store.getState().offline.online)
+        throw new Error("Must be online to update user details");
+
     const res = await axios.put(USERS + "/" + updatedUser._id, updatedUser, {
         withCredentials: true,
     });
@@ -90,6 +97,9 @@ export const updatePasswordAPI = async (
     password2: string,
     user: IUser
 ): Promise<void> => {
+    if (!store.getState().offline.online)
+        throw new Error("Must be online to update user details");
+
     const res = await axios.put(
         UPDATE_PASSWORD + "/" + user._id,
         {
@@ -106,4 +116,29 @@ export const updatePasswordAPI = async (
 // Boot user out if not logged in
 export const checkAuthAPI = (history: ReturnType<typeof useHistory>): void => {
     if (!store.getState().user.account) history.replace("/login");
+};
+
+export const updateProfilePicAPI = async (
+    fileList: FileList | null
+): Promise<void> => {
+    const user = store.getState().user.account;
+
+    if (!fileList) throw new Error("No file selected");
+    if (fileList[0]) {
+        const file = fileList[0];
+        const fileType = file["type"];
+        const validImageTypes = ["image/jpeg", "image/png"];
+        if (validImageTypes.includes(fileType)) {
+            const temp = cloneDeep(user);
+
+            const fileRef = ref(storage, `images/${file.name}`);
+            await uploadBytes(fileRef, file);
+            const url = await getDownloadURL(fileRef);
+
+            if (!url) throw new Error("Failed upload");
+
+            temp.profilePic = url;
+            updateUserAPI(temp);
+        }
+    }
 };
