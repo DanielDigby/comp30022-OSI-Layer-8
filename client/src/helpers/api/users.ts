@@ -14,6 +14,7 @@ import {
     NOTES,
     REGISTER,
     USERS,
+    UPDATE_PASSWORD,
 } from "../../interfaces/endpoints";
 import axios from "axios";
 
@@ -78,11 +79,28 @@ export const updateUserAPI = async (updatedUser: IUser): Promise<void> => {
     const res = await axios.put(USERS + "/" + updatedUser._id, updatedUser, {
         withCredentials: true,
     });
-    console.log(res);
     const user = res.data;
     if (user && res.status == 200) {
         store.dispatch(updateUser(user));
     } else throw new Error(res.statusText);
+};
+
+export const updatePasswordAPI = async (
+    password1: string,
+    password2: string,
+    user: IUser
+): Promise<void> => {
+    const res = await axios.put(
+        UPDATE_PASSWORD + "/" + user._id,
+        {
+            password1: password1,
+            password2: password2,
+        },
+        {
+            withCredentials: true,
+        }
+    );
+    if (res.status !== 200) throw new Error(res.statusText);
 };
 
 // Boot user out if not logged in
