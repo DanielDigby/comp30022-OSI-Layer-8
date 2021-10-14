@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StandardDetailNote.module.css";
 import "semantic-ui-css/semantic.min.css";
-import { NoteProps } from "../../interfaces/note";
+import { NoteModes, NoteProps } from "../../interfaces/note";
 import Text from "../ContentText/index";
 
 import { Segment, Icon } from "semantic-ui-react";
@@ -19,6 +19,7 @@ const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
                         <div className={styles.top}>
                             <HeadingText
                                 headingText={note.title ? note.title : ""}
+                                noteMode={NoteModes.STANDARD_DETAIL}
                             />
                             <div className={styles.thumbtack}>
                                 <Icon name="thumbtack" size="big" />

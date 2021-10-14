@@ -1,6 +1,18 @@
 @import "../../App.module.css";
 
-.title {
+.standardDetailMode {
+    font-family: var(--font-family);
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.editPlaceholderMode {
+    font-family: var(--font-family);
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.editExistingMode {
     font-family: var(--font-family);
     font-size: 2vw;
     font-weight: bold;
@@ -8,7 +20,7 @@
 
 /* phone size */
 @media only screen and (max-width: 500px) {
-    .title {
+    .standardDetailMode {
         font-size: var(--text-small);
         line-height: 3ch;
     }
@@ -16,7 +28,7 @@
 
 /* iPad size */
 @media only screen and (min-width: 1024px) {
-    .title {
+    .standardDetailMode {
         font-size: var(--text-medium);
         line-height: 3ch;
     }
@@ -24,7 +36,7 @@
 
 /* desktop size */
 @media only screen and (min-width: 1025px) {
-    .title {
+    .standardDetailMode {
         font-size: 20px;
         line-height: 3ch;
     }
