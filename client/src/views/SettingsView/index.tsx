@@ -114,7 +114,7 @@ const UserDetails = (): JSX.Element => {
         try {
             await updateUserAPI(user);
         } catch {
-            alert("Cannot update user while offline");
+            alert("Cannot update profile while offline");
         }
     };
 
@@ -132,7 +132,7 @@ const UserDetails = (): JSX.Element => {
             await updatePasswordAPI(password1, password2, user);
             alert("Successfully updated password");
         } catch {
-            alert("Cannot update user while offline");
+            alert("Cannot update passwords while offline");
         }
     };
 
