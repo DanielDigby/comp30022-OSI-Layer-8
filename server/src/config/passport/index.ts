@@ -39,7 +39,6 @@ passport.use(
         async function localStrategyCB(req, email, password, done) {
             try {
                 const user = <IUser>await User.findOne({ email: email });
-
                 if (process.env.CACHE !== "false")
                     cache.countBruteForce(user, email, req.ip);
 
@@ -81,7 +80,9 @@ passport.use(
                 if (process.env.CACHE !== "false")
                     await cache.checkJwtBlacklist(req);
 
-                const user = <IUser>await User.findOne({ id: jwt_payload._id });
+                const user = <IUser>(
+                    await User.findOne({ _id: jwt_payload._id })
+                );
                 if (!user) {
                     return done(null, false);
                 }

@@ -49,7 +49,7 @@ describe("User route tests", () => {
                     email: "new@new.com",
                     firstName: "New",
                     lastName: "New",
-                    password: "new123",
+                    password: "redacted",
                     profilePic: "new url",
                     colourScheme: "PLACEHOLDER",
                     tags: ["new test tag"],

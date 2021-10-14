@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { USERS } from "../../interfaces/endpoints";
 import { IUser } from "../../interfaces/user";
 
 export interface UserState {
@@ -22,24 +21,8 @@ export const userSlice = createSlice({
             state.account = null;
         },
 
-        // update user locally and post changes to backend
-        updateUser: {
-            reducer: (state, action: PayloadAction<IUser>) => {
-                state.account = action.payload;
-            },
-            prepare: (user: IUser) => {
-                return {
-                    payload: user,
-                    meta: {
-                        offline: {
-                            effect: {
-                                url: USERS + "/" + user._id,
-                                method: "PUT",
-                            },
-                        },
-                    },
-                };
-            },
+        updateUser: (state, action: PayloadAction<IUser>) => {
+            state.account = action.payload;
         },
     },
 });
