@@ -5,11 +5,13 @@ import { RootState } from "../../config/redux/store";
 import styles from "./SettingsView.module.css";
 import { logOutAPI } from "../../helpers/api/users";
 import Profile from "../../components/Profile";
+import placeholder from "../../assets/placeholder.png";
 import { useHistory } from "react-router-dom";
+import { uploadImage } from "../../config/firebase/config";
 // Semantic UI button
 import globalStyles from "../../App.module.css";
 import { updateUserAPI, updatePasswordAPI } from "../../helpers/api/users";
-import { Segment, Icon, Image, Input, Ref } from "semantic-ui-react";
+import { Segment, Icon, Image, Input, Ref, Button } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
 
@@ -291,21 +293,48 @@ const UserDetails = (): JSX.Element => {
 };
 
 const ProfilePic = (): JSX.Element => {
+    const user = useSelector((state: RootState) => state.user.account);
+
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fileList = e.target.files;
+
+        if (!fileList) return;
+        if (fileList[0]) {
+            const file = fileList[0];
+            const fileType = file["type"];
+            const validImageTypes = ["image/jpeg", "image/png"];
+            if (validImageTypes.includes(fileType)) {
+                const temp = cloneDeep(user);
+                let url;
+                try {
+                    url = await uploadImage(file);
+                } catch {
+                    alert("File upload failed");
+                }
+
+                temp.profilePic = url;
+                updateUserAPI(temp);
+            }
+        }
+    };
+
     return (
         <div className={styles.profilePic}>
             <div className={styles.profileTitle}>
                 Profile image
-                <Icon
+                <Button
+                    as="label"
+                    htmlFor="file"
                     size="small"
-                    name="pencil alternate"
-                    color="grey"
+                    icon="upload"
                     style={{ marginLeft: "60px" }}
-                />{" "}
+                />
+                <input type="file" id="file" hidden onChange={handleFile} />
             </div>
 
             <div className={styles.image}>
                 <Image
-                    src="https://react.semantic-ui.com/images/wireframe/square-image.png"
+                    src={user.profilePic ? user.profilePic : placeholder}
                     size="medium"
                     rounded
                 />

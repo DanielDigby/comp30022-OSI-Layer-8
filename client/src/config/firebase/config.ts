@@ -1,0 +1,26 @@
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyArjJag9_fvsY81d_nGpdbud0IJ4b-y0kg",
+    authDomain: "comp30022-crm-app.firebaseapp.com",
+    projectId: "comp30022-crm-app",
+    storageBucket: "comp30022-crm-app.appspot.com",
+    messagingSenderId: "267407061561",
+    appId: "1:267407061561:web:96b163d4767118ee9d13e8",
+};
+
+// Initialize Firebase
+const firebase = initializeApp(firebaseConfig);
+const storage = getStorage(firebase);
+
+export const uploadImage = async (file: File): Promise<string> => {
+    try {
+        const fileRef = ref(storage, `images/${file.name}`);
+        await uploadBytes(fileRef, file);
+        return getDownloadURL(fileRef);
+    } catch {
+        throw Error("Failed upload");
+    }
+};
