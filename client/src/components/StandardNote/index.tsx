@@ -6,7 +6,7 @@ import { INote } from "../../interfaces/note";
 import { Segment, Icon } from "semantic-ui-react";
 
 // Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../Tag";
+import Tag from "../NoteIcons/Tag/index";
 import Event from "../Event";
 import Time from "../Time";
 
