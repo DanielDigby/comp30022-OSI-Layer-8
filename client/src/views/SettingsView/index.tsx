@@ -8,7 +8,7 @@ import Profile from "../../components/Profile";
 import { useHistory } from "react-router-dom";
 // Semantic UI button
 import globalStyles from "../../App.module.css";
-import { updateUserAPI } from "../../helpers/api/users";
+import { updateUserAPI, updatePasswordAPI } from "../../helpers/api/users";
 import { Segment, Icon, Image, Input, Ref } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
@@ -84,13 +84,22 @@ const UserDetails = (): JSX.Element => {
 
     const [editing, setEditing] = useState("");
     const [input, setInput] = useState("");
+    const [password1, setPassword1] = useState("");
+    const [password2, setPassword2] = useState("");
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value);
+    };
+    const handlePassword1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword1(e.target.value);
+    };
+    const handlePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword2(e.target.value);
     };
 
     const firstNameId = "First name";
     const lastNameId = "Last name";
     const emailId = "Email";
+    const passwordId = "Password";
 
     const inputRef = useRef<HTMLElement | null>(null);
 
@@ -101,7 +110,7 @@ const UserDetails = (): JSX.Element => {
         });
     });
 
-    const fieldConfirmClick = () => {
+    const fieldConfirmClick = async () => {
         const temp = cloneDeep(user);
         switch (editing) {
             case firstNameId:
@@ -118,6 +127,20 @@ const UserDetails = (): JSX.Element => {
                 if (input == emailId) break;
                 temp.email = input;
                 updateUserAPI(temp);
+                break;
+            case passwordId:
+                if (password1 == passwordId) break;
+                if (password1 !== password2) {
+                    alert("Passwords must match");
+                    break;
+                }
+                try {
+                    await updatePasswordAPI(password1, password2, user);
+                    alert("Successfully updated password");
+                } catch {
+                    alert("Error updating passwords");
+                }
+
                 break;
         }
         setInput("");
@@ -216,14 +239,47 @@ const UserDetails = (): JSX.Element => {
                             />
                         </div>
                     )}
-                    <div className={styles.field}>
-                        {password}
-                        <Icon
-                            size="small"
-                            name="pencil alternate"
-                            color="grey"
-                        />
-                    </div>
+                    {editing == passwordId ? (
+                        <Ref innerRef={inputRef}>
+                            <span>
+                                <Input
+                                    style={{
+                                        fontSize: "15px",
+                                        marginBottom: "23px",
+                                        marginTop: "-10px",
+                                        width: "37.5%",
+                                    }}
+                                    placeholder={input}
+                                    onChange={handlePassword1}
+                                />
+                                <Input
+                                    action={{
+                                        icon: "check",
+                                        onClick: fieldConfirmClick,
+                                    }}
+                                    style={{
+                                        fontSize: "15px",
+                                        marginBottom: "23px",
+                                        marginLeft: "20px",
+                                        marginTop: "-10px",
+                                        width: "37.5%",
+                                    }}
+                                    placeholder={"Confirm"}
+                                    onChange={handlePassword2}
+                                />
+                            </span>
+                        </Ref>
+                    ) : (
+                        <div className={styles.field}>
+                            {password}
+                            <Icon
+                                size="small"
+                                name="pencil alternate"
+                                color="grey"
+                                onClick={() => fieldEditClick(passwordId)}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

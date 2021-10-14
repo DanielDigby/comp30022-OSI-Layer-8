@@ -44,7 +44,6 @@ const updatePassword = async (req: IRequestWithUser, res: express.Response) => {
         const user = await User.findById(id);
         user.password = hashPassword(password1);
         await user.save();
-        console.log(user);
         user.password = "redacted";
 
         return res.status(200).send(user);
