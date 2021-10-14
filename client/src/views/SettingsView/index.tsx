@@ -17,7 +17,7 @@ const SettingsView = (): JSX.Element => {
     const history = useHistory();
     const back = () => history.goBack();
     const logOut = async () => await logOutAPI(history);
-
+    const navigateDashboard = () => history.push("/");
     checkAuthAPI(history);
 
     // api call
@@ -26,7 +26,7 @@ const SettingsView = (): JSX.Element => {
             <div className={styles.container}>
                 <div className={styles.leftBanner}>
                     <div>
-                        <Profile />
+                        <Profile onClick={navigateDashboard} />
                         <div className={styles.signOut} onClick={logOut}>
                             <Icon name="sign out" size="big" color="grey" />
                             Sign out
