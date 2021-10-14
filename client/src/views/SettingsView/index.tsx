@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { capitalize, cloneDeep } from "lodash";
 import { useSelector } from "react-redux";
 import { RootState } from "../../config/redux/store";
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 // Semantic UI button
 import globalStyles from "../../App.module.css";
 import { updateUserAPI } from "../../helpers/api/users";
-import { Segment, Icon, Image, Input } from "semantic-ui-react";
+import { Segment, Icon, Image, Input, Ref } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
 
@@ -88,19 +88,34 @@ const UserDetails = (): JSX.Element => {
         setInput(e.target.value);
     };
 
+    const firstNameId = "First name";
+    const lastNameId = "Last name";
+    const emailId = "Email";
+
+    const inputRef = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        document.addEventListener("mousedown", (event) => {
+            if (!inputRef.current?.contains(event.target as Node))
+                setEditing("");
+        });
+    });
+
     const fieldConfirmClick = () => {
-        console.log(user);
         const temp = cloneDeep(user);
         switch (editing) {
-            case "First name":
+            case firstNameId:
+                if (input == firstNameId) break;
                 temp.firstName = input;
                 updateUserAPI(temp);
                 break;
-            case "Last name":
+            case lastNameId:
+                if (input == lastNameId) break;
                 temp.lastName = input;
                 updateUserAPI(temp);
                 break;
-            case "Email":
+            case emailId:
+                if (input == emailId) break;
                 temp.email = input;
                 updateUserAPI(temp);
                 break;
@@ -117,21 +132,23 @@ const UserDetails = (): JSX.Element => {
         <div>
             <div className={styles.formheading}>
                 <div className={styles.formtitle}>
-                    {editing == "First name" ? (
-                        <Input
-                            action={{
-                                icon: "check",
-                                onClick: fieldConfirmClick,
-                            }}
-                            style={{
-                                fontSize: "15px",
-                                marginBottom: "23px",
-                                marginTop: "-10px",
-                                width: "92%",
-                            }}
-                            placeholder={input}
-                            onChange={handleInput}
-                        />
+                    {editing == firstNameId ? (
+                        <Ref innerRef={inputRef}>
+                            <Input
+                                action={{
+                                    icon: "check",
+                                    onClick: fieldConfirmClick,
+                                }}
+                                style={{
+                                    fontSize: "15px",
+                                    marginBottom: "23px",
+                                    marginTop: "-10px",
+                                    width: "92%",
+                                }}
+                                placeholder={input}
+                                onChange={handleInput}
+                            />
+                        </Ref>
                     ) : (
                         <div className={styles.field}>
                             {firstName}
@@ -139,25 +156,27 @@ const UserDetails = (): JSX.Element => {
                                 size="small"
                                 name="pencil alternate"
                                 color="grey"
-                                onClick={() => fieldEditClick("First name")}
+                                onClick={() => fieldEditClick(firstNameId)}
                             />
                         </div>
                     )}
-                    {editing == "Last name" ? (
-                        <Input
-                            action={{
-                                icon: "check",
-                                onClick: fieldConfirmClick,
-                            }}
-                            style={{
-                                fontSize: "15px",
-                                marginBottom: "23px",
-                                marginTop: "-10px",
-                                width: "92%",
-                            }}
-                            placeholder={input}
-                            onChange={handleInput}
-                        />
+                    {editing == lastNameId ? (
+                        <Ref innerRef={inputRef}>
+                            <Input
+                                action={{
+                                    icon: "check",
+                                    onClick: fieldConfirmClick,
+                                }}
+                                style={{
+                                    fontSize: "15px",
+                                    marginBottom: "23px",
+                                    marginTop: "-10px",
+                                    width: "92%",
+                                }}
+                                placeholder={input}
+                                onChange={handleInput}
+                            />
+                        </Ref>
                     ) : (
                         <div className={styles.field}>
                             {lastName}
@@ -165,25 +184,27 @@ const UserDetails = (): JSX.Element => {
                                 size="small"
                                 name="pencil alternate"
                                 color="grey"
-                                onClick={() => fieldEditClick("Last name")}
+                                onClick={() => fieldEditClick(lastNameId)}
                             />
                         </div>
                     )}
-                    {editing == "Email" ? (
-                        <Input
-                            action={{
-                                icon: "check",
-                                onClick: fieldConfirmClick,
-                            }}
-                            style={{
-                                fontSize: "15px",
-                                marginBottom: "23px",
-                                marginTop: "-10px",
-                                width: "92%",
-                            }}
-                            placeholder={input}
-                            onChange={handleInput}
-                        />
+                    {editing == emailId ? (
+                        <Ref innerRef={inputRef}>
+                            <Input
+                                action={{
+                                    icon: "check",
+                                    onClick: fieldConfirmClick,
+                                }}
+                                style={{
+                                    fontSize: "15px",
+                                    marginBottom: "23px",
+                                    marginTop: "-10px",
+                                    width: "92%",
+                                }}
+                                placeholder={input}
+                                onChange={handleInput}
+                            />
+                        </Ref>
                     ) : (
                         <div className={styles.field}>
                             {email}
@@ -191,7 +212,7 @@ const UserDetails = (): JSX.Element => {
                                 size="small"
                                 name="pencil alternate"
                                 color="grey"
-                                onClick={() => fieldEditClick("Email")}
+                                onClick={() => fieldEditClick(emailId)}
                             />
                         </div>
                     )}
