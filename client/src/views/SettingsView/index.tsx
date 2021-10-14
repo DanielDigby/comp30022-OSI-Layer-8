@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { capitalize } from "lodash";
+import { capitalize, cloneDeep } from "lodash";
 import { useSelector } from "react-redux";
 import { RootState } from "../../config/redux/store";
 import styles from "./SettingsView.module.css";
@@ -8,7 +8,8 @@ import Profile from "../../components/Profile";
 import { useHistory } from "react-router-dom";
 // Semantic UI button
 import globalStyles from "../../App.module.css";
-import { Segment, Icon, Image } from "semantic-ui-react";
+import { updateUserAPI } from "../../helpers/api/users";
+import { Segment, Icon, Image, Input } from "semantic-ui-react";
 
 import ColourBlocks from "./ColourBlocks";
 
@@ -81,34 +82,119 @@ const UserDetails = (): JSX.Element => {
     const email = user.email;
     const password = "*********";
 
+    const [editing, setEditing] = useState("");
+    const [input, setInput] = useState("");
+    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value);
+    };
+
+    const fieldConfirmClick = () => {
+        console.log(user);
+        const temp = cloneDeep(user);
+        switch (editing) {
+            case "First name":
+                temp.firstName = input;
+                updateUserAPI(temp);
+                break;
+            case "Last name":
+                temp.lastName = input;
+                updateUserAPI(temp);
+                break;
+            case "Email":
+                temp.email = input;
+                updateUserAPI(temp);
+                break;
+        }
+        setInput("");
+        setEditing("");
+    };
+    const fieldEditClick = (name: string) => {
+        setInput(name);
+        setEditing(name);
+    };
+
     return (
         <div>
             <div className={styles.formheading}>
                 <div className={styles.formtitle}>
-                    <div className={styles.field}>
-                        {firstName}
-                        <Icon
-                            size="small"
-                            name="pencil alternate"
-                            color="grey"
-                        />{" "}
-                    </div>
-                    <div className={styles.field}>
-                        {lastName}
-                        <Icon
-                            size="small"
-                            name="pencil alternate"
-                            color="grey"
+                    {editing == "First name" ? (
+                        <Input
+                            action={{
+                                icon: "check",
+                                onClick: fieldConfirmClick,
+                            }}
+                            style={{
+                                fontSize: "15px",
+                                marginBottom: "23px",
+                                marginTop: "-10px",
+                                width: "92%",
+                            }}
+                            placeholder={input}
+                            onChange={handleInput}
                         />
-                    </div>
-                    <div className={styles.field}>
-                        {email}
-                        <Icon
-                            size="small"
-                            name="pencil alternate"
-                            color="grey"
+                    ) : (
+                        <div className={styles.field}>
+                            {firstName}
+                            <Icon
+                                size="small"
+                                name="pencil alternate"
+                                color="grey"
+                                onClick={() => fieldEditClick("First name")}
+                            />
+                        </div>
+                    )}
+                    {editing == "Last name" ? (
+                        <Input
+                            action={{
+                                icon: "check",
+                                onClick: fieldConfirmClick,
+                            }}
+                            style={{
+                                fontSize: "15px",
+                                marginBottom: "23px",
+                                marginTop: "-10px",
+                                width: "92%",
+                            }}
+                            placeholder={input}
+                            onChange={handleInput}
                         />
-                    </div>
+                    ) : (
+                        <div className={styles.field}>
+                            {lastName}
+                            <Icon
+                                size="small"
+                                name="pencil alternate"
+                                color="grey"
+                                onClick={() => fieldEditClick("Last name")}
+                            />
+                        </div>
+                    )}
+                    {editing == "Email" ? (
+                        <Input
+                            action={{
+                                icon: "check",
+                                onClick: fieldConfirmClick,
+                            }}
+                            style={{
+                                fontSize: "15px",
+                                marginBottom: "23px",
+                                marginTop: "-10px",
+                                width: "92%",
+                            }}
+                            placeholder={input}
+                            onChange={handleInput}
+                        />
+                    ) : (
+                        <div className={styles.field}>
+                            {email}
+                            <Icon
+                                size="small"
+                                name="pencil alternate"
+                                color="grey"
+                                onClick={() => fieldEditClick("Email")}
+                            />
+                        </div>
+                    )}
                     <div className={styles.field}>
                         {password}
                         <Icon

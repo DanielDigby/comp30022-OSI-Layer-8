@@ -15,14 +15,17 @@ const updateUser = async (req: IRequestWithUser, res: express.Response) => {
             throw new AppError("Unauthorized", 403, "Forbidden", true);
 
         const newData = req.body;
-        const user = await User.findByIdAndUpdate(id, newData).setOptions({
-            new: true,
-            overwrite: true,
-        });
+        delete newData.password;
 
-        return res.status(200).send(user);
+        const user = await User.findById(id);
+        Object.assign(user, newData);
+        await user.save();
+        newData.password = "redacted";
+
+        return res.status(200).send(newData);
     } catch (err) {
-        return res.send(err);
+        console.log(err);
+        return res.status(500);
     }
 };
 

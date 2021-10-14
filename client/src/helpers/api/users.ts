@@ -8,7 +8,13 @@ import {
     RootStateWithOffline,
     RESET_BASE,
 } from "../../config/redux/store";
-import { LOG_IN, LOG_OUT, NOTES, REGISTER } from "../../interfaces/endpoints";
+import {
+    LOG_IN,
+    LOG_OUT,
+    NOTES,
+    REGISTER,
+    USERS,
+} from "../../interfaces/endpoints";
 import axios from "axios";
 
 // post username password to backend then load notes and populate redux
@@ -68,8 +74,15 @@ export const registerAPI = async (newUser: INewUser): Promise<void> => {
     } else throw new Error(res.statusText);
 };
 
-export const updateUserAPI = (user: IUser): void => {
-    store.dispatch(updateUser(user));
+export const updateUserAPI = async (updatedUser: IUser): Promise<void> => {
+    const res = await axios.put(USERS + "/" + updatedUser._id, updatedUser, {
+        withCredentials: true,
+    });
+    console.log(res);
+    const user = res.data;
+    if (user && res.status == 200) {
+        store.dispatch(updateUser(user));
+    } else throw new Error(res.statusText);
 };
 
 // Boot user out if not logged in
