@@ -11,8 +11,6 @@ import Time from "../NoteIcons/Time/index";
 import Contact from "../NoteIcons/Contact/index";
 import Reminder from "../NoteIcons/Reminder/index";
 
-// Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../NoteIcons/Tag";
 import HeadingText from "../HeadingText";
 
 const EditNote = ({ note }: NoteProps): JSX.Element => {
@@ -28,7 +26,12 @@ const EditNote = ({ note }: NoteProps): JSX.Element => {
                                     noteMode={NoteModes.EDIT}
                                 />
                             </div>
-                            <div className={styles.content}></div>
+                            <div className={styles.content}>
+                                <Text
+                                    text={note.text ? note.text : ""}
+                                    noteMode={NoteModes.EDIT}
+                                />
+                            </div>
                         </div>
                         <div className={styles.rightContainer}>
                             <div className={styles.doneRow}>
