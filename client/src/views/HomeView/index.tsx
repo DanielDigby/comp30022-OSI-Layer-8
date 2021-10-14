@@ -1,7 +1,6 @@
 import React from "react";
 import { store } from "../../config/redux/store";
 import styles from "./HomeView.module.css";
-import logo from "../../images/cara.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import randomName from "random-name";
@@ -74,10 +73,6 @@ const HomeView = (): JSX.Element => {
     // api call
     return (
         <div className={styles.container}>
-            <div className="image">
-                <img className={styles.image} src={logo} />
-            </div>
-
             <h1 className={styles.heading}>cara</h1>
             <h4 className={styles.heading2}>Untangle your personal life</h4>
 

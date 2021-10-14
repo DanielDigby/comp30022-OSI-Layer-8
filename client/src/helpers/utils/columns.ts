@@ -1,7 +1,6 @@
 import { ColumnDict } from "../../views/NotesView/DnD";
 import { INote } from "../../interfaces/note";
 import _ from "lodash";
-import { v4 as uuid } from "uuid";
 
 export const mapNotesToColumns = (notes: Array<INote>): ColumnDict => {
     const temp = _.cloneDeep(notes);
@@ -24,19 +23,29 @@ export const mapNotesToColumns = (notes: Array<INote>): ColumnDict => {
     }
 
     const newDict = {
-        [uuid()]: {
+        ["col1"]: {
             name: "col1",
             items: arr1,
         },
-        [uuid()]: {
+        ["col2"]: {
             name: "col2",
             items: arr2,
         },
-        [uuid()]: {
+        ["col3"]: {
             name: "col3",
             items: arr3,
         },
     };
 
     return newDict;
+};
+
+export const isEmptyColumns = (columns: ColumnDict): boolean => {
+    const arr1Len = columns["col1"].items.length;
+    const arr2Len = columns["col2"].items.length;
+    const arr3Len = columns["col3"].items.length;
+
+    if (arr1Len === 0 && arr2Len === 0 && arr3Len == 0) return true;
+
+    return false;
 };
