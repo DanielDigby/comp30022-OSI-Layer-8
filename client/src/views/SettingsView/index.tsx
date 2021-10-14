@@ -130,6 +130,10 @@ const UserDetails = (): JSX.Element => {
                 break;
             case passwordId:
                 if (password1 == passwordId) break;
+                if (password1 == "") {
+                    alert("Passwords can not be empty");
+                    break;
+                }
                 if (password1 !== password2) {
                     alert("Passwords must match");
                     break;
