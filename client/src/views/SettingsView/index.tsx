@@ -12,6 +12,7 @@ import { checkAuthAPI } from "../../helpers/api/users";
 import { capitalize, cloneDeep } from "lodash";
 import { updateUserAPI, updatePasswordAPI } from "../../helpers/api/users";
 import { Segment, Icon, Image, Input, Ref, Button } from "semantic-ui-react";
+import { IUser } from "../../interfaces/user";
 
 const SettingsView = (): JSX.Element => {
     const history = useHistory();
@@ -109,6 +110,32 @@ const UserDetails = (): JSX.Element => {
         });
     });
 
+    const submitField = async (user: IUser) => {
+        try {
+            await updateUserAPI(user);
+        } catch {
+            alert("Cannot update user while offline");
+        }
+    };
+
+    const submitPasswords = async (password1: string, password2: string) => {
+        try {
+            if (password1 == passwordId) return;
+            if (password1 == "") {
+                alert("Passwords can not be empty");
+                return;
+            }
+            if (password1 !== password2) {
+                alert("Passwords must match");
+                return;
+            }
+            await updatePasswordAPI(password1, password2, user);
+            alert("Successfully updated password");
+        } catch {
+            alert("Cannot update user while offline");
+        }
+    };
+
     // checks which field is being edited and then updates a temp user as
     // necessary before saving
     const fieldConfirmClick = async () => {
@@ -122,35 +149,20 @@ const UserDetails = (): JSX.Element => {
                 if (input == firstNameId) break;
 
                 temp.firstName = input;
-                updateUserAPI(temp);
+                await submitField(temp);
                 break;
             case lastNameId:
                 if (input == lastNameId) break;
                 temp.lastName = input;
-                updateUserAPI(temp);
+                await submitField(temp);
                 break;
             case emailId:
                 if (input == emailId) break;
                 temp.email = input;
-                updateUserAPI(temp);
+                await submitField(temp);
                 break;
             case passwordId:
-                if (password1 == passwordId) break;
-                if (password1 == "") {
-                    alert("Passwords can not be empty");
-                    break;
-                }
-                if (password1 !== password2) {
-                    alert("Passwords must match");
-                    break;
-                }
-                try {
-                    await updatePasswordAPI(password1, password2, user);
-                    alert("Successfully updated password");
-                } catch {
-                    alert("Error updating passwords");
-                }
-
+                await submitPasswords(password1, password2);
                 break;
         }
         setInput("");
