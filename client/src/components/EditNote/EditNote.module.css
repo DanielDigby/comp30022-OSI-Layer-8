@@ -4,21 +4,49 @@
     width: 60vw;
 }
 
-.whole {
+.wholeContainer {
     display: flex;
     flex-direction: row;
     height: 40vh;
 }
 
-.left {
-    background-color: pink;
+.leftContainer {
+    /* background-color: pink; */
     flex-basis: 70%;
 }
 
-.right {
+.rightContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    background-color: antiquewhite;
+    justify-content: space-around;
+    /* background-color: antiquewhite; */
     flex-basis: 30%;
+}
+
+.doneRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: flex-start;
+    gap: 5px;
+    flex-basis: 13%;
+}
+
+.doneText {
+    color: var(--colour-darkgray);
+    font-size: var(--text-medium);
+}
+
+.fillerContainer {
+    flex-basis: 27%;
+}
+
+.buttonRows {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-basis: 60%;
+    justify-content: space-around;
 }
