@@ -21,7 +21,15 @@ const EditNote = ({ note }: NoteProps): JSX.Element => {
             <Segment.Group raised>
                 <Segment>
                     <div className={styles.wholeContainer}>
-                        <div className={styles.leftContainer}></div>
+                        <div className={styles.leftContainer}>
+                            <div className={styles.title}>
+                                <HeadingText
+                                    headingText={note.title ? note.title : ""}
+                                    noteMode={NoteModes.EDIT}
+                                />
+                            </div>
+                            <div className={styles.content}></div>
+                        </div>
                         <div className={styles.rightContainer}>
                             <div className={styles.doneRow}>
                                 <div className={styles.doneText}>Done</div>
