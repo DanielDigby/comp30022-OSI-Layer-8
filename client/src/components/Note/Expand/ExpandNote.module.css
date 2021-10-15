@@ -7,7 +7,7 @@
     background: rgba(0, 0, 0, 0.6);
 }
 
-.editNoteWrapper {
+.expandNoteWrapper {
     position: absolute;
     width: 750px;
     height: 750px;
@@ -18,7 +18,4 @@
     left: 0;
     right: 0;
     padding: 50px;
-}
-
-.editNoteContent {
 }

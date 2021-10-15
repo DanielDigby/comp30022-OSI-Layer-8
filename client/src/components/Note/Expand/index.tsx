@@ -1,10 +1,9 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
-import styles from "./editNote.module.css";
-
+import styles from "./ExpandNote.module.css";
 /* Need AnimatePresence because we still need the dom nodes after we close the animated note */
 import { motion, AnimatePresence } from "framer-motion";
 
-const EditNote = forwardRef((props, ref) => {
+const ExpandNote = forwardRef((props, ref) => {
     const [open, setOpen] = useState(false);
 
     useImperativeHandle(ref, () => {
@@ -41,7 +40,7 @@ const EditNote = forwardRef((props, ref) => {
                     onClick={() => setOpen(false)}
                 >
                     <motion.div
-                        className={styles.editNoteWrapper}
+                        className={styles.expandNoteWrapper}
                         initial={{
                             scale: 0,
                         }}
@@ -61,7 +60,6 @@ const EditNote = forwardRef((props, ref) => {
                         }}
                     >
                         <motion.div
-                            className={styles.editNoteContent}
                             initial={{
                                 x: 150,
                                 opacity: 0,
@@ -90,5 +88,5 @@ const EditNote = forwardRef((props, ref) => {
     );
 });
 /* I have no idea why we need this */
-EditNote.displayName = "EditNote";
-export default EditNote;
+ExpandNote.displayName = "ExpandNote";
+export default ExpandNote;
