@@ -3,7 +3,6 @@ import styles from "./editNote.module.css";
 
 /* Need AnimatePresence because we still need the dom nodes after we close the animated note */
 import { motion, AnimatePresence } from "framer-motion";
-import internal from "stream";
 
 const EditNote = forwardRef((props, ref) => {
     const [open, setOpen] = useState(false);
@@ -51,6 +50,8 @@ const EditNote = forwardRef((props, ref) => {
                             transition: {
                                 duration: 0.25,
                             },
+                            x: 0,
+                            y: 0,
                         }}
                         exit={{
                             scale: 0,
@@ -80,7 +81,7 @@ const EditNote = forwardRef((props, ref) => {
                                 },
                             }}
                         >
-                            helloworld
+                            insert note to render here
                         </motion.div>
                     </motion.div>
                 </motion.div>
