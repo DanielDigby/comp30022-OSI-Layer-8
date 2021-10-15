@@ -9,7 +9,6 @@ type TagProps = {
 };
 
 const Tag = ({ tagName }: TagProps): JSX.Element => {
-    // api call
     return (
 <<<<<<< HEAD
         <div className={styles.tag}>

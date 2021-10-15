@@ -2,12 +2,6 @@ import React from "react";
 // import styles from "./Note.module.css";
 import "semantic-ui-css/semantic.min.css";
 import { INote, NoteModes } from "../../interfaces/note";
-import StandardNote from "./StandardNote";
-
-import { Segment } from "semantic-ui-react";
-
-// Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../Tag";
 
 /* Deleted NotesText folder and it's working now */
 interface NoteProps {
@@ -16,27 +10,10 @@ interface NoteProps {
 }
 const Note = ({ note, mode }: NoteProps): JSX.Element => {
     // api call
-    switch (mode) {
-        case NoteModes.STANDARD:
-            return <StandardNote {...{ note }} />;
-        default:
-            return (
-                <div className={styles.container}>
-                    <Segment.Group raised>
-                        <Segment>
-                            <div className={styles.body}>
-                                <div className={styles.title}>
-                                    {note.title ? note.title : ""}
-                                </div>
-                                {note.text ? note.text : ""}
-                                <br />
-                                <br />
-                                <Tag tagName="Event" />
-                            </div>
-                        </Segment>
-                    </Segment.Group>
-                </div>
-            );
+    if (mode == NoteModes.STANDARD) {
+        return <StandardDetailNote note={note} mode={NoteModes.STANDARD} />;
+    } else if (mode == NoteModes.EDIT) {
+        return <EditNote note={note} mode={NoteModes.EDIT} />;
     }
 };
 

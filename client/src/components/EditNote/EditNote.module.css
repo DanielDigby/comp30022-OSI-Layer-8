@@ -1,0 +1,24 @@
+@import "../../App.module.css";
+
+.Segment {
+    width: 60vw;
+}
+
+.whole {
+    display: flex;
+    flex-direction: row;
+    height: 40vh;
+}
+
+.left {
+    background-color: pink;
+    flex-basis: 70%;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: antiquewhite;
+    flex-basis: 30%;
+}
