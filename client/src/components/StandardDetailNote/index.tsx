@@ -26,7 +26,10 @@ const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
                             </div>
                         </div>
                         <div className={styles.middle}>
-                            <Text text={note.text ? note.text : ""} />
+                            <Text
+                                text={note.text ? note.text : ""}
+                                noteMode={NoteModes.EDIT}
+                            />
                         </div>
                         <div className={styles.bottom}>
                             <div className={styles.leftBottom}>
