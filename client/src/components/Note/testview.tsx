@@ -7,7 +7,7 @@ import { INote } from "../../interfaces/note";
 const testNote: INote = {
     user: "10292",
     title: "hello",
-    text: "testing 123",
+    text: "testing 123ksjfsifjhiueroeseljflkwejflwejkfklsjfnskljfnskdjlnslkdfnskdfnskldfnsdkjfnskdfnskldfnsdkjfnksdfnksdjnfksdjnfksjfnskljfnsdkfnsfnsdmnfsdkjnfksdjnfksdjnfksdljnflksdnfkdsnfkjsdn",
     image: "img",
     pinned: false,
     _id: "test",

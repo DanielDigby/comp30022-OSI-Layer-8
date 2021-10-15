@@ -1,0 +1,29 @@
+@import "../../App.module.css";
+
+.content {
+    font-family: var(--font-family);
+}
+
+/* phone size */
+@media only screen and (max-width: 500px) {
+    .content {
+        font-size: 10px;
+        line-height: 3ch;
+    }
+}
+
+/* iPad size */
+@media only screen and (min-width: 1024px) {
+    .content {
+        font-size: var(--text-small);
+        line-height: 3ch;
+    }
+}
+
+/* desktop size */
+@media only screen and (min-width: 1025px) {
+    .content {
+        font-size: var(--text-small);
+        line-height: 3ch;
+    }
+}

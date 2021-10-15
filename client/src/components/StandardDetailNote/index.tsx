@@ -19,15 +19,26 @@ const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
                         <HeadingText
                             headingText={note.title ? note.title : ""}
                         />
-                        <Icon name="thumbtack" size="large" />
+                        <div className={styles.thumbtack}>
+                            <Icon name="thumbtack" size="large" />
+                        </div>
                     </div>
                     <div className={styles.middle}>
                         <Text text={note.text ? note.text : ""} />
                     </div>
                     <div className={styles.bottom}>
-                        <a>
+                        <div className={styles.leftBottom}>
                             <Tag tagName={note.tags[0]} />
-                        </a>
+                            <div className={styles.editRow}>
+                                <Icon name="edit outline" size="large" />
+                                <div className={styles.editText}>Edit note</div>
+                            </div>
+                        </div>
+                        <div className={styles.rightBottom}>
+                            <Icon name="address book outline" size="large" />
+                            <Icon name="bell slash outline" size="large" />
+                            <Icon name="clock outline" size="large" />
+                        </div>
                     </div>
                 </Segment>
             </Segment.Group>

@@ -11,9 +11,15 @@ type TagProps = {
 const Tag = ({ tagName }: TagProps): JSX.Element => {
     // api call
     return (
+<<<<<<< HEAD
         <div className={styles.tag}>
             <Icon name="tag" color="grey" />
             {tagName}
+=======
+        <div className={styles.tagRow}>
+            <Icon name="tag" size="large" />
+            <div className={styles.tagName}>{tagName}</div>
+>>>>>>> 6e67809... feat: add all button symbols and format note
         </div>
     );
 };

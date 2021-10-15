@@ -1,0 +1,32 @@
+@import "../../App.module.css";
+
+.title {
+    font-family: var(--font-family);
+    /* font-size: var(--text-big); */
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+/* phone size */
+@media only screen and (max-width: 500px) {
+    .title {
+        font-size: var(--text-small);
+        line-height: 3ch;
+    }
+}
+
+/* iPad size */
+@media only screen and (min-width: 1024px) {
+    .title {
+        font-size: var(--text-medium);
+        line-height: 3ch;
+    }
+}
+
+/* desktop size */
+@media only screen and (min-width: 1025px) {
+    .title {
+        font-size: 20px;
+        line-height: 3ch;
+    }
+}
