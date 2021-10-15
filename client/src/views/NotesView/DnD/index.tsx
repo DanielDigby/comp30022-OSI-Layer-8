@@ -19,11 +19,6 @@ export interface ColumnDict {
         items: Array<INote>;
     };
 }
-export enum DnDModes {
-    NOTES,
-    EVENTS,
-    REMINDERS,
-}
 
 export const DnD = (): JSX.Element => {
     const dispatch = useDispatch();
