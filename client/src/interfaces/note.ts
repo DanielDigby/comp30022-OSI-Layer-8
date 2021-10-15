@@ -22,8 +22,3 @@ export enum NoteModes {
     EVENT_DETAIL,
     EDIT,
 }
-
-export interface NoteProps {
-    note: INote;
-    mode: NoteModes;
-}
