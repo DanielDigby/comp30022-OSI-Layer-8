@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { store } from "../../config/redux/store";
 import styles from "./HomeView.module.css";
 import { useHistory } from "react-router-dom";
