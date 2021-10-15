@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Edit from "./Edit";
 import Standard from "./Standard";
 import StandardDetail from "./StandardDetail";
@@ -9,11 +9,27 @@ interface NoteProps {
     mode: NoteModes;
 }
 const Note = ({ note, mode }: NoteProps): JSX.Element => {
-    switch (mode) {
+    const [currentMode, toggleCurrentMode] = useState(mode);
+    const standardClick = () => {
+        toggleCurrentMode(NoteModes.STANDARD_DETAIL);
+    };
+    const detailClick = () => {
+        toggleCurrentMode(NoteModes.STANDARD);
+    };
+    switch (currentMode) {
+        // onClick={toggleCurrentMode(NoteModes.STANDARD_DETAIL)}
         case NoteModes.STANDARD:
-            return <Standard note={note} />;
+            return (
+                <div onClick={standardClick}>
+                    <Standard note={note} />
+                </div>
+            );
         case NoteModes.STANDARD_DETAIL:
-            return <StandardDetail note={note} />;
+            return (
+                <div onClick={detailClick}>
+                    <StandardDetail note={note} />
+                </div>
+            );
         case NoteModes.EVENT:
             return <div />;
         case NoteModes.EVENT_DETAIL:

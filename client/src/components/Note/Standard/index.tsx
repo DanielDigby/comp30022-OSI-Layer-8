@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StandardNote.module.css";
 import { INote } from "../../../interfaces/note";
-import { Tag, Event, Reminder } from "../icons";
+import { Tag, Event, Reminder, Pin } from "../icons";
 import { Segment, Icon } from "semantic-ui-react";
 
 const StandardNote = ({ note }: { note: INote }): JSX.Element => {
@@ -9,9 +9,9 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
         reminderTime,
         eventTime,
         tags,
+        pinned,
         // title,
         // text,
-        // pinned,
         // _id,
         // _clientId,
         // user,
@@ -47,13 +47,12 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
                             <b>{note.title ? note.title : ""}</b>
                         </div>
                         <div className={styles.pinContainer}>
-                            <Icon name="pin" color="grey" />
+                            <Pin pinned={pinned} />
                         </div>
                     </div>
                     <br />
                     <div className={styles.noteContainer}>
-                        {" "}
-                        {note.text ? note.text : ""}{" "}
+                        {note.text ? note.text : ""}
                     </div>
                     <br />
                     <div className={styles.tagContainer}>

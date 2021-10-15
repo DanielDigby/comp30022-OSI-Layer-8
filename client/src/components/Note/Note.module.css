@@ -26,7 +26,8 @@
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-    margin-left: 10px;
-    line-height: 30px;
-    font-size: large;
+}
+
+.tagText {
+    margin-left: 5px;
 }

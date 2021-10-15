@@ -30,7 +30,7 @@ const HomeView = (): JSX.Element => {
             reminderTime: null,
             eventTime: null,
             pinned: false,
-            tags: [],
+            tags: ["Birthdays"],
             relatedNotes: [],
         };
         dispatch(createNote(note));
