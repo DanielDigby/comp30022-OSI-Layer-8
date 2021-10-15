@@ -1,0 +1,6 @@
+.editMode {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    color: gray;
+}

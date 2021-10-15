@@ -7,7 +7,7 @@ import Text from "../ContentText/index";
 import { Segment, Icon } from "semantic-ui-react";
 
 // Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../Tag";
+import Tag from "../NoteIcons/Tag";
 import HeadingText from "../HeadingText";
 
 const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {

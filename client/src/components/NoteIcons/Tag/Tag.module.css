@@ -1,3 +1,4 @@
+<<<<<<< HEAD:client/src/components/Tag/Tag.module.css
 <<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
@@ -7,6 +8,9 @@
     color: #333333;
 =======
 @import "../../App.module.css";
+=======
+@import "../../../App.module.css";
+>>>>>>> efc3337... feat: modularise icons for notes and add to edit version of note:client/src/components/NoteIcons/Tag/Tag.module.css
 
 .tagRow {
     display: flex;
