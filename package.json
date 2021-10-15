@@ -25,7 +25,6 @@
     "down": "docker-compose down"
   },
   "packageManager": "yarn@3.0.0",
-  "dependencies": {},
   "devDependencies": {
     "framer-motion": "^4.1.17"
   }
