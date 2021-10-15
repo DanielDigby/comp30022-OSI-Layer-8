@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./EditNote.module.css";
 import { INote } from "../../../interfaces/note";
 import { Segment, Icon } from "semantic-ui-react";
-import { Tag, Pin, Contact, Reminder, Event } from "../Icons";
+import { Tag, Pin, Contact, Reminder, Event } from "../icons";
 
 const EditNote = ({ note }: { note: INote }): JSX.Element => {
     const {

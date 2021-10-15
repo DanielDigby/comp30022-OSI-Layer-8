@@ -21,3 +21,12 @@
     color: #212121;
     margin-bottom: 5px;
 }
+
+.tag {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-left: 10px;
+    line-height: 30px;
+    font-size: large;
+}

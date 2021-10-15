@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./StandardDetailNote.module.css";
-import { Tag } from "../Icons";
+import { Tag } from "../icons";
 import { INote } from "../../../interfaces/note";
 import { Segment, Icon } from "semantic-ui-react";
 

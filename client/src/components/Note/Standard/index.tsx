@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StandardNote.module.css";
 import { INote } from "../../../interfaces/note";
-import { Tag, Event, Reminder } from "../Icons";
+import { Tag, Event, Reminder } from "../icons";
 import { Segment, Icon } from "semantic-ui-react";
 
 const StandardNote = ({ note }: { note: INote }): JSX.Element => {

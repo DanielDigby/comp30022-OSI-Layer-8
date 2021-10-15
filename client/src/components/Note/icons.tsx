@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Icons.module.css";
+import styles from "./Note.module.css";
 import { Icon } from "semantic-ui-react";
 
 export const Tag = ({ tag }: { tag: string }): JSX.Element => {
