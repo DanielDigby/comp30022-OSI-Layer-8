@@ -17,21 +17,12 @@ import { INote, INoteWithoutIds } from "../../interfaces/note";
 /* USED FOR TESTING */
 import EditNote from "../../components/Note/EditNote";
 
-/* We need this for typescript */
-interface RefObject {
-    open: () => void;
-    close: () => void;
-}
-
 const HomeView = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateLogin = () => navHistory.push("/login");
     const navigateRegister = () => navHistory.push("/register");
 
     const dispatch = useDispatch();
-
-    /* PART OF NOTE RENDERING TESTING */
-    const editNoteRef = useRef<RefObject>();
 
     const postNote = async () => {
         const note: INoteWithoutIds = {
@@ -120,16 +111,7 @@ const HomeView = (): JSX.Element => {
                     content="test api delete"
                     onClick={() => removeNote()}
                 />
-                <Button
-                    basic
-                    colour="black"
-                    content="openNote"
-                    onClick={() => {
-                        editNoteRef.current?.open();
-                    }}
-                ></Button>
             </div>
-            <EditNote ref={editNoteRef}></EditNote>
         </div>
     );
 };
