@@ -53,7 +53,11 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
                                 </div>
 
                                 <div className={styles.tag}>
-                                    <Tag tag={tags[0]} />
+                                    {tags[0] ? (
+                                        <Tag tag={tags[0]} />
+                                    ) : (
+                                        <Tag tag="Add tag?" />
+                                    )}
                                 </div>
                             </div>
                         </div>

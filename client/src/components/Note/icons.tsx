@@ -3,12 +3,14 @@ import styles from "./Note.module.css";
 import { Icon } from "semantic-ui-react";
 
 export const Tag = ({ tag }: { tag: string }): JSX.Element => {
-    return (
-        <div className={styles.tag}>
-            <Icon name="tag" size="large" color="grey" />
-            {tag ? tag : "Add tag?"}
-        </div>
-    );
+    if (tag)
+        return (
+            <div className={styles.tag}>
+                <Icon name="tag" size="large" color="grey" />
+                {tag}
+            </div>
+        );
+    return <div />;
 };
 
 export const Pin = ({ pinned }: { pinned: boolean }): JSX.Element => {
