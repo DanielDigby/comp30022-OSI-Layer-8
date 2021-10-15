@@ -1,7 +1,7 @@
-import Note from "../Note/index";
+import Note from "../index";
 import React from "react";
-import { NoteModes } from "../../interfaces/note";
-import { INote } from "../../interfaces/note";
+import { NoteModes } from "../../../interfaces/note";
+import { INote } from "../../../interfaces/note";
 
 const testNote: INote = {
     user: "10292",

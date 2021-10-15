@@ -1,39 +1,23 @@
 import React from "react";
 import styles from "./StandardDetailNote.module.css";
-import "semantic-ui-css/semantic.min.css";
-import { NoteModes, NoteProps } from "../../interfaces/note";
-import Text from "../ContentText/index";
-
+import { Tag } from "../Icons";
+import { INote } from "../../../interfaces/note";
 import { Segment, Icon } from "semantic-ui-react";
 
-// Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../NoteIcons/Tag";
-import HeadingText from "../HeadingText";
-
-const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
+const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
     return (
         <div className={styles.Segment}>
             <Segment.Group raised>
                 <Segment>
                     <div className={styles.whole}>
                         <div className={styles.top}>
-                            <HeadingText
-                                headingText={note.title ? note.title : ""}
-                                noteMode={NoteModes.STANDARD_DETAIL}
-                            />
-                            <div className={styles.thumbtack}>
-                                <Icon name="thumbtack" size="big" />
-                            </div>
+                            <div className={styles.title}>{note.title}</div>
+                            <Icon name="thumbtack" size="big" color="grey" />
                         </div>
-                        <div className={styles.middle}>
-                            <Text
-                                text={note.text ? note.text : ""}
-                                noteMode={NoteModes.EDIT}
-                            />
-                        </div>
+                        <div className={styles.text}>{note.text}</div>
                         <div className={styles.bottom}>
                             <div className={styles.leftBottom}>
-                                <Tag tagName={note.tags[0]} />
+                                <Tag tag={note.tags[0]} />
                                 <div className={styles.editRow}>
                                     <Icon name="edit outline" size="big" />
                                     <div className={styles.editText}>
@@ -54,4 +38,4 @@ const StandardDetailNote = ({ note }: NoteProps): JSX.Element => {
     );
 };
 
-export default StandardDetailNote;
+export default StandardDetail;

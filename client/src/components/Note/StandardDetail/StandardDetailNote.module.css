@@ -1,4 +1,4 @@
-@import "../../App.module.css";
+@import "../../../App.module.css";
 
 .Segment {
     width: 50vw;
@@ -20,15 +20,11 @@
     align-items: flex-start;
 }
 
-.thumbtack {
-    color: var(--colour-darkgray);
-}
-
-.middle {
+.text {
     height: 40vh;
     padding-left: 1vw;
     padding-right: 1vw;
-    /* padding-top: 15px; */
+    font-family: var(--font-family);
     overflow-wrap: break-word;
     overflow: auto;
 }
@@ -65,4 +61,34 @@
     flex-direction: column;
     row-gap: 10px;
     color: var(--colour-darkgray);
+}
+
+.title {
+    font-family: var(--font-family);
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+/* phone size */
+@media only screen and (max-width: 500px) {
+    .title {
+        font-size: var(--text-small);
+        line-height: 3ch;
+    }
+}
+
+/* iPad size */
+@media only screen and (min-width: 1024px) {
+    .title {
+        font-size: var(--text-medium);
+        line-height: 3ch;
+    }
+}
+
+/* desktop size */
+@media only screen and (min-width: 1025px) {
+    .title {
+        font-size: 20px;
+        line-height: 3ch;
+    }
 }
