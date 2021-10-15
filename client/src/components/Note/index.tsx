@@ -16,6 +16,7 @@ const Note = ({ note, mode }: NoteProps): JSX.Element => {
     } else if (mode == NoteModes.EDIT) {
         return <EditNote note={note} />;
     }
+    return <div />;
 };
 
 export default Note;

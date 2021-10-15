@@ -1,20 +1,42 @@
 import React from "react";
 import styles from "./StandardNote.module.css";
-import "semantic-ui-css/semantic.min.css";
 import { INote } from "../../../interfaces/note";
-
+import { Tag, Event, Reminder } from "../Icons";
 import { Segment, Icon } from "semantic-ui-react";
 
-// Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../../Tag";
-import Event from "../../Event";
-import Time from "../../Time";
+const StandardNote = ({ note }: { note: INote }): JSX.Element => {
+    const {
+        reminderTime,
+        eventTime,
+        tags,
+        // title,
+        // text,
+        // pinned,
+        // _id,
+        // _clientId,
+        // user,
+        // image,
+        // relatedNotes,
+    } = note;
 
-/* Deleted NotesText folder and it's working now */
-interface NoteProps {
-    note: INote;
-}
-const StandardNote = ({ note }: NoteProps): JSX.Element => {
+    let displayReminder;
+    let displayEvent;
+    if (reminderTime)
+        displayReminder = reminderTime.toLocaleString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "numeric",
+            month: "short",
+        });
+    else displayReminder = "";
+    if (eventTime)
+        displayEvent = eventTime.toLocaleString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "numeric",
+            month: "short",
+        });
+    else displayEvent = "";
     // api call
     return (
         <div className={styles.outerContainer}>
@@ -35,13 +57,13 @@ const StandardNote = ({ note }: NoteProps): JSX.Element => {
                     </div>
                     <br />
                     <div className={styles.tagContainer}>
-                        <Tag tagName="Tag" />
+                        <Tag tag={tags[0]} />
                     </div>
                     <div className={styles.eventContainer}>
-                        <Event eventName="1 Event" />
+                        <Event displayEvent={displayEvent} />
                     </div>
                     <div className={styles.timeContainer}>
-                        <Time timeVar="Sep 5, 9:00 AM" />
+                        <Reminder displayReminder={displayReminder} />
                     </div>
                 </Segment>
             </Segment.Group>
