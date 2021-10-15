@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Note.module.css";
+// import styles from "./Note.module.css";
 import "semantic-ui-css/semantic.min.css";
 import { INote, NoteModes } from "../../interfaces/note";
 import StandardNote from "./StandardNote";
