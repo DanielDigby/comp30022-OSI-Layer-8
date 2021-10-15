@@ -23,11 +23,8 @@
 }
 
 .tag {
+    font-size: 13px;
     display: flex;
     flex-direction: row;
     margin-top: 10px;
-}
-
-.tagText {
-    margin-left: 5px;
 }

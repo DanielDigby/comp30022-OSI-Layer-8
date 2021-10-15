@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Note.module.css";
+import { capitalize } from "lodash";
 import { Icon } from "semantic-ui-react";
 
 const styleProp = {
@@ -12,8 +13,8 @@ export const Tag = ({ tag }: { tag: string }): JSX.Element => {
     if (tag)
         return (
             <div className={styles.tag}>
-                <Icon name="tag" style={styleProp} color="grey" />
-                <span className={styles.tagText}>{tag}</span>
+                <Icon name="tag" color="grey" />
+                {capitalize(tag)}
             </div>
         );
     return <div />;
