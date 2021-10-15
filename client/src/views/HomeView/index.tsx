@@ -1,3 +1,4 @@
+import Note from "../../components/Note/index";
 import React from "react";
 import { store } from "../../config/redux/store";
 import styles from "./HomeView.module.css";
@@ -76,41 +77,21 @@ const HomeView = (): JSX.Element => {
             <h1 className={styles.heading}>cara</h1>
             <h4 className={styles.heading2}>Untangle your personal life</h4>
 
-            <div className={styles.button}>
-                <Button
-                    className={styles.button}
-                    basic
-                    colour="black"
-                    content="Sign in"
-                    onClick={() => navigateLogin()}
-                />
-                <Button
-                    basic
-                    colour="black"
-                    content="Register"
-                    onClick={() => navigateRegister()}
-                />
-                <Button
-                    basic
-                    colour="black"
-                    content="test api"
-                    onClick={() => postNote()}
-                />
-                <Button
-                    basic
-                    colour="black"
-                    content="test api edit"
-                    onClick={() => putNote()}
-                />
-                <Button
-                    basic
-                    colour="black"
-                    content="test api delete"
-                    onClick={() => removeNote()}
-                />
-            </div>
-        </div>
-    );
+const emptyNote: INote = {
+    user: "10292",
+    title: null,
+    text: null,
+    image: "img",
+    pinned: true,
+    _id: "test",
+    _clientId: "test",
+    reminderTime: null,
+    eventTime: null,
+    tags: ["hi"],
+    relatedNotes: [],
 };
 
-export default HomeView;
+const NotesView = (): JSX.Element => {
+    return <Note note={existingNote} mode={NoteModes.EDIT} />;
+};
+export default NotesView;
