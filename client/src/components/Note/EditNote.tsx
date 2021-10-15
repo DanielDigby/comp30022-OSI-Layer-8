@@ -1,9 +1,9 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 import styles from "./editNote.module.css";
-import { INote, NoteModes } from "../../interfaces/note";
 
 /* Need AnimatePresence because we still need the dom nodes after we close the animated note */
 import { motion, AnimatePresence } from "framer-motion";
+import internal from "stream";
 
 const EditNote = forwardRef((props, ref) => {
     const [open, setOpen] = useState(false);
@@ -12,6 +12,9 @@ const EditNote = forwardRef((props, ref) => {
         return {
             open: () => setOpen(true),
             close: () => setOpen(false),
+            check: () => {
+                return open;
+            },
         };
     });
 
