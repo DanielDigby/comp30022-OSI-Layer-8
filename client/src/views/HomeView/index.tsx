@@ -14,6 +14,9 @@ import {
 import { Button } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../interfaces/note";
 
+/* USED FOR TESTING */
+import EditNote from "../../components/Note/EditNote";
+
 const HomeView = (): JSX.Element => {
     const navHistory = useHistory();
     const navigateLogin = () => navHistory.push("/login");
@@ -108,7 +111,9 @@ const HomeView = (): JSX.Element => {
                     content="test api delete"
                     onClick={() => removeNote()}
                 />
+                <Button basic colour="black" content="editnote"></Button>
             </div>
+            <EditNote></EditNote>
         </div>
     );
 };
