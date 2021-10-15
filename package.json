@@ -24,5 +24,8 @@
     "docker": "docker-compose -p 'cara' up",
     "down": "docker-compose down"
   },
-  "packageManager": "yarn@3.0.0"
+  "packageManager": "yarn@3.0.0",
+  "devDependencies": {
+    "framer-motion": "^4.1.17"
+  }
 }
