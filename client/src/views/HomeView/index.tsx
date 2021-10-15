@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { store } from "../../config/redux/store";
 import styles from "./HomeView.module.css";
 import { useHistory } from "react-router-dom";
@@ -23,6 +23,9 @@ const HomeView = (): JSX.Element => {
     const navigateRegister = () => navHistory.push("/register");
 
     const dispatch = useDispatch();
+
+    /* PART OF NOTE RENDERING TESTING */
+    const editNoteRef = useRef<any>();
 
     const postNote = async () => {
         const note: INoteWithoutIds = {
@@ -111,9 +114,16 @@ const HomeView = (): JSX.Element => {
                     content="test api delete"
                     onClick={() => removeNote()}
                 />
-                <Button basic colour="black" content="editnote"></Button>
+                <Button
+                    basic
+                    colour="black"
+                    content="openNote"
+                    onClick={() => {
+                        editNoteRef?.current?.open();
+                    }}
+                ></Button>
             </div>
-            <EditNote></EditNote>
+            <EditNote ref={editNoteRef}></EditNote>
         </div>
     );
 };
