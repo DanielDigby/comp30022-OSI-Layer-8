@@ -64,7 +64,11 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
                         <div className={styles.rightContainer}>
                             <div className={styles.doneRow}>
                                 <div className={styles.doneText}>Done</div>
-                                <Icon name="check" size="big" color="orange" />
+                                <Icon
+                                    name="check"
+                                    style={{ fontSize: "17px" }}
+                                    color="orange"
+                                />
                             </div>
                             <div className={styles.buttonRows}>
                                 <div className={styles.button}>

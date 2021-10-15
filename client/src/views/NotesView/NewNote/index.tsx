@@ -34,18 +34,23 @@ const NewNote = (): JSX.Element => {
                 <Note note={emptyNote} mode={NoteModes.EDIT} />
             </div>
         );
-    return (
-        <div className={styles.container} onClick={toggleOn}>
-            <Segment.Group raised>
-                <Segment>
-                    <div className={styles.body}>
-                        <Icon name="edit outline" size="large" color="grey" />
-                        <div className={styles.text}>Add a new note</div>
-                        <br />
-                    </div>
-                </Segment>
-            </Segment.Group>
-        </div>
-    );
+    else
+        return (
+            <div className={styles.container} onClick={toggleOn}>
+                <Segment.Group raised>
+                    <Segment>
+                        <div className={styles.body}>
+                            <Icon
+                                name="edit outline"
+                                size="large"
+                                color="grey"
+                            />
+                            <div className={styles.text}>Add a new note</div>
+                            <br />
+                        </div>
+                    </Segment>
+                </Segment.Group>
+            </div>
+        );
 };
 export default NewNote;

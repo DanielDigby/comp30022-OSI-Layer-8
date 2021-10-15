@@ -19,23 +19,16 @@
 
 .body {
     direction: ltr;
-}
-
-.content {
-    /* height: 40vh; */
-    color: gray;
-    padding-top: 5px;
-    overflow-wrap: anywhere;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    direction: ltr;
+    margin-top: 5px;
+    margin-left: 15px;
 }
 
 .rightContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    justify-content: space-around;
+    margin-right: 5px;
+    justify-content: space-between;
     flex-basis: 25%;
 }
 
@@ -64,11 +57,19 @@
 }
 
 .title {
-    padding: 1vw;
     direction: ltr;
     font-family: var(--font-family);
     font-size: 2vw;
     font-weight: bold;
+}
+
+.content {
+    /* height: 40vh; */
+    color: gray;
+    padding-top: 5px;
+    overflow-wrap: anywhere;
+    padding-right: 1vw;
+    direction: ltr;
 }
 
 .button {
