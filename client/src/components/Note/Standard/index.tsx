@@ -56,13 +56,23 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
                     </div>
                     <br />
                     <div className={styles.tagContainer}>
-                        <Tag tag={tags[0]} />
+                        {note.tags[0] && <Tag tag={tags[0]} />}
                     </div>
                     <div className={styles.eventContainer}>
-                        <Event displayEvent={displayEvent} />
+                        {displayEvent && (
+                            <span>
+                                {/* {displayEvent} */}
+                                <Event displayEvent={displayEvent} />
+                            </span>
+                        )}
                     </div>
                     <div className={styles.timeContainer}>
-                        <Reminder displayReminder={displayReminder} />
+                        {displayReminder && (
+                            <span>
+                                {/* {displayReminder} */}
+                                <Reminder displayReminder={displayReminder} />
+                            </span>
+                        )}
                     </div>
                 </Segment>
             </Segment.Group>
