@@ -27,10 +27,10 @@ const HomeView = (): JSX.Element => {
             user: store.getState().user.account._id,
             text: randomName.place(),
             image: null,
-            reminderTime: null,
+            reminderTime: new Date(),
             eventTime: null,
             pinned: false,
-            tags: [],
+            tags: ["Birthdays"],
             relatedNotes: [],
         };
         dispatch(createNote(note));
