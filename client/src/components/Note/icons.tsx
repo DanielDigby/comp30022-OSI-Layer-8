@@ -6,6 +6,7 @@ import { Icon } from "semantic-ui-react";
 const styleProp = {
     fontSize: "17px",
     marginBottom: "5px",
+    marginLeft: "5px",
     marginRight: "-2px",
 };
 
@@ -40,30 +41,42 @@ export const Contact = ({ tags }: { tags: Array<string> }): JSX.Element => {
     );
 };
 
-export const Reminder = ({
-    displayReminder,
-}: {
-    displayReminder: string;
-}): JSX.Element => {
+export const Reminder = ({ time }: { time: string | null }): JSX.Element => {
+    let display;
+    if (time)
+        display = new Date(time).toLocaleString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
     return (
-        <Icon
-            name={displayReminder ? "bell outline" : "bell slash outline"}
-            style={styleProp}
-            color={displayReminder !== "" ? "orange" : "grey"}
-        />
+        <div className={styles.time}>
+            {display}
+            <Icon
+                name={time ? "bell outline" : "bell slash outline"}
+                style={styleProp}
+                color={time ? "orange" : "grey"}
+            />
+        </div>
     );
 };
 
-export const Event = ({
-    displayEvent,
-}: {
-    displayEvent: string;
-}): JSX.Element => {
+export const Event = ({ time }: { time: string | null }): JSX.Element => {
+    let display;
+    if (time)
+        display = new Date(time).toLocaleString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "numeric",
+            month: "short",
+        });
     return (
-        <Icon
-            name="clock outline"
-            style={styleProp}
-            color={displayEvent !== "" ? "orange" : "grey"}
-        />
+        <div className={styles.time}>
+            {display}
+            <Icon
+                name="clock outline"
+                style={styleProp}
+                color={time ? "orange" : "grey"}
+            />
+        </div>
     );
 };

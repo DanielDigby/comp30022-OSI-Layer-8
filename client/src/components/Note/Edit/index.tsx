@@ -19,25 +19,6 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
         // relatedNotes,
     } = note;
 
-    let displayReminder;
-    let displayEvent;
-    if (reminderTime)
-        displayReminder = new Date(reminderTime).toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            day: "numeric",
-            month: "short",
-        });
-    else displayReminder = "";
-    if (eventTime)
-        displayEvent = new Date(eventTime).toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            day: "numeric",
-            month: "short",
-        });
-    else displayEvent = "";
-
     return (
         <div className={styles.Segment}>
             <Segment.Group raised>
@@ -82,16 +63,12 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
                                     <Contact tags={tags} />
                                 </div>
                                 <div className={styles.button}>
-                                    {displayReminder
-                                        ? displayReminder
-                                        : "Add reminder"}
-                                    <Reminder
-                                        displayReminder={displayReminder}
-                                    />
+                                    {!reminderTime && "Add reminder"}
+                                    <Reminder time={reminderTime} />
                                 </div>
                                 <div className={styles.button}>
-                                    {displayEvent ? displayEvent : "Add event"}
-                                    <Event displayEvent={displayEvent} />
+                                    {!eventTime && "Add event"}
+                                    <Event time={eventTime} />
                                 </div>
                             </div>
                         </div>
