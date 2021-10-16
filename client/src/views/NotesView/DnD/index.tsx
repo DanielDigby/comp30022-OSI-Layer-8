@@ -13,12 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateColumns } from "../../../config/redux/noteSlice";
 import { isEmptyColumns } from "../../../helpers/utils/columns";
 
-export interface ColumnDict {
-    [x: string]: {
-        name: string;
-        items: Array<INote>;
-    };
-}
+import { ColumnDict, StringMap } from "../../../interfaces/columns";
 
 export const DnD = (): JSX.Element => {
     const dispatch = useDispatch();

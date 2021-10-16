@@ -1,4 +1,4 @@
-import { ColumnDict } from "../../views/NotesView/DnD";
+import { ColumnDict, StringMap } from "../../views/NotesView/DnD";
 import { INote } from "../../interfaces/note";
 import _ from "lodash";
 
@@ -41,11 +41,37 @@ export const mapNotesToColumns = (notes: Array<INote>): ColumnDict => {
 };
 
 /* function that converts a string dictionary to columns */
-export const stringMapToColumns = (): ColumnDict => {
-    const arr1 = [];
-    const arr2 = [];
-    const arr3 = [];
+export const stringMapToColumns = (
+    stringMap: StringMap,
+    notes: Array<INote>
+): ColumnDict => {
+    /* Use these ararys to fill in the columnDict */
 
+    const arr1: Array<INote> = stringMap.arr1.map((clientId) => {
+        const note = notes.find((note) => note._clientId === clientId);
+
+        if (note) return note;
+
+        throw new Error("Failed to map array 1\n");
+    });
+
+    const arr2: Array<INote> = stringMap.arr2.map((clientId) => {
+        const note = notes.find((note) => note._clientId === clientId);
+
+        if (note) return note;
+
+        throw new Error("Failed to map array 2\n");
+    });
+
+    const arr3: Array<INote> = stringMap.arr3.map((clientId) => {
+        const note = notes.find((note) => note._clientId === clientId);
+
+        if (note) return note;
+
+        throw new Error("Failed to map array 3\n");
+    });
+
+    /* Return this new column dict with the new notes from StringMap */
     const outDict = {
         ["col1"]: {
             name: "col1",
@@ -62,6 +88,18 @@ export const stringMapToColumns = (): ColumnDict => {
     };
 
     return outDict;
+};
+
+/* Converts a column dict into a StringMap object holding the client ids of each note */
+export const columnsToStringMap = (columns: ColumnDict): StringMap => {
+    /* Output map */
+    const outMap = {
+        arr1: columns["col1"].items.map((x) => x._clientId),
+        arr2: columns["col2"].items.map((x) => x._clientId),
+        arr3: columns["col3"].items.map((x) => x._clientId),
+    };
+
+    return outMap;
 };
 
 export const isEmptyColumns = (columns: ColumnDict): boolean => {

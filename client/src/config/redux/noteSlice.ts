@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { INote, INoteWithoutIds } from "../../interfaces/note";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
-import { ColumnDict } from "../../views/NotesView/DnD";
+import { ColumnDict } from "../../interfaces/columns";
 import { NOTES } from "../../interfaces/endpoints";
 import { mapNotesToColumns } from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
 import { searchNotes } from "../../helpers/utils/search";
+
 export interface NoteState {
     array: Array<INote>;
     stringMap: {
