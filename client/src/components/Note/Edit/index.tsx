@@ -29,6 +29,7 @@ const EditNote = ({
     const [eventTime, setEventTime] = useState(
         note.eventTime ? note.eventTime : ""
     );
+
     const [showReminderTimePicker, toggleShowReminderTimePicker] =
         useState(false);
     const [reminderTime, setReminderTime] = useState(
@@ -62,7 +63,22 @@ const EditNote = ({
         toggleShowReminderTimePicker(false);
     };
 
+    const fieldsNotChanged = () => {
+        if (
+            title === "" &&
+            text === "" &&
+            pinned === false &&
+            tag === "" &&
+            eventTime === "" &&
+            reminderTime === ""
+        )
+            return true;
+        else return false;
+    };
+
     const handleSubmit = async () => {
+        if (fieldsNotChanged()) return;
+
         const newNote: INoteWithoutIds = {
             title: title,
             user: user._id,
@@ -102,7 +118,7 @@ const EditNote = ({
                                                 border: "none",
                                                 overflow: "hidden",
                                             }}
-                                            placeholder="Tell us more"
+                                            placeholder="Add text"
                                             value={text}
                                             onChange={handleText}
                                         />
@@ -126,11 +142,20 @@ const EditNote = ({
                             </div>
                             <div className={styles.rightContainer}>
                                 <div className={styles.doneRow}>
-                                    <Form.Button
-                                        icon="check"
-                                        size="tiny"
-                                        color="orange"
-                                    />
+                                    {fieldsNotChanged() ? (
+                                        <Form.Button
+                                            disabled
+                                            icon="check"
+                                            size="tiny"
+                                            color="orange"
+                                        />
+                                    ) : (
+                                        <Form.Button
+                                            icon="check"
+                                            size="tiny"
+                                            color="orange"
+                                        />
+                                    )}
                                 </div>
                                 <div className={styles.buttonRows}>
                                     <div
