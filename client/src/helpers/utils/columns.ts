@@ -40,6 +40,30 @@ export const mapNotesToColumns = (notes: Array<INote>): ColumnDict => {
     return newDict;
 };
 
+/* function that converts a string dictionary to columns */
+export const stringMapToColumns = (): ColumnDict => {
+    const arr1 = [];
+    const arr2 = [];
+    const arr3 = [];
+
+    const outDict = {
+        ["col1"]: {
+            name: "col1",
+            items: arr1,
+        },
+        ["col2"]: {
+            name: "col2",
+            items: arr2,
+        },
+        ["col3"]: {
+            name: "col3",
+            items: arr3,
+        },
+    };
+
+    return outDict;
+};
+
 export const isEmptyColumns = (columns: ColumnDict): boolean => {
     const arr1Len = columns["col1"].items.length;
     const arr2Len = columns["col2"].items.length;
