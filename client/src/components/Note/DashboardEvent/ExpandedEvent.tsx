@@ -27,9 +27,9 @@ const testNote: INote = {
     text: "test",
     image: "test",
     reminderTime: null,
-    eventTime: null,
+    eventTime: "August 30, 2022",
     pinned: false,
-    tags: [],
+    tags: ["family"],
     relatedNotes: [],
 };
 
@@ -41,30 +41,28 @@ const ExpandedEvent = (): JSX.Element => {
         <div className={styles.Segment}>
             <div className="ui raised segment">
                 <div className={styles.topContainer}>
-                    <div className={styles.wordsContainer}>
-                        <div className={styles.headingContainer}>
+                    <div className={styles.headingContainer}>
+                        <div className={styles.heading}>
                             <b>{testNote.title}</b>
                         </div>
-                        <div className={styles.textContainer}>
-                            {testNote.text}
+                        <div className={styles.spaceBetween}></div>
+                        <div className={styles.bellContainer}>
+                            <Icon name="bell slash outline" size="large" />
                         </div>
-                        <a>
-                            <Tag tag="Social" />
-                        </a>
                     </div>
-                    <div className={styles.iconsContainer}>
-                        <Icon name="bell slash outline" size="large" />
-                    </div>
+                    <div className={styles.textContainer}>{testNote.text}</div>
+                    <a>{testNote.tags[0] && <Tag tag={testNote.tags[0]} />}</a>
                 </div>
+
                 <div className={styles.footerContainer}>
                     <div className={styles.goToNote}>
                         Go to Note
                         <Icon name="angle right" size="large" />
                     </div>
                     <div className={styles.timeAndClock}>
-                        <Icon name="clock outline" size="large" />
-                        <div className={styles.smallGap}></div>
-                        Aug 30, 7:30 PM
+                        {testNote.eventTime && (
+                            <Event time={testNote.eventTime} />
+                        )}
                     </div>
                 </div>
             </div>

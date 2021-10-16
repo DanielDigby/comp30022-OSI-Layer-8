@@ -27,9 +27,9 @@ const testNote: INote = {
     text: "test",
     image: "test",
     reminderTime: null,
-    eventTime: null,
+    eventTime: "August 19, 2022",
     pinned: false,
-    tags: [],
+    tags: ["social"],
     relatedNotes: [],
 };
 
@@ -43,16 +43,14 @@ const EventNoteView = (): JSX.Element => {
                         <b>{testNote.title}</b>
                     </div>
                     <div className={styles.time}>
-                        <Icon name="clock outline" size="large" />
-                        <div className={styles.space}></div>
-                        November 16
+                        {testNote.eventTime && (
+                            <Event time={testNote.eventTime} />
+                        )}
                     </div>
                 </div>
                 <p></p>
                 <p></p>
-                <a>
-                    <Tag tag="Social" />
-                </a>
+                <a>{testNote.tags[0] && <Tag tag={testNote.tags[0]} />}</a>
             </div>
         </div>
     );

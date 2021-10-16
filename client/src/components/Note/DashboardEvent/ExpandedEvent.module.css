@@ -2,22 +2,34 @@
     width: 300px;
 }
 
+/* Container for the top */
 .topContainer {
     display: flex;
     width: 100%;
-}
-
-.wordsContainer {
-    display: flex;
-    width: 90%;
     flex-direction: column;
-    padding-bottom: 20%;
+    padding-bottom: 10%;
 }
 
 .headingContainer {
     display: flex;
     width: 100%;
+    align-items: stretch;
     padding-bottom: 5%;
+}
+
+.heading {
+    display: flex;
+    width: 100%;
+}
+
+.spaceBetween {
+    display: flex;
+    width: 30%;
+}
+
+.bellContainer {
+    display: flex;
+    width: 10%;
 }
 
 .textContainer {
