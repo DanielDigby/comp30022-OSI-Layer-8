@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./EditNote.module.css";
 import TextareaAutosize from "react-textarea-autosize";
 import { RootState } from "../../../config/redux/store";
@@ -6,7 +6,7 @@ import { capitalize } from "lodash";
 import { useSelector } from "react-redux";
 import { createNoteAPI } from "../../../helpers/api/notes";
 import { DateTimeInput } from "semantic-ui-calendar-react";
-import { Segment, Form, Icon } from "semantic-ui-react";
+import { Segment, Form, Icon, Button } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
 import { Tag, Pin, Reminder, Event } from "../icons";
 
@@ -99,6 +99,9 @@ const EditNote = ({
         <div className={styles.Segment}>
             <Segment.Group raised>
                 <Segment>
+                    <div className={styles.exit} onClick={doneEditing}>
+                        <Button circular icon="times" />
+                    </div>
                     <Form onSubmit={handleSubmit}>
                         <div className={styles.wholeContainer}>
                             <div className={styles.scroll}>
@@ -141,6 +144,7 @@ const EditNote = ({
                                     </div>
                                 </div>
                             </div>
+
                             <div className={styles.rightContainer}>
                                 <div className={styles.doneRow}>
                                     {fieldsNotChanged() ? (
@@ -178,6 +182,7 @@ const EditNote = ({
                                                     )
                                                 }
                                             />
+
                                             <DateTimeInput
                                                 name="reminderTime"
                                                 placeholder="Reminder Time"
@@ -212,6 +217,7 @@ const EditNote = ({
                                                     )
                                                 }
                                             />
+
                                             <DateTimeInput
                                                 name="eventTime"
                                                 placeholder="Event Time"

@@ -26,6 +26,12 @@
     margin-left: 15px;
 }
 
+.exit {
+    position: absolute;
+    left: -17px;
+    top: -17px;
+}
+
 .rightContainer {
     display: flex;
     flex-direction: column;

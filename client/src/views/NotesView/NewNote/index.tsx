@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Segment, Icon } from "semantic-ui-react";
 import { INote, NoteModes } from "../../../interfaces/note";
 import Note from "../../../components/Note";
@@ -27,17 +27,9 @@ const NewNote = (): JSX.Element => {
         toggleEditing(false);
     };
 
-    const noteRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        document.addEventListener("mousedown", (event) => {
-            if (!noteRef.current?.contains(event.target as Node)) toggleOff();
-        });
-    });
-
     if (isEditing)
         return (
-            <div className={styles.edit} ref={noteRef}>
+            <div className={styles.edit}>
                 <Note
                     note={emptyNote}
                     mode={NoteModes.EDIT}
