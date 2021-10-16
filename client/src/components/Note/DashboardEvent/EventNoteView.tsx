@@ -1,22 +1,9 @@
 import React from "react";
 import styles from "./EventNote.module.css";
 import "semantic-ui-css/semantic.min.css";
-//import { INote, NoteModes } from "../../interfaces/note";
 import { INote } from "../../../interfaces/note";
 
 import { Tag, Event } from "../icons";
-
-//import { store } from "../../config/redux/store";
-
-/* Deleted NotesText folder and it's working now */
-/*
-interface NoteProps {
-    note: INote;
-    mode: NoteModes;
-} */
-
-//const sept = new Date("August 19, 2022");
-//sept.setFullYear(2021, 8, 10);
 
 const testNote: INote = {
     user: null,

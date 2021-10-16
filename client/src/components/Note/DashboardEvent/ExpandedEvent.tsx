@@ -1,23 +1,10 @@
 import React from "react";
 import styles from "./ExpandedEvent.module.css";
 import "semantic-ui-css/semantic.min.css";
-//import { INote, NoteModes } from "../../interfaces/note";
 import { INote } from "../../../interfaces/note";
 
 import { Tag, Event } from "../icons";
 import { Icon } from "semantic-ui-react";
-
-//import { store } from "../../config/redux/store";
-
-/* Deleted NotesText folder and it's working now */
-/*
-interface NoteProps {
-    note: INote;
-    mode: NoteModes;
-} */
-
-//const sept = new Date("August 19, 2022");
-//sept.setFullYear(2021, 8, 10);
 
 const testNote: INote = {
     user: null,
@@ -27,16 +14,13 @@ const testNote: INote = {
     text: "test",
     image: "test",
     reminderTime: null,
-    eventTime: "August 30, 2022",
+    eventTime: null,
     pinned: false,
     tags: ["family"],
     relatedNotes: [],
 };
 
-//const dateString = testNote.eventTime?.toString;
-
 const ExpandedEvent = (): JSX.Element => {
-    // api call
     return (
         <div className={styles.Segment}>
             <div className="ui raised segment">
@@ -60,9 +44,7 @@ const ExpandedEvent = (): JSX.Element => {
                         <Icon name="angle right" size="large" />
                     </div>
                     <div className={styles.timeAndClock}>
-                        {testNote.eventTime && (
-                            <Event time={testNote.eventTime} />
-                        )}
+                        {testNote.eventTime && <Event time={""} />}
                     </div>
                 </div>
             </div>
