@@ -6,7 +6,7 @@ import { INote } from "../../../interfaces/note";
 import { Tag, Event } from "../icons";
 import { Icon } from "semantic-ui-react";
 
-const testNote: INote = {
+const note: INote = {
     user: null,
     _id: "sdjfasdfa",
     _clientId: "sfhkjasd",
@@ -20,22 +20,22 @@ const testNote: INote = {
     relatedNotes: [],
 };
 
-const ExpandedEvent = (): JSX.Element => {
+const ExpandedEvent = ({ note }: { note: INote }): JSX.Element => {
     return (
         <div className={styles.Segment}>
             <div className="ui raised segment">
                 <div className={styles.topContainer}>
                     <div className={styles.headingContainer}>
                         <div className={styles.heading}>
-                            <b>{testNote.title}</b>
+                            <b>{note.title}</b>
                         </div>
                         <div className={styles.spaceBetween}></div>
                         <div className={styles.bellContainer}>
                             <Icon name="bell slash outline" size="large" />
                         </div>
                     </div>
-                    <div className={styles.textContainer}>{testNote.text}</div>
-                    <a>{testNote.tags[0] && <Tag tag={testNote.tags[0]} />}</a>
+                    <div className={styles.textContainer}>{note.text}</div>
+                    <a>{note.tags[0] && <Tag tag={note.tags[0]} />}</a>
                 </div>
 
                 <div className={styles.footerContainer}>
@@ -44,7 +44,7 @@ const ExpandedEvent = (): JSX.Element => {
                         <Icon name="angle right" size="large" />
                     </div>
                     <div className={styles.timeAndClock}>
-                        {testNote.eventTime && <Event time={""} />}
+                        {note.eventTime && <Event time={""} />}
                     </div>
                 </div>
             </div>
