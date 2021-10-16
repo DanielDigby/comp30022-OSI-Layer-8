@@ -1,32 +1,39 @@
 import React, { useState } from "react";
 import styles from "./EditNote.module.css";
+import { capitalize } from "lodash";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../config/redux/store";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
 import TextareaAutosize from "react-textarea-autosize";
-import { Segment, Form, TextArea, Input } from "semantic-ui-react";
-import { Tag, Pin, Contact, Reminder, Event } from "../icons";
+import { Segment, Form, Icon } from "semantic-ui-react";
+import { DateTimeInput } from "semantic-ui-calendar-react";
+import { Tag, Pin, Reminder, Event } from "../icons";
 import { createNoteAPI } from "../../../helpers/api/notes";
+const DATE_FORMAT = "HH:mm MM-DD-YYYY";
 
-const EditNote = ({ note }: { note: INote }): JSX.Element => {
+const EditNote = ({
+    note,
+    doneEditing,
+}: {
+    note: INote;
+    doneEditing: () => void;
+}): JSX.Element => {
     const user = useSelector((state: RootState) => state.user.account);
-    const {
-        // title,
-        // text,
-        reminderTime,
-        eventTime,
-        // pinned,
-        tags,
-        // _id,
-        // _clientId,
-        // user,
-        // image,
-        // relatedNotes,
-    } = note;
+    const { tags } = note;
 
     const [title, setTitle] = useState(note.title ? note.title : "");
     const [text, setText] = useState(note.text ? note.text : "");
     const [pinned, togglePinned] = useState(note.pinned);
+    const [tag, setTag] = useState(note.tags[0] ? note.tags[0] : "");
+    const [showEventTimePicker, toggleShowEventTimePicker] = useState(false);
+    const [eventTime, setEventTime] = useState(
+        note.eventTime ? note.eventTime : ""
+    );
+    const [showReminderTimePicker, toggleShowReminderTimePicker] =
+        useState(false);
+    const [reminderTime, setReminderTime] = useState(
+        note.reminderTime ? note.reminderTime : ""
+    );
 
     const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
@@ -34,8 +41,25 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
     const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
     };
+    const handleTag = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTag(e.target.value);
+    };
     const pinOnClick = () => {
         togglePinned(!pinned);
+    };
+    const handleEventTime = (
+        event: React.SyntheticEvent | undefined,
+        data: { value: string }
+    ) => {
+        setEventTime(data.value);
+        toggleShowEventTimePicker(false);
+    };
+    const handleReminderTime = (
+        event: React.SyntheticEvent | undefined,
+        data: { value: string }
+    ) => {
+        setReminderTime(data.value);
+        toggleShowReminderTimePicker(false);
     };
 
     const handleSubmit = async () => {
@@ -44,13 +68,14 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
             user: user._id,
             text: text,
             image: null,
-            reminderTime: null,
-            eventTime: null,
+            reminderTime: reminderTime !== "" ? reminderTime : null,
+            eventTime: eventTime !== "" ? eventTime : null,
             pinned: pinned,
-            tags: [],
+            tags: [capitalize(tag)],
             relatedNotes: [],
         };
         createNoteAPI(newNote);
+        doneEditing();
     };
 
     return (
@@ -62,7 +87,7 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
                             <div className={styles.scroll}>
                                 <div className={styles.body}>
                                     <div className={styles.title}>
-                                        <Input
+                                        <Form.Input
                                             transparent
                                             placeholder="Add title"
                                             value={title}
@@ -85,7 +110,15 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
                                             {tags[0] ? (
                                                 <Tag tag={tags[0]} />
                                             ) : (
-                                                <Tag tag="Add tag?" />
+                                                <div className={styles.addTag}>
+                                                    <Tag tag=" " />
+                                                    <Form.Input
+                                                        transparent
+                                                        placeholder="Add tag"
+                                                        value={tag}
+                                                        onChange={handleTag}
+                                                    />
+                                                </div>
                                             )}
                                         </div>
                                     </div>
@@ -107,20 +140,73 @@ const EditNote = ({ note }: { note: INote }): JSX.Element => {
                                         {pinned ? "Pinned" : "Pin"}
                                         <Pin pinned={pinned} />
                                     </div>
-                                    <div className={styles.button}>
-                                        {tags.includes("contact")
-                                            ? "Added"
-                                            : "Add as contact"}
-                                        <Contact tags={tags} />
-                                    </div>
-                                    <div className={styles.button}>
-                                        {!reminderTime && "Add reminder"}
-                                        <Reminder time={reminderTime} />
-                                    </div>
-                                    <div className={styles.button}>
-                                        {!eventTime && "Add event"}
-                                        <Event time={eventTime} />
-                                    </div>
+
+                                    {showReminderTimePicker ? (
+                                        <div className={styles.timePicker}>
+                                            <Icon
+                                                name="times"
+                                                color="grey"
+                                                onClick={() =>
+                                                    toggleShowReminderTimePicker(
+                                                        false
+                                                    )
+                                                }
+                                            />
+                                            <DateTimeInput
+                                                name="reminderTime"
+                                                placeholder="Reminder Time"
+                                                value={reminderTime}
+                                                iconPosition="left"
+                                                popupPosition="right center"
+                                                dateTimeFormat={DATE_FORMAT}
+                                                onChange={handleReminderTime}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div
+                                            className={styles.button}
+                                            onClick={() =>
+                                                toggleShowReminderTimePicker(
+                                                    true
+                                                )
+                                            }
+                                        >
+                                            {!reminderTime && "Add reminder"}
+                                            <Reminder time={reminderTime} />
+                                        </div>
+                                    )}
+                                    {showEventTimePicker ? (
+                                        <div className={styles.timePicker}>
+                                            <Icon
+                                                name="times"
+                                                color="grey"
+                                                onClick={() =>
+                                                    toggleShowEventTimePicker(
+                                                        false
+                                                    )
+                                                }
+                                            />
+                                            <DateTimeInput
+                                                name="eventTime"
+                                                placeholder="Event Time"
+                                                value={eventTime}
+                                                iconPosition="left"
+                                                popupPosition="right center"
+                                                dateTimeFormat={DATE_FORMAT}
+                                                onChange={handleEventTime}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div
+                                            className={styles.button}
+                                            onClick={() =>
+                                                toggleShowEventTimePicker(true)
+                                            }
+                                        >
+                                            {!eventTime && "Add event"}
+                                            <Event time={eventTime} />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

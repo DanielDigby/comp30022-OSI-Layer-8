@@ -26,31 +26,32 @@ const NewNote = (): JSX.Element => {
     const toggleOff = () => {
         toggleEditing(false);
     };
-    return (
-        <div onClick={toggleOff}>
-            <Note note={emptyNote} mode={NoteModes.EDIT} />
-        </div>
-    );
-    // // api call
-    // if (isEditing)
 
-    // else
-    //     return (
-    //         <div className={styles.container} onClick={toggleOn}>
-    //             <Segment.Group raised>
-    //                 <Segment>
-    //                     <div className={styles.body}>
-    //                         <Icon
-    //                             name="edit outline"
-    //                             size="large"
-    //                             color="grey"
-    //                         />
-    //                         <div className={styles.text}>Add a new note</div>
-    //                         <br />
-    //                     </div>
-    //                 </Segment>
-    //             </Segment.Group>
-    //         </div>
-    //     );
+    if (isEditing)
+        return (
+            <Note
+                note={emptyNote}
+                mode={NoteModes.EDIT}
+                doneEditing={toggleOff}
+            />
+        );
+    else
+        return (
+            <div className={styles.container} onClick={toggleOn}>
+                <Segment.Group raised>
+                    <Segment>
+                        <div className={styles.body}>
+                            <Icon
+                                name="edit outline"
+                                size="large"
+                                color="grey"
+                            />
+                            <div className={styles.text}>Add a new note</div>
+                            <br />
+                        </div>
+                    </Segment>
+                </Segment.Group>
+            </div>
+        );
 };
 export default NewNote;
