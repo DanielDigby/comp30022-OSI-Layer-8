@@ -5,7 +5,6 @@ import "semantic-ui-css/semantic.min.css";
 import { INote } from "../../../interfaces/note";
 
 import { Tag, Event } from "../icons";
-import { Icon } from "semantic-ui-react";
 
 //import { store } from "../../config/redux/store";
 
