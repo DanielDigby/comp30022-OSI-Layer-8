@@ -22,7 +22,7 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
     let displayReminder;
     let displayEvent;
     if (reminderTime)
-        displayReminder = reminderTime.toLocaleString("en-US", {
+        displayReminder = new Date(reminderTime).toLocaleString("en-US", {
             hour: "2-digit",
             minute: "2-digit",
             day: "numeric",
@@ -30,7 +30,7 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
         });
     else displayReminder = "";
     if (eventTime)
-        displayEvent = eventTime.toLocaleString("en-US", {
+        displayEvent = new Date(eventTime).toLocaleString("en-US", {
             hour: "2-digit",
             minute: "2-digit",
             day: "numeric",

@@ -44,7 +44,7 @@ const postNote = async (req: IRequestWithUser, res: express.Response) => {
             title: req.body?.title,
             text: req.body?.text,
             image: req.body?.image,
-            reminderTime: req.body?.reminderTime,
+            reminderTime: new Date(),
             eventTime: req.body?.eventTime,
             pinned: req.body?.pinned,
             tags: req.body?.tags,

@@ -27,7 +27,7 @@ const HomeView = (): JSX.Element => {
             user: store.getState().user.account._id,
             text: randomName.place(),
             image: null,
-            reminderTime: new Date(),
+            reminderTime: new Date().toISOString(),
             eventTime: null,
             pinned: false,
             tags: ["Birthdays"],
