@@ -9,8 +9,9 @@ import { INote, NoteModes } from "../../interfaces/note";
 interface NoteProps {
     note: INote;
     mode: NoteModes;
+    doneEditing?: () => void;
 }
-const Note = ({ note, mode }: NoteProps): JSX.Element => {
+const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
     const [currentMode, toggleCurrentMode] = useState(mode);
 
     const standardClick = () => {
@@ -53,7 +54,18 @@ const Note = ({ note, mode }: NoteProps): JSX.Element => {
                 </div>
             );
         case NoteModes.EDIT:
-            return <Edit note={note} />;
+            return (
+                <Edit
+                    note={note}
+                    doneEditing={
+                        doneEditing
+                            ? doneEditing
+                            : () => {
+                                  return;
+                              }
+                    }
+                />
+            );
         default:
             return <div />;
     }

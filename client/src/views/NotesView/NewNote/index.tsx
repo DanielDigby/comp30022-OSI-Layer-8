@@ -27,11 +27,14 @@ const NewNote = (): JSX.Element => {
         toggleEditing(false);
     };
 
-    // api call
     if (isEditing)
         return (
-            <div onClick={toggleOff}>
-                <Note note={emptyNote} mode={NoteModes.EDIT} />
+            <div className={styles.edit}>
+                <Note
+                    note={emptyNote}
+                    mode={NoteModes.EDIT}
+                    doneEditing={toggleOff}
+                />
             </div>
         );
     else
