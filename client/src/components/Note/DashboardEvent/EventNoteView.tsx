@@ -16,7 +16,7 @@ interface NoteProps {
     mode: NoteModes;
 } */
 
-const sept = new Date("August 19, 2022");
+//const sept = new Date("August 19, 2022");
 //sept.setFullYear(2021, 8, 10);
 
 const testNote: INote = {

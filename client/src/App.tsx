@@ -14,6 +14,9 @@ import HomeView from "./views/HomeView";
 import EventNoteView from "./components/Note/EventNoteView";
 import ExpandedEvent from "./components/Note/ExpandedEvent";
 
+import EventNoteView from "./components/Note/EventNoteView";
+import ExpandedEvent from "./components/Note/ExpandedEvent";
+
 const App = (): JSX.Element => {
     return (
         <div className={styles.pageContainer}>
