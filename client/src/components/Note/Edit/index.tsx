@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import styles from "./EditNote.module.css";
+import TextareaAutosize from "react-textarea-autosize";
+import { RootState } from "../../../config/redux/store";
 import { capitalize } from "lodash";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../config/redux/store";
-import { INote, INoteWithoutIds } from "../../../interfaces/note";
-import TextareaAutosize from "react-textarea-autosize";
-import { Segment, Form, Icon } from "semantic-ui-react";
-import { DateTimeInput } from "semantic-ui-calendar-react";
-import { Tag, Pin, Reminder, Event } from "../icons";
 import { createNoteAPI } from "../../../helpers/api/notes";
+import { DateTimeInput } from "semantic-ui-calendar-react";
+import { Segment, Form, Icon } from "semantic-ui-react";
+import { INote, INoteWithoutIds } from "../../../interfaces/note";
+import { Tag, Pin, Reminder, Event } from "../icons";
+
 const DATE_FORMAT = "HH:mm MM-DD-YYYY";
 
 const EditNote = ({
