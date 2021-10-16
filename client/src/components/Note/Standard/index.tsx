@@ -19,24 +19,6 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
         // relatedNotes,
     } = note;
 
-    let displayReminder;
-    let displayEvent;
-    if (reminderTime)
-        displayReminder = reminderTime.toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            day: "numeric",
-            month: "short",
-        });
-    else displayReminder = "";
-    if (eventTime)
-        displayEvent = eventTime.toLocaleString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            day: "numeric",
-            month: "short",
-        });
-    else displayEvent = "";
     // api call
     return (
         <div className={styles.outerContainer}>
@@ -58,21 +40,10 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
                     <div className={styles.tagContainer}>
                         {note.tags[0] && <Tag tag={tags[0]} />}
                     </div>
-                    <div className={styles.eventContainer}>
-                        {displayEvent && (
-                            <span>
-                                {/* {displayEvent} */}
-                                <Event displayEvent={displayEvent} />
-                            </span>
-                        )}
-                    </div>
                     <div className={styles.timeContainer}>
-                        {displayReminder && (
-                            <span>
-                                {/* {displayReminder} */}
-                                <Reminder displayReminder={displayReminder} />
-                            </span>
-                        )}
+                        {reminderTime && <Reminder time={reminderTime} />}
+
+                        {eventTime && <Event time={eventTime} />}
                     </div>
                 </Segment>
             </Segment.Group>
