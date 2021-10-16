@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Edit from "./Edit";
 import Standard from "./Standard";
 import StandardDetail from "./StandardDetail";
+import EventNoteView from "./DashboardEvent/EventNoteView";
 import { INote, NoteModes } from "../../interfaces/note";
 
 interface NoteProps {
@@ -31,7 +32,12 @@ const Note = ({ note, mode }: NoteProps): JSX.Element => {
                 </div>
             );
         case NoteModes.EVENT:
-            return <div />;
+            return (
+                <div>
+                    {" "}
+                    <EventNoteView note={note} />
+                </div>
+            );
         case NoteModes.EVENT_DETAIL:
             return <div />;
         case NoteModes.EDIT:

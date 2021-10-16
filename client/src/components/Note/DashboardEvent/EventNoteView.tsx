@@ -19,24 +19,22 @@ const testNote: INote = {
     relatedNotes: [],
 };
 
-const EventNoteView = (): JSX.Element => {
+const EventNoteView = ({ note }: { note: INote }): JSX.Element => {
     // api call
     return (
         <div className={styles.Segment}>
             <div className="ui raised segment">
                 <div className={styles.headingContainer}>
                     <div className={styles.heading}>
-                        <b>{testNote.title}</b>
+                        <b>{note.title}</b>
                     </div>
                     <div className={styles.time}>
-                        {testNote.eventTime && (
-                            <Event time={testNote.eventTime} />
-                        )}
+                        {note.eventTime && <Event time={note.eventTime} />}
                     </div>
                 </div>
                 <p></p>
                 <p></p>
-                <a>{testNote.tags[0] && <Tag tag={testNote.tags[0]} />}</a>
+                <a>{note.tags[0] && <Tag tag={note.tags[0]} />}</a>
             </div>
         </div>
     );
