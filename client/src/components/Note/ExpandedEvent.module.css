@@ -1,0 +1,72 @@
+.Segment {
+    width: 300px;
+}
+
+.topContainer {
+    display: flex;
+    width: 100%;
+}
+
+.wordsContainer {
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    padding-bottom: 20%;
+}
+
+.headingContainer {
+    display: flex;
+    width: 100%;
+    padding-bottom: 5%;
+}
+
+.textContainer {
+    display: flex;
+    width: 100%;
+    padding-bottom: 5%;
+}
+
+/* Right side icons */
+.iconsContainer {
+    display: flex;
+    width: 10%;
+    flex-direction: column-reverse;
+    padding-bottom: 5%;
+}
+
+/* For go to note and Time */
+.footerContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.goToNote {
+    display: flex;
+    width: 40%;
+}
+
+.timeAndClock {
+    display: flex;
+    width: 60%;
+    flex-direction: row-reverse;
+}
+
+.smallGap {
+    display: flex;
+    width: 4%;
+}
+
+.heading {
+    display: flex;
+    width: 60%;
+}
+.time {
+    display: flex;
+    width: 50%;
+    flex-direction: row-reverse;
+}
+
+.space {
+    width: 5px;
+}
