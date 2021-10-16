@@ -11,6 +11,9 @@ import DashboardView from "./views/DashboardView";
 import SettingsView from "./views/SettingsView";
 import HomeView from "./views/HomeView";
 
+import EventNoteView from "./components/Note/EventNoteView";
+import ExpandedEvent from "./components/Note/ExpandedEvent";
+
 const App = (): JSX.Element => {
     return (
         <div className={styles.pageContainer}>
@@ -22,6 +25,9 @@ const App = (): JSX.Element => {
                 <Route path="/register" component={RegisterView} />
                 <Route path="/settings" component={SettingsView} />
                 <Route path="/notes" component={NotesView} />
+
+                <Route path="/eventnote" component={EventNoteView} />
+                <Route path="/expandedevent" component={ExpandedEvent} />
             </Switch>
         </div>
     );
