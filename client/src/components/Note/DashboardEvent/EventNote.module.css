@@ -1,0 +1,28 @@
+.Segment {
+    width: 300px;
+    margin-bottom: 18px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.headingContainer {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    flex-direction: row;
+    align-items: right;
+}
+
+.heading {
+    display: flex;
+    width: 60%;
+}
+.time {
+    display: flex;
+    width: 50%;
+    flex-direction: row-reverse;
+}
+
+.space {
+    width: 5px;
+}

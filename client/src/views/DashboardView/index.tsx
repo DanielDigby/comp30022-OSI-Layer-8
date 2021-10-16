@@ -134,11 +134,7 @@ const EventNotes = ({ notes }: EventNotesProps) => {
         <div className={styles.eventsContainer}>
             {eventNotes.map((note: INote) => {
                 return (
-                    <Note
-                        note={note}
-                        mode={NoteModes.STANDARD}
-                        key={note._id}
-                    />
+                    <Note note={note} mode={NoteModes.EVENT} key={note._id} />
                 );
             })}
         </div>
