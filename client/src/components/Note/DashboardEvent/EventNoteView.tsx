@@ -2,10 +2,9 @@ import React from "react";
 import styles from "./EventNote.module.css";
 import "semantic-ui-css/semantic.min.css";
 //import { INote, NoteModes } from "../../interfaces/note";
-import { INote } from "../../interfaces/note";
+import { INote } from "../../../interfaces/note";
 
-import Tag from "../Tag";
-import HeadingText from "../HeadingText";
+import { Tag, Event } from "../icons";
 import { Icon } from "semantic-ui-react";
 
 //import { store } from "../../config/redux/store";
@@ -28,13 +27,11 @@ const testNote: INote = {
     text: "test",
     image: "test",
     reminderTime: null,
-    eventTime: sept,
+    eventTime: null,
     pinned: false,
     tags: [],
     relatedNotes: [],
 };
-
-const dateString = testNote.eventTime?.toString;
 
 const EventNoteView = (): JSX.Element => {
     // api call
@@ -43,13 +40,7 @@ const EventNoteView = (): JSX.Element => {
             <div className="ui raised segment">
                 <div className={styles.headingContainer}>
                     <div className={styles.heading}>
-                        <b>
-                            <HeadingText
-                                headingText={
-                                    testNote.title ? testNote.title : ""
-                                }
-                            />{" "}
-                        </b>
+                        <b>{testNote.title}</b>
                     </div>
                     <div className={styles.time}>
                         <Icon name="clock outline" size="large" />
@@ -60,7 +51,7 @@ const EventNoteView = (): JSX.Element => {
                 <p></p>
                 <p></p>
                 <a>
-                    <Tag tagName="Social" />
+                    <Tag tag="Social" />
                 </a>
             </div>
         </div>

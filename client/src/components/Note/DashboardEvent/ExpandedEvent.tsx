@@ -2,10 +2,9 @@ import React from "react";
 import styles from "./ExpandedEvent.module.css";
 import "semantic-ui-css/semantic.min.css";
 //import { INote, NoteModes } from "../../interfaces/note";
-import { INote } from "../../interfaces/note";
+import { INote } from "../../../interfaces/note";
 
-import Tag from "../Tag";
-import HeadingText from "../HeadingText";
+import { Tag, Event } from "../icons";
 import { Icon } from "semantic-ui-react";
 
 //import { store } from "../../config/redux/store";
@@ -17,7 +16,7 @@ interface NoteProps {
     mode: NoteModes;
 } */
 
-const sept = new Date("August 19, 2022");
+//const sept = new Date("August 19, 2022");
 //sept.setFullYear(2021, 8, 10);
 
 const testNote: INote = {
@@ -28,7 +27,7 @@ const testNote: INote = {
     text: "test",
     image: "test",
     reminderTime: null,
-    eventTime: sept,
+    eventTime: null,
     pinned: false,
     tags: [],
     relatedNotes: [],
@@ -44,18 +43,13 @@ const ExpandedEvent = (): JSX.Element => {
                 <div className={styles.topContainer}>
                     <div className={styles.wordsContainer}>
                         <div className={styles.headingContainer}>
-                            <b>Heading Here</b>
+                            <b>{testNote.title}</b>
                         </div>
                         <div className={styles.textContainer}>
-                            hello sfajgdskv dafsdv lsdkvaldsfij vbdfbls vldivh
-                            sdvlkdv sdslvsdv shdv akvjdsvs dvladsv testing
-                            testing 123 asglfblj fabf@#%@#$^# v shdv akvjdsvs
-                            dvladsv testing testing 123 asglfblj fabf@#%@#$^# v
-                            shdv akvjdsvs dvladsv testing testing 123 asglfblj
-                            fabf@#%@#$^# v sh
+                            {testNote.text}
                         </div>
                         <a>
-                            <Tag tagName="Social" />
+                            <Tag tag="Social" />
                         </a>
                     </div>
                     <div className={styles.iconsContainer}>
