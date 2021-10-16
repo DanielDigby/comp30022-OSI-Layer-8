@@ -6,20 +6,6 @@ import { INote } from "../../../interfaces/note";
 import { Tag, Event } from "../icons";
 import { Icon } from "semantic-ui-react";
 
-const note: INote = {
-    user: null,
-    _id: "sdjfasdfa",
-    _clientId: "sfhkjasd",
-    title: "event title here",
-    text: "test",
-    image: "test",
-    reminderTime: null,
-    eventTime: null,
-    pinned: false,
-    tags: ["family"],
-    relatedNotes: [],
-};
-
 const ExpandedEvent = ({ note }: { note: INote }): JSX.Element => {
     return (
         <div className={styles.Segment}>

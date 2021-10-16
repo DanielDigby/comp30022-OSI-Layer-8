@@ -5,20 +5,6 @@ import { INote } from "../../../interfaces/note";
 
 import { Tag, Event } from "../icons";
 
-const testNote: INote = {
-    user: null,
-    _id: "sdjfasdfa",
-    _clientId: "sfhkjasd",
-    title: "event title here",
-    text: "test",
-    image: "test",
-    reminderTime: null,
-    eventTime: "August 19, 2022",
-    pinned: false,
-    tags: ["social"],
-    relatedNotes: [],
-};
-
 const EventNoteView = ({ note }: { note: INote }): JSX.Element => {
     // api call
     return (
