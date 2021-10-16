@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./EditNote.module.css";
 import TextareaAutosize from "react-textarea-autosize";
 import { RootState } from "../../../config/redux/store";
