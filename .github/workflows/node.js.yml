@@ -10,7 +10,7 @@ on:
     branches: [main, develop]
 
 jobs:
-  frontend-tests:
+  frontend-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -46,7 +46,7 @@ jobs:
       - run: yarn
       - run: yarn workspace client build
 
-  backend-tests:
+  backend-test:
     runs-on: ubuntu-latest
 
     strategy:
