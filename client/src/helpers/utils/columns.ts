@@ -145,6 +145,25 @@ export const removeNoteFromColumnDict = (
     return outDict;
 };
 
+export const removeNoteFromStringMap = (
+    removeNote: INote,
+    stringMap: StringMap
+): StringMap => {
+    if (!removeNote) return stringMap;
+
+    stringMap.arr1 = stringMap.arr1.filter(
+        (_clientId) => _clientId !== removeNote._clientId
+    );
+    stringMap.arr2 = stringMap.arr2.filter(
+        (_clientId) => _clientId !== removeNote._clientId
+    );
+    stringMap.arr3 = stringMap.arr3.filter(
+        (_clientId) => _clientId !== removeNote._clientId
+    );
+
+    return stringMap;
+};
+
 export const addNoteToColumnDict = (
     note: INote,
     columns: ColumnDict

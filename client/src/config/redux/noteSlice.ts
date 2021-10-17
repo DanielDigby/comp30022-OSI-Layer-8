@@ -9,6 +9,7 @@ import {
     stringMapToColumns,
     mapNotesToColumns,
     removeNoteFromColumnDict,
+    removeNoteFromStringMap,
 } from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
 import { searchNotes } from "../../helpers/utils/search";
@@ -134,6 +135,21 @@ export const noteSlice = createSlice({
                 state.array = state.array.filter(
                     (note) => note._clientId !== action.payload._clientId
                 );
+
+                // after deleting a note remove it from both string maps and
+                // columns dict to update ui
+                state.columnDict = removeNoteFromColumnDict(
+                    action.payload,
+                    state.columnDict
+                );
+                state.stringMap = removeNoteFromStringMap(
+                    action.payload,
+                    state.stringMap
+                );
+                state.tempMap = removeNoteFromStringMap(
+                    action.payload,
+                    state.tempMap
+                );
             },
             prepare: (note: INote) => {
                 return {
@@ -141,7 +157,7 @@ export const noteSlice = createSlice({
                     meta: {
                         offline: {
                             effect: {
-                                url: NOTES + note._clientId,
+                                url: NOTES + "/" + note._clientId,
                                 method: "DELETE",
                                 data: "delete",
                             },
