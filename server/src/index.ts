@@ -16,15 +16,17 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-                "img-src": [
-                    "'self'",
-                    "https://firebasestorage.googleapis.com/v0/b/comp30022-crm-app.appspot.com/o/images",
-                ],
+                defaultSrc: ["'self'"],
+                objectSrc: ["'none'"],
+                scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
+                styleSrc: ["'self'", "https: 'unsafe-inline'"],
+                imgSrc: ["'self'", "https://firebasestorage.googleapis.com/"],
+                upgradeInsecureRequests: [],
             },
         },
     })
 );
+
 app.use(require("sanitize").middleware);
 app.use(express.json({ limit: "300kb" }));
 app.use(cookieParser());
