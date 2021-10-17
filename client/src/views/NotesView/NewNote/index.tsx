@@ -29,6 +29,8 @@ const NewNote = (): JSX.Element => {
         toggleNewEdit(true);
     };
     const toggleOff = () => {
+        console.log("off");
+        dispatch(clearEditing());
         toggleNewEdit(false);
     };
 
@@ -48,7 +50,7 @@ const NewNote = (): JSX.Element => {
                 <Note
                     note={editing}
                     mode={NoteModes.EDIT}
-                    doneEditing={() => dispatch(clearEditing())}
+                    doneEditing={toggleOff}
                 />
             </div>
         );

@@ -111,6 +111,49 @@ export const columnsToStringMap = (columns: ColumnDict): StringMap => {
     return outMap;
 };
 
+export const removeNoteFromColumnDict = (
+    removeNote: INote,
+    columns: ColumnDict
+): ColumnDict => {
+    if (!removeNote) return columns;
+
+    const arr1 = columns["col1"].items.filter(
+        (note) => note._clientId !== removeNote._clientId
+    );
+    const arr2 = columns["col2"].items.filter(
+        (note) => note._clientId !== removeNote._clientId
+    );
+    const arr3 = columns["col3"].items.filter(
+        (note) => note._clientId !== removeNote._clientId
+    );
+
+    const outDict = {
+        ["col1"]: {
+            name: "col1",
+            items: arr1,
+        },
+        ["col2"]: {
+            name: "col2",
+            items: arr2,
+        },
+        ["col3"]: {
+            name: "col3",
+            items: arr3,
+        },
+    };
+
+    return outDict;
+};
+
+export const addNoteToColumnDict = (
+    note: INote,
+    columns: ColumnDict
+): ColumnDict => {
+    columns["col1"].items.push(note);
+    console.log(columns);
+    return columns;
+};
+
 export const isEmptyColumns = (columns: ColumnDict): boolean => {
     const arr1Len = columns["col1"].items.length;
     const arr2Len = columns["col2"].items.length;

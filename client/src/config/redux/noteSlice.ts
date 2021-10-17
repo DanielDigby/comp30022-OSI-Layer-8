@@ -8,6 +8,7 @@ import {
     columnsToStringMap,
     stringMapToColumns,
     mapNotesToColumns,
+    removeNoteFromColumnDict,
 } from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
 import { searchNotes } from "../../helpers/utils/search";
@@ -15,6 +16,7 @@ import { searchNotes } from "../../helpers/utils/search";
 export interface NoteState {
     array: Array<INote>;
     stringMap: StringMap;
+    tempMap: StringMap;
     columnDict: ColumnDict;
     filter: string;
     search: string;
@@ -25,6 +27,7 @@ export interface NoteState {
 const initialState: NoteState = {
     array: [],
     stringMap: { arr1: [], arr2: [], arr3: [] },
+    tempMap: { arr1: [], arr2: [], arr3: [] },
     columnDict: {
         ["col1"]: {
             name: "col1",
@@ -95,13 +98,14 @@ export const noteSlice = createSlice({
                     Object.assign(note, action.payload);
                 }
             },
+
             prepare: (note: INote) => {
                 return {
                     payload: note,
                     meta: {
                         offline: {
                             effect: {
-                                url: NOTES + note._clientId,
+                                url: NOTES + "/" + note._clientId,
                                 method: "PUT",
                                 data: note,
                             },
@@ -147,11 +151,29 @@ export const noteSlice = createSlice({
             },
         },
 
-        setEditing: (state, action: PayloadAction<INote>) => {
+        setEditing: (state, action: PayloadAction<INote | null>) => {
+            // when we set editing to a note we want to remove the note from the
+            // current column dict
+            if (action.payload) {
+                state.tempMap = columnsToStringMap(state.columnDict);
+                state.columnDict = removeNoteFromColumnDict(
+                    action.payload,
+                    state.columnDict
+                );
+            }
+
             state.editing = action.payload;
         },
 
         clearEditing: (state) => {
+            // we want to add what we were last editing back into column dict
+            if (state.editing) {
+                console.log("hello");
+                state.columnDict = stringMapToColumns(
+                    state.tempMap,
+                    state.array
+                );
+            }
             state.editing = null;
         },
 
