@@ -114,8 +114,9 @@ export const updatePasswordAPI = async (
 };
 
 // Boot user out if not logged in
-export const checkAuthAPI = (history: ReturnType<typeof useHistory>): void => {
-    if (!store.getState().user.account) history.replace("/login");
+export const checkAuthAPI = (): boolean => {
+    if (store.getState().user.account == null) return false;
+    else return true;
 };
 
 export const updateProfilePicAPI = async (

@@ -8,7 +8,6 @@ import { RootState } from "../../config/redux/store";
 import { logOutAPI, updateProfilePicAPI } from "../../helpers/api/users";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { checkAuthAPI } from "../../helpers/api/users";
 import { capitalize, cloneDeep } from "lodash";
 import { updateUserAPI, updatePasswordAPI } from "../../helpers/api/users";
 import { Segment, Icon, Image, Input, Ref, Button } from "semantic-ui-react";
@@ -19,7 +18,6 @@ const SettingsView = (): JSX.Element => {
     const back = () => history.goBack();
     const logOut = async () => await logOutAPI(history);
     const navigateDashboard = () => history.push("/");
-    checkAuthAPI(history);
 
     // api call
     return (
