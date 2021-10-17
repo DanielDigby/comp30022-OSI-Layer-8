@@ -23,7 +23,7 @@
 }
 .noteContainer {
     display: flex;
-    min-height: 200px;
+    min-height: 35px;
     white-space: pre-line;
     flex-direction: column;
 }
