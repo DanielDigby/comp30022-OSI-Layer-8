@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router";
+import { RouteComponentProps } from "react-router-dom";
 import { checkAuthAPI } from "../../helpers/api/users";
 
 const PrivateRoute = ({
     component,
     path,
 }: {
-    component: FunctionComponent<any>;
+    component:
+        | React.ComponentType<RouteComponentProps<any>>
+        | React.ComponentType<any>
+        | undefined;
     path: string;
 }): JSX.Element => {
     const loggedIn = checkAuthAPI();

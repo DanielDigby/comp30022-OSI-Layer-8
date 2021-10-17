@@ -20,6 +20,7 @@ app.use(
                 objectSrc: ["'none'"],
                 scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
                 styleSrc: ["'self'", "https: 'unsafe-inline'"],
+                fontSrc: ["'self'", "https://fonts.gstatic.com/"],
                 imgSrc: ["'self'", "https://firebasestorage.googleapis.com/"],
                 upgradeInsecureRequests: [],
             },
