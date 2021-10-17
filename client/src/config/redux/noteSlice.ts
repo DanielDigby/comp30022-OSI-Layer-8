@@ -219,7 +219,8 @@ export const noteSlice = createSlice({
 
         updateColumns: (state, action: PayloadAction<ColumnDict>) => {
             state.columnDict = action.payload;
-            state.stringMap = columnsToStringMap(state.columnDict);
+            if (state.filter === "" && state.search === "")
+                state.stringMap = columnsToStringMap(state.columnDict);
         },
 
         updateFilter: (state, action: PayloadAction<string>) => {
