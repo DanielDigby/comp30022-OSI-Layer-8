@@ -18,17 +18,9 @@ const App = (): JSX.Element => {
                 <Route path="/register" component={RegisterView} />
                 <Route path="/login" component={LogInView} />
 
-                <PrivateRoute path="">
-                    <DashboardView />
-                </PrivateRoute>
-
-                <PrivateRoute path="/settings">
-                    <SettingsView />
-                </PrivateRoute>
-
-                <PrivateRoute path="/notes">
-                    <NotesView />
-                </PrivateRoute>
+                <PrivateRoute path="/" component={DashboardView} />
+                <PrivateRoute path="/settings" component={SettingsView} />
+                <PrivateRoute path="notes" component={NotesView} />
             </Switch>
         </div>
     );

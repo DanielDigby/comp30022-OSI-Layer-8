@@ -1,21 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Redirect, Route } from "react-router";
 import { checkAuthAPI } from "../../helpers/api/users";
 
 const PrivateRoute = ({
-    children,
+    component,
     path,
 }: {
-    children: JSX.Element;
+    component: FunctionComponent<any>;
     path: string;
 }): JSX.Element => {
     const loggedIn = checkAuthAPI();
-    return (
-        <Route exact path={path}>
-            {loggedIn ? { children } : <Redirect to="/login" />}
-        </Route>
-    );
+
+    if (loggedIn) return <Route exact path={path} component={component} />;
+    else return <Redirect to="/login" />;
 };
 
 export default PrivateRoute;
