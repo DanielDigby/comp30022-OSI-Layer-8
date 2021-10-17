@@ -19,6 +19,7 @@ export interface NoteState {
     filter: string;
     search: string;
     searchLoading: boolean;
+    editing: INote | null;
 }
 
 const initialState: NoteState = {
@@ -41,6 +42,7 @@ const initialState: NoteState = {
     filter: "",
     search: "",
     searchLoading: false,
+    editing: null,
 };
 
 export const noteSlice = createSlice({
@@ -145,6 +147,14 @@ export const noteSlice = createSlice({
             },
         },
 
+        setEditing: (state, action: PayloadAction<INote>) => {
+            state.editing = action.payload;
+        },
+
+        clearEditing: (state) => {
+            state.editing = null;
+        },
+
         updateColumns: (state, action: PayloadAction<ColumnDict>) => {
             state.columnDict = action.payload;
         },
@@ -187,6 +197,8 @@ export const {
     createNote,
     updateNote,
     deleteNote,
+    setEditing,
+    clearEditing,
     updateColumns,
     updateFilter,
     clearSearch,

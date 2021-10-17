@@ -21,6 +21,22 @@ export const Tag = ({ tag }: { tag: string }): JSX.Element => {
     return <div />;
 };
 
+export const Bin = ({
+    shouldDelete,
+}: {
+    shouldDelete: boolean;
+}): JSX.Element => {
+    return (
+        <div className={styles.bin}>
+            {shouldDelete ? (
+                <Icon name="trash alternate" color="red" />
+            ) : (
+                <Icon name="trash alternate outline" color="grey" />
+            )}
+        </div>
+    );
+};
+
 export const Pin = ({ pinned }: { pinned: boolean }): JSX.Element => {
     return (
         <Icon

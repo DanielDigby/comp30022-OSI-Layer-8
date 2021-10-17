@@ -1,94 +1,54 @@
-@import "../../../App.module.css";
-
-.Segment {
-    width: 50vw;
-    line-height: 5vh;
-}
-
-.whole {
+.outerContainer {
     display: flex;
+    width: 174px;
     flex-direction: column;
 }
-
-.top {
+.pinContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.topContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 5vh;
-    padding: 1vw;
-    height: auto;
+}
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+}
+.pinContainer {
+    display: flex;
+    flex-direction: column;
+}
+.noteContainer {
+    display: flex;
+    min-height: 35px;
+    white-space: pre-line;
+    flex-direction: column;
+}
+.tagContainer {
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
 }
+.timeContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
 
-.text {
-    height: 40vh;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    font-family: var(--font-family);
-    overflow-wrap: break-word;
-    overflow: auto;
+.edit {
+    z-index: 1;
+    position: absolute;
+    left: -12px;
+    top: -12px;
 }
 
 .bottom {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    padding: 1vw;
-}
-
-.leftBottom {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    justify-content: center;
-}
-
-.editRow {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    color: var(--colour-orange-accent);
-}
-
-.editText {
-    color: var(--colour-darkgray);
-    font-size: var(--text-small);
-}
-
-.rightBottom {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    color: var(--colour-darkgray);
-}
-
-.title {
-    font-family: var(--font-family);
-    font-size: 2vw;
-    font-weight: bold;
-}
-
-/* phone size */
-@media only screen and (max-width: 500px) {
-    .title {
-        font-size: var(--text-small);
-        line-height: 3ch;
-    }
-}
-
-/* iPad size */
-@media only screen and (min-width: 1024px) {
-    .title {
-        font-size: var(--text-medium);
-        line-height: 3ch;
-    }
-}
-
-/* desktop size */
-@media only screen and (min-width: 1025px) {
-    .title {
-        font-size: 20px;
-        line-height: 3ch;
-    }
+    align-items: flex-end;
 }

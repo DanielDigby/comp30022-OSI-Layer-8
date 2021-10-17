@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Edit from "./Edit";
 import Standard from "./Standard";
 import StandardDetail from "./StandardDetail";
@@ -14,12 +14,13 @@ interface NoteProps {
 const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
     const [currentMode, toggleCurrentMode] = useState(mode);
 
-    const standardClick = () => {
+    const expandStandard = () => {
         toggleCurrentMode(NoteModes.STANDARD_DETAIL);
     };
-    const detailClick = () => {
+    const minimizeStandard = () => {
         toggleCurrentMode(NoteModes.STANDARD);
     };
+
     const expandEvent = () => {
         toggleCurrentMode(NoteModes.EVENT_DETAIL);
     };
@@ -27,17 +28,29 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
         toggleCurrentMode(NoteModes.EVENT);
     };
 
+    const noteRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        document.addEventListener("mousedown", (event) => {
+            if (
+                !noteRef.current?.contains(event.target as Node) &&
+                mode == NoteModes.STANDARD
+            )
+                minimizeStandard();
+        });
+    });
+
     switch (currentMode) {
         // onClick={toggleCurrentMode(NoteModes.STANDARD_DETAIL)}
         case NoteModes.STANDARD:
             return (
-                <div onClick={standardClick}>
+                <div onClick={expandStandard}>
                     <Standard note={note} />
                 </div>
             );
         case NoteModes.STANDARD_DETAIL:
             return (
-                <div onClick={detailClick}>
+                <div ref={noteRef}>
                     <StandardDetail note={note} />
                 </div>
             );

@@ -10,6 +10,7 @@
 }
 
 .pinnedSpacer {
+    margin-bottom: 22px;
     margin-right: 22px;
 }
 
@@ -54,20 +55,20 @@
 .pinnedNotesContainer {
     display: flex;
     width: 60%;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 /* Container for left column of pinned notes */
 .pinnedTopContainer {
     display: flex;
     width: 100%;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .pinnedBottomContainer {
     display: flex;
     width: 100%;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 /* Container for Calenter icon */

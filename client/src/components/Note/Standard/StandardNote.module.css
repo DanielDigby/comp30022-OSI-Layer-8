@@ -23,6 +23,9 @@
 }
 .noteContainer {
     display: flex;
+    white-space: pre-line;
+    overflow: hidden;
+    max-height: 70px;
     flex-direction: column;
 }
 .tagContainer {
