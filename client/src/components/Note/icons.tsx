@@ -29,13 +29,9 @@ export const Bin = ({
     return (
         <div className={styles.bin}>
             {shouldDelete ? (
-                <Icon name="trash alternate" size="large" color="red" />
+                <Icon name="trash alternate" color="red" />
             ) : (
-                <Icon
-                    name="trash alternate outline"
-                    size="large"
-                    color="grey"
-                />
+                <Icon name="trash alternate outline" color="grey" />
             )}
         </div>
     );

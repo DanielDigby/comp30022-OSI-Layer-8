@@ -24,6 +24,7 @@
 .noteContainer {
     display: flex;
     min-height: 200px;
+    white-space: pre-line;
     flex-direction: column;
 }
 .tagContainer {

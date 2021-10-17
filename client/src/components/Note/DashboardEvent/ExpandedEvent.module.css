@@ -37,6 +37,7 @@
 
 .textContainer {
     display: flex;
+    white-space: pre-line;
     width: 100%;
     padding-bottom: 5%;
 }
