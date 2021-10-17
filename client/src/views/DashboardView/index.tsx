@@ -8,13 +8,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../config/redux/store";
 import { useHistory } from "react-router-dom";
 import { capitalize } from "lodash";
-import { checkAuthAPI } from "../../helpers/api/users";
 import { INote, NoteModes } from "../../interfaces/note";
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
-    checkAuthAPI(history);
     const navigateNotes = () => {
         history.push("/notes");
     };
@@ -24,7 +22,7 @@ const DashboardView = (): JSX.Element => {
 
     const store = useSelector((state: RootState) => state);
     const notes = store.notes.array;
-    const name = store.user.account.firstName;
+    const name = store.user.account?.firstName;
 
     return (
         <div className={globalStyles.light}>
