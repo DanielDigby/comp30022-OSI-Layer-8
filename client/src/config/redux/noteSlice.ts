@@ -6,6 +6,7 @@ import { ColumnDict, StringMap } from "../../interfaces/columns";
 import { NOTES } from "../../interfaces/endpoints";
 import {
     columnsToStringMap,
+    stringMapToColumns,
     mapNotesToColumns,
 } from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
@@ -171,7 +172,10 @@ export const noteSlice = createSlice({
                 state.filter = action.payload;
             }
             if (state.filter === "" && state.search === "")
-                state.stringMap = columnsToStringMap(state.columnDict);
+                state.columnDict = stringMapToColumns(
+                    state.stringMap,
+                    state.array
+                );
             else {
                 const filtered = filter(state.array, state.filter);
                 const searched = searchNotes(filtered, state.search);
@@ -183,11 +187,14 @@ export const noteSlice = createSlice({
             const filtered = filter(state.array, state.filter);
             state.search = "";
             if (state.filter === "" && state.search === "")
-                state.stringMap = columnsToStringMap(state.columnDict);
+                state.columnDict = stringMapToColumns(
+                    state.stringMap,
+                    state.array
+                );
             else {
-                state.searchLoading = false;
                 state.columnDict = mapNotesToColumns(filtered);
             }
+            state.searchLoading = false;
         },
 
         startSearch: (state, action: PayloadAction<string>) => {
@@ -212,6 +219,7 @@ export const {
     deleteNote,
     setEditing,
     clearEditing,
+    loadPage,
     updateColumns,
     updateFilter,
     clearSearch,
