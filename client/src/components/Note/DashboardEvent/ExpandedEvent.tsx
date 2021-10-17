@@ -3,7 +3,7 @@ import styles from "./ExpandedEvent.module.css";
 import "semantic-ui-css/semantic.min.css";
 import { INote } from "../../../interfaces/note";
 
-import { Tag, Event } from "../icons";
+import { Tag, Event, Reminder, Pin } from "../icons";
 import { Icon } from "semantic-ui-react";
 
 const ExpandedEvent = ({ note }: { note: INote }): JSX.Element => {
@@ -16,12 +16,14 @@ const ExpandedEvent = ({ note }: { note: INote }): JSX.Element => {
                             <b>{note.title}</b>
                         </div>
                         <div className={styles.spaceBetween}></div>
-                        <div className={styles.bellContainer}>
-                            <Icon name="bell slash outline" size="large" />
+                        <div className={styles.pinContainer}>
+                            <Pin pinned={note.pinned} />
                         </div>
                     </div>
                     <div className={styles.textContainer}>{note.text}</div>
-                    <a>{note.tags[0] && <Tag tag={note.tags[0]} />}</a>
+                    <div className={styles.tagContainer}>
+                        {note.tags[0] && <Tag tag={note.tags[0]} />}
+                    </div>
                 </div>
 
                 <div className={styles.footerContainer}>
@@ -29,8 +31,12 @@ const ExpandedEvent = ({ note }: { note: INote }): JSX.Element => {
                         Go to Note
                         <Icon name="angle right" size="large" />
                     </div>
-                    <div className={styles.timeAndClock}>
-                        {note.eventTime && <Event time={""} />}
+                    <div className={styles.timeContainer}>
+                        {note.reminderTime && (
+                            <Reminder time={note.reminderTime} />
+                        )}
+
+                        {note.eventTime && <Event time={note.eventTime} />}
                     </div>
                 </div>
             </div>

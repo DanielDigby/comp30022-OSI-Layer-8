@@ -1,3 +1,5 @@
+@import "../../../App.module.css";
+
 .Segment {
     width: 300px;
     margin-bottom: 18px;
@@ -25,4 +27,8 @@
 
 .space {
     width: 5px;
+}
+
+.tagContainer {
+    color: var(--colour-darkgray);
 }

@@ -176,11 +176,9 @@ const PinnedNotes = ({ notes }: PinnedNotesProps) => {
             <div className={styles.pinnedBottomContainer}>
                 {pinnedNotes2.map((note: INote) => {
                     return (
-                        <Note
-                            note={note}
-                            mode={NoteModes.STANDARD}
-                            key={note._id}
-                        />
+                        <div key={note._id} className={styles.pinnedSpacer}>
+                            <Note note={note} mode={NoteModes.STANDARD} />
+                        </div>
                     );
                 })}
             </div>

@@ -20,7 +20,9 @@ const EventNoteView = ({ note }: { note: INote }): JSX.Element => {
                 </div>
                 <p></p>
                 <p></p>
-                <a>{note.tags[0] && <Tag tag={note.tags[0]} />}</a>
+                <div className={styles.tagContainer}>
+                    {note.tags[0] && <Tag tag={note.tags[0]} />}
+                </div>
             </div>
         </div>
     );
