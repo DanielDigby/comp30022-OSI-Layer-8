@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import globalStyles from "../../App.module.css";
 import MenuBar from "./MenuBar";
 import Profile from "../../components/Profile";
@@ -8,11 +8,18 @@ import { useHistory } from "react-router-dom";
 import { checkAuthAPI } from "../../helpers/api/users";
 import { SearchBar } from "./SearchBar";
 import { DnD } from "./DnD";
+import { loadPage } from "../../config/redux/noteSlice";
+import { useDispatch } from "react-redux";
 
 const NotesView = (): JSX.Element => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const navigateDashboard = () => history.push("/");
     checkAuthAPI(history);
+
+    useEffect(() => {
+        dispatch(loadPage());
+    });
 
     return (
         <div className={globalStyles.light}>
