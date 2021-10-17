@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./StandardDetailNote.module.css";
 import { INote } from "../../../interfaces/note";
-import { Tag, Event, Reminder, Pin } from "../icons";
+import { Tag, Event, Reminder, Pin, Bin } from "../icons";
 import { Segment, Button } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-import { setEditing } from "../../../config/redux/noteSlice";
+import { deleteNote, setEditing } from "../../../config/redux/noteSlice";
 
 const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
     const dispatch = useDispatch();
@@ -22,9 +22,27 @@ const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
         // relatedNotes,
     } = note;
 
+    const [shouldDelete, setShouldDelete] = useState(false);
+
     const edit = () => {
         dispatch(setEditing(note));
     };
+    const confirmDelete = () => {
+        dispatch(deleteNote(note));
+    };
+
+    const toggleShouldDelete = () => {
+        if (shouldDelete) confirmDelete();
+        else setShouldDelete(true);
+    };
+
+    const binRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => {
+        document.addEventListener("mousedown", (event) => {
+            if (!binRef.current?.contains(event.target as Node))
+                setShouldDelete(false);
+        });
+    });
 
     // api call
     return (
@@ -50,10 +68,16 @@ const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
                     <div className={styles.tagContainer}>
                         {note.tags[0] && <Tag tag={tags[0]} />}
                     </div>
-                    <div className={styles.timeContainer}>
-                        {reminderTime && <Reminder time={reminderTime} />}
+                    <div className={styles.bottom}>
+                        <div ref={binRef} onClick={toggleShouldDelete}>
+                            <Bin shouldDelete={shouldDelete} />
+                        </div>
 
-                        {eventTime && <Event time={eventTime} />}
+                        <div className={styles.timeContainer}>
+                            {reminderTime && <Reminder time={reminderTime} />}
+
+                            {eventTime && <Event time={eventTime} />}
+                        </div>
                     </div>
                 </Segment>
             </Segment.Group>

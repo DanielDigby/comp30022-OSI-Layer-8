@@ -20,6 +20,7 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
     const minimizeStandard = () => {
         toggleCurrentMode(NoteModes.STANDARD);
     };
+
     const expandEvent = () => {
         toggleCurrentMode(NoteModes.EVENT_DETAIL);
     };
@@ -31,7 +32,10 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
 
     useEffect(() => {
         document.addEventListener("mousedown", (event) => {
-            if (!noteRef.current?.contains(event.target as Node))
+            if (
+                !noteRef.current?.contains(event.target as Node) &&
+                mode == NoteModes.STANDARD
+            )
                 minimizeStandard();
         });
     });
@@ -46,7 +50,7 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
             );
         case NoteModes.STANDARD_DETAIL:
             return (
-                <div onClick={minimizeStandard} ref={noteRef}>
+                <div ref={noteRef}>
                     <StandardDetail note={note} />
                 </div>
             );

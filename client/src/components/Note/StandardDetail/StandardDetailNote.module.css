@@ -45,3 +45,9 @@
     left: -12px;
     top: -12px;
 }
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
