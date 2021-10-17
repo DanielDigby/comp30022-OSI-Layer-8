@@ -1,4 +1,4 @@
-import { ColumnDict, StringMap } from "../../views/NotesView/DnD";
+import { ColumnDict, StringMap } from "../../interfaces/columns";
 import { INote } from "../../interfaces/note";
 import _ from "lodash";
 
@@ -45,6 +45,15 @@ export const stringMapToColumns = (
     stringMap: StringMap,
     notes: Array<INote>
 ): ColumnDict => {
+    /* If stringMap is empty but notes is not, then throw an error */
+    if (
+        stringMap.arr1.length === 0 &&
+        stringMap.arr2.length === 0 &&
+        stringMap.arr3.length === 0 &&
+        !(notes.length === 0)
+    )
+        throw new Error("StringMap empty but notes is not empty\n");
+
     /* Use these ararys to fill in the columnDict */
 
     const arr1: Array<INote> = stringMap.arr1.map((clientId) => {

@@ -2,20 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { INote, INoteWithoutIds } from "../../interfaces/note";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
-import { ColumnDict } from "../../interfaces/columns";
+import { ColumnDict, StringMap } from "../../interfaces/columns";
 import { NOTES } from "../../interfaces/endpoints";
-import { mapNotesToColumns } from "../../helpers/utils/columns";
+import {
+    columnsToStringMap,
+    mapNotesToColumns,
+} from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
 import { searchNotes } from "../../helpers/utils/search";
 
 export interface NoteState {
     array: Array<INote>;
-    stringMap: {
-        [x: string]: {
-            name: string;
-            items: Array<string>;
-        };
-    };
+    stringMap: StringMap;
     columnDict: ColumnDict;
     filter: string;
     search: string;
@@ -25,7 +23,7 @@ export interface NoteState {
 
 const initialState: NoteState = {
     array: [],
-    stringMap: {},
+    stringMap: { arr1: [], arr2: [], arr3: [] },
     columnDict: {
         ["col1"]: {
             name: "col1",
@@ -156,8 +154,14 @@ export const noteSlice = createSlice({
             state.editing = null;
         },
 
+        loadPage: (state) => {
+            state.columnDict = mapNotesToColumns(state.array);
+            state.stringMap = columnsToStringMap(state.columnDict);
+        },
+
         updateColumns: (state, action: PayloadAction<ColumnDict>) => {
             state.columnDict = action.payload;
+            state.stringMap = columnsToStringMap(state.columnDict);
         },
 
         updateFilter: (state, action: PayloadAction<string>) => {
@@ -166,16 +170,24 @@ export const noteSlice = createSlice({
             } else {
                 state.filter = action.payload;
             }
-            const filtered = filter(state.array, state.filter);
-            const searched = searchNotes(filtered, state.search);
-            state.columnDict = mapNotesToColumns(searched);
+            if (state.filter === "" && state.search === "")
+                state.stringMap = columnsToStringMap(state.columnDict);
+            else {
+                const filtered = filter(state.array, state.filter);
+                const searched = searchNotes(filtered, state.search);
+                state.columnDict = mapNotesToColumns(searched);
+            }
         },
 
         clearSearch: (state) => {
             const filtered = filter(state.array, state.filter);
             state.search = "";
-            state.searchLoading = false;
-            state.columnDict = mapNotesToColumns(filtered);
+            if (state.filter === "" && state.search === "")
+                state.stringMap = columnsToStringMap(state.columnDict);
+            else {
+                state.searchLoading = false;
+                state.columnDict = mapNotesToColumns(filtered);
+            }
         },
 
         startSearch: (state, action: PayloadAction<string>) => {
