@@ -10,6 +10,8 @@ import {
     mapNotesToColumns,
     removeNoteFromColumnDict,
     removeNoteFromStringMap,
+    addNoteToColumnDict,
+    addNoteToStringMap,
 } from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
 import { searchNotes } from "../../helpers/utils/search";
@@ -62,6 +64,21 @@ export const noteSlice = createSlice({
         createNote: {
             reducer: (state, action: PayloadAction<INote>) => {
                 state.array.push(action.payload);
+
+                // after adding to notes array also add to column dict and string
+                // maps for ui state
+                state.columnDict = addNoteToColumnDict(
+                    action.payload,
+                    state.columnDict
+                );
+                state.stringMap = addNoteToStringMap(
+                    action.payload,
+                    state.stringMap
+                );
+                state.tempMap = addNoteToStringMap(
+                    action.payload,
+                    state.tempMap
+                );
             },
             prepare: (note: INoteWithoutIds) => {
                 // create and assign _clientId
@@ -90,6 +107,8 @@ export const noteSlice = createSlice({
         },
 
         // update a note and patch to backend
+        // updating ui is handled by edit reducers as notes can only be updated
+        // via edit actions
         updateNote: {
             reducer: (state, action: PayloadAction<INote>) => {
                 const note = state.array.find(

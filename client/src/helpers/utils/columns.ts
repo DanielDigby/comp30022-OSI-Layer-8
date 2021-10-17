@@ -164,12 +164,19 @@ export const removeNoteFromStringMap = (
     return stringMap;
 };
 
+export const addNoteToStringMap = (
+    note: INote,
+    stringMap: StringMap
+): StringMap => {
+    stringMap.arr1.unshift(note._clientId);
+    return stringMap;
+};
+
 export const addNoteToColumnDict = (
     note: INote,
     columns: ColumnDict
 ): ColumnDict => {
-    columns["col1"].items.push(note);
-    console.log(columns);
+    columns["col1"].items.unshift(note);
     return columns;
 };
 
