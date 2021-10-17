@@ -1,20 +1,24 @@
 import React from "react";
 import styles from "./StandardNote.module.css";
-import "semantic-ui-css/semantic.min.css";
 import { INote } from "../../../interfaces/note";
+import { Tag, Event, Reminder, Pin } from "../icons";
+import { Segment } from "semantic-ui-react";
 
-import { Segment, Icon } from "semantic-ui-react";
+const StandardNote = ({ note }: { note: INote }): JSX.Element => {
+    const {
+        reminderTime,
+        eventTime,
+        tags,
+        pinned,
+        // title,
+        // text,
+        // _id,
+        // _clientId,
+        // user,
+        // image,
+        // relatedNotes,
+    } = note;
 
-// Added a the <Route path="/note" component={Note} /> for this
-import Tag from "../../Tag";
-import Event from "../../Event";
-import Time from "../../Time";
-
-/* Deleted NotesText folder and it's working now */
-interface NoteProps {
-    note: INote;
-}
-const StandardNote = ({ note }: NoteProps): JSX.Element => {
     // api call
     return (
         <div className={styles.outerContainer}>
@@ -25,23 +29,21 @@ const StandardNote = ({ note }: NoteProps): JSX.Element => {
                             <b>{note.title ? note.title : ""}</b>
                         </div>
                         <div className={styles.pinContainer}>
-                            <Icon name="pin" color="grey" />
+                            <Pin pinned={pinned} />
                         </div>
                     </div>
                     <br />
                     <div className={styles.noteContainer}>
-                        {" "}
-                        {note.text ? note.text : ""}{" "}
+                        {note.text ? note.text : ""}
                     </div>
                     <br />
                     <div className={styles.tagContainer}>
-                        <Tag tagName="Tag" />
-                    </div>
-                    <div className={styles.eventContainer}>
-                        <Event eventName="1 Event" />
+                        {note.tags[0] && <Tag tag={tags[0]} />}
                     </div>
                     <div className={styles.timeContainer}>
-                        <Time timeVar="Sep 5, 9:00 AM" />
+                        {reminderTime && <Reminder time={reminderTime} />}
+
+                        {eventTime && <Event time={eventTime} />}
                     </div>
                 </Segment>
             </Segment.Group>

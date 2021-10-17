@@ -1,6 +1,6 @@
 .outerContainer {
     display: flex;
-    width: 20vw;
+    width: 174px;
     flex-direction: column;
 }
 .pinContainer {
@@ -23,6 +23,9 @@
 }
 .noteContainer {
     display: flex;
+    white-space: pre-line;
+    overflow: hidden;
+    max-height: 70px;
     flex-direction: column;
 }
 .tagContainer {
@@ -33,10 +36,7 @@
 .timeContainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-}
-.eventContainer {
-    display: flex;
-    flex-direction: column;
+    margin-top: 10px;
+    justify-content: flex-end;
     align-items: flex-end;
 }

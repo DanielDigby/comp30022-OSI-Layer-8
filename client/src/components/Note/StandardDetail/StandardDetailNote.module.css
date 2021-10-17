@@ -1,0 +1,54 @@
+.outerContainer {
+    display: flex;
+    width: 174px;
+    flex-direction: column;
+}
+.pinContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+}
+.pinContainer {
+    display: flex;
+    flex-direction: column;
+}
+.noteContainer {
+    display: flex;
+    min-height: 35px;
+    white-space: pre-line;
+    flex-direction: column;
+}
+.tagContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.timeContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.edit {
+    z-index: 1;
+    position: absolute;
+    left: -12px;
+    top: -12px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}

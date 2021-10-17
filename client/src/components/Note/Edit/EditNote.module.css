@@ -1,0 +1,101 @@
+@import "../../../App.module.css";
+
+.Segment {
+    margin-top: 8.8rem;
+    margin-left: 15px;
+    margin-right: 14px;
+    width: 60vw;
+}
+
+.wholeContainer {
+    display: flex;
+    flex-direction: row;
+    height: 35vh;
+}
+
+.scroll {
+    flex-basis: 75%;
+    overflow: scroll;
+    direction: rtl;
+    overflow-x: hidden;
+}
+
+.body {
+    direction: ltr;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.exit {
+    position: absolute;
+    left: -17px;
+    top: -17px;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 5px;
+    justify-content: space-between;
+    flex-basis: 25%;
+}
+
+.doneRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: flex-start;
+    gap: 5px;
+    flex-basis: 13%;
+}
+
+.doneText {
+    color: var(--colour-darkgray);
+    font-size: var(--text-medium);
+}
+
+.buttonRows {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 110px;
+    margin-top: 20%;
+    justify-content: space-around;
+}
+
+.title {
+    direction: ltr;
+    font-family: var(--font-family);
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    color: gray;
+    margin-top: 10px;
+    overflow-wrap: anywhere;
+    padding-right: 1vw;
+    direction: ltr;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    color: gray;
+}
+
+.timePicker {
+    display: flex;
+    align-items: center;
+}
+
+.addTag {
+    display: flex;
+    line-height: 5px;
+    align-items: center;
+}

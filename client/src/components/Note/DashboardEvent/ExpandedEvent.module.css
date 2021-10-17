@@ -1,0 +1,97 @@
+.Segment {
+    width: 300px;
+    margin-bottom: 18px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+/* Container for the top */
+.topContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding-bottom: 10%;
+}
+
+.headingContainer {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    padding-bottom: 5%;
+}
+
+.heading {
+    display: flex;
+    width: 100%;
+}
+
+.spaceBetween {
+    display: flex;
+    width: 30%;
+}
+
+.bellContainer {
+    display: flex;
+    width: 10%;
+}
+
+.textContainer {
+    display: flex;
+    white-space: pre-line;
+    width: 100%;
+    padding-bottom: 5%;
+}
+
+/* Right side icons */
+.iconsContainer {
+    display: flex;
+    width: 10%;
+    flex-direction: column-reverse;
+    padding-bottom: 5%;
+}
+
+/* For go to note and Time */
+.footerContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.goToNote {
+    display: flex;
+    width: 40%;
+}
+
+.timeAndClock {
+    display: flex;
+    width: 60%;
+    flex-direction: row-reverse;
+}
+
+.smallGap {
+    display: flex;
+    width: 4%;
+}
+
+.heading {
+    display: flex;
+    width: 60%;
+}
+.time {
+    display: flex;
+    width: 50%;
+    flex-direction: row-reverse;
+}
+
+.space {
+    width: 5px;
+}
+.timeContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    justify-content: flex-end;
+    align-items: flex-end;
+}

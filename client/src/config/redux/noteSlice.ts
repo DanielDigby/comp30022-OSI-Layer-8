@@ -2,28 +2,35 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { INote, INoteWithoutIds } from "../../interfaces/note";
 import { v4 as uuidv4 } from "uuid";
 import { AxiosResponse } from "axios";
-import { ColumnDict } from "../../views/NotesView/DnD";
+import { ColumnDict, StringMap } from "../../interfaces/columns";
 import { NOTES } from "../../interfaces/endpoints";
-import { mapNotesToColumns } from "../../helpers/utils/columns";
+import {
+    columnsToStringMap,
+    stringMapToColumns,
+    mapNotesToColumns,
+    removeNoteFromColumnDict,
+    removeNoteFromStringMap,
+    addNoteToColumnDict,
+    addNoteToStringMap,
+} from "../../helpers/utils/columns";
 import { filter } from "../../helpers/utils/filter";
 import { searchNotes } from "../../helpers/utils/search";
+
 export interface NoteState {
     array: Array<INote>;
-    stringMap: {
-        [x: string]: {
-            name: string;
-            items: Array<string>;
-        };
-    };
+    stringMap: StringMap;
+    tempMap: StringMap;
     columnDict: ColumnDict;
     filter: string;
     search: string;
     searchLoading: boolean;
+    editing: INote | null;
 }
 
 const initialState: NoteState = {
     array: [],
-    stringMap: {},
+    stringMap: { arr1: [], arr2: [], arr3: [] },
+    tempMap: { arr1: [], arr2: [], arr3: [] },
     columnDict: {
         ["col1"]: {
             name: "col1",
@@ -41,6 +48,7 @@ const initialState: NoteState = {
     filter: "",
     search: "",
     searchLoading: false,
+    editing: null,
 };
 
 export const noteSlice = createSlice({
@@ -56,6 +64,21 @@ export const noteSlice = createSlice({
         createNote: {
             reducer: (state, action: PayloadAction<INote>) => {
                 state.array.push(action.payload);
+
+                // after adding to notes array also add to column dict and string
+                // maps for ui state
+                state.columnDict = addNoteToColumnDict(
+                    action.payload,
+                    state.columnDict
+                );
+                state.stringMap = addNoteToStringMap(
+                    action.payload,
+                    state.stringMap
+                );
+                state.tempMap = addNoteToStringMap(
+                    action.payload,
+                    state.tempMap
+                );
             },
             prepare: (note: INoteWithoutIds) => {
                 // create and assign _clientId
@@ -84,6 +107,8 @@ export const noteSlice = createSlice({
         },
 
         // update a note and patch to backend
+        // updating ui is handled by edit reducers as notes can only be updated
+        // via edit actions
         updateNote: {
             reducer: (state, action: PayloadAction<INote>) => {
                 const note = state.array.find(
@@ -93,13 +118,14 @@ export const noteSlice = createSlice({
                     Object.assign(note, action.payload);
                 }
             },
+
             prepare: (note: INote) => {
                 return {
                     payload: note,
                     meta: {
                         offline: {
                             effect: {
-                                url: NOTES + note._clientId,
+                                url: NOTES + "/" + note._clientId,
                                 method: "PUT",
                                 data: note,
                             },
@@ -128,6 +154,21 @@ export const noteSlice = createSlice({
                 state.array = state.array.filter(
                     (note) => note._clientId !== action.payload._clientId
                 );
+
+                // after deleting a note remove it from both string maps and
+                // columns dict to update ui
+                state.columnDict = removeNoteFromColumnDict(
+                    action.payload,
+                    state.columnDict
+                );
+                state.stringMap = removeNoteFromStringMap(
+                    action.payload,
+                    state.stringMap
+                );
+                state.tempMap = removeNoteFromStringMap(
+                    action.payload,
+                    state.tempMap
+                );
             },
             prepare: (note: INote) => {
                 return {
@@ -135,7 +176,7 @@ export const noteSlice = createSlice({
                     meta: {
                         offline: {
                             effect: {
-                                url: NOTES + note._clientId,
+                                url: NOTES + "/" + note._clientId,
                                 method: "DELETE",
                                 data: "delete",
                             },
@@ -145,8 +186,41 @@ export const noteSlice = createSlice({
             },
         },
 
+        setEditing: (state, action: PayloadAction<INote | null>) => {
+            // when we set editing to a note we want to remove the note from the
+            // current column dict
+            if (action.payload) {
+                state.tempMap = columnsToStringMap(state.columnDict);
+                state.columnDict = removeNoteFromColumnDict(
+                    action.payload,
+                    state.columnDict
+                );
+            }
+
+            state.editing = action.payload;
+        },
+
+        clearEditing: (state) => {
+            // we want to add what we were last editing back into column dict
+            if (state.editing) {
+                console.log("hello");
+                state.columnDict = stringMapToColumns(
+                    state.tempMap,
+                    state.array
+                );
+            }
+            state.editing = null;
+        },
+
+        loadPage: (state) => {
+            state.columnDict = mapNotesToColumns(state.array);
+            state.stringMap = columnsToStringMap(state.columnDict);
+        },
+
         updateColumns: (state, action: PayloadAction<ColumnDict>) => {
             state.columnDict = action.payload;
+            if (state.filter === "" && state.search === "")
+                state.stringMap = columnsToStringMap(state.columnDict);
         },
 
         updateFilter: (state, action: PayloadAction<string>) => {
@@ -155,16 +229,30 @@ export const noteSlice = createSlice({
             } else {
                 state.filter = action.payload;
             }
-            const filtered = filter(state.array, state.filter);
-            const searched = searchNotes(filtered, state.search);
-            state.columnDict = mapNotesToColumns(searched);
+            if (state.filter === "" && state.search === "")
+                state.columnDict = stringMapToColumns(
+                    state.stringMap,
+                    state.array
+                );
+            else {
+                const filtered = filter(state.array, state.filter);
+                const searched = searchNotes(filtered, state.search);
+                state.columnDict = mapNotesToColumns(searched);
+            }
         },
 
         clearSearch: (state) => {
             const filtered = filter(state.array, state.filter);
             state.search = "";
+            if (state.filter === "" && state.search === "")
+                state.columnDict = stringMapToColumns(
+                    state.stringMap,
+                    state.array
+                );
+            else {
+                state.columnDict = mapNotesToColumns(filtered);
+            }
             state.searchLoading = false;
-            state.columnDict = mapNotesToColumns(filtered);
         },
 
         startSearch: (state, action: PayloadAction<string>) => {
@@ -187,6 +275,9 @@ export const {
     createNote,
     updateNote,
     deleteNote,
+    setEditing,
+    clearEditing,
+    loadPage,
     updateColumns,
     updateFilter,
     clearSearch,

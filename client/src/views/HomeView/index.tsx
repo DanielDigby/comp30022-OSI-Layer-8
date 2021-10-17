@@ -28,9 +28,9 @@ const HomeView = (): JSX.Element => {
             text: randomName.place(),
             image: null,
             reminderTime: null,
-            eventTime: null,
+            eventTime: new Date().toISOString(),
             pinned: false,
-            tags: [],
+            tags: ["Birthdays"],
             relatedNotes: [],
         };
         dispatch(createNote(note));

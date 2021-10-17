@@ -134,11 +134,7 @@ const EventNotes = ({ notes }: EventNotesProps) => {
         <div className={styles.eventsContainer}>
             {eventNotes.map((note: INote) => {
                 return (
-                    <Note
-                        note={note}
-                        mode={NoteModes.STANDARD}
-                        key={note._id}
-                    />
+                    <Note note={note} mode={NoteModes.EVENT} key={note._id} />
                 );
             })}
         </div>
@@ -170,11 +166,9 @@ const PinnedNotes = ({ notes }: PinnedNotesProps) => {
             <div className={styles.pinnedTopContainer}>
                 {pinnedNotes1.map((note: INote) => {
                     return (
-                        <Note
-                            note={note}
-                            mode={NoteModes.STANDARD}
-                            key={note._id}
-                        />
+                        <div key={note._id} className={styles.pinnedSpacer}>
+                            <Note note={note} mode={NoteModes.STANDARD} />
+                        </div>
                     );
                 })}
             </div>
@@ -182,11 +176,9 @@ const PinnedNotes = ({ notes }: PinnedNotesProps) => {
             <div className={styles.pinnedBottomContainer}>
                 {pinnedNotes2.map((note: INote) => {
                     return (
-                        <Note
-                            note={note}
-                            mode={NoteModes.STANDARD}
-                            key={note._id}
-                        />
+                        <div key={note._id} className={styles.pinnedSpacer}>
+                            <Note note={note} mode={NoteModes.STANDARD} />
+                        </div>
                     );
                 })}
             </div>

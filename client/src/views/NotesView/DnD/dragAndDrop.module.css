@@ -12,7 +12,7 @@
 }
 
 .scroll {
-    margin-top: 52.3px;
+    margin-top: 42.3px;
     margin-right: 45px;
     width: 92.5%;
     overflow: scroll;
@@ -23,6 +23,8 @@
 }
 
 .dndContainer {
+    padding-top: 10px;
+    padding-left: 10px;
     width: 80%;
 }
 

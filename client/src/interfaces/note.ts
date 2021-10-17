@@ -8,8 +8,8 @@ export interface INoteWithoutIds {
     title: string | null;
     text: string | null;
     image: string | null;
-    reminderTime: Date | null;
-    eventTime: Date | null;
+    reminderTime: string | null;
+    eventTime: string | null;
     pinned: boolean;
     tags: Array<string>;
     relatedNotes: Array<string>;

@@ -23,7 +23,10 @@ export const filterNotes = (
                 .filter((note) => note.eventTime !== null)
                 .sort((a, b) => {
                     if (a.eventTime === null || b.eventTime === null) return 0;
-                    return a.eventTime.valueOf() - b.eventTime.valueOf();
+                    return (
+                        new Date(a.eventTime).valueOf() -
+                        new Date(b.eventTime).valueOf()
+                    );
                 });
 
             break;
@@ -34,7 +37,10 @@ export const filterNotes = (
                 .sort((a, b) => {
                     if (a.reminderTime === null || b.reminderTime === null)
                         return 0;
-                    return a.reminderTime.valueOf() - b.reminderTime.valueOf();
+                    return (
+                        new Date(a.reminderTime).valueOf() -
+                        new Date(b.reminderTime).valueOf()
+                    );
                 });
             break;
 
