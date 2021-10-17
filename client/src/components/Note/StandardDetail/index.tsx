@@ -1,36 +1,59 @@
 import React from "react";
 import styles from "./StandardDetailNote.module.css";
-import { Tag } from "../icons";
 import { INote } from "../../../interfaces/note";
-import { Segment, Icon } from "semantic-ui-react";
+import { Tag, Event, Reminder, Pin } from "../icons";
+import { Segment, Button } from "semantic-ui-react";
+import { useDispatch } from "react-redux";
+import { setEditing } from "../../../config/redux/noteSlice";
 
 const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
+    const dispatch = useDispatch();
+    const {
+        reminderTime,
+        eventTime,
+        tags,
+        pinned,
+        // title,
+        // text,
+        // _id,
+        // _clientId,
+        // user,
+        // image,
+        // relatedNotes,
+    } = note;
+
+    const edit = () => {
+        dispatch(setEditing(note));
+    };
+
+    // api call
     return (
-        <div className={styles.Segment}>
+        <div className={styles.outerContainer}>
             <Segment.Group raised>
-                <Segment>
-                    <div className={styles.whole}>
-                        <div className={styles.top}>
-                            <div className={styles.title}>{note.title}</div>
-                            <Icon name="thumbtack" size="big" color="grey" />
+                <div className={styles.edit} onClick={edit}>
+                    <Button circular icon="edit" size="tiny" />
+                </div>
+                <Segment color="orange" styles={{ zIndex: "0" }}>
+                    <div className={styles.topContainer}>
+                        <div className={styles.titleContainer}>
+                            <b>{note.title ? note.title : ""}</b>
                         </div>
-                        <div className={styles.text}>{note.text}</div>
-                        <div className={styles.bottom}>
-                            <div className={styles.leftBottom}>
-                                <Tag tag={note.tags[0]} />
-                                <div className={styles.editRow}>
-                                    <Icon name="edit outline" size="big" />
-                                    <div className={styles.editText}>
-                                        Edit note
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={styles.rightBottom}>
-                                <Icon name="address book outline" size="big" />
-                                <Icon name="bell slash outline" size="big" />
-                                <Icon name="clock outline" size="big" />
-                            </div>
+                        <div className={styles.pinContainer}>
+                            <Pin pinned={pinned} />
                         </div>
+                    </div>
+                    <br />
+                    <div className={styles.noteContainer}>
+                        {note.text ? note.text : ""}
+                    </div>
+                    <br />
+                    <div className={styles.tagContainer}>
+                        {note.tags[0] && <Tag tag={tags[0]} />}
+                    </div>
+                    <div className={styles.timeContainer}>
+                        {reminderTime && <Reminder time={reminderTime} />}
+
+                        {eventTime && <Event time={eventTime} />}
                     </div>
                 </Segment>
             </Segment.Group>

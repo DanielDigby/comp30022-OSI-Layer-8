@@ -4,7 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { RootState } from "../../../config/redux/store";
 import { capitalize } from "lodash";
 import { useSelector } from "react-redux";
-import { createNoteAPI } from "../../../helpers/api/notes";
+import { createNoteAPI, updateNoteAPI } from "../../../helpers/api/notes";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { Segment, Form, Icon, Button } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
@@ -20,6 +20,8 @@ const EditNote = ({
     doneEditing: () => void;
 }): JSX.Element => {
     const user = useSelector((state: RootState) => state.user.account);
+    const editing = useSelector((state: RootState) => state.notes.editing);
+
     const { tags } = note;
 
     const [title, setTitle] = useState(note.title ? note.title : "");
@@ -80,18 +82,35 @@ const EditNote = ({
     const handleSubmit = async () => {
         if (fieldsNotChanged()) return;
 
-        const newNote: INoteWithoutIds = {
-            title: title,
-            user: user._id,
-            text: text,
-            image: null,
-            reminderTime: reminderTime !== "" ? reminderTime : null,
-            eventTime: eventTime !== "" ? eventTime : null,
-            pinned: pinned,
-            tags: [capitalize(tag)],
-            relatedNotes: [],
-        };
-        createNoteAPI(newNote);
+        if (editing) {
+            const updatedNote: INote = {
+                _id: note._id,
+                _clientId: note._clientId,
+                title: title,
+                user: user._id,
+                text: text,
+                image: null,
+                reminderTime: reminderTime !== "" ? reminderTime : null,
+                eventTime: eventTime !== "" ? eventTime : null,
+                pinned: pinned,
+                tags: [capitalize(tag)],
+                relatedNotes: [],
+            };
+            updateNoteAPI(updatedNote);
+        } else {
+            const newNote: INoteWithoutIds = {
+                title: title,
+                user: user._id,
+                text: text,
+                image: null,
+                reminderTime: reminderTime !== "" ? reminderTime : null,
+                eventTime: eventTime !== "" ? eventTime : null,
+                pinned: pinned,
+                tags: [capitalize(tag)],
+                relatedNotes: [],
+            };
+            createNoteAPI(newNote);
+        }
         doneEditing();
     };
 

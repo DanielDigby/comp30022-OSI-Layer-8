@@ -3,9 +3,14 @@ import { Segment, Icon } from "semantic-ui-react";
 import { INote, NoteModes } from "../../../interfaces/note";
 import Note from "../../../components/Note";
 import styles from "./NewNote.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../config/redux/store";
+import { clearEditing } from "../../../config/redux/noteSlice";
 
 const NewNote = (): JSX.Element => {
-    const [isEditing, toggleEditing] = useState(false);
+    const dispatch = useDispatch();
+    const editing = useSelector((state: RootState) => state.notes.editing);
+    const [newEdit, toggleNewEdit] = useState(false);
     const emptyNote: INote = {
         title: null,
         user: null,
@@ -21,19 +26,29 @@ const NewNote = (): JSX.Element => {
     };
 
     const toggleOn = () => {
-        toggleEditing(true);
+        toggleNewEdit(true);
     };
     const toggleOff = () => {
-        toggleEditing(false);
+        toggleNewEdit(false);
     };
 
-    if (isEditing)
+    if (newEdit)
         return (
             <div className={styles.edit}>
                 <Note
                     note={emptyNote}
                     mode={NoteModes.EDIT}
                     doneEditing={toggleOff}
+                />
+            </div>
+        );
+    else if (editing)
+        return (
+            <div className={styles.edit}>
+                <Note
+                    note={editing}
+                    mode={NoteModes.EDIT}
+                    doneEditing={() => dispatch(clearEditing())}
                 />
             </div>
         );
