@@ -29,7 +29,6 @@ const NewNote = (): JSX.Element => {
         toggleNewEdit(true);
     };
     const toggleOff = () => {
-        console.log("off");
         dispatch(clearEditing());
         toggleNewEdit(false);
     };

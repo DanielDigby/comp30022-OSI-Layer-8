@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 // import PrivateRoute from "./components/PrivateRoute";
 import styles from "./App.module.css";
 
@@ -18,9 +19,9 @@ const App = (): JSX.Element => {
                 <Route path="/register" component={RegisterView} />
                 <Route path="/login" component={LogInView} />
 
-                <Route path="/" component={DashboardView} />
-                <Route path="/settings" component={SettingsView} />
-                <Route path="notes" component={NotesView} />
+                <PrivateRoute path="/settings" component={SettingsView} />
+                <PrivateRoute path="/notes" component={NotesView} />
+                <PrivateRoute path="/" component={DashboardView} />
             </Switch>
         </div>
     );
