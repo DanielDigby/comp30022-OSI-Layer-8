@@ -50,7 +50,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,
-    enhancers: [offline({ ...config, effect }) as StoreEnhancer],
+    enhancers: [
+        offline({ ...config, persist: undefined, effect }) as StoreEnhancer,
+    ],
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
