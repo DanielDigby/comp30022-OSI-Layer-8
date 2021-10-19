@@ -20,9 +20,14 @@
     "build": "yarn workspaces foreach run build",
     "start": "yarn workspace server start",
     "dev": "yarn workspace client dev & yarn workspace server dev",
+    "integration": "yarn workspace client dev & yarn workspace server integration",
     "image": "yarn install && COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
     "docker": "docker-compose -p 'cara' up",
     "down": "docker-compose down"
   },
-  "packageManager": "yarn@3.0.0"
+  "packageManager": "yarn@3.0.0",
+  "devDependencies": {
+    "cypress": "^8.6.0",
+    "mongoose": "^6.0.11"
+  }
 }
