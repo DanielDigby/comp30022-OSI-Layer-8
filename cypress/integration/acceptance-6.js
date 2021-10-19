@@ -1,6 +1,6 @@
-describe('5. User can navigate from dashboard to notes page', () => {
+describe('6. User can reposition and edit notes on notes page', () => {
   
-    it('Can move to notes page to view all notes from dashboard page after auth', () => {
+    it('Can drag a note on the notes page to a new location', () => {
       // can use this register hook to auth a user before doing the rest of the testing
       cy.register()
       cy.visit('/notes')
