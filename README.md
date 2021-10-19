@@ -96,6 +96,7 @@ To start integration testing follow these steps:
 - Start docker desktop on your machine
 - run in terminal 1: 
 ```
+yarn install
 docker pull mongo
 docker run -d mongo-on-docker -p 27017:27017 mongo
 ```
