@@ -152,6 +152,7 @@ const EditNote = ({
                                                 <div className={styles.addTag}>
                                                     <Tag tag=" " />
                                                     <Form.Input
+                                                        id="add-tag"
                                                         transparent
                                                         placeholder="Add tag"
                                                         value={tag}
