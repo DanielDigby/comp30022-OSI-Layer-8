@@ -44,6 +44,7 @@ export const DnD = (): JSX.Element => {
                                     {(provided) => {
                                         return (
                                             <div
+                                                id={id}
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                                 className={dndStyles.column}

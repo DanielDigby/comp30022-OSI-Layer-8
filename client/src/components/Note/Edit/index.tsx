@@ -128,6 +128,7 @@ const EditNote = ({
                                     <div className={styles.title}>
                                         <Form.Input
                                             transparent
+                                            id="edit-title"
                                             placeholder="Add title"
                                             value={title}
                                             onChange={handleTitle}
