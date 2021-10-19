@@ -92,7 +92,6 @@ const deleteNote = async (req: IRequestWithUser, res: express.Response) => {
     try {
         const clientId = req.params.Id;
         const note = await Note.findOne({ _clientId: clientId }, {});
-        console.log(note);
         validateUser(
             (note as unknown as INote).user,
             req.user._id,

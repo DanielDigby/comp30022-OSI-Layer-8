@@ -12,7 +12,6 @@ const connectTestingDB = async () => {
     const uri = await mongoServer.getUri();
 
     await mongoose.connect(uri);
-
     const db = mongoose.connection;
 
     db.on("error", (err) => {

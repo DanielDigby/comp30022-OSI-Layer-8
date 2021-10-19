@@ -5,6 +5,10 @@ require("dotenv").config();
 if (process.env.NODE_ENV !== "test") {
     require("./development");
 }
+if (process.env.CYPRESS == "true") {
+    const db = require("./integration");
+    db.initializeIntegrationDB();
+}
 
 // configure models
 require("../../modules/note/noteModel");
