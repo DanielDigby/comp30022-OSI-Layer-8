@@ -73,6 +73,7 @@ const RegisterView = (): JSX.Element => {
                     <Form.Field>
                         <label>Email</label>
                         <Input
+                            id="input-email"
                             placeholder="Email"
                             value={email}
                             onChange={handleEmail}
@@ -82,6 +83,7 @@ const RegisterView = (): JSX.Element => {
                         <Form.Field>
                             <label>First Name</label>
                             <Input
+                                id="input-first-name"
                                 placeholder="First Name"
                                 value={firstName}
                                 onChange={handleFirstName}
@@ -91,6 +93,7 @@ const RegisterView = (): JSX.Element => {
                         <Form.Field>
                             <label>Last Name</label>
                             <Input
+                                id="input-last-name"
                                 placeholder="Last Name"
                                 value={lastName}
                                 onChange={handleLastName}
@@ -101,6 +104,7 @@ const RegisterView = (): JSX.Element => {
                         <Form.Field>
                             <label>Password</label>
                             <Input
+                                id="input-password-1"
                                 placeholder="Password"
                                 type="password"
                                 value={password1}
@@ -110,6 +114,7 @@ const RegisterView = (): JSX.Element => {
                         <Form.Field>
                             <label>Confirm</label>
                             <Input
+                                id="input-password-2"
                                 placeholder="Password"
                                 type="password"
                                 value={password2}
@@ -125,6 +130,7 @@ const RegisterView = (): JSX.Element => {
                             onClick={() => history.goBack()}
                         />
                         <Button
+                            id="submit"
                             content="Sign Up"
                             color="orange"
                             type="submit"
