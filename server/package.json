@@ -12,7 +12,7 @@
         "dev": "cross-env-shell CACHE=false nodemon src/index.ts",
         "docker": "nodemon -L src/index.ts",
         "test": "jest",
-        "integration": "cross-env-shell CACHE=false NODE_ENV=test CYPRESS=true nodemon src/index.ts"
+        "integration": "cross-env-shell CACHE=false CYPRESS=true nodemon src/index.ts"
     },
     "jest": {
         "testEnvironment": "node",

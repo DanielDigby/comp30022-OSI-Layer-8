@@ -19,4 +19,19 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+
+  on('task', {
+    async clearDB () {
+      const mongoose = require("mongoose");
+
+      const DB = "comp30022-crm-app";
+      const uri = `mongodb://localhost:27017/${DB}`;
+
+      await mongoose.connect(uri);
+      await mongoose.connection.dropDatabase();
+      await mongoose.connection.close();
+      
+      return null;
+    }
+  })
 }

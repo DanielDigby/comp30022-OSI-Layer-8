@@ -88,6 +88,31 @@ and github will automatically abort the merge
 
 All we've got to do is write tests as/before we write code and it will keep our ship sailing
 
+# Integration testing
+
+The integration tests are set up to use a local mongo database so that we can clear it between each test.
+To start integration testing follow these steps:
+
+- Start docker desktop on your machine
+- run in terminal 1: 
+```
+docker pull mongo
+docker run -d mongo-on-docker -p 27017:27017 mongo
+```
+- run in terminal 2:
+```
+yarn integration
+```
+- run in terminal 3:
+```
+yarn run cypress open
+```
+- finally choose the test suite you would like to run
+
+The test suites are set up in `/cypress/integration/` and are configured to dump the database before each test
+so when testing parts of the application that require auth you will need to register a user before starting
+to test functionality
+
 # Deployment
 
 The way deployment works is by pushing the repo to heroku whenever we make a merge or a push to main and after the test pipeline has passed, what heroku then does is:
