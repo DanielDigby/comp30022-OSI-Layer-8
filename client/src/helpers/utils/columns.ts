@@ -151,6 +151,7 @@ export const removeNoteFromStringMap = (
 ): StringMap => {
     if (!removeNote) return stringMap;
 
+    if (stringMap === undefined) return stringMap;
     stringMap.arr1 = stringMap.arr1.filter(
         (_clientId) => _clientId !== removeNote._clientId
     );
