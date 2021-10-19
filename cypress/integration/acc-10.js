@@ -7,7 +7,7 @@ describe('10. User can add a filter', () => {
 
       // add a filter
       cy.get('*[class^="plus large icon"]').click()
-      cy.get('#add-tag').type("new tag")
+      cy.get('#input-tag').type("new tag")
       cy.get('*[class^="plus icon"]').click()
       cy.get('*[class^="ui fluid secondary vertical menu"]').children().contains('New Tag')
     })
