@@ -116,12 +116,10 @@ to test functionality
 
 # Deployment
 
-The way deployment works is by pushing the repo to heroku whenever we make a merge or a push to main and after the test pipeline has passed, what heroku then does is:
+The way deployment works is by pushing the repo to heroku whenever we make a merge or a push to main and after the test pipeline has passed. Heroku then builds our production container as specified in the Dockerfile at project root.
 
-```
-yarn workspaces foreach run build
-yarn workspace server run start
-```
+It does a multi stage build where it installs and compiles both apps then copies only necessary files to run over to the production build stage to minimize the size of our production image.
+Heroku has a self serve redis cache add on that we have included so while we use a redis cache in our development container orchestration we do not need one for deployment, as we hook into their redis cache.
 
 ^ then the server serves the static files that were build from react so we dont need to start the react app
 
