@@ -136,6 +136,7 @@ const EditNote = ({
                                     </div>
                                     <div className={styles.content}>
                                         <Form.TextArea
+                                            id="edit-text"
                                             control={TextareaAutosize}
                                             style={{
                                                 padding: "0px",

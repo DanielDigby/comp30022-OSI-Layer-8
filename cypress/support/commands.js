@@ -33,6 +33,8 @@ Cypress.Commands.add('register', () => {
     })
 
 // Use this command to drag notes around on notes page
+// sourced from:
+// https://github.com/cypress-io/cypress/issues/3942#issuecomment-485648100
 Cypress.Commands.add('dragAndDrop', (subject, target) => {
     Cypress.log({
         name: 'DRAGNDROP',
@@ -79,6 +81,11 @@ Cypress.Commands.add('dragAndDrop', (subject, target) => {
         });
 });
 
+Cypress.Commands.add('addNote', (title) => {
+    cy.get('*[class^="NewNote_container"]').click()
+    cy.get('#edit-title').type(title)
+    cy.get('*[class^="ui orange tiny icon button"]').click()
+});
 
 //
 //
