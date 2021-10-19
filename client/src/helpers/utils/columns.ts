@@ -168,7 +168,9 @@ export const addNoteToStringMap = (
     note: INote,
     stringMap: StringMap
 ): StringMap => {
-    stringMap.arr1.unshift(note._clientId);
+    if (stringMap !== undefined) {
+        stringMap.arr1.unshift(note._clientId);
+    }
     return stringMap;
 };
 
