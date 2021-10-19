@@ -1,6 +1,6 @@
 describe('6. User can edit notes on notes page', () => {
   
-    it('Can drag a note on the notes page to a new location', () => {
+    it('Can select an existing note and edit it', () => {
       cy.register()
       cy.visit('/notes')
 
