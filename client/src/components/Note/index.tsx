@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Edit from "./Edit";
-import Image from "./Image";
 import Standard from "./Standard";
 import StandardDetail from "./StandardDetail";
 import EventNoteView from "./DashboardEvent/EventNoteView";
@@ -44,10 +43,9 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
     switch (currentMode) {
         case NoteModes.STANDARD:
             return (
-                // <div onClick={expandStandard}>
-                //     <Standard note={note} />
-                // </div>
-                <Image />
+                <div onClick={expandStandard}>
+                    <Standard note={note} />
+                </div>
             );
         case NoteModes.STANDARD_DETAIL:
             return (

@@ -12,7 +12,7 @@ import {
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { Segment, Form, Icon, Button } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
-import { Tag, Pin, Reminder, Event, Upload } from "../icons";
+import { Tag, Pin, Reminder, Event, Upload, Bin } from "../icons";
 
 const DATE_FORMAT = "HH:mm MM-DD-YYYY";
 
@@ -140,49 +140,68 @@ const EditNote = ({
                     </div>
                     <Form onSubmit={handleSubmit}>
                         <div className={styles.wholeContainer}>
-                            <div className={styles.scroll}>
-                                <div className={styles.body}>
-                                    <div className={styles.title}>
-                                        <Form.Input
-                                            transparent
-                                            id="edit-title"
-                                            placeholder="Add title"
-                                            value={title}
-                                            onChange={handleTitle}
+                            {/* Dont show text tools if image being uploaded */}
+                            {image ? (
+                                <div className={styles.imageContainer}>
+                                    <Segment.Group
+                                        raised
+                                        className={styles.imageSegmentStyle}
+                                    >
+                                        <img
+                                            src={image}
+                                            className={styles.image}
                                         />
-                                    </div>
-                                    <div className={styles.content}>
-                                        <Form.TextArea
-                                            id="edit-text"
-                                            control={TextareaAutosize}
-                                            style={{
-                                                padding: "0px",
-                                                border: "none",
-                                                overflow: "hidden",
-                                            }}
-                                            placeholder="Add text"
-                                            value={text}
-                                            onChange={handleText}
-                                        />
-                                        <div className={styles.tag}>
-                                            {tags[0] ? (
-                                                <Tag tag={tags[0]} />
-                                            ) : (
-                                                <div className={styles.addTag}>
-                                                    <Tag tag=" " />
-                                                    <Form.Input
-                                                        id="add-tag"
-                                                        transparent
-                                                        placeholder="Add tag"
-                                                        value={tag}
-                                                        onChange={handleTag}
-                                                    />
-                                                </div>
-                                            )}
+                                    </Segment.Group>
+                                </div>
+                            ) : (
+                                <div className={styles.scroll}>
+                                    <div className={styles.body}>
+                                        <div className={styles.title}>
+                                            <Form.Input
+                                                transparent
+                                                id="edit-title"
+                                                placeholder="Add title"
+                                                value={title}
+                                                onChange={handleTitle}
+                                            />
+                                        </div>
+                                        <div className={styles.content}>
+                                            <Form.TextArea
+                                                id="edit-text"
+                                                control={TextareaAutosize}
+                                                style={{
+                                                    padding: "0px",
+                                                    border: "none",
+                                                    overflow: "hidden",
+                                                }}
+                                                placeholder="Add text"
+                                                value={text}
+                                                onChange={handleText}
+                                            />
+                                            <div className={styles.tag}>
+                                                {tags[0] ? (
+                                                    <Tag tag={tags[0]} />
+                                                ) : (
+                                                    <div
+                                                        className={
+                                                            styles.addTag
+                                                        }
+                                                    >
+                                                        <Tag tag=" " />
+                                                        <Form.Input
+                                                            id="add-tag"
+                                                            transparent
+                                                            placeholder="Add tag"
+                                                            value={tag}
+                                                            onChange={handleTag}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
 
                             <div className={styles.rightContainer}>
                                 <div className={styles.doneRow}>
@@ -209,10 +228,25 @@ const EditNote = ({
                                         {pinned ? "Pinned" : "Pin"}
                                         <Pin pinned={pinned} />
                                     </div>
-                                    <div className={styles.button}>
-                                        Add image
-                                        <Upload handleFile={handleFile} />
-                                    </div>
+
+                                    {image ? (
+                                        <div
+                                            className={styles.button}
+                                            onClick={() => setImage(null)}
+                                        >
+                                            Remove image
+                                            <div className={styles.bin}>
+                                                <Bin shouldDelete={true} />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className={styles.button}>
+                                            Add image
+                                            <Upload
+                                                handleFile={handleFile}
+                                            />{" "}
+                                        </div>
+                                    )}
 
                                     {showReminderTimePicker ? (
                                         <div className={styles.timePicker}>

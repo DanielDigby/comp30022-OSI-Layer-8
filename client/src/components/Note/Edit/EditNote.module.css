@@ -99,3 +99,29 @@
     line-height: 5px;
     align-items: center;
 }
+
+.imageContainer {
+    display: flex;
+    width: 80%;
+}
+
+.imageSegmentStyle {
+    width: 40%;
+    display: flex;
+    align-items: center; /* vertical */
+    justify-content: center; /* horizontal */
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.image {
+    object-fit: cover;
+    width: 110%;
+    height: 110%;
+}
+
+.bin {
+    font-size: medium;
+    margin-left: 6px;
+    margin-right: -4px;
+}
