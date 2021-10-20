@@ -4,7 +4,11 @@ import TextareaAutosize from "react-textarea-autosize";
 import { RootState } from "../../../config/redux/store";
 import { capitalize } from "lodash";
 import { useSelector } from "react-redux";
-import { createNoteAPI, updateNoteAPI } from "../../../helpers/api/notes";
+import {
+    createNoteAPI,
+    updateNoteAPI,
+    uploadNoteImageAPI,
+} from "../../../helpers/api/notes";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { Segment, Form, Icon, Button } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
@@ -51,9 +55,6 @@ const EditNote = ({
     const pinOnClick = () => {
         togglePinned(!pinned);
     };
-    const uploadOnClick = () => {
-        return;
-    };
     const handleEventTime = (
         event: React.SyntheticEvent | undefined,
         data: { value: string }
@@ -67,6 +68,28 @@ const EditNote = ({
     ) => {
         setReminderTime(data.value);
         toggleShowReminderTimePicker(false);
+    };
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fileList = e.target.files;
+
+        try {
+            const updatedNote: INote = {
+                _id: note._id,
+                _clientId: note._clientId,
+                title: title,
+                user: user._id,
+                text: text,
+                image: null,
+                reminderTime: reminderTime !== "" ? reminderTime : null,
+                eventTime: eventTime !== "" ? eventTime : null,
+                pinned: pinned,
+                tags: [capitalize(tag)],
+                relatedNotes: [],
+            };
+            uploadNoteImageAPI(updatedNote, fileList);
+        } catch (err) {
+            alert("Profile picture upload failed");
+        }
     };
 
     const fieldsNotChanged = () => {
@@ -195,12 +218,9 @@ const EditNote = ({
                                         {pinned ? "Pinned" : "Pin"}
                                         <Pin pinned={pinned} />
                                     </div>
-                                    <div
-                                        className={styles.button}
-                                        onClick={uploadOnClick}
-                                    >
+                                    <div className={styles.button}>
                                         Add image
-                                        <Upload />
+                                        <Upload handleFile={handleFile} />
                                     </div>
 
                                     {showReminderTimePicker ? (
