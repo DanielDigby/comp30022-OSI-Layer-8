@@ -33,7 +33,7 @@ app.use(Sentry.Handlers.requestHandler());
 // TracingHandler creates a trace for every incoming request
 app.use(Sentry.Handlers.tracingHandler());
 
-// middleware
+// set up middleware
 app.use(
     helmet({
         contentSecurityPolicy: {
