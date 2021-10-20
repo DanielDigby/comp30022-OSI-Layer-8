@@ -151,6 +151,7 @@ export const removeNoteFromStringMap = (
 ): StringMap => {
     if (!removeNote) return stringMap;
 
+    if (stringMap === undefined) return stringMap;
     stringMap.arr1 = stringMap.arr1.filter(
         (_clientId) => _clientId !== removeNote._clientId
     );
@@ -168,7 +169,9 @@ export const addNoteToStringMap = (
     note: INote,
     stringMap: StringMap
 ): StringMap => {
-    stringMap.arr1.unshift(note._clientId);
+    if (stringMap !== undefined) {
+        stringMap.arr1.unshift(note._clientId);
+    }
     return stringMap;
 };
 
