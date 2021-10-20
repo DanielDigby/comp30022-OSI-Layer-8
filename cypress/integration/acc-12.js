@@ -11,6 +11,7 @@ describe("10. User can add a filter", () => {
     cy.get('*[class^="ui orange tiny icon button"]').click();
 
     // delete the note
+    cy.get('*[class^="StandardNote_outerContainer"]').click();
     cy.get('*[class^="grey trash alternative outline icon"]').click();
     cy.get('*[class^="grey trash alternative outline icon"]').click();
 
