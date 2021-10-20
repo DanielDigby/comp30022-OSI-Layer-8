@@ -1,4 +1,5 @@
 import React from "react";
+import testImg from "./test.jpeg";
 import styles from "./StandardNote.module.css";
 import { INote } from "../../../interfaces/note";
 import { Tag, Event, Reminder, Pin } from "../icons";
@@ -10,14 +11,24 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
         eventTime,
         tags,
         pinned,
+        image,
         // title,
         // text,
         // _id,
         // _clientId,
         // user,
-        // image,
+
         // relatedNotes,
     } = note;
+
+    if (image)
+        return (
+            <div className={styles.outerContainer}>
+                <Segment.Group raised className={styles.imageSegmentStyle}>
+                    <img src={testImg} className={styles.image} />
+                </Segment.Group>
+            </div>
+        );
 
     // api call
     return (

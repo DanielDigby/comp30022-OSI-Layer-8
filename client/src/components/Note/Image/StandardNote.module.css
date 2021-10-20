@@ -1,6 +1,7 @@
 .outerContainer {
     display: flex;
     width: 174px;
+
     flex-direction: column;
 }
 .pinContainer {
