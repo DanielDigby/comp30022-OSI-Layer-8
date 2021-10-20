@@ -1,7 +1,7 @@
 describe("20. A user can share notes with another user", () => {
   it(
-    "Registers a new user then navigates to the notes page and opens the new note editor." +
-      "Succeeds when it finds the button to link the new note to another note",
+    "Registers a new user then navigates to the notes page and creates a new note." +
+      "Succeeds when it finds the button to share the new note with another user",
     () => {
       cy.register();
       cy.visit("/notes");
