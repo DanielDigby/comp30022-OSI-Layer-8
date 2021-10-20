@@ -106,6 +106,7 @@
 }
 
 .imageSegmentStyle {
+    max-height: 250px;
     width: 40%;
     display: flex;
     align-items: center; /* vertical */

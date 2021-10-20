@@ -42,7 +42,7 @@
 }
 
 .imageSegmentStyle {
-    height: 100px;
+    max-height: 250px;
     display: flex;
     align-items: center; /* vertical */
     justify-content: center; /* horizontal */
