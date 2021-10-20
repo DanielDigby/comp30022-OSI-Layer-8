@@ -11,7 +11,7 @@
         "start": "node .",
         "dev": "cross-env-shell CACHE=false nodemon src/index.ts",
         "docker": "nodemon -L src/index.ts",
-        "test": "jest",
+        "test": "cross-env-shell JWT_SECRET=secret jest",
         "integration": "cross-env-shell CACHE=false CYPRESS=true nodemon src/index.ts"
     },
     "jest": {
