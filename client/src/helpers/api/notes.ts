@@ -21,9 +21,8 @@ export const deleteNoteAPI = (note: INote): void => {
 };
 
 export const uploadNoteImageAPI = async (
-    note: INote,
     fileList: FileList | null
-): Promise<void> => {
+): Promise<string | null> => {
     if (!fileList) throw new Error("No file selected");
 
     if (fileList[0]) {
@@ -37,8 +36,8 @@ export const uploadNoteImageAPI = async (
 
             if (!url) throw new Error("Failed upload");
 
-            note.image = url;
-            store.dispatch(updateNote(note));
+            return url;
         }
     }
+    return null;
 };

@@ -32,6 +32,7 @@ const EditNote = ({
     const [text, setText] = useState(note.text ? note.text : "");
     const [pinned, togglePinned] = useState(note.pinned);
     const [tag, setTag] = useState(note.tags[0] ? note.tags[0] : "");
+    const [image, setImage] = useState(note.image);
     const [showEventTimePicker, toggleShowEventTimePicker] = useState(false);
     const [eventTime, setEventTime] = useState(
         note.eventTime ? note.eventTime : ""
@@ -73,22 +74,11 @@ const EditNote = ({
         const fileList = e.target.files;
 
         try {
-            const updatedNote: INote = {
-                _id: note._id,
-                _clientId: note._clientId,
-                title: title,
-                user: user._id,
-                text: text,
-                image: null,
-                reminderTime: reminderTime !== "" ? reminderTime : null,
-                eventTime: eventTime !== "" ? eventTime : null,
-                pinned: pinned,
-                tags: [capitalize(tag)],
-                relatedNotes: [],
-            };
-            uploadNoteImageAPI(updatedNote, fileList);
+            const url = await uploadNoteImageAPI(fileList);
+            console.log(url);
+            setImage(url);
         } catch (err) {
-            alert("Profile picture upload failed");
+            alert("upload failed");
         }
     };
 
@@ -99,7 +89,8 @@ const EditNote = ({
             pinned === false &&
             tag === "" &&
             eventTime === "" &&
-            reminderTime === ""
+            reminderTime === "" &&
+            image == null
         )
             return true;
         else return false;
@@ -115,7 +106,7 @@ const EditNote = ({
                 title: title,
                 user: user._id,
                 text: text,
-                image: null,
+                image: image,
                 reminderTime: reminderTime !== "" ? reminderTime : null,
                 eventTime: eventTime !== "" ? eventTime : null,
                 pinned: pinned,
@@ -128,7 +119,7 @@ const EditNote = ({
                 title: title,
                 user: user._id,
                 text: text,
-                image: null,
+                image: image,
                 reminderTime: reminderTime !== "" ? reminderTime : null,
                 eventTime: eventTime !== "" ? eventTime : null,
                 pinned: pinned,
