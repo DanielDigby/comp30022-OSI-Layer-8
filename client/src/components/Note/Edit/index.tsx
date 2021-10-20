@@ -152,6 +152,7 @@ const EditNote = ({
                                                 <div className={styles.addTag}>
                                                     <Tag tag=" " />
                                                     <Form.Input
+                                                        id="add-tag"
                                                         transparent
                                                         placeholder="Add tag"
                                                         value={tag}
@@ -203,6 +204,7 @@ const EditNote = ({
                                             />
 
                                             <DateTimeInput
+                                                id="reminder-time-input"
                                                 name="reminderTime"
                                                 placeholder="Reminder Time"
                                                 value={reminderTime}
@@ -214,6 +216,7 @@ const EditNote = ({
                                         </div>
                                     ) : (
                                         <div
+                                            id="add-reminder"
                                             className={styles.button}
                                             onClick={() =>
                                                 toggleShowReminderTimePicker(
@@ -238,6 +241,7 @@ const EditNote = ({
                                             />
 
                                             <DateTimeInput
+                                                id="event-time-input"
                                                 name="eventTime"
                                                 placeholder="Event Time"
                                                 value={eventTime}
@@ -249,6 +253,7 @@ const EditNote = ({
                                         </div>
                                     ) : (
                                         <div
+                                            id="add-event-time"
                                             className={styles.button}
                                             onClick={() =>
                                                 toggleShowEventTimePicker(true)

@@ -65,7 +65,7 @@ export const Reminder = ({ time }: { time: string | null }): JSX.Element => {
             minute: "2-digit",
         });
     return (
-        <div className={styles.time}>
+        <div className={styles.time} id="reminder-time">
             {display}
             <Icon
                 name={time ? "bell outline" : "bell slash outline"}
@@ -86,7 +86,7 @@ export const Event = ({ time }: { time: string | null }): JSX.Element => {
             month: "short",
         });
     return (
-        <div className={styles.time}>
+        <div className={styles.time} id="event-time">
             {display}
             <Icon
                 name="clock outline"
