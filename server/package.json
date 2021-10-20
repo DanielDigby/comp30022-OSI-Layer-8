@@ -19,6 +19,8 @@
         "coverage": false
     },
     "dependencies": {
+        "@sentry/node": "^6.13.3",
+        "@sentry/tracing": "^6.13.3",
         "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
