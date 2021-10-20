@@ -1,4 +1,4 @@
-describe("15. A user can set an event time when creating a note", () => {
+describe("16. A user can set an event time when creating a note", () => {
   it("Able to log in andn navigate to notes page. Succeeds when the user is able to create a note with an event time", () => {
     cy.register();
     cy.visit("/notes");
