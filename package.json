@@ -21,7 +21,7 @@
     "start": "yarn workspace server start",
     "dev": "yarn workspace client dev & yarn workspace server dev",
     "integration": "yarn workspace client dev & yarn workspace server integration",
-    "image": "yarn install && COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
+    "image": "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build",
     "docker": "docker-compose -p 'cara' up",
     "down": "docker-compose down"
   },

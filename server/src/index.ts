@@ -7,6 +7,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./helpers/errors";
 
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 require("./config/mongoose");
 require("./config/passport");
 
@@ -39,7 +40,13 @@ app.use(
             directives: {
                 defaultSrc: ["'self'"],
                 objectSrc: ["'none'"],
-                scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
+                scriptSrc: [
+                    "'self'",
+                    "unpkg.com",
+                    "polyfill.io",
+                    "https://sentry.io",
+                ],
+                connectSrc: ["'self'", "https://sentry.io"],
                 styleSrc: ["'self'", "https: 'unsafe-inline'"],
                 fontSrc: ["'self'", "https://fonts.gstatic.com/", "data:"],
                 imgSrc: ["'self'", "https://firebasestorage.googleapis.com/"],

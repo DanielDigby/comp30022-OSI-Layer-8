@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 var bodyParser = require("body-parser");
 import { hashPassword, generateJwt } from "../../helpers/security";
 import { IUser } from "../user/userModel";
-const db = require("../../config/mongoose/testing");
+const db = require("../../config/mongoose/memoryDB");
 const app = require("../../index");
 
 app.use(bodyParser.urlencoded({ extended: true }));

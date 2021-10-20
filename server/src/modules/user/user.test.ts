@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { generateJwt } from "../../helpers/security";
 import { IUser } from "../../modules/user/userModel";
 
-const db = require("../../config/mongoose/testing");
+const db = require("../../config/mongoose/memoryDB");
 const app = require("../../index");
 
 const User = mongoose.model("User");
