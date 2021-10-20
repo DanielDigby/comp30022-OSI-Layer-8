@@ -128,6 +128,7 @@ const EditNote = ({
                                     <div className={styles.title}>
                                         <Form.Input
                                             transparent
+                                            id="edit-title"
                                             placeholder="Add title"
                                             value={title}
                                             onChange={handleTitle}
@@ -135,6 +136,7 @@ const EditNote = ({
                                     </div>
                                     <div className={styles.content}>
                                         <Form.TextArea
+                                            id="edit-text"
                                             control={TextareaAutosize}
                                             style={{
                                                 padding: "0px",

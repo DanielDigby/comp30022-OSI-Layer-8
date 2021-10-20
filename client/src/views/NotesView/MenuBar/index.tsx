@@ -78,6 +78,7 @@ const MenuBar = (): JSX.Element => {
                 <div className={styles.input}>
                     {show ? (
                         <Input
+                            id="input-tag"
                             action={{
                                 icon: "plus",
                                 onClick: handlePlusClick,
