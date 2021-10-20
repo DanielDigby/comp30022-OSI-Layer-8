@@ -8,7 +8,7 @@ import { createNoteAPI, updateNoteAPI } from "../../../helpers/api/notes";
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { Segment, Form, Icon, Button } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
-import { Tag, Pin, Reminder, Event } from "../icons";
+import { Tag, Pin, Reminder, Event, Upload } from "../icons";
 
 const DATE_FORMAT = "HH:mm MM-DD-YYYY";
 
@@ -50,6 +50,9 @@ const EditNote = ({
     };
     const pinOnClick = () => {
         togglePinned(!pinned);
+    };
+    const uploadOnClick = () => {
+        return;
     };
     const handleEventTime = (
         event: React.SyntheticEvent | undefined,
@@ -191,6 +194,13 @@ const EditNote = ({
                                     >
                                         {pinned ? "Pinned" : "Pin"}
                                         <Pin pinned={pinned} />
+                                    </div>
+                                    <div
+                                        className={styles.button}
+                                        onClick={uploadOnClick}
+                                    >
+                                        Add image
+                                        <Upload />
                                     </div>
 
                                     {showReminderTimePicker ? (

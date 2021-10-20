@@ -38,7 +38,7 @@ export const Bin = ({
 };
 
 export const Upload = (): JSX.Element => {
-    return <Icon name="upload" style={styleProp} />;
+    return <Icon name="upload" color="grey" style={styleProp} />;
 };
 
 export const Pin = ({ pinned }: { pinned: boolean }): JSX.Element => {
