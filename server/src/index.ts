@@ -41,15 +41,10 @@ app.use(
                 defaultSrc: [
                     "'self'",
                     "https://firebasestorage.googleapis.com/",
+                    "*.sentry.io",
                 ],
                 objectSrc: ["'none'"],
-                scriptSrc: [
-                    "'self'",
-                    "unpkg.com",
-                    "polyfill.io",
-                    "https://sentry.io",
-                ],
-                connectSrc: ["'self'", "https://sentry.io"],
+                scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
                 styleSrc: ["'self'", "https: 'unsafe-inline'"],
                 fontSrc: ["'self'", "https://fonts.gstatic.com/", "data:"],
                 imgSrc: ["'self'", "https://firebasestorage.googleapis.com/"],
