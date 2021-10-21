@@ -15,7 +15,7 @@ import { RootState } from "./config/redux/store";
 
 const App = (): JSX.Element => {
     const colourScheme = useSelector(
-        (state: RootState) => state.user.account.colourScheme
+        (state: RootState) => state.user.account?.colourScheme
     );
     return (
         <div className={colourScheme}>
