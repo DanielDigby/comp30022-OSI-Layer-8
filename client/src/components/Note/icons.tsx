@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Note.module.css";
 import { capitalize } from "lodash";
 import { Icon, Button } from "semantic-ui-react";
+import { getColourScheme } from "../../helpers/api/users";
 
 const styleProp = {
     fontSize: "17px",
@@ -66,7 +67,7 @@ export const Pin = ({ pinned }: { pinned: boolean }): JSX.Element => {
         <Icon
             name="thumbtack"
             style={styleProp}
-            color={pinned ? "orange" : "grey"}
+            color={pinned ? getColourScheme() : "grey"}
         />
     );
 };
@@ -76,7 +77,7 @@ export const Contact = ({ tags }: { tags: Array<string> }): JSX.Element => {
         <Icon
             name="address book outline"
             style={styleProp}
-            color={tags.includes("contact") ? "orange" : "grey"}
+            color={tags.includes("contact") ? getColourScheme() : "grey"}
         />
     );
 };
@@ -94,7 +95,7 @@ export const Reminder = ({ time }: { time: string | null }): JSX.Element => {
             <Icon
                 name={time ? "bell outline" : "bell slash outline"}
                 style={styleProp}
-                color={time ? "orange" : "grey"}
+                color={time ? getColourScheme() : "grey"}
             />
         </div>
     );
@@ -115,7 +116,7 @@ export const Event = ({ time }: { time: string | null }): JSX.Element => {
             <Icon
                 name="clock outline"
                 style={styleProp}
-                color={time ? "orange" : "grey"}
+                color={time ? getColourScheme() : "grey"}
             />
         </div>
     );

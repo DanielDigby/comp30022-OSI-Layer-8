@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SemanticCOLORS } from "semantic-ui-react";
 import { storage } from "../../config/firebase/config";
 import { useHistory } from "react-router";
 import { cloneDeep } from "lodash";
@@ -141,4 +142,10 @@ export const updateProfilePicAPI = async (
             updateUserAPI(temp);
         }
     }
+};
+
+export const getColourScheme = (): SemanticCOLORS => {
+    if (store.getState().user.account?.colourScheme)
+        return store.getState().user.account.colourScheme;
+    else return "orange";
 };
