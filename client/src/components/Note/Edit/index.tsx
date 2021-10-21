@@ -23,7 +23,7 @@ const EditNote = ({
     note: INote;
     doneEditing: () => void;
 }): JSX.Element => {
-    const offline = useSelector((state: RootState) => state.offline.online);
+    const online = useSelector((state: RootState) => state.offline.online);
     const user = useSelector((state: RootState) => state.user.account);
     const editing = useSelector((state: RootState) => state.notes.editing);
 
@@ -72,7 +72,7 @@ const EditNote = ({
         toggleShowReminderTimePicker(false);
     };
     const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!offline) {
+        if (online) {
             const fileList = e.target.files;
 
             try {
@@ -244,9 +244,9 @@ const EditNote = ({
                                         </div>
                                     ) : (
                                         <div className={styles.button}>
-                                            {offline
-                                                ? "Can't upload while offline"
-                                                : "Add image"}
+                                            {online
+                                                ? "Add image"
+                                                : "Can't upload"}
                                             <Upload handleFile={handleFile} />
                                         </div>
                                     )}
