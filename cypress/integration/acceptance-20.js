@@ -5,6 +5,8 @@ describe("20. A user can share notes with another user", () => {
     () => {
       cy.register();
       cy.visit("/notes");
+
+      // Create a new note with a title
       cy.get('*[class^="NewNote_container"]').click();
       cy.get('*[class^="EditNote_title"]').type("Hello, World");
       cy.get('*[class^="EditNote_doneRow"]').click();

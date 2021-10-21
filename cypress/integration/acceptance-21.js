@@ -2,8 +2,8 @@ import "cypress-file-upload";
 
 describe("21. A user can store an image", () => {
   it(
-    "KJDSFKJSDFJKSDFJKSDKJRegisters a new user then navigates to the notes page and creates a new note." +
-      "Succeeds when it finds the button to share the new note with another user",
+    "Navigates to the notes page to create a new note with an image upload." +
+      "Succeeds when the image is successfully loaded and displayed in the notes page.",
     () => {
       cy.register();
 
