@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./StandardDetailNote.module.css";
+import { useHistory } from "react-router";
 import { INote } from "../../../interfaces/note";
 import { Tag, Event, Reminder, Pin, Bin } from "../icons";
 import { Segment, Button } from "semantic-ui-react";
@@ -7,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { deleteNote, setEditing } from "../../../config/redux/noteSlice";
 
 const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const {
         reminderTime,
@@ -26,6 +28,7 @@ const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
 
     const edit = () => {
         dispatch(setEditing(note));
+        if (history.location.pathname === "/") history.push("/notes");
     };
     const confirmDelete = () => {
         dispatch(deleteNote(note));

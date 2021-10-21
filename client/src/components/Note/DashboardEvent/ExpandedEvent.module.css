@@ -15,7 +15,12 @@
         min-width: 210px;
     }
 }
-
+.edit {
+    z-index: 1;
+    position: absolute;
+    left: -12px;
+    top: -12px;
+}
 /* Container for the top */
 .topContainer {
     display: flex;
@@ -66,7 +71,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-end;
 }
 
