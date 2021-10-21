@@ -10,11 +10,15 @@ import LogInView from "./views/LogInView";
 import RegisterView from "./views/RegisterView";
 import DashboardView from "./views/DashboardView";
 import SettingsView from "./views/SettingsView";
-import { getColourScheme } from "./helpers/api/users";
+import { useSelector } from "react-redux";
+import { RootState } from "./config/redux/store";
 
 const App = (): JSX.Element => {
+    const colourScheme = useSelector(
+        (state: RootState) => state.user.account.colourScheme
+    );
     return (
-        <div className={getColourScheme()}>
+        <div className={colourScheme}>
             <div className={styles.pageContainer}>
                 <Switch>
                     {/* add more routes here, path is the url you want on the frontend component is the view to be rendered */}

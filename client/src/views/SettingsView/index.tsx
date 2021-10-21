@@ -63,15 +63,13 @@ const SettingsView = (): JSX.Element => {
                     </div>
                 </Segment>
                 {/* Bottom block of settings */}
-                {/* TOGGLE OFF FALSE TO REENABLE FEATURE WHEN READY TO WORK ON COLOURSCHEMES */}
-                {false && (
-                    <Segment raised className={styles.block}>
-                        <div className={styles.heading}>
-                            <h3>color schemes</h3>
-                        </div>
-                        <ColourBlocks />
-                    </Segment>
-                )}
+
+                <Segment raised className={styles.block}>
+                    <div className={styles.heading}>
+                        <h3>color schemes</h3>
+                    </div>
+                    <ColourBlocks />
+                </Segment>
             </div>
         </div>
     );
