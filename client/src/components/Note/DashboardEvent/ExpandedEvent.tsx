@@ -7,6 +7,7 @@ import { Segment, Button } from "semantic-ui-react";
 import { Tag, Event, Reminder, Pin } from "../icons";
 import { useDispatch } from "react-redux";
 import { setEditing } from "../../../config/redux/noteSlice";
+import { getColourScheme } from "../../../helpers/api/users";
 
 const ExpandedEvent = ({ note }: { note: INote }): JSX.Element => {
     const history = useHistory();
@@ -21,7 +22,7 @@ const ExpandedEvent = ({ note }: { note: INote }): JSX.Element => {
                 <div className={styles.edit} onClick={edit}>
                     <Button circular icon="edit" size="tiny" />
                 </div>
-                <Segment color="orange" styles={{ zIndex: "0" }}>
+                <Segment color={getColourScheme()} styles={{ zIndex: "0" }}>
                     <div className={styles.topContainer}>
                         <div className={styles.headingContainer}>
                             <div className={styles.heading}>

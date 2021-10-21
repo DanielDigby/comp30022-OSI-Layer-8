@@ -13,6 +13,7 @@ import { DateTimeInput } from "semantic-ui-calendar-react";
 import { Segment, Form, Icon, Button, Input } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
 import { Tag, Pin, Reminder, Event, Upload, Bin, Contact } from "../icons";
+import { getColourScheme } from "../../../helpers/api/users";
 
 const DATE_FORMAT = "HH:mm MM-DD-YYYY";
 
@@ -221,13 +222,13 @@ const EditNote = ({
                                             disabled
                                             icon="check"
                                             size="tiny"
-                                            color="orange"
+                                            color={getColourScheme()}
                                         />
                                     ) : (
                                         <Form.Button
                                             icon="check"
                                             size="tiny"
-                                            color="orange"
+                                            color={getColourScheme()}
                                         />
                                     )}
                                 </div>
