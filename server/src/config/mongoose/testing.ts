@@ -12,7 +12,6 @@ const connectTestingDB = async () => {
     const uri = await mongoServer.getUri();
 
     await mongoose.connect(uri);
-
     const db = mongoose.connection;
 
     db.on("error", (err) => {
@@ -27,7 +26,7 @@ const connectTestingDB = async () => {
 
 // Wipe data from memory then stop
 const closeTestingDB = async () => {
-    await mongoose.connection.dropDatabase;
+    await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
     await mongoServer.stop();
 };

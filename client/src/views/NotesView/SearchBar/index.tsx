@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./SearchBar.module.css";
 import { Search } from "semantic-ui-react";
 import { RootState } from "../../../config/redux/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,6 +44,7 @@ export const SearchBar = (): JSX.Element => {
 
     return (
         <Search
+            className={styles.searchBar}
             loading={loading}
             onSearchChange={handleSearchChange}
             value={value}

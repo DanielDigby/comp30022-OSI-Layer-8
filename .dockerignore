@@ -100,6 +100,9 @@ dist
 # dependencies
 /node_modules
 
+# integration tests
+/cypress
+
 # testing
 /coverage
 

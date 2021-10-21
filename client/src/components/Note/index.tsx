@@ -41,7 +41,6 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
     });
 
     switch (currentMode) {
-        // onClick={toggleCurrentMode(NoteModes.STANDARD_DETAIL)}
         case NoteModes.STANDARD:
             return (
                 <div onClick={expandStandard}>

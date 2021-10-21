@@ -1,10 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 
 .container {
-    margin-top: 8.8rem;
+    margin-top: 4.2rem;
     margin-left: 2.5vw;
     margin-right: 1.5vw;
-    width: 170px;
+    height: fit-content;
+}
+
+.segment {
+    width: 160px;
+}
+@media only screen and (max-width: 600px) {
+    .container {
+        margin-top: 4.2rem;
+        margin-left: 15px;
+    }
+    .segment {
+        min-width: 210px;
+    }
 }
 
 .edit {

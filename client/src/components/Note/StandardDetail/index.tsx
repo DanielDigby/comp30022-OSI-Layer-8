@@ -13,12 +13,12 @@ const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
         eventTime,
         tags,
         pinned,
+        image,
         // title,
         // text,
         // _id,
         // _clientId,
         // user,
-        // image,
         // relatedNotes,
     } = note;
 
@@ -43,6 +43,39 @@ const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
                 setShouldDelete(false);
         });
     });
+
+    if (image)
+        return (
+            <div className={styles.outerContainer}>
+                <Segment.Group raised>
+                    <div className={styles.edit} ref={binRef}>
+                        {shouldDelete ? (
+                            <Button
+                                circular
+                                icon="trash"
+                                color="red"
+                                size="tiny"
+                                onClick={toggleShouldDelete}
+                            />
+                        ) : (
+                            <Button
+                                circular
+                                icon="trash"
+                                size="tiny"
+                                onClick={toggleShouldDelete}
+                            />
+                        )}
+                    </div>
+                    <Segment
+                        color="orange"
+                        styles={{ zIndex: "0" }}
+                        className={styles.imageSegmentStyle}
+                    >
+                        <img src={image} className={styles.image} />
+                    </Segment>
+                </Segment.Group>
+            </div>
+        );
 
     // api call
     return (

@@ -56,7 +56,7 @@ const NewNote = (): JSX.Element => {
     else
         return (
             <div className={styles.container} onClick={toggleOn}>
-                <Segment.Group raised>
+                <Segment.Group raised className={styles.segment}>
                     <Segment>
                         <div className={styles.body}>
                             <Icon
