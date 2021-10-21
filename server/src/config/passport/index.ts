@@ -59,11 +59,10 @@ passport.use(
 );
 
 // Decrypt incoming jwt to find associated user
-// TODO (Daniel) change secret to environment variable
 passport.use(
     new JwtStrategy(
         {
-            secretOrKey: "secret",
+            secretOrKey: process.env.JWT_SECRET,
             jwtFromRequest: extractJwt,
             passReqToCallback: true,
         },

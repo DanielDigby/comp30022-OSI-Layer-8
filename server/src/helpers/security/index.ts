@@ -21,7 +21,7 @@ export function generateJwt(user: IUser) {
         {
             _id: user._id,
         },
-        "secret"
+        process.env.JWT_SECRET
     );
 }
 

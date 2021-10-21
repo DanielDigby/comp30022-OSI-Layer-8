@@ -11,7 +11,7 @@
         "start": "node .",
         "dev": "cross-env-shell CACHE=false nodemon src/index.ts",
         "docker": "nodemon -L src/index.ts",
-        "test": "jest",
+        "test": "cross-env-shell JWT_SECRET=secret jest",
         "integration": "cross-env-shell CACHE=false CYPRESS=true nodemon src/index.ts"
     },
     "jest": {
@@ -19,6 +19,8 @@
         "coverage": false
     },
     "dependencies": {
+        "@sentry/node": "^6.13.3",
+        "@sentry/tracing": "^6.13.3",
         "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
