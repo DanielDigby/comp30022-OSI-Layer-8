@@ -1,17 +1,34 @@
-.leftBanner {
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.cog {
-    margin-bottom: 30px;
-    margin-left: 30px;
+.footer {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+    padding-bottom: 20px;
 }
 
 .pinnedSpacer {
     margin-bottom: 22px;
     margin-right: 22px;
+}
+
+@media only screen and (max-width: 600px) {
+    .pinnedSpacer {
+        margin-right: 0px;
+    }
 }
 
 .noNotes {
@@ -26,27 +43,36 @@
 }
 
 /* Container for the greeting, date, and link to all notes*/
-.midContainer {
+.mid {
     display: flex;
     width: 73%;
-    margin-top: 7%;
+    margin-top: 10%;
     align-items: stretch;
     flex-direction: row;
     align-content: top;
 }
 
 /* Container for the Icons for calendar and notes*/
-.bottomContainer {
+.bottom {
     display: flex;
-    width: 75%;
-    margin-left: -8%;
     flex-direction: row;
+}
+
+.notesPanel {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+    .bottom {
+        flex-direction: column;
+    }
 }
 
 /* Container for event notes */
 .eventsContainer {
     display: flex;
-    width: 45%;
     flex-direction: column;
     align-items: stretch;
 }
@@ -54,8 +80,13 @@
 /* For all the rows of pinned notes*/
 .pinnedNotesContainer {
     display: flex;
-    width: 60%;
     flex-direction: row;
+}
+
+@media only screen and (max-width: 600px) {
+    .pinnedNotesContainer {
+        flex-direction: column;
+    }
 }
 
 /* Container for left column of pinned notes */
@@ -71,17 +102,10 @@
     flex-direction: column;
 }
 
-/* Container for Calenter icon */
-.calendarContainer {
-    display: flex;
-    width: 8%;
-}
-
-/* Container for thumbtack icon */
-.tumbtackContainer {
+.icon {
     display: flex;
     width: 5%;
-    margin-right: 13px;
+    margin-right: 20px;
 }
 
 /* eventNote box*/
@@ -110,6 +134,12 @@
     margin-right: 10px;
 }
 
+@media only screen and (max-width: 550px) {
+    .viewAllNotesContainer {
+        visibility: hidden;
+    }
+}
+
 .viewNotesContainer {
     display: flex;
     width: 100%;
@@ -127,9 +157,7 @@
 }
 
 .main {
-    width: 100%;
-    margin-top: 60px;
-    margin-left: -10px;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -141,6 +169,12 @@
     width: 300px;
 }
 
+@media only screen and (max-width: 550px) {
+    .greeting {
+        font-size: 30px;
+    }
+}
+
 .date {
     color: #707070;
     font-size: 20px;
@@ -149,6 +183,12 @@
     display: flex;
     flex-direction: column;
     align-items: left;
+}
+
+@media only screen and (max-width: 550px) {
+    .date {
+        font-size: 15px;
+    }
 }
 
 .label {
