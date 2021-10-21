@@ -50,7 +50,7 @@ const MenuBar = (): JSX.Element => {
                                 header
                                 name={name}
                                 key={uuid()}
-                                style={{ fontSize: "16px" }}
+                                className={styles.menuItem}
                                 active={filter === name}
                                 onClick={() => dispatch(updateFilter(name))}
                             />

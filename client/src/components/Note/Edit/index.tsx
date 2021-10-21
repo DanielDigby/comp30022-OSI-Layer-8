@@ -10,7 +10,7 @@ import {
     uploadNoteImageAPI,
 } from "../../../helpers/api/notes";
 import { DateTimeInput } from "semantic-ui-calendar-react";
-import { Segment, Form, Icon, Button } from "semantic-ui-react";
+import { Segment, Form, Icon, Button, Input } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
 import { Tag, Pin, Reminder, Event, Upload, Bin } from "../icons";
 
@@ -160,11 +160,12 @@ const EditNote = ({
                                 <div className={styles.scroll}>
                                     <div className={styles.body}>
                                         <div className={styles.title}>
-                                            <Form.Input
+                                            <Input
                                                 transparent
                                                 id="edit-title"
                                                 placeholder="Add title"
                                                 value={title}
+                                                className={styles.title}
                                                 onChange={handleTitle}
                                             />
                                         </div>
@@ -267,9 +268,11 @@ const EditNote = ({
                                                 id="reminder-time-input"
                                                 name="reminderTime"
                                                 placeholder="Reminder Time"
+                                                fluid
                                                 value={reminderTime}
                                                 iconPosition="left"
-                                                popupPosition="right center"
+                                                pickerWidth="50px"
+                                                popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleReminderTime}
                                             />
@@ -304,9 +307,13 @@ const EditNote = ({
                                                 id="event-time-input"
                                                 name="eventTime"
                                                 placeholder="Event Time"
+                                                fluid
                                                 value={eventTime}
                                                 iconPosition="left"
-                                                popupPosition="right center"
+                                                pickerStyle={{
+                                                    width: "35px !important",
+                                                }}
+                                                popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleEventTime}
                                             />
