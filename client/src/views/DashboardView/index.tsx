@@ -59,7 +59,7 @@ const DashboardView = (): JSX.Element => {
                             <EventNotes {...{ notes }} />
                         </div>
                         <div className={styles.notesPanel}>
-                            <div className={styles.tumbtackContainer}>
+                            <div className={styles.icon}>
                                 <Icon
                                     name="thumbtack"
                                     color={getColourScheme()}
