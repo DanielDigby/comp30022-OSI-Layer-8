@@ -48,9 +48,12 @@
 .personal {
     display: flex;
     justify-content: space-between;
+    width: 90%;
 }
 
 .forms {
+    display: flex;
+    flex-direction: row;
     height: 70%;
     width: 50%;
 }
@@ -81,8 +84,14 @@
     margin-bottom: 35px;
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 325px;
     justify-content: space-between;
+}
+
+.input {
+    font-size: 15px;
+    margin-bottom: 38px;
+    width: 325px;
 }
 
 .image {
@@ -90,11 +99,91 @@
 }
 
 .profilePic {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
     width: 40%;
     height: 100%;
 }
 
 .profileTitle {
-    font-size: 20px;
-    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.passwordInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+}
+
+@media only screen and (min-width: 1200px) {
+    .block {
+        display: flex;
+        flex-direction: column;
+        width: 900px;
+        min-height: 300px;
+    }
+    .main {
+        margin-top: 10vh;
+        margin-left: 50px;
+    }
+    .leftBanner {
+        width: 10vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .personal {
+        flex-direction: column;
+    }
+    .block {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        min-height: 300px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .block {
+        display: flex;
+        flex-direction: column;
+        width: 210px;
+        min-height: 300px;
+    }
+    .signOutText {
+        visibility: hidden;
+    }
+    .heading {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .formtitle {
+        font-size: 14px;
+    }
+    .input {
+        width: 120px;
+    }
+    .field {
+        margin-bottom: 0px;
+        width: 150px;
+    }
+    .fieldButton {
+        background-color: transparent !important;
+    }
+    .profileTitle {
+        font-size: 16px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    span {
+        width: 100px;
+        overflow: hidden;
+    }
+    .passwordInputs {
+        flex-direction: column;
+        width: 100px;
+    }
 }

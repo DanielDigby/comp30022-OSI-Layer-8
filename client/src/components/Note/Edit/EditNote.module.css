@@ -1,16 +1,40 @@
 @import "../../../App.module.css";
 
 .Segment {
-    margin-top: 8.8rem;
+    margin-top: 4.2rem;
     margin-left: 15px;
     margin-right: 14px;
-    width: 60vw;
+    width: 700px;
+}
+
+@media only screen and (max-width: 1050px) {
+    .Segment {
+        width: 570px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .Segment {
+        width: 375px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .Segment {
+        width: 210px;
+    }
 }
 
 .wholeContainer {
     display: flex;
     flex-direction: row;
     height: 35vh;
+}
+
+@media only screen and (max-width: 600px) {
+    .wholeContainer {
+        min-height: 365px;
+    }
 }
 
 .scroll {
@@ -20,10 +44,31 @@
     overflow-x: hidden;
 }
 
+@media only screen and (max-width: 600px) {
+    .scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .scroll {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: 0; /* Firefox */
+    }
+}
+
 .body {
     direction: ltr;
     margin-top: 5px;
     margin-left: 15px;
+}
+@media only screen and (max-width: 600px) {
+    .body {
+        margin-left: 0px;
+    }
+}
+
+.title {
+    font-size: 20px !important;
 }
 
 .exit {
@@ -59,7 +104,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    height: 110px;
+    height: 140px;
     margin-top: 20%;
     justify-content: space-around;
 }
@@ -89,6 +134,14 @@
     color: gray;
 }
 
+@media only screen and (max-width: 815px) {
+    .button {
+        color: #000; /* Fallback for older browsers */
+        color: rgba(0, 0, 0, 0);
+        font-size: 0px;
+    }
+}
+
 .timePicker {
     display: flex;
     align-items: center;
@@ -98,4 +151,32 @@
     display: flex;
     line-height: 5px;
     align-items: center;
+}
+
+.imageContainer {
+    display: flex;
+    width: 80%;
+}
+
+.imageSegmentStyle {
+    width: 95%;
+    height: auto;
+    max-height: 250px;
+    display: flex;
+    align-items: center; /* vertical */
+    justify-content: center; /* horizontal */
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.image {
+    object-fit: cover;
+    width: 110%;
+    height: 110%;
+}
+
+.bin {
+    font-size: medium;
+    margin-left: 6px;
+    margin-right: -4px;
 }

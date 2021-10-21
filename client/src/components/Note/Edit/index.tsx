@@ -4,11 +4,15 @@ import TextareaAutosize from "react-textarea-autosize";
 import { RootState } from "../../../config/redux/store";
 import { capitalize } from "lodash";
 import { useSelector } from "react-redux";
-import { createNoteAPI, updateNoteAPI } from "../../../helpers/api/notes";
+import {
+    createNoteAPI,
+    updateNoteAPI,
+    uploadNoteImageAPI,
+} from "../../../helpers/api/notes";
 import { DateTimeInput } from "semantic-ui-calendar-react";
-import { Segment, Form, Icon, Button } from "semantic-ui-react";
+import { Segment, Form, Icon, Button, Input } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
-import { Tag, Pin, Reminder, Event } from "../icons";
+import { Tag, Pin, Reminder, Event, Upload, Bin } from "../icons";
 
 const DATE_FORMAT = "HH:mm MM-DD-YYYY";
 
@@ -19,6 +23,7 @@ const EditNote = ({
     note: INote;
     doneEditing: () => void;
 }): JSX.Element => {
+    const online = useSelector((state: RootState) => state.offline.online);
     const user = useSelector((state: RootState) => state.user.account);
     const editing = useSelector((state: RootState) => state.notes.editing);
 
@@ -28,6 +33,7 @@ const EditNote = ({
     const [text, setText] = useState(note.text ? note.text : "");
     const [pinned, togglePinned] = useState(note.pinned);
     const [tag, setTag] = useState(note.tags[0] ? note.tags[0] : "");
+    const [image, setImage] = useState(note.image);
     const [showEventTimePicker, toggleShowEventTimePicker] = useState(false);
     const [eventTime, setEventTime] = useState(
         note.eventTime ? note.eventTime : ""
@@ -65,6 +71,19 @@ const EditNote = ({
         setReminderTime(data.value);
         toggleShowReminderTimePicker(false);
     };
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (online) {
+            const fileList = e.target.files;
+
+            try {
+                const url = await uploadNoteImageAPI(fileList);
+                console.log(url);
+                setImage(url);
+            } catch (err) {
+                alert("upload failed");
+            }
+        }
+    };
 
     const fieldsNotChanged = () => {
         if (
@@ -73,7 +92,8 @@ const EditNote = ({
             pinned === false &&
             tag === "" &&
             eventTime === "" &&
-            reminderTime === ""
+            reminderTime === "" &&
+            image == null
         )
             return true;
         else return false;
@@ -89,7 +109,7 @@ const EditNote = ({
                 title: title,
                 user: user._id,
                 text: text,
-                image: null,
+                image: image,
                 reminderTime: reminderTime !== "" ? reminderTime : null,
                 eventTime: eventTime !== "" ? eventTime : null,
                 pinned: pinned,
@@ -102,7 +122,7 @@ const EditNote = ({
                 title: title,
                 user: user._id,
                 text: text,
-                image: null,
+                image: image,
                 reminderTime: reminderTime !== "" ? reminderTime : null,
                 eventTime: eventTime !== "" ? eventTime : null,
                 pinned: pinned,
@@ -123,46 +143,69 @@ const EditNote = ({
                     </div>
                     <Form onSubmit={handleSubmit}>
                         <div className={styles.wholeContainer}>
-                            <div className={styles.scroll}>
-                                <div className={styles.body}>
-                                    <div className={styles.title}>
-                                        <Form.Input
-                                            transparent
-                                            placeholder="Add title"
-                                            value={title}
-                                            onChange={handleTitle}
+                            {/* Dont show text tools if image being uploaded */}
+                            {image ? (
+                                <div className={styles.imageContainer}>
+                                    <Segment.Group
+                                        raised
+                                        className={styles.imageSegmentStyle}
+                                    >
+                                        <img
+                                            src={image}
+                                            className={styles.image}
                                         />
-                                    </div>
-                                    <div className={styles.content}>
-                                        <Form.TextArea
-                                            control={TextareaAutosize}
-                                            style={{
-                                                padding: "0px",
-                                                border: "none",
-                                                overflow: "hidden",
-                                            }}
-                                            placeholder="Add text"
-                                            value={text}
-                                            onChange={handleText}
-                                        />
-                                        <div className={styles.tag}>
-                                            {tags[0] ? (
-                                                <Tag tag={tags[0]} />
-                                            ) : (
-                                                <div className={styles.addTag}>
-                                                    <Tag tag=" " />
-                                                    <Form.Input
-                                                        transparent
-                                                        placeholder="Add tag"
-                                                        value={tag}
-                                                        onChange={handleTag}
-                                                    />
-                                                </div>
-                                            )}
+                                    </Segment.Group>
+                                </div>
+                            ) : (
+                                <div className={styles.scroll}>
+                                    <div className={styles.body}>
+                                        <div className={styles.title}>
+                                            <Input
+                                                transparent
+                                                id="edit-title"
+                                                placeholder="Add title"
+                                                value={title}
+                                                className={styles.title}
+                                                onChange={handleTitle}
+                                            />
+                                        </div>
+                                        <div className={styles.content}>
+                                            <Form.TextArea
+                                                id="edit-text"
+                                                control={TextareaAutosize}
+                                                style={{
+                                                    padding: "0px",
+                                                    border: "none",
+                                                    overflow: "hidden",
+                                                }}
+                                                placeholder="Add text"
+                                                value={text}
+                                                onChange={handleText}
+                                            />
+                                            <div className={styles.tag}>
+                                                {tags[0] ? (
+                                                    <Tag tag={tags[0]} />
+                                                ) : (
+                                                    <div
+                                                        className={
+                                                            styles.addTag
+                                                        }
+                                                    >
+                                                        <Tag tag=" " />
+                                                        <Form.Input
+                                                            id="add-tag"
+                                                            transparent
+                                                            placeholder="Add tag"
+                                                            value={tag}
+                                                            onChange={handleTag}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
 
                             <div className={styles.rightContainer}>
                                 <div className={styles.doneRow}>
@@ -190,6 +233,25 @@ const EditNote = ({
                                         <Pin pinned={pinned} />
                                     </div>
 
+                                    {image ? (
+                                        <div
+                                            className={styles.button}
+                                            onClick={() => setImage(null)}
+                                        >
+                                            Remove image
+                                            <div className={styles.bin}>
+                                                <Bin shouldDelete={true} />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className={styles.button}>
+                                            {online
+                                                ? "Add image"
+                                                : "Can't upload"}
+                                            <Upload handleFile={handleFile} />
+                                        </div>
+                                    )}
+
                                     {showReminderTimePicker ? (
                                         <div className={styles.timePicker}>
                                             <Icon
@@ -203,17 +265,21 @@ const EditNote = ({
                                             />
 
                                             <DateTimeInput
+                                                id="reminder-time-input"
                                                 name="reminderTime"
                                                 placeholder="Reminder Time"
+                                                fluid
                                                 value={reminderTime}
                                                 iconPosition="left"
-                                                popupPosition="right center"
+                                                pickerWidth="50px"
+                                                popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleReminderTime}
                                             />
                                         </div>
                                     ) : (
                                         <div
+                                            id="add-reminder"
                                             className={styles.button}
                                             onClick={() =>
                                                 toggleShowReminderTimePicker(
@@ -238,17 +304,23 @@ const EditNote = ({
                                             />
 
                                             <DateTimeInput
+                                                id="event-time-input"
                                                 name="eventTime"
                                                 placeholder="Event Time"
+                                                fluid
                                                 value={eventTime}
                                                 iconPosition="left"
-                                                popupPosition="right center"
+                                                pickerStyle={{
+                                                    width: "35px !important",
+                                                }}
+                                                popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleEventTime}
                                             />
                                         </div>
                                     ) : (
                                         <div
+                                            id="add-event-time"
                                             className={styles.button}
                                             onClick={() =>
                                                 toggleShowEventTimePicker(true)

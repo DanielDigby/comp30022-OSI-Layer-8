@@ -9,7 +9,8 @@
 // ***********************************************
 //
 //
-// -- Use this register command for tests that need auth --
+
+// Use this register command for tests that need auth 
 Cypress.Commands.add('register', () => { 
     cy.visit('/register')
         cy.get('#input-email')
@@ -30,6 +31,62 @@ Cypress.Commands.add('register', () => {
         cy.url()
             .should('be.equal', 'http://localhost:3000/')
     })
+
+// Use this command to drag notes around on notes page
+// sourced from:
+// https://github.com/cypress-io/cypress/issues/3942#issuecomment-485648100
+Cypress.Commands.add('dragAndDrop', (subject, target) => {
+    Cypress.log({
+        name: 'DRAGNDROP',
+        message: `Dragging element ${subject} to ${target}`,
+        consoleProps: () => {
+            return {
+                subject: subject,
+                target: target
+            };
+        }
+    });
+    const BUTTON_INDEX = 0;
+    const SLOPPY_CLICK_THRESHOLD = 10;
+    cy.get(target)
+        .first()
+        .then($target => {
+            let coordsDrop = $target[0].getBoundingClientRect();
+            cy.get(subject)
+                .first()
+                .then(subject => {
+                    const coordsDrag = subject[0].getBoundingClientRect();
+                    cy.wrap(subject)
+                        .trigger('mousedown', {
+                            button: BUTTON_INDEX,
+                            clientX: coordsDrag.x,
+                            clientY: coordsDrag.y,
+                            force: true
+                        })
+                        .trigger('mousemove', {
+                            button: BUTTON_INDEX,
+                            clientX: coordsDrag.x + SLOPPY_CLICK_THRESHOLD,
+                            clientY: coordsDrag.y,
+                            force: true
+                        });
+                    cy.get('body')
+                        .trigger('mousemove', {
+                            button: BUTTON_INDEX,
+                            clientX: coordsDrop.x,
+                            clientY: coordsDrop.y,
+                            force: true            
+                        })
+                        .trigger('mouseup');
+                });
+        });
+});
+
+Cypress.Commands.add('addNote', (title) => {
+    cy.get('*[class^="NewNote_container"]').click()
+    cy.get('#edit-title').type(title)
+    cy.get('*[class^="ui orange tiny icon button"]').click()
+});
+
 //
 //
 // -- This is a child command --

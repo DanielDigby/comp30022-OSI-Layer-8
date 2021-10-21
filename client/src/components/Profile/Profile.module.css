@@ -24,3 +24,9 @@
     line-height: 42.5px;
     height: 42.5px;
 }
+
+@media only screen and (max-width: 600px) {
+    .text {
+        visibility: hidden;
+    }
+}

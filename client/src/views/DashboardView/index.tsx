@@ -2,7 +2,6 @@ import React from "react";
 import Note from "../../components/Note";
 import styles from "./DashboardView.module.css";
 import Profile from "../../components/Profile";
-import globalStyles from "./../../App.module.css";
 import { Icon } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../config/redux/store";
@@ -25,50 +24,60 @@ const DashboardView = (): JSX.Element => {
     const name = store.user.account?.firstName;
 
     return (
-        <div className={globalStyles.light}>
-            <div className={styles.leftBanner}>
+        <div className={styles.container}>
+            <div className="DashboardView_header">
                 <Profile />
-                <div className={styles.cog}>
-                    <Icon
-                        name="cog"
-                        size="big"
-                        color="grey"
-                        onClick={() => navigateSettings()}
-                    />
-                </div>
             </div>
-            <div className={styles.main}>
-                <div className={styles.midContainer}>
-                    <Greeting {...{ name }} />
+            <div className={styles.body}>
+                <div className={styles.main}>
+                    <div className={styles.mid}>
+                        <Greeting {...{ name }} />
 
-                    <div className={styles.viewNotesContainer}>
-                        <Icon
-                            name="arrow right"
-                            size="big"
-                            color="grey"
-                            onClick={navigateNotes}
-                        />
-                        <div className={styles.viewAllNotesContainer}>
-                            View <p>all notes</p>
+                        <div className={styles.viewNotesContainer}>
+                            <Icon
+                                name="arrow right"
+                                size="big"
+                                color="grey"
+                                onClick={navigateNotes}
+                            />
+                            <div className={styles.viewAllNotesContainer}>
+                                View <p>all notes</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className={styles.bottomContainer}>
-                    <div className={styles.calendarContainer}>
-                        <Icon
-                            name="calendar alternate"
-                            color="orange"
-                            size="big"
-                        />
+                    <div className={styles.bottom}>
+                        <div className={styles.notesPanel}>
+                            <div className={styles.icon}>
+                                <Icon
+                                    name="calendar alternate"
+                                    color="orange"
+                                    size="big"
+                                />
+                            </div>
+                            <EventNotes {...{ notes }} />
+                        </div>
+                        <div className={styles.notesPanel}>
+                            <div className={styles.tumbtackContainer}>
+                                <Icon
+                                    name="thumbtack"
+                                    color="orange"
+                                    size="big"
+                                />
+                            </div>
+                            <PinnedNotes {...{ notes }} />
+                        </div>
                     </div>
-                    <EventNotes {...{ notes }} />
-                    <div className={styles.tumbtackContainer}>
-                        <Icon name="thumbtack" color="orange" size="big" />
-                    </div>
-                    <PinnedNotes {...{ notes }} />
+                    {store.user.isNewLogin && <InstallPrompt />}
                 </div>
-                {store.user.isNewLogin && <InstallPrompt />}
+            </div>
+            <div className={styles.footer}>
+                <Icon
+                    name="cog"
+                    size="big"
+                    color="grey"
+                    onClick={() => navigateSettings()}
+                />
             </div>
         </div>
     );

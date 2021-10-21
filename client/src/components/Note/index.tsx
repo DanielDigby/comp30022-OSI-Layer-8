@@ -37,11 +37,15 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
                 mode == NoteModes.STANDARD
             )
                 minimizeStandard();
+            if (
+                !noteRef.current?.contains(event.target as Node) &&
+                mode == NoteModes.EVENT
+            )
+                minimizeEvent();
         });
     });
 
     switch (currentMode) {
-        // onClick={toggleCurrentMode(NoteModes.STANDARD_DETAIL)}
         case NoteModes.STANDARD:
             return (
                 <div onClick={expandStandard}>
@@ -62,7 +66,7 @@ const Note = ({ note, mode, doneEditing }: NoteProps): JSX.Element => {
             );
         case NoteModes.EVENT_DETAIL:
             return (
-                <div onClick={minimizeEvent}>
+                <div ref={noteRef}>
                     <ExpandedEvent note={note} />
                 </div>
             );
