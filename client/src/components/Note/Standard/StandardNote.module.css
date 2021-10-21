@@ -31,9 +31,12 @@
 .noteContainer {
     display: flex;
     white-space: pre-line;
+    position: relative;
     overflow: hidden;
     max-height: 70px;
     flex-direction: column;
+    -webkit-mask-image: linear-gradient(to bottom, black 10%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 10%, transparent 100%);
 }
 .tagContainer {
     display: flex;
