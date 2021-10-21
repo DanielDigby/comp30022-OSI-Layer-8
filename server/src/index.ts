@@ -38,7 +38,10 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'"],
+                defaultSrc: [
+                    "'self'",
+                    "https://firebasestorage.googleapis.com/",
+                ],
                 objectSrc: ["'none'"],
                 scriptSrc: [
                     "'self'",
