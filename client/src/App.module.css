@@ -24,15 +24,6 @@
     --text-small: 15px;
 }
 
-/* Light/Dark mode */
-.light {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-    padding: 0.5rem;
-}
-
 .dark {
     background-color: var(--colour-background-dark);
 }
@@ -93,10 +84,9 @@
 and then centres what we put in it */
 .pageContainer {
     height: 100vh;
-    max-height: 100vh;
     width: 100vw;
     max-width: 100vw;
-    background-image: var(--gradientBackground);
+    padding: 0.5rem;
 }
 
 .containerHorizontal,

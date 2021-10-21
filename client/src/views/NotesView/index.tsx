@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import globalStyles from "../../App.module.css";
 import MenuBar from "./MenuBar";
 import Profile from "../../components/Profile";
 import styles from "./NotesView.module.css";
@@ -20,19 +19,25 @@ const NotesView = (): JSX.Element => {
     });
 
     return (
-        <div className={globalStyles.light}>
-            <div className={styles.staticLeft}>
-                <div>
-                    <Profile onClick={navigateDashboard} />
-                    <MenuBar />
-                </div>
-                <NewNote />
-            </div>
-            <div className={styles.main}>
-                <div className={styles.containerRight}>
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <Profile onClick={navigateDashboard} />
+                <div className={styles.searchBar}>
                     <SearchBar />
                 </div>
-                <DnD />
+            </div>
+            <div className={styles.body}>
+                <div className={styles.staticLeft}>
+                    <div>
+                        <MenuBar />
+                    </div>
+                </div>
+                <div className={styles.main}>
+                    <div className={styles.notes}>
+                        <NewNote />
+                        <DnD />
+                    </div>
+                </div>
             </div>
         </div>
     );

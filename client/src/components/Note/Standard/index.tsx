@@ -10,14 +10,24 @@ const StandardNote = ({ note }: { note: INote }): JSX.Element => {
         eventTime,
         tags,
         pinned,
+        image,
         // title,
         // text,
         // _id,
         // _clientId,
         // user,
-        // image,
+
         // relatedNotes,
     } = note;
+
+    if (image)
+        return (
+            <div className={styles.outerContainer}>
+                <Segment.Group raised className={styles.imageSegmentStyle}>
+                    <img src={image} className={styles.image} />
+                </Segment.Group>
+            </div>
+        );
 
     // api call
     return (

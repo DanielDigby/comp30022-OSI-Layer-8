@@ -11,6 +11,17 @@
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+@media only screen and (max-width: 800px) {
+    .notesSection {
+        grid-template-columns: 190px 190px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .notesSection {
+        grid-template-columns: 230px;
+    }
+}
+
 .scroll {
     margin-top: 42.3px;
     margin-right: 45px;
@@ -18,6 +29,21 @@
     overflow: scroll;
     overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+@media only screen and (min-width: 1050px) {
+    .scroll {
+        height: 86.7vh;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .scroll {
+        margin-top: 15px;
+        margin-left: 7px;
+        margin-right: 0px;
+        width: 100%;
+    }
+}
+
 .scroll::-webkit-scrollbar-track {
     background-color: transparent;
 }
@@ -26,6 +52,12 @@
     padding-top: 10px;
     padding-left: 10px;
     width: 80%;
+}
+@media only screen and (max-width: 600px) {
+    .dndContainer {
+        padding-left: 0px;
+        width: 100%;
+    }
 }
 
 .column {

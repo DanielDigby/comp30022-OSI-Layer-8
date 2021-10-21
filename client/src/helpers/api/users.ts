@@ -1,3 +1,4 @@
+import axios from "axios";
 import { storage } from "../../config/firebase/config";
 import { useHistory } from "react-router";
 import { cloneDeep } from "lodash";
@@ -6,7 +7,6 @@ import { setUser, updateUser } from "../../config/redux/userSlice";
 import { setNotes } from "../../config/redux/noteSlice";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { RESET_STATE as RESET_OFFLINE } from "@redux-offline/redux-offline/lib/constants";
-
 import {
     store,
     RootStateWithOffline,
@@ -20,7 +20,6 @@ import {
     USERS,
     UPDATE_PASSWORD,
 } from "../../interfaces/endpoints";
-import axios from "axios";
 
 // post username password to backend then load notes and populate redux
 // reject with unauthorized error when credentials are incorrect

@@ -3,6 +3,13 @@
     width: 174px;
     flex-direction: column;
 }
+
+@media only screen and (max-width: 600px) {
+    .outerContainer {
+        width: auto;
+        min-width: 210px;
+    }
+}
 .pinContainer {
     display: flex;
     flex-direction: column;
@@ -39,4 +46,19 @@
     margin-top: 10px;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.imageSegmentStyle {
+    max-height: 250px;
+    display: flex;
+    align-items: center; /* vertical */
+    justify-content: center; /* horizontal */
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.image {
+    object-fit: cover;
+    width: 110%;
+    height: 110%;
 }
