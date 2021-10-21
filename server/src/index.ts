@@ -16,7 +16,7 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'"],
+                defaultSrc: ["'self'", "https://firebasestorage.googleapis.com/"],
                 objectSrc: ["'none'"],
                 scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
                 styleSrc: ["'self'", "https: 'unsafe-inline'"],
