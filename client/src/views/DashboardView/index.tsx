@@ -28,42 +28,48 @@ const DashboardView = (): JSX.Element => {
             <div className="DashboardView_header">
                 <Profile />
             </div>
-            <div className={styles.main}>
-                <div className={styles.mid}>
-                    <Greeting {...{ name }} />
+            <div className={styles.body}>
+                <div className={styles.main}>
+                    <div className={styles.mid}>
+                        <Greeting {...{ name }} />
 
-                    <div className={styles.viewNotesContainer}>
-                        <Icon
-                            name="arrow right"
-                            size="big"
-                            color="grey"
-                            onClick={navigateNotes}
-                        />
-                        <div className={styles.viewAllNotesContainer}>
-                            View <p>all notes</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.bottom}>
-                    <div className={styles.notesPanel}>
-                        <div className={styles.icon}>
+                        <div className={styles.viewNotesContainer}>
                             <Icon
-                                name="calendar alternate"
-                                color="orange"
+                                name="arrow right"
                                 size="big"
+                                color="grey"
+                                onClick={navigateNotes}
                             />
+                            <div className={styles.viewAllNotesContainer}>
+                                View <p>all notes</p>
+                            </div>
                         </div>
-                        <EventNotes {...{ notes }} />
                     </div>
-                    <div className={styles.notesPanel}>
-                        <div className={styles.tumbtackContainer}>
-                            <Icon name="thumbtack" color="orange" size="big" />
+
+                    <div className={styles.bottom}>
+                        <div className={styles.notesPanel}>
+                            <div className={styles.icon}>
+                                <Icon
+                                    name="calendar alternate"
+                                    color="orange"
+                                    size="big"
+                                />
+                            </div>
+                            <EventNotes {...{ notes }} />
                         </div>
-                        <PinnedNotes {...{ notes }} />
+                        <div className={styles.notesPanel}>
+                            <div className={styles.tumbtackContainer}>
+                                <Icon
+                                    name="thumbtack"
+                                    color="orange"
+                                    size="big"
+                                />
+                            </div>
+                            <PinnedNotes {...{ notes }} />
+                        </div>
                     </div>
+                    {store.user.isNewLogin && <InstallPrompt />}
                 </div>
-                {store.user.isNewLogin && <InstallPrompt />}
             </div>
             <div className={styles.footer}>
                 <Icon
