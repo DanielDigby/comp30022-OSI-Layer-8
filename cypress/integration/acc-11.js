@@ -17,7 +17,7 @@ describe("11. User can search their notes ", () => {
     // search for the note
     cy.get("input.prompt").type("the note");
 
-    // there should only be one note displayed
+    // there should only be one out of two note displayed
     cy.get('*[class^="dragAndDrop_item"]').should(($items) => {
       expect($items).to.have.length(1);
     });

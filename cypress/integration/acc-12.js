@@ -12,8 +12,8 @@ describe("10. User can add a filter", () => {
 
     // delete the note
     cy.get('*[class^="StandardNote_outerContainer"]').click();
-    cy.get('*[class^="grey trash alternative outline icon"]').click();
-    cy.get('*[class^="grey trash alternative outline icon"]').click();
+    cy.get('*[class^="grey trash alternate outline icon"]').click();
+    cy.get('*[class^="red trash alternate icon"]').click();
 
     // note should be deleted
     cy.get('*[class^="dragAndDrop_item"]').should("not.exist");
