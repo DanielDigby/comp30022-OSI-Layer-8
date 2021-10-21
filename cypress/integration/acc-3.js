@@ -4,15 +4,20 @@ describe("1. A user can log in", () => {
     "Navigates to the dashboard." +
       "Succedes when it sees pinned and event notes",
     () => {
-      cy.visit("/dashboard");
-      cy.get("#input-email").type("test.user@email.com");
-      cy.get("#input-password").type("Password");
-      cy.get("form").submit();
-      cy.on("window:confirm", (str) => {
-        expect(str).to.contain(`We use cookies to personalise content in cara`);
-        cy.on("window:confirm", () => true);
-      });
-      cy.url().should("be.equal", "http://localhost:3000/");
+      // visit notes page
+      cy.register();
+      cy.visit("/notes");
+
+      // create notes
+      cy.get('*[class^="NewNote_container"]').click();
+      cy.get("#edit-title").type("new title");
+      cy.get("#edit-text").type("new text");
+      cy.get('*[class^="grey thumbtack icon"]').click();
+      cy.get('*[class^="ui orange tiny icon button"]').click();
+
+      // go back to dashboard and check if pinned is visible
+      cy.visit("/");
+      cy.get('*[class^="StandardNote_outerContainer"]').contains("new title");
     }
   );
 });
