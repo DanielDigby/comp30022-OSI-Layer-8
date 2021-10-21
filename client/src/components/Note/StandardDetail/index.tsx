@@ -88,7 +88,7 @@ const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
                 <div className={styles.edit} onClick={edit}>
                     <Button circular icon="edit" size="tiny" />
                 </div>
-                <Segment color="orange" styles={{ zIndex: "0" }}>
+                <Segment color={getColourScheme()} styles={{ zIndex: "0" }}>
                     <div className={styles.topContainer}>
                         <div className={styles.titleContainer}>
                             <b>{note.title ? note.title : ""}</b>
