@@ -125,15 +125,15 @@ const RegisterView = (): JSX.Element => {
 
                     <div className={styles.buttons}>
                         <Button
-                            content="Back"
-                            color="black"
-                            onClick={() => history.goBack()}
-                        />
-                        <Button
                             id="submit"
                             content="Sign Up"
                             color="orange"
                             type="submit"
+                        />
+                        <Button
+                            content="Back"
+                            color="black"
+                            onClick={() => history.goBack()}
                         />
                     </div>
                 </Form>
