@@ -72,14 +72,8 @@ export const Pin = ({ pinned }: { pinned: boolean }): JSX.Element => {
     );
 };
 
-export const Contact = ({ tags }: { tags: Array<string> }): JSX.Element => {
-    return (
-        <Icon
-            name="address book outline"
-            style={styleProp}
-            color={tags.includes("contact") ? getColourScheme() : "grey"}
-        />
-    );
+export const Contact = (): JSX.Element => {
+    return <Icon name="address book outline" style={styleProp} color="grey" />;
 };
 
 export const Reminder = ({ time }: { time: string | null }): JSX.Element => {
