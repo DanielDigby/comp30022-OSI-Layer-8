@@ -36,7 +36,7 @@ describe("User route tests", () => {
                     lastName: "Doe",
                     password: "test123",
                     profilePic: "test url",
-                    colourScheme: "PLACEHOLDER",
+                    colourScheme: "orange",
                     tags: ["test tag"],
                 };
                 await new User(user).save();
@@ -51,7 +51,7 @@ describe("User route tests", () => {
                     lastName: "New",
                     password: "redacted",
                     profilePic: "new url",
-                    colourScheme: "PLACEHOLDER",
+                    colourScheme: "orange",
                     tags: ["new test tag"],
                 };
 
