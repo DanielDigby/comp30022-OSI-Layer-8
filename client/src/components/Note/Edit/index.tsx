@@ -285,6 +285,7 @@ const EditNote = ({
                                                 value={reminderTime}
                                                 iconPosition="left"
                                                 pickerWidth="50px"
+                                                hideMobileKeyboard
                                                 popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleReminderTime}
@@ -326,6 +327,7 @@ const EditNote = ({
                                                 pickerStyle={{
                                                     width: "35px !important",
                                                 }}
+                                                hideMobileKeyboard
                                                 popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleEventTime}
