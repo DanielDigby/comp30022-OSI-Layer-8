@@ -11,12 +11,30 @@
     margin-right: 5%;
 }
 
-.colour {
+.light {
     height: 100%;
     margin-top: 0;
 }
 
-.light {
+.lemonade {
+    background-color: #f8eaed !important;
+    height: 100%;
+    margin-top: 0;
+}
+
+.sky {
+    background-color: #e5f1f5 !important;
+    height: 100%;
+    margin-top: 0;
+}
+
+.slate {
+    background-color: #e4e5ed !important;
+    height: 100%;
+    margin-top: 0;
+}
+
+/* .light {
     background-color: aliceblue;
     margin-top: -3%;
     margin-left: -5%;
@@ -26,15 +44,7 @@
     border-style: rounded;
     border-width: 2px;
     border-color: #e0e0e0;
-}
-
-.light {
-    margin-top: -3%;
-    margin-left: -5%;
-    width: 109%;
-    height: 110%;
-    border-radius: 3%;
-}
+} */
 
 .checkbox {
     display: flex;

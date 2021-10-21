@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { capitalize } from "lodash";
 import { INote, NoteModes } from "../../interfaces/note";
 import { filterNotes, FilterOn } from "../../helpers/utils/filter";
+import { getColourScheme } from "../../helpers/api/users";
 
 const DashboardView = (): JSX.Element => {
     const history = useHistory();
@@ -51,17 +52,17 @@ const DashboardView = (): JSX.Element => {
                             <div className={styles.icon}>
                                 <Icon
                                     name="calendar alternate"
-                                    color="orange"
+                                    color={getColourScheme()}
                                     size="big"
                                 />
                             </div>
                             <EventNotes {...{ notes }} />
                         </div>
                         <div className={styles.notesPanel}>
-                            <div className={styles.tumbtackContainer}>
+                            <div className={styles.icon}>
                                 <Icon
                                     name="thumbtack"
-                                    color="orange"
+                                    color={getColourScheme()}
                                     size="big"
                                 />
                             </div>

@@ -87,6 +87,7 @@ and then centres what we put in it */
     width: 100vw;
     max-width: 100vw;
     padding: 0.5rem;
+    background-color: var(--background);
 }
 
 .containerHorizontal,

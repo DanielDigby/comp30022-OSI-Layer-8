@@ -1,0 +1,15 @@
+.orange {
+    --background: white;
+}
+
+.blue {
+    --background: #e4e5ed;
+}
+
+.red {
+    --background: #f8eaed;
+}
+
+.teal {
+    --background: #e5f1f5;
+}
