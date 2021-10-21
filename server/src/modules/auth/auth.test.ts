@@ -4,7 +4,7 @@ import express from "express";
 import { IUser } from "../user/userModel";
 import mongoose from "mongoose";
 import { hashPassword, generateJwt } from "../../helpers/security";
-const db = require("../../config/mongoose/testing");
+const db = require("../../config/mongoose/memoryDB");
 const app = require("../../index");
 
 beforeAll(async () => {

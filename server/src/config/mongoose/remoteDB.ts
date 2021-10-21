@@ -1,8 +1,15 @@
 import mongoose from "mongoose";
 
-// connect to atlas database
-const DB = "comp30022-crm-app";
-const mongoURI = `mongodb://localhost:27017/${DB}`;
+// connect to remote database
+let mongoURI;
+if (process.env.NODE_ENV == "production") {
+    mongoURI = process.env.PROD_MONGODB_URI;
+} else if (process.env.CYPRESS == "true") {
+    mongoURI = process.env.INT_MONGODB_URI;
+} else {
+    mongoURI = process.env.DEV_MONGODB_URI;
+}
+
 const mongoOpts = {
     dbName: "comp30022-crm-app",
 };

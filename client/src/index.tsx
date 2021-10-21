@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "semantic-ui-css/semantic.min.css";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
@@ -10,6 +12,15 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 // import redux
 import { store, persistor } from "./config/redux/store";
 import { Provider } from "react-redux";
+
+Sentry.init({
+    dsn: "https://9c5d0994199b470c80dba07337683443@o1044993.ingest.sentry.io/6020253",
+    integrations: [new Integrations.BrowserTracing()],
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
     <React.StrictMode>

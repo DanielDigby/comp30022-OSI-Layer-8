@@ -2,21 +2,30 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import helmet from "helmet";
+
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./helpers/errors";
 
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 require("./config/mongoose");
 require("./config/passport");
 
 const app = express();
 const port = process.env.PORT || 8080;
 
-// middleware
+const sentry = require("./config/sentry");
+sentry.configure(app);
+
+// set up middleware
 app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'", "https://firebasestorage.googleapis.com/"],
+                defaultSrc: [
+                    "'self'",
+                    "https://firebasestorage.googleapis.com/",
+                    "*.sentry.io",
+                ],
                 objectSrc: ["'none'"],
                 scriptSrc: ["'self'", "unpkg.com", "polyfill.io"],
                 styleSrc: ["'self'", "https: 'unsafe-inline'"],
@@ -58,6 +67,9 @@ app.use("/api/users/", userRouter);
 const authRouter = require("./modules/auth/authRouter");
 app.use("/api/auth/", authRouter);
 
+// The error handler must be before any other error middleware and after all controllers
+sentry.errorHandler(app);
+// local error handler
 app.use(errorHandler);
 
 // Frontend connection
