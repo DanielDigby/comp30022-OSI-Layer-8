@@ -67,14 +67,14 @@ const LogInView = (): JSX.Element => {
                     </Form.Field>
                     <div className={styles.buttons}>
                         <Button
-                            content="Sign up"
-                            color="black"
-                            onClick={() => history.push("/register")}
-                        />
-                        <Button
                             content="Sign in"
                             color="orange"
                             type="submit"
+                        />
+                        <Button
+                            content="Sign up"
+                            color="black"
+                            onClick={() => history.push("/register")}
                         />
                     </div>
                 </Form>
