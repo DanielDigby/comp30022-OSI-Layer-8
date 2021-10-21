@@ -126,7 +126,7 @@ const RegisterView = (): JSX.Element => {
                     <div className={styles.buttons}>
                         <Button
                             id="submit"
-                            content="Sign Up"
+                            content="Register"
                             color="orange"
                             type="submit"
                         />
