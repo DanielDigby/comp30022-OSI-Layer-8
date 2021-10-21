@@ -45,6 +45,12 @@
     justify-content: space-between;
 }
 
+@media only screen and (max-width: 1000px) {
+    .inputSection {
+        min-width: 30%;
+    }
+}
+
 @media only screen and (max-width: 700px) {
     .logo {
         margin-top: 20%;
@@ -54,6 +60,15 @@
     .title {
         font-size: 50px;
         margin: 20px;
+    }
+    .inputSection {
+        min-width: 50%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .inputSection {
+        min-width: 70%;
     }
 }
 
