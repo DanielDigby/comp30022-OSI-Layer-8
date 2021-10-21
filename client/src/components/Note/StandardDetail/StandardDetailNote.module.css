@@ -52,3 +52,18 @@
     justify-content: space-between;
     align-items: flex-end;
 }
+.imageSegmentStyle {
+    max-height: 250px;
+    display: flex;
+    align-items: center; /* vertical */
+    justify-content: center; /* horizontal */
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.image {
+    object-fit: cover;
+    margin-top: -10px;
+    width: 110%;
+    height: 110%;
+}

@@ -4,14 +4,18 @@ import Profile from "../../components/Profile";
 import placeholder from "../../assets/placeholder.png";
 import globalStyles from "../../App.module.css";
 import ColourBlocks from "./ColourBlocks";
+import { IUser } from "../../interfaces/user";
 import { RootState } from "../../config/redux/store";
-import { logOutAPI, updateProfilePicAPI } from "../../helpers/api/users";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { capitalize, cloneDeep } from "lodash";
-import { updateUserAPI, updatePasswordAPI } from "../../helpers/api/users";
 import { Segment, Icon, Image, Input, Ref, Button } from "semantic-ui-react";
-import { IUser } from "../../interfaces/user";
+import {
+    logOutAPI,
+    updateProfilePicAPI,
+    updateUserAPI,
+    updatePasswordAPI,
+} from "../../helpers/api/users";
 
 const SettingsView = (): JSX.Element => {
     const history = useHistory();

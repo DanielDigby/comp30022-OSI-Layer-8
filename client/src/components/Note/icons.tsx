@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Note.module.css";
 import { capitalize } from "lodash";
-import { Icon } from "semantic-ui-react";
+import { Icon, Button } from "semantic-ui-react";
 
 const styleProp = {
     fontSize: "17px",
@@ -33,6 +33,30 @@ export const Bin = ({
             ) : (
                 <Icon name="trash alternate outline" color="grey" />
             )}
+        </div>
+    );
+};
+
+export const Upload = ({
+    handleFile,
+}: {
+    handleFile: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
+}): JSX.Element => {
+    return (
+        <div>
+            <Button
+                as="label"
+                htmlFor="file"
+                size="large"
+                icon="upload"
+                style={{
+                    backgroundColor: "transparent",
+                    padding: "0px",
+                    marginRight: "-1px",
+                    marginLeft: "3px",
+                }}
+            />
+            <input type="file" id="file" hidden onChange={handleFile} />
         </div>
     );
 };

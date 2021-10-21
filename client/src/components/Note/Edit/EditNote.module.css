@@ -59,7 +59,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    height: 110px;
+    height: 140px;
     margin-top: 20%;
     justify-content: space-around;
 }
@@ -98,4 +98,31 @@
     display: flex;
     line-height: 5px;
     align-items: center;
+}
+
+.imageContainer {
+    display: flex;
+    width: 80%;
+}
+
+.imageSegmentStyle {
+    max-height: 250px;
+    width: 40%;
+    display: flex;
+    align-items: center; /* vertical */
+    justify-content: center; /* horizontal */
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.image {
+    object-fit: cover;
+    width: 110%;
+    height: 110%;
+}
+
+.bin {
+    font-size: medium;
+    margin-left: 6px;
+    margin-right: -4px;
 }
