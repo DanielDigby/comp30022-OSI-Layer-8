@@ -6,6 +6,7 @@ import { Tag, Event, Reminder, Pin, Bin } from "../icons";
 import { Segment, Button } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { deleteNote, setEditing } from "../../../config/redux/noteSlice";
+import { getColourScheme } from "../../../helpers/api/users";
 
 const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
     const history = useHistory();
@@ -70,7 +71,7 @@ const StandardDetail = ({ note }: { note: INote }): JSX.Element => {
                         )}
                     </div>
                     <Segment
-                        color="orange"
+                        color={getColourScheme()}
                         styles={{ zIndex: "0" }}
                         className={styles.imageSegmentStyle}
                     >

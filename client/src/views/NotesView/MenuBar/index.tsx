@@ -8,6 +8,7 @@ import { RootState } from "../../../config/redux/store";
 import { updateFilter } from "../../../config/redux/noteSlice";
 import { Menu, Icon, Input } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
+import { getColourScheme } from "../../../helpers/api/users";
 
 const MenuBar = (): JSX.Element => {
     const history = useHistory();
@@ -41,7 +42,7 @@ const MenuBar = (): JSX.Element => {
         <div className={styles.containerLeft}>
             <div className={styles.sideContainer}>
                 <div className={styles.icon}>
-                    <Icon name="tag" size="large" color="orange" />
+                    <Icon name="tag" size="large" color={getColourScheme()} />
                 </div>
                 <div className={styles.menu}>
                     <Menu fluid secondary vertical>

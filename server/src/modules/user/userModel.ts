@@ -18,9 +18,9 @@ const userSchema = new Schema<IUser>({
     profilePic: { type: String },
     colourScheme: {
         type: String,
-        enum: ["PLACEHOLDER"],
+        enum: ["orange", "blue", "red", "teal"],
         required: true,
-        default: "PLACEHOLDER",
+        default: "orange",
     },
     tags: {
         type: [String],

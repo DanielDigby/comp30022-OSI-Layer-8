@@ -47,7 +47,7 @@ describe("Authentication service", () => {
                         expect(res.body.firstName).toEqual(user.firstName);
                         expect(res.body.lastName).toEqual(user.lastName);
                         expect(res.body.profilePic).toEqual(user.profilePic);
-                        expect(res.body.colourScheme).toEqual("PLACEHOLDER");
+                        expect(res.body.colourScheme).toEqual("orange");
                         expect(res.body.tags.length).toEqual(0);
 
                         expect(res.body.password).toBe("redacted");
@@ -139,7 +139,7 @@ describe("Authentication service", () => {
                         expect(res.body.firstName).toEqual("test");
                         expect(res.body.lastName).toEqual("user");
                         expect(res.body.profilePic).toEqual("someImgUrl");
-                        expect(res.body.colourScheme).toEqual("PLACEHOLDER");
+                        expect(res.body.colourScheme).toEqual("orange");
                         expect(res.body.tags.length).toEqual(0);
 
                         expect(res.body.password).toBe("redacted");

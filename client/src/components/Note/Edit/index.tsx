@@ -12,7 +12,8 @@ import {
 import { DateTimeInput } from "semantic-ui-calendar-react";
 import { Segment, Form, Icon, Button, Input } from "semantic-ui-react";
 import { INote, INoteWithoutIds } from "../../../interfaces/note";
-import { Tag, Pin, Reminder, Event, Upload, Bin } from "../icons";
+import { Tag, Pin, Reminder, Event, Upload, Bin, Contact } from "../icons";
+import { getColourScheme } from "../../../helpers/api/users";
 
 const DATE_FORMAT = "HH:mm MM-DD-YYYY";
 
@@ -39,6 +40,8 @@ const EditNote = ({
         note.eventTime ? note.eventTime : ""
     );
 
+    const contactTemplate = "Phone: \n\n" + "Email: \n\n" + "Address: \n\n";
+
     const [showReminderTimePicker, toggleShowReminderTimePicker] =
         useState(false);
     const [reminderTime, setReminderTime] = useState(
@@ -56,6 +59,11 @@ const EditNote = ({
     };
     const pinOnClick = () => {
         togglePinned(!pinned);
+    };
+    const contactOnClick = () => {
+        setTitle(title + "First Last");
+        setText(text + contactTemplate);
+        setTag("Contact");
     };
     const handleEventTime = (
         event: React.SyntheticEvent | undefined,
@@ -214,13 +222,13 @@ const EditNote = ({
                                             disabled
                                             icon="check"
                                             size="tiny"
-                                            color="orange"
+                                            color={getColourScheme()}
                                         />
                                     ) : (
                                         <Form.Button
                                             icon="check"
                                             size="tiny"
-                                            color="orange"
+                                            color={getColourScheme()}
                                         />
                                     )}
                                 </div>
@@ -232,7 +240,13 @@ const EditNote = ({
                                         {pinned ? "Pinned" : "Pin"}
                                         <Pin pinned={pinned} />
                                     </div>
-
+                                    <div
+                                        className={styles.button}
+                                        onClick={contactOnClick}
+                                    >
+                                        Template
+                                        <Contact />
+                                    </div>
                                     {image ? (
                                         <div
                                             className={styles.button}
@@ -272,6 +286,7 @@ const EditNote = ({
                                                 value={reminderTime}
                                                 iconPosition="left"
                                                 pickerWidth="50px"
+                                                hideMobileKeyboard
                                                 popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleReminderTime}
@@ -313,6 +328,7 @@ const EditNote = ({
                                                 pickerStyle={{
                                                     width: "35px !important",
                                                 }}
+                                                hideMobileKeyboard
                                                 popupPosition="top right"
                                                 dateTimeFormat={DATE_FORMAT}
                                                 onChange={handleEventTime}

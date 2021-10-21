@@ -72,7 +72,7 @@ const LogInView = (): JSX.Element => {
                             type="submit"
                         />
                         <Button
-                            content="Sign up"
+                            content="Register"
                             color="black"
                             onClick={() => history.push("/register")}
                         />
