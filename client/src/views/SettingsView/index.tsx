@@ -2,14 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./SettingsView.module.css";
 import Profile from "../../components/Profile";
 import placeholder from "../../assets/placeholder.png";
-import globalStyles from "../../App.module.css";
 import ColourBlocks from "./ColourBlocks";
 import { IUser } from "../../interfaces/user";
 import { RootState } from "../../config/redux/store";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { capitalize, cloneDeep } from "lodash";
-import { Segment, Icon, Image, Input, Ref, Button } from "semantic-ui-react";
+import {
+    Segment,
+    Icon,
+    Image,
+    Input,
+    Ref,
+    Button,
+    Form,
+} from "semantic-ui-react";
 import {
     logOutAPI,
     updateProfilePicAPI,
@@ -25,50 +32,46 @@ const SettingsView = (): JSX.Element => {
 
     // api call
     return (
-        <div className={globalStyles.light}>
-            <div className={styles.container}>
-                <div className={styles.leftBanner}>
-                    <div>
-                        <Profile onClick={navigateDashboard} />
-                        <div className={styles.signOut} onClick={logOut}>
-                            <Icon name="sign out" size="big" color="grey" />
-                            Sign out
-                        </div>
-                    </div>
-                    <div className={styles.backButton}>
-                        <Icon
-                            name="arrow left"
-                            size="big"
-                            color="grey"
-                            onClick={back}
-                        />
+        <div className={styles.container}>
+            <div className={styles.leftBanner}>
+                <div>
+                    <Profile onClick={navigateDashboard} />
+                    <div className={styles.signOut} onClick={logOut}>
+                        <Icon name="sign out" size="big" color="grey" />
+                        <span className={styles.signOutText}> Sign out </span>
                     </div>
                 </div>
-                {/* Top block of settings */}
-                <div className={styles.main}>
+                <div className={styles.backButton}>
+                    <Icon
+                        name="arrow left"
+                        size="big"
+                        color="grey"
+                        onClick={back}
+                    />
+                </div>
+            </div>
+            {/* Top block of settings */}
+            <div className={styles.main}>
+                <Segment raised className={styles.block}>
+                    <b className={styles.heading}>Personal details</b>
+                    {/* All the different forms to enter, split 30% for forms 70% for profile pic */}
+                    <div className={styles.personal}>
+                        <div className={styles.forms}>
+                            <UserDetails />
+                        </div>
+                        <ProfilePic />
+                    </div>
+                </Segment>
+                {/* Bottom block of settings */}
+                {/* TOGGLE OFF FALSE TO REENABLE FEATURE WHEN READY TO WORK ON COLOURSCHEMES */}
+                {false && (
                     <Segment raised className={styles.block}>
                         <div className={styles.heading}>
-                            <h3>Personal details</h3>
+                            <h3>color schemes</h3>
                         </div>
-                        {/* All the different forms to enter, split 30% for forms 70% for profile pic */}
-                        <div className={styles.personal}>
-                            <div className={styles.forms}>
-                                <UserDetails />
-                            </div>
-                            <ProfilePic />
-                        </div>
+                        <ColourBlocks />
                     </Segment>
-                    {/* Bottom block of settings */}
-                    {/* TOGGLE OFF FALSE TO REENABLE FEATURE WHEN READY TO WORK ON COLOURSCHEMES */}
-                    {false && (
-                        <Segment raised className={styles.block}>
-                            <div className={styles.heading}>
-                                <h3>color schemes</h3>
-                            </div>
-                            <ColourBlocks />
-                        </Segment>
-                    )}
-                </div>
+                )}
             </div>
         </div>
     );
@@ -256,13 +259,11 @@ const PasswordField = ({
     if (editing == fieldId)
         return (
             <Ref innerRef={inputRef}>
-                <span>
+                <Form.Group className={styles.passwordInputs}>
                     <Input
                         style={{
                             fontSize: "15px",
                             marginBottom: "38px",
-                            marginTop: "-10px",
-                            width: "35.5%",
                         }}
                         placeholder={input}
                         onChange={handlePassword1}
@@ -275,20 +276,18 @@ const PasswordField = ({
                         style={{
                             fontSize: "15px",
                             marginBottom: "38px",
-                            marginTop: "-10px",
-                            marginLeft: "20px",
-                            width: "35.5%",
                         }}
                         placeholder={"Confirm"}
                         onChange={handlePassword2}
                     />
-                </span>
+                </Form.Group>
             </Ref>
         );
     return (
         <div className={styles.field}>
             {value}
             <Button
+                className={styles.fieldButton}
                 size="small"
                 icon="pencil alternate"
                 onClick={() => fieldEditClick(fieldId)}
@@ -325,12 +324,7 @@ const UserField = ({
                         icon: "check",
                         onClick: fieldConfirmClick,
                     }}
-                    style={{
-                        fontSize: "15px",
-                        marginBottom: "38px",
-                        marginTop: "-10px",
-                        width: "89%",
-                    }}
+                    className={styles.input}
                     placeholder={input}
                     onChange={handleInput}
                 />
@@ -338,8 +332,9 @@ const UserField = ({
         );
     return (
         <div className={styles.field}>
-            {value}
+            <span>{value}</span>
             <Button
+                className={styles.fieldButton}
                 size="small"
                 icon="pencil alternate"
                 onClick={() => fieldEditClick(fieldId)}
@@ -363,13 +358,14 @@ const ProfilePic = (): JSX.Element => {
 
     return (
         <div className={styles.profilePic}>
-            <div className={styles.profileTitle}>
-                Profile image
+            <div className={styles.field}>
+                <b className={styles.profileTitle}>Profile image</b>
                 <Button
                     as="label"
                     htmlFor="file"
                     size="small"
                     icon="upload"
+                    className={styles.fieldButton}
                     style={{ marginLeft: "60px" }}
                 />
                 <input type="file" id="file" hidden onChange={handleFile} />
