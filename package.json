@@ -29,5 +29,8 @@
   "devDependencies": {
     "cypress": "^8.6.0",
     "mongoose": "^6.0.11"
+  },
+  "dependencies": {
+    "cypress-file-upload": "^5.0.8"
   }
 }
