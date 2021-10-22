@@ -35,9 +35,10 @@
     overflow: hidden;
     max-height: 70px;
     flex-direction: column;
-    -webkit-mask-image: linear-gradient(to bottom, black 10%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 10%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
+
 .tagContainer {
     display: flex;
     flex-direction: column;
