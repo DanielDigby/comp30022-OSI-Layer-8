@@ -128,3 +128,9 @@ Heroku has a self serve redis cache add on that we have included so while we use
 I've set it up so we all need to create a pull request to push to a protected branch (main/dev), so rather than pushing to these branches directly we should cut a branch off
 as a hotfix from main, or a feature from dev. Make changes on the new branch then create a pr, and assign someone to review our changes before merging back in. We also will be
 unable to merge until the tests pass
+
+# Notes
+
+## 2022-01-18 - plh
+
+Will shortly be moving this repo to the SwinburneLivingLab organisation - https://github.com/SwinburneLivingLab
